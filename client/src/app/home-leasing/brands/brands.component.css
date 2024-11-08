@@ -1,0 +1,20 @@
+.btn-class:hover{
+	@apply text-white bg-custom-blue !important ;
+}
+a{
+	@apply text-[16px] font-bold ;
+}
+.tw-btn-outline-info{
+	@apply border-custom-blue py-[6px] px-3 rounded border border-solid text-center;
+}
+.tw-btn-outline-info:focus {
+	@apply shadow-[0_0_0_0.2rem_rgba(58,176,195,.5)] !important ;
+}
+@media screen and (max-width: 767px){
+ h2{
+	@apply text-[16px] !important;
+ }
+ a{
+	@apply text-[14px];
+ }
+}

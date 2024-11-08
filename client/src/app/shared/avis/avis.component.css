@@ -1,0 +1,16 @@
+.tw-avis-bloc {
+    @apply bg-[#f1f1f1] p-6 rounded-[8px];
+}
+
+.tw-avis_comm {
+    @apply text-[15px] font-medium text-custom-black h-[90px] overflow-auto; 
+}
+
+.tw-avis_date {
+    @apply text-right text-sm font-light text-gray-700 mt-1;
+
+}
+
+h2 {
+    @apply text-lg font-bold text-custom-blue leading-[26px] mt-[10px] mr-5 mb-0 ml-0;
+}

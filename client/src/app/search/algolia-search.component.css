@@ -1,0 +1,47 @@
+
+.tw-container {
+  @apply m-auto pt-[18px] pb-[25px] px-3 max-w-[1400px] !important;
+}
+.tw-container p{
+  @apply font-bold text-[14px] leading-4 text-[#2A2A2A] mt-[5px];
+}
+
+.divTop{
+	@apply scroll-mt-[145px];
+}
+
+
+.algolia-input{
+  @apply mb-[8px] border-[0px] pt-[10px] pb-[10px];
+
+}
+
+.ais-SearchBox input {
+  @apply h-auto block w-full text-[1rem] font-normal leading-normal text-[#495057] bg-white bg-clip-padding border mb-2 px-3 py-2.5 py-1.5 rounded-none border-solid border-[#ced4da];
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+body { font-family: sans-serif; }
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .tw-container {
+    @apply pt-[10px] !important;
+  }
+
+ 
+}
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .card-occas .produit {
+      @apply w-[85%];
+  }
+}
+
+::ng-deep .main-bg {
+  @apply bg-[#f1f1f1]
+}
+
+.tw-title {
+  @apply font-bold text-[14px] leading-4 text-[#2A2A2A] mt-[12px];
+}
+

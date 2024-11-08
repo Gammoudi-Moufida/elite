@@ -1,0 +1,45 @@
+<h2 *ngIf="marqueName">Nos modèles {{marqueName}}</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+    <div class="col-span-1" *ngFor="let element of sousLinks">
+        <div class="tw-border">
+            <a *ngIf="element.eurotaxModeId==eurotaxModelId && eurotaxModelId">
+                <p class="tw-link model-actif is-active cursor-auto">
+                    {{element.title}}
+                </p>
+            </a>
+            <a *ngIf="element.eurotaxModeId!=eurotaxModelId || !eurotaxModelId" href="{{element.url}}">
+                <p class="tw-link">
+                    {{element.title}}
+                </p>
+            </a>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="sousLinks?.length > 12">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2" [ngClass]= "{'hidden':isCollapsed}">
+        <div class="col-span-1" *ngFor="let element of sousLinks | slice: 12:sousLinks.length">
+            <div class="tw-border">
+                <a *ngIf="element.eurotaxModeId==eurotaxModelId && eurotaxModelId">
+                    <p class="tw-link model-actif is-active cursor-auto">
+                        {{element.title}}
+                    </p>
+                </a>
+                <a *ngIf="element.eurotaxModeId!=eurotaxModelId || !eurotaxModelId" href="{{element.url}}">
+                    <p class="tw-link">
+                        {{element.title}}
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<h2 *ngIf="marqueName">Les services {{marqueName}}</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+    <div class="col-span-1" *ngFor="let item of verify() | slice: 1:nbLinks">
+        <div class="tw-border">
+            <a href="{{item.url}}">
+                <p class="tw-link">{{item.title}}</p>
+            </a>
+        </div>
+    </div>
+</div>

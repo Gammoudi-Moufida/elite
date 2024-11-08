@@ -1,0 +1,48 @@
+
+:host ::ng-deep h2 {
+    @apply text-[18px] font-bold my-[16px] mx-0 !important;
+}
+:host ::ng-deep h3 {
+    @apply text-[18px] font-bold !important;
+}
+:host ::ng-deep ul {
+    @apply list-none pl-0 inline-block !important;
+}
+:host ::ng-deep .liste_modeles li {
+    @apply float-left w-[12%] text-[14px] my-0 mx-[16px] !important;
+}
+:host ::ng-deep .liste_modeles li a{
+    @apply text-black;
+}
+:host ::ng-deep .liste_modeles li a:hover{
+    @apply text-[#00779b];
+}
+.tw-textSplit{
+    @apply overflow-hidden inline-block leading-[26px];
+}
+
+@media only screen and (max-width : 444px) {
+    .tw-textSplit{
+        @apply max-h-[90px] leading-[22px];
+   }
+   :host ::ng-deep .liste_modeles li {
+    @apply w-[22%] !important;
+  }
+}
+@media only screen and (min-width : 445px) and (max-width: 479px) {
+   .tw-textSplit{
+       @apply max-h-[65px] leading-[22px];
+  }
+}
+@media only screen and (min-width : 480px) {
+   .tw-textSplit{
+   @apply max-h-[47px];
+  }
+}
+
+a{
+   @apply text-[inherit] !important;
+}
+.links:hover{
+    @apply text-[#00779b] !important;
+}

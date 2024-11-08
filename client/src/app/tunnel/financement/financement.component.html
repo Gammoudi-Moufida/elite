@@ -1,0 +1,101 @@
+<div class="mt-3" id="financement">
+    <div class="e-a-collapse-header bg-white p-3 mb-2 d-flex justify-content-between" (click)="collapse.toggle()" [attr.aria-expanded]="!isLoaPriceClicked">
+        <h2 class="ea-h5 ea-bold mb-0">FINANCEMENT <span class="ea-h5 ea-bold ea-blue-color">*(champs obligatoires pour réserver)</span></h2>
+        <div class="ea-collapse-icon">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!isLoaPriceClicked">
+                <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+            </svg>
+    
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="isLoaPriceClicked">
+                <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+            </svg>
+        </div>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isLoaPriceClicked">
+        <div class="e-a-collapse-body bg-white p-3">
+            <div class="row">
+                <div class="col-12" *ngIf = "!isLease">
+                    <div class="d-flex align-items-center padding-list" (click)="selectNoFinancement()">
+                        <input class="e-a-form-radio-small-input" type="radio" [checked]="!isSelected" name="form_devis_financement_none" id="form_devis_financement_none" />
+                        <label class="ea-h5 ps-2 mb-0 label-color" for="form_devis_financement_none">
+                            Non merci aucun financement
+                        </label>  
+                      </div>
+                </div>
+                <p class="ps-3 pt-2 ea-h4 ea-bold">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager*</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                    <label class="ea-h5 ea-bold"> Durée : {{ duration }} mois </label>
+                    <input type="range" class="ea-slider" min="12" max="84" step="12" [(ngModel)]="duration" (ngModelChange)="durationChange()"/>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                    <label class="ea-h5 ea-bold"> Apport : {{ apport }} € </label>
+                    <input type="range" min="0" max="15000" step="100" class="ea-slider" [(ngModel)]="apport" (ngModelChange)="apportChange()"/>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                    <label class="ea-h5 ea-bold"> Kilométrage annuel  : {{ kilometrage |number:'1.0-0'}} KM </label>
+                    <input type="range" min="5000" max="25000" step="5000" class="ea-slider" [(ngModel)]="kilometrage" (ngModelChange)="kilometrageChange()"/>
+                </div>
+            </div>
+            <div class="loader" *ngIf="loader"></div>
+            <div class="row" *ngIf = "!loader">
+               <div class="col-sm-12 col-md-4 col-lg-4 mb-3" *ngFor = "let financement of devis?.simulationFinancement?.financements; let i = index ">
+                <div class="card card-finance-ea h-100">
+                    <div class="card-body">
+                      <div class="card-title">
+                        <div class="d-flex align-items-center" (click)="selectFinancement(financement)">
+                          <input class="e-a-form-radio-big-input" type="radio" name="{{ financement?.result?.typeFinancement }}_{{i}}" id="{{ financement?.result?.typeFinancement }}_{{i}}" [checked]="financement.selected">
+                          <label class="ps-3 mb-0 text-s-14" for="{{ financement?.result?.typeFinancement }}_{{i}}">
+                            <span class="ea-h3 ea-bold">{{financement.result.nomFinancement}}</span>
+                          </label>
+                        </div>
+                        <hr>
+                      </div>
+                      <div class="d-flex mt-4 align-items-center">
+                        <h6 class="card-subtitle font-price ea-h3 ea-blue-color" *ngIf="financement.error">-- €/mois</h6>
+                        <h6 class="card-subtitle font-price ea-h3 ea-blue-color"  *ngIf="!financement.error">{{service.getTotalMensualite(financement)|number:'1.2-2' }}€/mois</h6>
+                        <div *ngIf = "financement?.mensualite">
+                            <svg width="20" height="20" viewBox="0 0 16 16" fill="none" class="ms-1 mb-1" (click)="open(content,'lg'); infosFinancement(financement)">
+                                <path 
+                                  d="M8.00004 14.6666C11.6819 14.6666 14.6667 11.6818 14.6667 7.99992C14.6667 4.31802 11.6819 1.33325 8.00004 1.33325C4.31814 1.33325 1.33337 4.31802 1.33337 7.99992C1.33337 11.6818 4.31814 14.6666 8.00004 14.6666Z"
+                                  fill="#327793"></path>
+                                <path d="M8 10.6667V8" stroke="#EBEBEC" stroke-width="1.5"
+                                  stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M8 5.33325H8.0075" stroke="#EBEBEC" stroke-width="1.5"
+                                  stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg>
+                        </div>
+                       
+                      </div>
+                      <p class="mt-4 ea-h5 label-color" *ngIf="financement.error"> {{financement.error}} </p>
+                      <p class="mt-4 ea-h5 label-color" *ngIf="!financement.error"  innerHTML="{{financement.result.infos}}"></p>
+                    </div>
+                    <button type="button" *ngIf="!(devis?.initDevis?.isVo && !devis?.initDevis?.activeState)" [attr.data-eventname]="'cta_recevoir_devis_'+financement?.result?.nomFinancement?.replace(' ','_').replace('é','e')|lowercase" class="btn e-a-btn-card-finance ea-info w-100 ea-h5 ea-bold" (click)="openFormClient(financement)">RECEVOIR UN DEVIS</button>
+                    <button type="button" *ngIf="devis?.initDevis?.isVo && !devis?.initDevis?.activeState" class="btn ea-btn-danger rounded-tl-none rounded-tr-none w-100 h-[46px] ea-h5 ea-bold pointer-events-none">VENDUE</button>
+                  </div>
+               </div>
+            </div>
+            <div class="row mt-3" *ngIf = "devis?.simulationFinancement?.financements?.length == 0">
+                <div class="col-12 text-center ea-h4 ea-red-color" >
+                    Aucun résultat pour cette simulation !
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title ea-bold"> {{infosLoa?.result?.nomFinancement}}</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="modal-body">
+      <app-finance-details [financement] = "infosLoa" (assuranceSelected) = "assuranceSelected()"></app-finance-details>
+    </div>
+</ng-template>
+
+
+

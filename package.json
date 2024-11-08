@@ -1,0 +1,10 @@
+{
+  "name": "semantic-node",
+  "version": "0.0.0",
+  "scripts": { },
+  "private": true,
+  "dependencies": { },
+  "devDependencies": {
+         "semantic-release": "^19.0.2"
+  }
+}

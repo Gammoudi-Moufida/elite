@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+      <title>Elite-Auto vous accompagne</title>
+      <link rel="shortcut icon" href="/favicon.ico" />
+    <base href="/">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="preconnect" href="https://image.elite-auto.fr">
+      <!-- Google Tag Manager -->
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-5ZGRVS3J');
+      </script>
+      <!-- End Google Tag Manager -->
+      
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1025404699"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-1025404699');
+      </script>
+  </head>
+  
+<body>
+  <app-root></app-root>
+    <div id="usergoogletag"></div>
+    <div id="taggoogle"></div>
+    <div id="schematag"></div>
+    <div id="taghome"></div>
+    <div id="conversiontag"></div>
+    <div id="browserIEAlert"></div>
+    <script>
+      if(!!window.MSInputMethodContext && !!document.documentMode){
+        document.getElementById("browserIEAlert").innerHTML+= '<div class="alert alert-warning" style="z-index: 1000;position: fixed;top: 70px;text-align: center;width: 100%;border-radius: 0px;" role="alert">  Ce site ne supporte plus <strong>Internet Explorer</strong>. Pour continuer, veuillez utiliser un autre navigateur internet.</div>'
+      }
+    </script>
+</body>
+</html>

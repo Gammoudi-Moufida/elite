@@ -1,0 +1,13 @@
+.tw-ea_search {
+  @apply border appearance-none h-[44px] font-medium text-base leading-5 text-[#596A73] ml-0.5 rounded-lg outline-none border-solid border-[rgba(0,0,0,0.2)] focus:ring focus:border-[#a9c4f5];
+  background: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.99962 4.97656L10.1246 0.851562L11.303 2.0299L5.99962 7.33323L0.696289 2.0299L1.87462 0.851562L5.99962 4.97656Z' fill='%23596A73'/%3E%3C/svg%3E%0A")
+    no-repeat 95%;
+}
+.tw-ea-span {
+  @apply font-medium text-sm leading-4 self-center text-black;
+}
+.tw-form {
+  @apply block w-full px-3 py-1.5;
+}
+
+

@@ -1,0 +1,30 @@
+<div class="bg-custom-gray">
+    <div class="container pb-0 pt-3">
+      <h2 class="font-roboto text-custom-black" *ngIf="type != 'entreprise'">Nos nouveautés</h2>
+      <h2 class="font-roboto text-custom-black" *ngIf="type == 'entreprise'">Nos derniers utilitaires</h2>
+        <div class="flex items-center justify-center w-full h-full  py-4">
+            <div class="w-full relative flex items-center justify-center">
+              <button *ngIf="screenMode ==2" aria-label="slide backward" class="tw-arrow-left" (click)="goPrev()">
+                <svg width="22" height="22" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 1L1 7L7 13" stroke="#097893" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+                <div id="offerSlider" class="h-full flex gap-3 items-stretch justify-start transition ease-out duration-700 tw-touch-y" (swipeleft)="goNext()"  (swiperight)="goPrev()">
+                    <app-algolia-card class="flex flex-shrink-0 relative w-72 lg:w-auto max-w-xs rounded-xl text-xs leading-[18px]" *ngFor="let offer of newOffers|slice:0:5"
+                    [result]="offer">
+                  </app-algolia-card>
+                </div>
+              </div>
+              <button *ngIf="screenMode ==2" aria-label="slide forward" class="tw-arrow-right" (click)="goNext()">
+                <svg width="22" height="22" viewBox="0 0 8 14" fill="none" xmlns="https://www.w3.org/2000/svg">
+                  <path d="M1 1L7 7L1 13" stroke="#097893" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+

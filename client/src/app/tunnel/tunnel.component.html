@@ -1,0 +1,87 @@
+<!-- <div class="loader" *ngIf="!show"></div> -->
+<!-- <div *ngIf="show"> -->
+    <div class="bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="text-center carousel-h" *ngIf="!devis.carousel">
+                        <div class="loader"></div>
+                    </div>
+                    <app-carousel *ngIf="devis.carousel" [devis]="devis" [colorCheck]="devis?.colors?.selectedColor"></app-carousel>
+                    <app-tunnel-summary *ngIf="screenWidth && 992 > screenWidth" [devis]="devis" [totalPrice]="getTotalPrice()"
+                        [bestLoaPrice]="bestLoaPrice" [bestLoaInfo]="bestLoaInfo" [verif]="verif(false)" [message]="message"
+                        (submitFormClient)="submitFormClient($event)" (emptyRedirectEvent)="emptyRedirectEvent($event)"
+                        (submitFormReservation)="submitFormReservation($event)" (loaPriceClicked)="loaPriceClicked($event)" (formClientClicked)="formClientClicked($event)" [loadDevis]="loadDevis" [isLoadedSave]="isLoadedSave" [loader]="loader" [remiseMessage]="remiseMessage" [discretionRemise]="discretionRemise" [textAvantageClient]="textAvantageClient" [isLease]="isLease"[elitePrice]="getElitePrice()" [tvaPrice]="getTvaPrice()" [ttcPrice]="getTtcPrice()"></app-tunnel-summary>
+                    <app-informations [devis]="devis"></app-informations>
+                    <div class="pt-2 pb-1" *ngIf="nbreHites > 0">
+                        <p class="ea-h2 ea-bold ea-blue-color">Trouvez dès maintenant votre véhicule à tous les coûts</p>
+                        <div class="row g-2">
+                            <div class="col-lg-6" *ngFor ="let offer of hits.slice(0,2); let i = index" >
+                                <app-suggestion-offers [offer]="offer"></app-suggestion-offers>
+                            </div>
+                        </div>
+                    </div>
+                    <app-colors [devis]="devis" (colorSelected)="colorSelected($event)" [isClosedColorCollapse]="isClosedColorCollapse"
+                    (sellerieSelected)="sellerieSelected($event)" (inputTextColor)="inputTextColor($event)" (collapseEvent) = "colorCollapseEvent($event)"
+                    (inputTextSellerie)="inputTextSellerie($event)"></app-colors>
+                    <app-options [devis]="devis" (optionSelected)="optionSelected($event)" (guaranteeSelected)="guaranteeSelected($event)" [totalOptions]="totalOptions"></app-options>
+                    <app-financement [devis]="devis" (dureeChangeAction)="dureeChange($event)"
+                    (apportChangeAction)="apportChange($event)" (kilometrageChangeAction)="kilometrageChange($event)" 
+                    [duration]="duration" [apport]="apport" [kilometrage]="kilometrage" [loader]="loader"
+                    (selectFinancementAction)="selectFinancementAction($event)" [isLoaPriceClicked]="isLoaPriceClicked"
+                    (openFinancementDetails)="openFinancementDetails($event)" (collapseEvent) = "financeCollapseEvent($event)"
+                    (isSelectedFinancement)="isSelectedFinancement($event)" (isSelectedNoFinancement)="isSelectedNoFinancement($event)" [isLease]="isLease"  (submitFormClient)="submitFormClient($event)"></app-financement>
+                    <app-equipements [devis]="devis" *ngIf="devis?.generalInfo?.type != 'occasion'"></app-equipements>
+                    <app-techniques [devis]="devis"></app-techniques>
+                    <app-delivery [devis]="devis" (postalCodeChangeAction)="postalCodeChangeAction($event)" [isClosedDeliveryCollapse]="isClosedDeliveryCollapse" (collapseEvent) = "deliveryCollapseEvent($event)"
+                    (selectedLivaison)="selectedLivaison($event)" [loadDelivery]="loadDelivery"></app-delivery>
+                    <app-video-testing [devis] = "devis"></app-video-testing>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <app-tunnel-summary  *ngIf="screenWidth && 991 < screenWidth" [devis]="devis" [totalPrice]="getTotalPrice()"
+                    [bestLoaPrice]="bestLoaPrice" [bestLoaInfo]="bestLoaInfo" [verif]="verif(false)" [message]="message"
+                    (submitFormClient)="submitFormClient($event)" (emptyRedirectEvent)="emptyRedirectEvent($event)"
+                    (submitFormReservation)="submitFormReservation($event)" (loaPriceClicked)="loaPriceClicked($event)" (formClientClicked)="formClientClicked($event)" [loadDevis]="loadDevis" [isLoadedSave]="isLoadedSave" [loader]="loader" [remiseMessage]="remiseMessage" [discretionRemise]="discretionRemise" [textAvantageClient]="textAvantageClient" [isLease]="isLease" [elitePrice]="getElitePrice()" [tvaPrice]="getTvaPrice()" [ttcPrice]="getTtcPrice()"></app-tunnel-summary>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="!(devis?.initDevis?.isVo && !devis?.initDevis?.activeState)">
+        <div class="row">
+            <div class="col-12">
+                <app-reprise [devis]="devis" (repriseSimulationSelected)="repriseSimulationSelected($event);"
+                (repriseChanged)="calculPrice();" (repriseSelected)="repriseSelected($event);"
+                (repriseChosed)="repriseChosed();" [ngClass]="{'hidden' : !withReprise}"
+                (noRepriseSelected)="noRepriseSelected($event)" (modeSelected)="modeSelected($event)"
+                (aideRepriseSelected)="aideRepriseSelected($event)"></app-reprise>
+            </div>
+        </div>
+    </div>
+    <!-- <hr *ngIf="devis?.generalInfo?.label"> -->
+    <!-- <div class="container" *ngIf="devis?.generalInfo?.label">
+        <p class="ea-h5 ea-gray-color font-txt">
+            (*) Voir conditions avec nos conseillers.
+        </p>    
+    </div> -->
+    <hr *ngIf="devis?.generalInfo?.proxautoLabel">
+    <div class="container text-[#6f6f6f]" *ngIf="devis?.generalInfo?.occasionContent" [innerHTML]="devis?.generalInfo?.occasionContent"></div>
+    <div class="container" *ngIf="devis?.generalInfo?.proxautoLabel">
+        <p class="ea-h5 ea-gray-color font-txt">
+            <span class="block mb-2"><strong>Payez l'essentiel, rien que l’essentiel !</strong>&nbsp;</span>
+            <span class="block mb-1">Avec notre sélection de véhicules d’occasion “<strong>Prix malin</strong>”, optimisez votre budget automobile !</span>
+            <span class="block mb-1">Parce que votre <strong>sécurité</strong> est notre priorité, tous nos véhicules sont soumis à un contrôle qualité avec plus de 100 points de contrôle et bénéficient d’une <strong>garantie minimale de 12 mois</strong>. </span>
+            <span class="block mb-1">Tous nos véhicules “Prix malin” sont commercialisés <strong>sans aucun frais superflus</strong> de carrosserie afin de vous garantir le <strong>meilleur prix.</strong>&nbsp; </span>
+        </p>
+    </div>
+    <hr *ngIf="devis?.generalInfo?.avisMoyenne">
+    <div class="container" *ngIf="devis?.generalInfo?.avisMoyenne">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="ea-h1 ea-bold text-center mt-2">Parce que l’avis de nos clients comptent</h2>
+                <app-shared-avis-list *ngIf="devis?.generalInfo?.eurotaxModelId && devis?.generalInfo?.type" [mark]="devis?.generalInfo?.eurotaxModelId" [type]="devis?.generalInfo?.type" [isModel]="true">
+                </app-shared-avis-list>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+

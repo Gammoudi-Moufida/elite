@@ -1,0 +1,19 @@
+<div class="bg-custom-gray">
+    <div class="container pb-3 pt-0">
+        <div class="flex items-center justify-center h-full py-2">
+            <a href="https://www.avis-verifies.com/avis-clients/elite-auto.fr" target="_blank">
+                <img ngSrc="pictos/widget21-13729.png" alt="avis elite-auto" width="175" height="86">
+            </a>
+        </div>
+        <h2 class="font-roboto text-custom-black">{{title}}</h2>
+          <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 my-3" >
+            <div *ngFor="let item of data">
+                <h3 class="text-custom-black text-base font-roboto">{{item.title}}</h3>
+                <ng-container >
+                    <p class="text-custom-gray text-sm font-roboto" [innerHtml]="item.content"></p>
+                </ng-container>
+            </div>
+          </div>
+    </div>
+</div>
+

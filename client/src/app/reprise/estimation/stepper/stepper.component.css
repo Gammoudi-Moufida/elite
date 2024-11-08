@@ -1,0 +1,20 @@
+
+.step-1{
+   @apply bg-[url(https://www.elite-auto.fr/bundles/elitereprise/css/images/estimation_step_1.png)];
+}
+.step-2{
+   @apply bg-[url(https://www.elite-auto.fr/bundles/elitereprise/css/images/estimation_step_2.png)];
+}
+.step-3{
+    @apply bg-[url(https://www.elite-auto.fr/bundles/elitereprise/css/images/estimation_step_3.png)];
+}
+.step-4{
+   @apply bg-[url(https://www.elite-auto.fr/bundles/elitereprise/css/images/estimation_step_4.png)];
+}
+
+
+@media (max-width: 992px) {
+    small{
+        @apply text-[12px];
+    }  
+}

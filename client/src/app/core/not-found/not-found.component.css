@@ -1,0 +1,7 @@
+.not-found-page {
+    @apply bg-[url(https://www.elite-auto.fr/images/bg_404.jpg)] bg-no-repeat bg-center bg-fixed bg-cover my-0 mx-auto font-raleway;
+}
+
+.error-msg {
+    @apply text-[26px] text-center font-normal leading-7 text-white pt-5;
+}

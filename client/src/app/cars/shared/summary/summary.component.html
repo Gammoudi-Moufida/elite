@@ -1,0 +1,69 @@
+<div class="flex flex-wrap tw-container w-full px-3 mx-0">
+    <div class="w-full lg:w-7/12 tw-card bg-white">
+        <div class="p-[30px]">
+            <!-- <a [routerLink]="data.bigImageLink" class="text-center"> -->
+            <a href="{{data.bigImageLink}}" class="text-center">
+                <img class="m-auto" alt="{{data.mark}} {{data.model}}" title="{{data.mark}} {{data.model}}"
+                    ngSrc="{{carImage}}" priority fill class="tw-custom-relative ">
+            </a>
+            <div class="w-full text-[15px] mb-2.5 text-[#909ea5]">{{data.info}}</div>
+        </div>
+    </div>
+    <div class="w-full lg:w-5/12 lg:pl-[40px]" *ngIf='totalResult'>
+        <div class="flex flex-wrap -mx-3 px-3">
+            <div class="w-full mb-3">
+                <h3 class="capitalize text-black font-bold sm:mt-2 text-2xl">{{data.mark}} {{data.model}}
+                    <span *ngIf="fuel">{{fuel}}</span>
+                </h3>
+                <span class="text-[15px] font-semibold text-custom-jet-gray"> {{totalResult?totalResult:0}}
+                    <span *ngIf="totalResult > 1">modèles</span>
+                    <span *ngIf="totalResult == 1">modèle</span>
+                    selon votre recherche
+                </span>
+            </div>
+            <br><br><br>
+            <div class="w-full mt-3">
+                <p class="text-base tracking-normal font-bold text-[#212529]">Sélectionner la catégorie</p>
+                <p class="text-[13px] font-semibold tracking-normal text-custom-gray" *ngIf="categoryChecked == 1">
+                    Occasion | Occasion récente et 1er prix</p>
+                <!-- <p class="small-font gray-text" *ngIf="categoryChecked == 2"> Elite Access | Occasion 1er prix</p> -->
+                <p class="text-[13px] font-semibold tracking-normal text-custom-gray" *ngIf="categoryChecked == 3"> Neuf
+                    | Neuf sur commande</p>
+                <p class="text-[13px] font-semibold tracking-normal text-custom-gray" *ngIf="categoryChecked == 4"> 0 km
+                    | Neuf disponible (0 km)</p>
+
+            </div>
+        </div>
+        <div class="w-full">
+            <div class="grid grid-cols-1 -mx-3 pr-[25px]">
+                <div class="w-full tw-card tw-categorie-card m-1 mb-2" *ngFor="let item of items1"
+                    (click)="categorieClicked(item.value);" [class.tw-active]="item.isRefined">
+                    <span class="text-base tracking-normal font-bold Elite_{{item.value}} "> {{item.label}} </span>
+                    <span class="text-[13px] font-semibold tracking-normal text-custom-gray"
+                        *ngIf="item?.value == '4' ">à partir de {{minSmart | number}} €</span>
+                    <span class="text-[13px] font-semibold tracking-normal text-custom-gray"
+                        *ngIf="item?.value == '3' ">à partir de {{minNew | number}} €</span>
+                    <span class="text-[13px] font-semibold tracking-normal text-custom-gray"
+                        *ngIf="item?.value == '1' ">à partir de {{minPrime | number}} €</span>
+                </div>
+                <div class="w-full tw-card tw-categorie-card m-1" *ngFor="let item of items2"
+                    (click)="categorieClicked(item.value);" [class.tw-active]="item.isRefined">
+                    <span class="text-base tracking-normal font-bold Elite_{{item.value}} "> {{item.label}} </span>
+                    <span class="text-[13px] font-semibold tracking-normal text-custom-gray"
+                        *ngIf="item?.value == '4' ">à partir de {{minSmart | number}} €</span>
+                    <span class="text-[13px] font-semibold tracking-normal text-custom-gray"
+                        *ngIf="item?.value == '3' ">à partir de {{minNew | number}} €</span>
+                    <span class="text-[13px] font-semibold tracking-normal text-custom-gray"
+                        *ngIf="item?.value == '1' ">à partir de {{minPrime | number}} €</span>
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-3 px-1">
+                <a type="button"
+                    class="w-full tw-btn mt-3 bg-custom-ocean-blue text-white font-medium rounded-[9px] py-[10px]"
+                    (click)='goToCatalogue()'>
+                    Voir le catalogue
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

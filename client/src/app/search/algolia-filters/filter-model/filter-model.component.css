@@ -1,0 +1,6 @@
+
+input::-webkit-input-placeholder {
+    @apply font-medium text-base leading-5 text-[#989898] !important;
+  }
+
+  

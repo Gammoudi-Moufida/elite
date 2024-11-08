@@ -1,0 +1,18 @@
+::ng-deep a:hover {
+    @apply text-[#00779b];
+}
+::ng-deep h2 {
+  @apply mb-[5px] !important;
+}
+@media screen and (min-width: 700px) {
+section {
+	@apply p-[20px] !important;
+}
+}
+section {
+    @apply px-[12px];
+}
+::ng-deep .main-container { 
+    @apply bg-white ;
+  }
+  

@@ -1,0 +1,40 @@
+<div *ngIf="!isPromoPage" class="hidden sm:hidden md:hidden lg:block">
+  <div class="flex">
+    <span class="flex-1 tw-ea-span text-end mx-2">Trier par</span>
+    <select class="flex-1 tw-form tw-ea_search" (change)="state?.refine($event.target.value); orderSelected($event.target.value)">
+      <option *ngFor="let option of state?.options" class="h-[40px]" [selected]="option.value === sortByDetected" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+</div>
+<div *ngIf="isPromoPage" class="block">
+  <div class="flex">
+    <span class="flex-1 tw-ea-span text-end mx-2">Trier par</span>
+    <select class="flex-1 tw-form tw-ea_search" (change)="state?.refine($event.target.value); orderSelected($event.target.value)">
+      <option *ngFor="let option of state?.options" class="h-[40px]" [selected]="option.value === sortByDetected" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="!isPromoPage"  class=" block sm:block md:block lg:hidden">
+    <button type="button" class="tw-btn-filters" (click)="showListButton()" >
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" class="inline mb-1 me-1">
+        <path
+          d="M3.9944 0.577327C4.31984 0.251894 4.84748 0.251894 5.17292 0.577327L8.50624 3.91066C8.83166 4.2361 8.83166 4.76374 8.50624 5.08918C8.18083 5.41459 7.65316 5.41459 7.32774 5.08918L5.41699 3.17843V12.8333C5.41699 13.2935 5.04389 13.6666 4.58366 13.6666C4.12343 13.6666 3.75033 13.2935 3.75033 12.8333V3.17843L1.83958 5.08918C1.51414 5.41459 0.986509 5.41459 0.661067 5.08918C0.335634 4.76374 0.335634 4.2361 0.661067 3.91066L3.9944 0.577327ZM12.0837 10.8214V1.16659C12.0837 0.706352 12.4567 0.333252 12.917 0.333252C13.3772 0.333252 13.7503 0.706352 13.7503 1.16659V10.8214L15.6611 8.91067C15.9865 8.58525 16.5142 8.58525 16.8396 8.91067C17.165 9.23609 17.165 9.76375 16.8396 10.0892L13.5062 13.4225C13.35 13.5788 13.138 13.6666 12.917 13.6666C12.696 13.6666 12.484 13.5788 12.3277 13.4225L8.99441 10.0892C8.66899 9.76375 8.66899 9.23609 8.99441 8.91067C9.31983 8.58525 9.84749 8.58525 10.1729 8.91067L12.0837 10.8214Z"
+          fill="white" />
+      </svg>
+      TRIER
+    </button>
+  <div *ngIf="showList" class="absolute z-20 mt-2 w-56  rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+    <div class="p-3" role="none">
+     
+      <button *ngFor="let option of state?.options" class="font-normal text-[16px] text-[#212529] p-1"
+      (click)="state?.refine(option.value)" (click)="showListButton()">{{option.label}}</button>
+    </div>
+
+  </div>
+</div>
+

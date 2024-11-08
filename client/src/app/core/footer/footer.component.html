@@ -1,0 +1,105 @@
+<footer id="new_footer" class="bg-white border-t border-solid border-gray-300 border-opacity-50">
+    <div class="container mx-auto p-8">
+        <div class="grid grid-cols-1">
+            <div class="col-span-1 lg:col-span-1">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" *ngIf="footerColumn || footerColumn1 || footerColumn2">
+                    <div class="col-span-1 md:col-span-1 h-[120px] overflow-y-scroll overflow-x-hidden" *ngIf="footerColumn">
+                        <p class="text-custom-black text-sm font-bold">{{footerColumn.title}}</p>
+                        <div *ngFor="let item of footerColumn | keyvalue: originalOrder">
+                            <a class="text-custom-black text-xs" *ngIf="item.value.url" href="{{item.value.url}}">{{item.value.title}}</a>&nbsp;
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-1 h-[120px] overflow-y-scroll overflow-x-hidden" *ngIf="footerColumn1">
+                        <p class="text-custom-black text-sm font-bold">{{footerColumn1.title}}</p>
+                        <div *ngFor="let item of footerColumn1 | keyvalue: originalOrder">
+                            <a class="text-custom-black text-xs" *ngIf="item.value.url" href="{{item.value.url}}">{{item.value.title}}</a>&nbsp;
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-1 h-[120px] overflow-y-scroll overflow-x-hidden" *ngIf="footerColumn2">
+                        <p class="text-custom-black text-sm font-bold">{{footerColumn2.title}}</p>
+                        <div *ngFor="let item of footerColumn2 | keyvalue: originalOrder">
+                            <a class="text-custom-black text-xs" *ngIf="item.value.url" href="{{item.value.url}}">{{item.value.title}}</a>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" *ngIf="!links">
+                    <div class="col-span-1 md:col-span-1 h-[120px] overflow-y-scroll overflow-x-hidden">
+                        <p class="text-custom-black text-sm font-bold">VOITURES NEUVES</p>
+                        <div><a class="text-custom-black text-xs" href="https://www.elite-auto.fr/voiture-peugeot-2/208-7265.html">peugeot 208 neuve</a>&nbsp;
+                        </div>
+                        <div><a class="text-custom-black text-xs" href="https://www.elite-auto.fr/voiture-renault-1/clio-v-7208.html">vente renault clio 5</a>&nbsp;
+                        </div>
+                        <div><a class="text-custom-black text-xs" href="https://www.elite-auto.fr/voiture-ds-100/ds3-crossback-7071.html">ds ds3</a>&nbsp;
+                        </div>
+                        <div><a class="text-custom-black text-xs" href="https://www.elite-auto.fr/voiture-audi-9/a1-sportback-7070.html">mandataire audi a1</a>&nbsp;
+                        </div>
+                    </div>
+                    <div class="col-span-1 md:col-span-1 h-[120px] overflow-y-scroll overflow-x-hidden">
+                        <p class="text-custom-black text-sm font-bold">MANDATAIRE VOITURE</p>
+                        <div>
+                            <a class="text-custom-black text-xs" href="https://www.elite-auto.fr/vente-voiture/renault-1.html">renault neuve</a>&nbsp;
+                        </div>
+                        <div>
+                            <a class="text-custom-black text-xs" href="https://www.elite-auto.fr/vente-voiture/peugeot-2.html">mandataire peugeot</a>&nbsp;
+                        </div>
+                        <div>
+                            <a class="text-custom-black text-xs" href="https://www.elite-auto.fr/vente-voiture/citroen-3.html">mandataire auto citroen</a>&nbsp;
+                        </div>
+                        <div>
+                            <a class="text-custom-black text-xs" href="https://www.elite-auto.fr/vente-voiture/dacia-73.html">voiture neuve dacia</a>&nbsp;
+                        </div>
+                        <div>
+                            <a class="text-custom-black text-xs" href="https://www.elite-auto.fr/vente-voiture/dacia-73.html">mandataire vw neuve</a>&nbsp;
+                        </div>
+                        <div>
+                            <a class="text-custom-black text-xs" href="https://www.elite-auto.fr/vente-voiture/volkswagen-7.html">renault neuve</a>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" *ngIf="!footerColumn && !footerColumn1 && !footerColumn2"></div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  <div class="bg-custom-black h-auto text-white text-sm">
+    <div class="container py-2 px-4">
+        <div class="flex flex-col-reverse items-center sm:flex-row gap-3">
+            <div class="flex-none w-full sm:w-8/12 order-1 sm:-order-1">
+                <div class="float-left">
+                    <span>Pour les trajets courts, privilégiez la marche ou le vélo. #SeDéplacerMoinsPolluer</span>
+                    <span class="block">&copy; {{ currentYear }} - Tous droits réservés S.A.S au capital de 1 000 000€ 11 Rue de l'Orme, 91540 Fontenay-le-Vicomte</span>
+                </div>
+            </div>
+            <div class="flex-none w-full sm:w-4/12 order-2 sm:order-2">
+                <div class="xl:float-right md:float-right">
+                    <app-tw-community></app-tw-community>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="bg-white border-gray-300 border-opacity-50 hidden xl:block">
+    <div class="container flex py-2 px-4" *ngIf="links">
+        <ng-container *ngFor="let link of links; let first = first; let last = last">
+            <a href="{{link.url}}" class="text-sm text-custom-black uppercase {{first ? '' : 'ml-3'}} {{last ? '' : 'mr-3'}}">{{link.title}}</a>&nbsp;
+            <ng-container *ngIf="!last">
+                <span class="border-r border-black"></span>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class="container flex py-2 px-4" *ngIf="!links">
+        <a href="https://www.elite-auto.fr/leasing" class="text-sm text-custom-black uppercase mr-3">Leasing</a>&nbsp;
+        <span class="border-r border-black"></span>
+        <a href="https://www.elite-auto.fr/reprise-voiture" class="text-sm text-custom-black uppercase mx-[.75rem]">Reprise Voiture</a>&nbsp;
+        <span class="border-r border-black"></span>
+        <a href="https://entreprise.elite-auto.fr/" class="text-sm text-custom-black uppercase mx-[.75rem]">Véhicule Utilitaire</a>&nbsp;
+        <span class="border-r border-black"></span>
+        <a href="https://www.elite-auto.fr/services" class="text-sm text-custom-black uppercase mx-[.75rem]">Services</a>&nbsp;
+        <span class="border-r border-black"></span>
+        <a href="https://www.elite-auto.fr/infos-legales" class="text-sm text-custom-black uppercase mx-[.75rem]">Mentions légales</a>&nbsp;
+        <span class="border-r border-black"></span>
+        <a href="https://www.elite-auto.fr/occasion/guide/pages.html" class="text-sm text-custom-black uppercase mx-[.75rem]">Pages occasion</a>&nbsp;
+        <span class="border-r border-black"></span>
+        <a href="https://www.elite-auto.fr/financement" class="text-sm text-custom-black uppercase mx-[.75rem]">Financement</a>&nbsp;
+    </div>
+  </div>  

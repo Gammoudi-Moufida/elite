@@ -1,0 +1,12 @@
+
+<div class="tw-input">
+  <div class="tw-icon">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M15.8575 14.4765C16.048 14.667 16.048 14.976 15.8575 15.167L15.167 15.8575C14.976 16.048 14.667 16.048 14.4765 15.8575L9.6425 11.0235C9.59 10.971 9.555 10.909 9.5315 10.843C8.54 11.5675 7.3225 12 6 12C2.6865 12 0 9.3135 0 6C0 2.6865 2.6865 0 6 0C9.3135 0 12 2.6865 12 6C12 7.3225 11.5675 8.54 10.843 9.5315C10.909 9.555 10.971 9.5895 11.0235 9.6425L15.8575 14.4765ZM6 2C3.791 2 2 3.791 2 6C2 8.209 3.791 10 6 10C8.209 10 10 8.209 10 6C10 3.791 8.209 2 6 2Z"
+        fill="#357690" />
+    </svg>
+  </div>
+  <input class="tw-ea_search" type="text" #input placeholder="Rechercher un véhicule"
+    (keyup)="this.state?.refine(input.value)" [value]="this.state?.query" (keyup.enter)="onEnter(input)" />
+</div>

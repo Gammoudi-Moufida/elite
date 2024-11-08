@@ -1,0 +1,250 @@
+<div class="tw-loader" *ngIf="loading"></div>
+
+<div *ngIf="!loading" class="tw-container mx-auto px-[12px] mt-[1rem]">
+
+  <span class="max-[768px]:text-base text-lg font-bold"> Estimation automatique
+  </span>
+
+  <div class="text-sm"> Pour une estimation rapide, renseignez l'immatriculation de votre véhicule.</div>
+
+  <div class="tw-input-group mb-[1rem] mt-2">
+    <input type="text" class="tw-form rounded-l" [(ngModel)]="matriculeToFind" placeholder="Exemple : AA-001-AA"
+      aria-label="Immat">
+    <span class="bg-custom-steel-blue text-white text-[smaller] px-5 py-2 rounded-r cursor-pointer" (click)="getVehiculesByImmat()">Valider</span>
+  </div>
+
+  <div class="title-select" *ngIf="vehiculesByImmat?.length > 0"> Sélectionnez votre véhicule :</div>
+
+  <ul *ngIf="vehiculesByImmat?.length > 0">
+    <li *ngFor="let vbi of vehiculesByImmat">
+      <a class="text-inherit no-underline" [class.tw-clicked]="(selectedVehicule?.sVersion == vbi?.libVehicule) && (selectedVehicule?.sTypNatcode == vbi?.s_veh_typnatcode) "
+        (click)="choseVehicule(vbi)"> {{vbi?.libVehicule}} -
+        {{vbi?.dateVehicule}} > </a>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="!loading" class="bg-custom-gray mb-0 mt-3 pt-2">
+
+  <div class="tw-container mx-auto px-[12px] mb-[1rem] mt-[1rem]">
+
+    <div class="flex flex-wrap" *ngIf="!hideStep1">
+      <div class="max-[768px]:text-base text-lg font-bold">
+        Estimation manuelle
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6" id="step1" *ngIf="!hideStep1">
+
+      <div>
+        <label class="text-sm">Année du véhicule :</label>
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedYear"
+          (change)="selectYear($event.target.value)">
+          <option selected value="0">Année</option>
+          <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-sm">Mois du véhicule :</label>
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedMonth"
+          (change)="selectMonth($event.target.value)">
+          <option selected value="0">Mois</option>
+          <option *ngFor="let month of months" value="{{month?.id}}">{{month?.name}}</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-sm">Marque du véhicule :</label>
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedMarque" (change)="selectMarque()">
+          <option selected [ngValue]=null>Marque</option>
+          <option *ngFor="let marque of marques" [ngValue]="marque">{{marque?.name}}</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-sm">Modèle du véhicule :</label>
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedModel" (change)="selectModel()">
+          <option selected [ngValue]=null>Modèle</option>
+          <option *ngFor="let model of models" [ngValue]="model">{{model?.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 mt-[6px]" *ngIf="!hideStep1">
+      <div>
+        <label class="text-sm mt-2">Motorisation du véhicule:</label>
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedMotorisation" (change)="selectMotorisation()">
+          <option selected [ngValue]=null>Motorisation</option>
+          <option *ngFor="let motorisation of motorisations" [ngValue]="motorisation">{{motorisation?.name}}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label class="text-sm mt-2">Finition du véhicule:</label>
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedFinition" (change)="selectFinition()">
+          <option selected [ngValue]=null>Finition</option>
+          <option *ngFor="let finition of finitions" [ngValue]="finition">{{finition?.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 mt-[1rem]" id="step2" *ngIf="!hideStep1">
+      <div class="max-[768px]:text-base text-lg font-bold">
+        Votre véhicule :
+      </div>
+      <div class="md:w-1/2 md:pr-3">
+        <select class="tw-form-select tw-bg-select" [(ngModel)]="selectedVehicule" (change)="selectVehiculeByCmb()">
+          <option selected [ngValue]=null>Véhicule à estimer</option>
+          <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule">{{vehicule?.sVersion}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-3" [ngClass]="{ 'pointer-events-none opacity-30':!selectedVehicule || !step2}" id="step3">
+      <div class="max-[768px]:text-base text-lg font-bold">Renseignements de base sur votre {{selectedVehicule?.sMarque}} </div>
+      <br>
+
+      <div class="grid sm:grid-cols-1 md:grid-cols-2 mt-[-20px]">
+        <div>
+          <div class="w-full sm:w-1/2">
+            <label class="text-sm m-0">
+              <span>Première main ?</span>
+            </label>
+          </div>
+          <div class="w-full sm:w-1/2">
+            <div class="inline-block me-5">
+              <div class="flex items-center">
+                <input class="e-a-form-radio-small-input" type="radio" name="firstOptions0" id="firstOptions00"
+                  [value]="true" [(ngModel)]="firstOptions[0]">
+                <label class="tw-check-label text-sm mb-0" for="firstOptions00">
+                  <span>Oui</span>
+                </label>
+              </div>
+            </div>
+            <div class="inline-block">
+              <div class="flex align-items-center">
+                <input class="e-a-form-radio-small-input" type="radio" name="firstOptions0" id="firstOptions01"
+                  [value]="false" [(ngModel)]="firstOptions[0]">
+                <label class="tw-check-label text-sm mb-0" for="firstOptions01">
+                  <span>Non</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="w-full sm:w-1/2">
+            <label class="text-sm m-0">
+              <span>Carnet d'entretien à jour ?</span>
+            </label>
+          </div>
+          <div class="w-full sm:w-1/2">
+            <div class="inline-block me-5">
+              <div class="flex items-center">
+                <input class="e-a-form-radio-small-input" type="radio" name="firstOptions1" id="firstOptions10"
+                  [value]="true" [(ngModel)]="firstOptions[1]">
+                <label class="tw-check-label text-sm mb-0" for="firstOptions10">
+                  <span>Oui</span>
+                </label>
+              </div>
+            </div>
+            <div class="inline-block">
+              <div class="flex items-center">
+                <input class="e-a-form-radio-small-input" type="radio" name="firstOptions1" id="firstOptions11"
+                  [value]="false" [(ngModel)]="firstOptions[1]">
+                <label class="tw-check-label text-sm mb-0" for="firstOptions11">
+                  <span>Non</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <label class="text-sm">Kilométrage</label>
+      <div class="tw-input-group mb-3 mt-2">
+        <input type="number" class="tw-form rounded-l" [(ngModel)]="kilometrage">
+        <span class="bg-custom-steel-blue text-white text-[smaller] px-5 py-2 rounded-r cursor-pointer" (click)="gotToStep4()">Valider</span>
+      </div>
+
+    </div>
+
+    <div class="mt-3" [ngClass]="{ 'pointer-events-none opacity-30':!selectedVehicule || !step3}" id="step4">
+      <div class="max-[768px]:text-base text-lg font-bold">Renseignez vos coordonnées </div>
+      <br>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div class="padding-l-small padding-r-small">
+
+          <div class="flex flex-wrap">
+            <div class="w-full md:w-1/4 xl:w-3/12 xl:pr-4">
+              <select class="tw-form-select tw-bg-select" id="civilite" name="civility" formControlName="civility">
+                <option selected value="">Civilité</option>
+                <option value="Mme">Madame</option>
+                <option value="Mr">Monsieur</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6">
+            <div class="padding-l-small">
+              <div class="form-group">
+                <label class="text-sm mt-2">Nom:</label>
+                <input type="text" class="tw-form rounded" id="nom" placeholder="Votre Nom" name="firstname"
+                  formControlName="firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstname.errors.required">Nom obligatoire</div>
+                </div>
+              </div>
+            </div>
+            <div class="padding-r-small">
+              <div class="form-group">
+                <label class="text-sm mt-2">Code Postal:</label>
+                <input type="text" class="tw-form rounded" id="postalCode" name="postalCode"
+                  formControlName="postalCode" placeholder="Votre code postal"
+                  [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" />
+                <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                  <div *ngIf="f.postalCode.errors.required">Code postal obligatoire</div>
+                  <div *ngIf="f.postalCode.errors.pattern">Code postal invalide</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="padding-l-small">
+              <div class="form-group">
+                <label class="text-sm mt-2">Email :</label>
+                <input type="email" class="tw-form rounded" id="email" placeholder="Votre adresse email" name="mail"
+                  formControlName="mail" [ngClass]="{'is-invalid':submitted && f.mail.errors }" />
+                <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                  <div *ngIf="f.mail.errors.required">Email obligatoire</div>
+                  <div *ngIf="f.mail.errors.pattern">Email invalide</div>
+                </div>
+              </div>
+            </div>
+            <div class="padding-r-small">
+              <div class="form-group">
+                <label class="text-sm mt-2">Téléphone:</label>
+                <input type="tel" class="tw-form rounded" name="tel" formControlName="tel" id="tel"
+                  placeholder="Votre numéro de téléphone" [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" />
+                <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                  <div *ngIf="f.tel.errors.required">Téléphone obligatoire</div>
+                  <div *ngIf="f.tel.errors.pattern">Téléphone invalide</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap">
+            <div class="flex-[1_0_0%]">
+              <button type="submit" class="tw-btn bg-[#ff7a01] text-white text-sm font-semibold mt-3 mb-3 lg:w-1/4 md:w-5/12">
+                Recevoir mon estimation gratuite
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+.tw-compareBtn { 
+    @apply w-full border border-solid border-[#dde1e3] mb-[16px] bg-[#007795] h-[45px] text-[14px] rounded-[5px] text-white; 
+}
+
+.tw-container{
+     @apply m-auto w-full pt-[30px] pb-[25px] pl-[16px] max-w-[1400px]; 
+}
+.tw-pt {
+    @apply pt-[0px] !important;
+}
+.tw-container p{
+    @apply text-[14px] leading-5 text-[#556a74] 
+}
+
+.compareNumber {
+    @apply border border-solid w-full border-[#fff] bg-[#fff] h-[45px] text-center p-[10px] rounded-[5px]; 
+}
+
+hr {
+    @apply border-0 border-t border-solid border-[rgba(0,0,0,.1)] my-[1rem];
+}
+
+
+.tw-btn-delete{
+    @apply bg-[#EBEBEC] rounded-[3px] w-[86px] h-[22px] ml-[225px];
+  }
+
+.list-group{
+    @apply flex flex-col bg-white text-sm   border-[#dee2e6] rounded;
+}
+.li-style {
+    @apply w-[5%] align-top;
+}
+
+.li-label {
+    @apply w-[95%] whitespace-break-spaces;
+}
+
+.stick{ 
+     @apply w-full fixed top-0 z-[12];
+   }  
+.list-group-flush .tw-list-group-item:last-child {
+    @apply border-b-0;
+}
+@media only screen and (max-width : 767px) {
+    .tw-container{
+        @apply pt-[50px];
+    }
+
+    .stick{  
+        @apply top-[132px];
+    }
+
+    .mobile-fixed-block {
+        @apply fixed flex w-full left-0 px-3 top-0 z-[20] bg-white shadow-[0_8px_6px_-6px_#dde1e3] pt-[15px];
+    }
+    
+    .second-mobile-fixed-block {
+        @apply fixed flex w-full left-0 justify-center px-3 top-[75px] z-[20] bg-white shadow-[0_8px_6px_-6px_#dde1e3];
+      }
+}
+.tw-offer-card-price {
+    @apply font-bold text-base cursor-text leading-4 text-[#35393F] ;
+  }
+.card-deck .tw-card {
+    @apply max-w-[326px] min-w-[326px] mr-[22px] ml-[0px] text-[12px] mb-[0px];
+}
+
+.card:last-child {
+   @apply mr-[0px] !important;
+  }
+
+.card-deck {
+    @apply inline-flex flex-nowrap m-0;
+
+}
+
+
+.card-deck-overflow {
+    @apply grid  overflow-auto !important;
+}
+
+@media only screen and (max-width: 567px) {
+    .list-group {
+        @apply text-[10px];
+    }
+    .card-deck .tw-card {
+        @apply max-w-[220px] min-w-[220px] mr-[5px];
+    }
+    .tw-btn-delete {
+        @apply ml-[149px] text-[9px] w-[65px];
+      }
+      ::ng-deep .padding-r {
+        @apply pr-[0px];
+    }
+}
+
+.border-radius-bottom {
+    @apply rounded-b-xl ;
+}
+
+.border-radius-top {
+    @apply rounded-t-xl;
+}
+
+.tw-list-group-item {
+    @apply bg-inherit !important;
+}
+.tw-list-group-item {
+    @apply relative block text-[#212529] no-underline border px-4 py-2 border-solid border-[#dee2e6];
+  }
+.tw-card {
+    @apply relative flex flex-col bg-clip-border bg-white  break-words;
+  }
+
+.tw-delete-action-btn{
+    @apply bg-inherit top-[40px] z-[15] !important;
+}
+
+.tw-card-background {
+   @apply bg-[#eff0f2];
+}
+
+::ng-deep .main-bg {
+   @apply bg-[#f1f1f1];
+}

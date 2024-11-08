@@ -1,0 +1,59 @@
+.badge{
+    @apply inline-block  items-center !important ;
+}
+.black-badge{
+    @apply text-white font-bold bg-custom-black w-[150px] h-[39px] text-[large] rounded-[6px] p-2 ;
+}
+.font-size{
+    @apply text-[16px];
+}
+.sizeImg{
+    @apply h-[75%] w-[75%] block !important ;
+}
+/*modal popup */
+.tw-modal {
+    @apply fixed top-0  justify-center items-center w-full inset-0 z-[1000] overflow-y-auto;
+}
+.tw-opicity-modal{
+    @apply fixed inset-0 bg-[#000]/75;
+}
+.tw-content-modal {
+    @apply relative bg-white rounded-lg;
+}
+.tw-header-modal {
+    @apply relative bg-white rounded-lg shadow dark:bg-gray-700;
+}
+.tw-btn-close {
+    @apply flex shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b;
+}
+.tw-btn-modal {
+    @apply ms-3 text-base font-normal leading-normal text-[#212529] bg-white focus:outline-none rounded-lg border border-[#212529] px-3 py-1.5 hover:text-white hover:bg-[#212529] focus:z-10;
+}
+.tw-text-header{
+    @apply shrink-0 text-center block p-4 border-b rounded-t;
+}
+::ng-deep .modal-content {
+    @apply border-none !important;
+}
+@media screen and (max-width: 767px){
+    h2{
+        @apply text-[15px];
+    }
+    .figure-caption{
+        @apply text-[16px]; 
+    }
+    .tw-sub-caption{
+        @apply text-[16px] text-custom-black;   
+    }
+    .backg{
+        @apply w-[120px] h-[85px] m-auto ;
+    }
+    .black-badge{
+        @apply w-[116px] h-[32px];
+    }
+
+    .font-size{
+        @apply text-[12px];
+    }
+
+}

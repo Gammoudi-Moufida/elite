@@ -1,0 +1,18 @@
+  .bg {
+    background: #F1F1F1;
+  }
+
+  .carousel-h {
+    height: 420px;
+  }
+
+  .container {
+    max-width: 1400px;
+    font-family: 'Roboto', sans-serif;
+}
+  
+  @media only screen and (max-width : 480px)  {
+    .carousel-h {
+       height: 260px;
+    }
+  }

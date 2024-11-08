@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imgproxy-pod
+spec:
+  selector:
+    matchLabels:
+      app: k8l-elite
+      tier: imgproxy-pod
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: k8l-elite
+        tier: imgproxy-pod
+        track: stable
+    spec:
+      containers:
+        - name: image-proxy
+          image: "midprnci.gra7.container-registry.ovh.net/elite-auto/imgproxy:latest"
+          ports:
+            - name: http
+              containerPort: 8080
+      imagePullSecrets:
+      - name:  priv-registry 

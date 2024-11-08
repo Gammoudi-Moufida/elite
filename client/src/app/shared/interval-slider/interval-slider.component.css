@@ -1,0 +1,69 @@
+
+.tw-multi-range-slider {
+  @apply z-[2] pointer-events-none opacity-0 translate-x-0 translate-y-[-15px] h-[35px] appearance-none;
+}
+.tw-MultiRangeSlider {
+  @apply z-[1] mx-[15px] my-0;
+}
+.tw-MultiRangeSlider > .track {
+  @apply z-[1] h-[3px] bg-[#d8e0f3] rounded-[5px];
+}
+.tw-MultiRangeSlider > .range {
+  @apply z-[2] bg-[#097893] h-[3px] transition-[0.3s] duration-[linear] inset-x-[0%];
+}
+.tw-MultiRangeSlider > .thumb {
+  @apply z-[3] w-8 h-8 bg-[#097893] rounded-2xl;
+}
+.tw-MultiRangeSlider > .thumb.left {
+  @apply translate-x-[-17px] translate-y-[-15px] transition-[0.3s] duration-[linear];
+}
+.tw-MultiRangeSlider > .thumb.right {
+  @apply translate-x-[17px] translate-y-[-15px] transition-[0.3s] duration-[linear] right-[0%];
+}
+.tw-circle {
+  @apply w-2 h-2 translate-x-3 translate-y-3 bg-[white] rounded-[50%];
+}
+.tw-multi-range-slider::-webkit-slider-thumb {
+  @apply cursor-pointer pointer-events-auto;
+}
+.tw-multi-range-slider::-moz-range-thumb {
+  @apply cursor-pointer h-[35px] w-[35px] cursor-pointer rounded-[15px] pointer-events-auto;
+}
+.tw-circleStep {
+  @apply h-1 w-2 bg-[#097893] inline-block rounded-[50%];
+}
+.tw-stepTop {
+  @apply top-[-11px] absolute;
+}
+datalist {
+  @apply inline-flex w-full;
+}
+datalist option {
+  @apply cursor-pointer min-h-[0.6rem] transition-[0.3s] duration-[linear] border-[none] m-0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @apply h-[35px] w-[35px] cursor-pointer rounded-[15px] appearance-none;
+  
+}
+.tw-multi-range-slider::-moz-range-thumb {
+  @apply appearance-none;
+}
+.tw-show {
+  @apply block absolute text-black text-center bg-white p-[5px] whitespace-nowrap text-xs font-semibold rounded-[3px] right-[-17px] bottom-[120%];
+}
+label {
+  @apply text-xs;
+}
+.tw-font {
+  @apply text-xs not-italic;
+}
+span {
+  @apply text-[#596A73] text-sm;
+}
+.tw-price-rent-values {
+  @apply relative ml-0 bottom-[60px];
+}
+.tw-margin-slider-customized {
+  @apply mx-[5px];
+}

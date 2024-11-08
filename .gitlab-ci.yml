@@ -1,0 +1,131 @@
+stages:
+  - build
+  - test
+  - release
+  - publish
+  - deploy
+  - rollback
+
+services:
+  - docker:dind   
+
+build:
+  stage: build
+  image: docker  
+  only:
+    - production
+  when: on_success
+  script: 
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY   
+    - apk add --no-cache docker-compose
+    - docker-compose build
+    - docker push registry.gitlab.com/elite-auto/elite-auto/imgproxy:prerelease
+    - docker push registry.gitlab.com/elite-auto/elite-auto/nginx:prerelease 
+    - docker push registry.gitlab.com/elite-auto/elite-auto/client:prerelease
+
+test:
+  stage: test
+  needs: [build]
+  only:
+    - production
+  when: on_success
+  script:
+    - echo 'this is a test job'
+
+
+release:
+  stage: release
+  image: node:latest
+  when: on_success
+  needs: [test]
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+    - |
+      {
+        echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/"
+        echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}"
+      } | tee -a .npmrc
+  script:
+    - npm run semantic-release
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .npm/
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production" && $CI_DEFAULT_BRANCH
+
+publish:
+ stage: publish
+ image: docker
+ needs: [release] 
+ only:
+  - production 
+ before_script:
+  - apk update && apk add git
+  - export TAG_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+  - echo "TAG_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))" >> build.env
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker pull registry.gitlab.com/elite-auto/elite-auto/imgproxy:prerelease
+  - docker pull registry.gitlab.com/elite-auto/elite-auto/nginx:prerelease
+  - docker pull registry.gitlab.com/elite-auto/elite-auto/client:prerelease
+ script: 
+  - docker tag registry.gitlab.com/elite-auto/elite-auto/imgproxy:prerelease registry.gitlab.com/elite-auto/elite-auto/imgproxy:$TAG_VERSION
+  - docker tag registry.gitlab.com/elite-auto/elite-auto/nginx:prerelease registry.gitlab.com/elite-auto/elite-auto/nginx:$TAG_VERSION
+  - docker tag registry.gitlab.com/elite-auto/elite-auto/client:prerelease registry.gitlab.com/elite-auto/elite-auto/client:$TAG_VERSION
+  - docker push registry.gitlab.com/elite-auto/elite-auto/imgproxy:$TAG_VERSION
+  - docker push registry.gitlab.com/elite-auto/elite-auto/nginx:$TAG_VERSION
+  - docker push registry.gitlab.com/elite-auto/elite-auto/client:$TAG_VERSION 
+ artifacts:
+    reports:
+      dotenv: build.env
+    expire_in: 10 mins
+ 
+deploy:
+   stage: deploy
+   needs: [publish] 
+   image:
+     name: bitnami/kubectl:latest
+     entrypoint: [""]
+   only:
+    - production 
+   script:
+   - kubectl config use-context elite-auto/elite-auto:prod1-agent
+   - kubectl set image deployment/nginx-pod   nginx=registry.gitlab.com/elite-auto/elite-auto/nginx:$TAG_VERSION
+   - kubectl set image deployment/client-pod   client=registry.gitlab.com/elite-auto/elite-auto/client:$TAG_VERSION
+   - kubectl set image deployment/imgproxy-pod   image-proxy=registry.gitlab.com/elite-auto/elite-auto/imgproxy:$TAG_VERSION
+   - kubectl config use-context elite-auto/elite-auto:prod2-agent
+   - kubectl set image deployment/nginx-pod   nginx=registry.gitlab.com/elite-auto/elite-auto/nginx:$TAG_VERSION
+   - kubectl set image deployment/client-pod   client=registry.gitlab.com/elite-auto/elite-auto/client:$TAG_VERSION
+   - kubectl set image deployment/imgproxy-pod   image-proxy=registry.gitlab.com/elite-auto/elite-auto/imgproxy:$TAG_VERSION
+   environment:
+    name: Prod
+   needs:
+    - job: publish
+      artifacts: true
+
+
+   #########################################################################
+  #       ____     ___    _       _       ____       _       ____   _  __    #
+  #      |  _ \   / _ \  | |     | |     | __ )     / \     / ___| | |/ /    #
+  #      | |_) | | | | | | |     | |     |  _ \    / _ \   | |     | ' /     #
+  #      |  _ <  | |_| | | |___  | |___  | |_) |  / ___ \  | |___  | . \     #
+  #      |_| \_\  \___/  |_____| |_____| |____/  /_/   \_\  \____| |_|\_\    #
+  #                                                                          #
+   ##########################################################################
+
+rollback:
+   stage: rollback
+   image:
+     name: bitnami/kubectl:latest
+     entrypoint: [""]
+   only:
+    - rollback 
+   script:
+   - kubectl config use-context elite-auto/elite-auto:prod1-agent
+   - kubectl set image deployment/nginx-pod   nginx=registry.gitlab.com/elite-auto/elite-auto/nginx:1.0.0
+   - kubectl set image deployment/client-pod   client=registry.gitlab.com/elite-auto/elite-auto/client:1.0.0
+   - kubectl set image deployment/imgproxy-pod   image-proxy=registry.gitlab.com/elite-auto/elite-auto/imgproxy:1.0.0
+   - kubectl config use-context elite-auto/elite-auto:prod2-agent
+   - kubectl set image deployment/nginx-pod   nginx=registry.gitlab.com/elite-auto/elite-auto/nginx:1.0.0
+   - kubectl set image deployment/client-pod   client=registry.gitlab.com/elite-auto/elite-auto/client:1.0.0
+   - kubectl set image deployment/imgproxy-pod   image-proxy=registry.gitlab.com/elite-auto/elite-auto/imgproxy:1.0.0

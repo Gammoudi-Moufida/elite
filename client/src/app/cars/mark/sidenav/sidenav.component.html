@@ -1,0 +1,17 @@
+<button type="button" class="tw-close" aria-label="Close" *ngIf="1024 >  screenWidth" (click)="backAction()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+<br/>
+<div class="text-[16px]  font-semibold" *ngFor = "let item of links?.menuTab | slice:1:links?.menuTab.length" [attr.aria-expanded]="!isCollapsed && item.sousLink">
+    
+    <a  *ngIf="!item.sousLink"  [href]="item.url">
+        {{item.title | uppercase}}
+    </a>
+
+    <a *ngIf="item.sousLink" [ngClass]="{'text-custom-dark-blue':item.sousLink }">
+        {{item.title | uppercase}}
+    </a>
+
+    <hr>
+</div>
+<button type="button" class=" w-full rounded-none py-[6px] px-3 bg-[#e5461e] border-[#e5461e] text-white" *ngIf="1024 >  screenWidth" (click)="backAction()"><b>Retour</b></button>

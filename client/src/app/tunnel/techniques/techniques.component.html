@@ -1,0 +1,168 @@
+<div class="mt-3">
+    <div class="e-a-collapse-header bg-white text-uppercase p-3 mb-2 d-flex justify-content-between" (click)="collapse.toggle()" [attr.aria-expanded]="!isClosedCollapse">
+        <h2 class="ea-h5 ea-bold mb-0">DONNÉES TECHNIQUES</h2>
+        <div class="ea-collapse-icon">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!isClosedCollapse">
+                <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+            </svg>
+    
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="isClosedCollapse">
+                <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+            </svg>
+        </div>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isClosedCollapse">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M1.22671 10.3333C0.944887 9.84599 0.725817 9.32497 0.574707 8.78267C0.903579 8.6154 1.17977 8.36042 1.37273 8.04593C1.56568 7.73145 1.66788 7.36971 1.66802 7.00075C1.66816 6.63178 1.56623 6.26997 1.37351 5.95534C1.18079 5.64071 0.904787 5.38552 0.57604 5.218C0.877398 4.12833 1.45119 3.13331 2.24337 2.32667C2.55277 2.52782 2.91179 2.63944 3.28069 2.64919C3.6496 2.65894 4.01401 2.56642 4.33359 2.38189C4.65318 2.19736 4.91548 1.928 5.09146 1.60363C5.26744 1.27926 5.35024 0.912521 5.33071 0.544004C6.42545 0.261085 7.57419 0.261544 8.66871 0.545337C8.64934 0.913847 8.73231 1.28053 8.90843 1.60481C9.08454 1.92909 9.34694 2.19832 9.66659 2.38271C9.98624 2.5671 10.3507 2.65946 10.7196 2.64957C11.0884 2.63968 11.4474 2.52793 11.7567 2.32667C12.1427 2.72 12.4854 3.16734 12.7734 3.66667C13.062 4.166 13.278 4.68667 13.4254 5.21734C13.0965 5.3846 12.8203 5.63959 12.6274 5.95407C12.4344 6.26856 12.3322 6.6303 12.3321 6.99926C12.3319 7.36823 12.4339 7.73004 12.6266 8.04467C12.8193 8.3593 13.0953 8.61449 13.424 8.782C13.1227 9.87168 12.5489 10.8667 11.7567 11.6733C11.4473 11.4722 11.0883 11.3606 10.7194 11.3508C10.3505 11.3411 9.98607 11.4336 9.66649 11.6181C9.3469 11.8026 9.0846 12.072 8.90862 12.3964C8.73264 12.7207 8.64984 13.0875 8.66937 13.456C7.57463 13.7389 6.42589 13.7385 5.33137 13.4547C5.35074 13.0862 5.26777 12.7195 5.09165 12.3952C4.91554 12.0709 4.65314 11.8017 4.33349 11.6173C4.01384 11.4329 3.64941 11.3405 3.28052 11.3504C2.91164 11.3603 2.55268 11.4721 2.24337 11.6733C1.84937 11.2713 1.50777 10.8211 1.22671 10.3333ZM5.00004 10.464C5.71046 10.8738 6.2446 11.5313 6.50004 12.3107C6.83271 12.342 7.16671 12.3427 7.49937 12.3113C7.75497 11.5319 8.28937 10.8743 9.00004 10.4647C9.71019 10.0538 10.5471 9.91966 11.35 10.088C11.5434 9.816 11.71 9.526 11.8487 9.22267C11.3017 8.61163 10.9995 7.82014 11 7C11 6.16 11.3134 5.37534 11.8487 4.77734C11.7091 4.4741 11.5417 4.18443 11.3487 3.912C10.5462 4.08021 9.7099 3.94632 9.00004 3.536C8.28962 3.12625 7.75548 2.46866 7.50004 1.68934C7.16737 1.658 6.83337 1.65734 6.50071 1.68867C6.2451 2.4681 5.71071 3.12571 5.00004 3.53534C4.2899 3.94621 3.45302 4.08035 2.65004 3.912C2.45708 4.18419 2.29013 4.47391 2.15137 4.77734C2.69842 5.38838 3.00063 6.17986 3.00004 7C3.00004 7.84 2.68671 8.62467 2.15137 9.22267C2.29102 9.5259 2.4584 9.81558 2.65137 10.088C3.45385 9.9198 4.29018 10.0537 5.00004 10.464ZM7.00004 9C6.46961 9 5.9609 8.78929 5.58583 8.41422C5.21075 8.03914 5.00004 7.53044 5.00004 7C5.00004 6.46957 5.21075 5.96086 5.58583 5.58579C5.9609 5.21072 6.46961 5 7.00004 5C7.53047 5 8.03918 5.21072 8.41425 5.58579C8.78933 5.96086 9.00004 6.46957 9.00004 7C9.00004 7.53044 8.78933 8.03914 8.41425 8.41422C8.03918 8.78929 7.53047 9 7.00004 9ZM7.00004 7.66667C7.17685 7.66667 7.34642 7.59643 7.47144 7.47141C7.59647 7.34638 7.66671 7.17682 7.66671 7C7.66671 6.82319 7.59647 6.65362 7.47144 6.5286C7.34642 6.40358 7.17685 6.33334 7.00004 6.33334C6.82323 6.33334 6.65366 6.40358 6.52864 6.5286C6.40361 6.65362 6.33337 6.82319 6.33337 7C6.33337 7.17682 6.40361 7.34638 6.52864 7.47141C6.65366 7.59643 6.82323 7.66667 7.00004 7.66667Z" fill="#596A73"/>
+                            </svg>
+                        <span class="ps-1 ea-bold">MOTEUR</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <ul class="label-color mb-2">
+                                <li> Moteur : {{ devis?.generalInfo?.offer?.nbCylindre }} cylindres en {{ devis?.generalInfo?.offer?.cylinderName }}</li>
+                                <li>Carburant : {{ devis?.generalInfo?.offer?.energieTextLong }}</li>
+                                <li>Cylindrée : {{ devis?.generalInfo?.offer?.volumeTechnique|number:'1.0-0' }}cm <sup>3</sup></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <ul class="label-color mb-2">
+                                <li>Puissance (CH/KW) : {{ devis?.generalInfo?.offer?.puissanceHp|number:'1.0-0' }} CH / {{ devis?.generalInfo?.offer?.puissanceKw|number:'1.0-0' }} Kw à tr/min</li>
+                                <li>Transmission : {{ devis?.generalInfo?.offer?.transmission }} - {{ devis?.generalInfo?.offer?.nbVitesseAvant }} vitesses</li>
+                                <li>Couple : {{ devis?.generalInfo?.offer?.couple|number:'1.0-0' }} Nm à tr/min</li>
+                                <p  *ngIf="isClosed" class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" (click)="isClosed = !isClosed">Tout Afficher (+ 1)</p>
+                                <li [hidden]="isClosed">Puissance fiscale : {{ devis?.generalInfo?.offer?.puissanceFiscale|number:'1.0-0' }} CV</li>
+                            </ul>
+                           
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M7.00016 0.333313C10.6822 0.333313 13.6668 3.31798 13.6668 6.99998C13.6668 10.682 10.6822 13.6666 7.00016 13.6666C3.31816 13.6666 0.333496 10.682 0.333496 6.99998C0.333496 3.31798 3.31816 0.333313 7.00016 0.333313ZM7.00016 1.66665C4.05483 1.66665 1.66683 4.05465 1.66683 6.99998C1.66683 9.94531 4.05483 12.3333 7.00016 12.3333C9.9455 12.3333 12.3335 9.94531 12.3335 6.99998C12.3335 4.05465 9.9455 1.66665 7.00016 1.66665ZM9.5555 3.89131C9.7135 3.78065 9.92816 3.79931 10.0642 3.93598C10.2002 4.07198 10.2175 4.28665 10.1062 4.44265C8.65283 6.47331 7.85283 7.56131 7.7075 7.70731C7.31683 8.09731 6.6835 8.09731 6.29283 7.70731C5.90283 7.31665 5.90283 6.68331 6.29283 6.29265C6.54216 6.04398 7.6295 5.24331 9.5555 3.89131ZM10.6668 6.33331C11.0348 6.33331 11.3335 6.63198 11.3335 6.99998C11.3335 7.36798 11.0348 7.66665 10.6668 7.66665C10.2988 7.66665 10.0002 7.36798 10.0002 6.99998C10.0002 6.63198 10.2988 6.33331 10.6668 6.33331ZM3.3335 6.33331C3.7015 6.33331 4.00016 6.63198 4.00016 6.99998C4.00016 7.36798 3.7015 7.66665 3.3335 7.66665C2.9655 7.66665 2.66683 7.36798 2.66683 6.99998C2.66683 6.63198 2.9655 6.33331 3.3335 6.33331ZM4.87883 3.93598C5.13883 4.19598 5.13883 4.61798 4.87883 4.87865C4.61883 5.13865 4.19616 5.13865 3.93616 4.87865C3.67616 4.61865 3.67616 4.19598 3.93616 3.93598C4.19616 3.67598 4.61816 3.67598 4.87883 3.93598ZM7.00016 2.66665C7.36816 2.66665 7.66683 2.96531 7.66683 3.33331C7.66683 3.70131 7.36816 3.99998 7.00016 3.99998C6.63216 3.99998 6.3335 3.70131 6.3335 3.33331C6.3335 2.96531 6.63216 2.66665 7.00016 2.66665Z" fill="#596A73"/>
+                            </svg>
+                        <span class="ps-1 ea-bold">PERFORMANCES</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="label-color mb-2">
+                                <li>Accélération : de 0 à 100 km/h : {{ devis?.generalInfo?.offer?.zeroAcent }} s.</li>
+                                <li>Vitesse maximum : {{ devis?.generalInfo?.offer?.vitesseMax }} km/h</li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M12.3335 9.66665H13.6668V13.6666H9.66683V12.3333H4.3335V13.6666H0.333496V9.66665H1.66683V4.33331H0.333496V0.333313H4.3335V1.66665H9.66683V0.333313H13.6668V4.33331H12.3335V9.66665ZM11.0002 9.66665V4.33331H9.66683V2.99998H4.3335V4.33331H3.00016V9.66665H4.3335V11H9.66683V9.66665H11.0002ZM1.66683 1.66665V2.99998H3.00016V1.66665H1.66683ZM1.66683 11V12.3333H3.00016V11H1.66683ZM11.0002 1.66665V2.99998H12.3335V1.66665H11.0002ZM11.0002 11V12.3333H12.3335V11H11.0002Z" fill="#596A73"/>
+                            </svg>
+                        <span class="ps-1 ea-bold">CHASSIS</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <ul class="label-color mb-2">
+                                <li>Nombre de places : {{ devis?.generalInfo?.offer?.nbSiege }} p</li>
+                                <li>Poids à vide : {{ devis?.generalInfo?.offer?.poidsVide }} kg</li>
+                                <li>Volume du coffre mini/maxi : {{ devis?.generalInfo?.offer?.volumeCoffreMin }} l / {{ devis?.generalInfo?.offer?.volumeCoffreMax }} l</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <ul class="label-color mb-2">
+                                <li>Dimensions : {{ devis?.generalInfo?.offer?.longueur }} mm x {{ devis?.generalInfo?.offer?.largeur }} mm x {{ devis?.generalInfo?.offer?.hauteur }} mm</li>
+                                <li>Pneumatiques AV/AR : {{ devis?.generalInfo?.offer?.tyreFront }} / {{ devis?.generalInfo?.offer?.tyreRear }}</li>
+                            </ul>
+                           
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8.3335 10.6667H9.00016V12H0.333496V10.6667H1.00016V0.666667C1.00016 0.489856 1.0704 0.320286 1.19542 0.195262C1.32045 0.0702379 1.49002 0 1.66683 0H7.66683C7.84364 0 8.01321 0.0702379 8.13823 0.195262C8.26326 0.320286 8.3335 0.489856 8.3335 0.666667V6H9.66683C10.0205 6 10.3596 6.14048 10.6096 6.39052C10.8597 6.64057 11.0002 6.97971 11.0002 7.33333V10C11.0002 10.1768 11.0704 10.3464 11.1954 10.4714C11.3204 10.5964 11.49 10.6667 11.6668 10.6667C11.8436 10.6667 12.0132 10.5964 12.1382 10.4714C12.2633 10.3464 12.3335 10.1768 12.3335 10V5.33333H11.0002C10.8234 5.33333 10.6538 5.2631 10.5288 5.13807C10.4037 5.01305 10.3335 4.84348 10.3335 4.66667V2.276L9.22883 1.17133L10.1715 0.228667L13.4715 3.52867C13.5335 3.59049 13.5827 3.66396 13.6162 3.74484C13.6497 3.82573 13.6669 3.91244 13.6668 4V10C13.6668 10.5304 13.4561 11.0391 13.081 11.4142C12.706 11.7893 12.1973 12 11.6668 12C11.1364 12 10.6277 11.7893 10.2526 11.4142C9.87754 11.0391 9.66683 10.5304 9.66683 10V7.33333H8.3335V10.6667ZM2.3335 10.6667H7.00016V6.66667H2.3335V10.6667ZM2.3335 1.33333V5.33333H7.00016V1.33333H2.3335Z" fill="#596A73"/>
+                            </svg>
+                        <span class="ps-1 ea-bold">CONSOMMATION</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="label-color mb-2">
+                                <li>Consommation urbaine : {{ devis?.generalInfo?.offer?.consoUrbaine }} l/100</li>
+                                <li>Consommation mixte : {{ devis?.generalInfo?.offer?.consoMixte }} l/100</li>
+                                <li>Consommation extra-urbaine : {{ devis?.generalInfo?.offer?.consoExtraUrbaine }} l/100</li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3.15683 3.30198C2.30686 4.18417 1.7865 5.33208 1.68321 6.55276C1.57992 7.77343 1.90001 8.99245 2.58967 10.0049C3.27932 11.0174 4.29651 11.7616 5.47024 12.1124C6.64397 12.4632 7.90269 12.3993 9.03483 11.9313C9.1115 11.4313 8.9435 10.9513 8.87483 10.7833C8.7215 10.41 8.21616 9.77198 7.37283 8.88731C7.1475 8.65065 7.16216 8.46865 7.24283 7.92931L7.2515 7.86865C7.30616 7.49931 7.39816 7.28065 8.6415 7.08331C9.2735 6.98331 9.4395 7.23531 9.6695 7.58531L9.74683 7.69998C9.9655 8.01998 10.1275 8.09331 10.3722 8.20398C10.4822 8.25398 10.6188 8.31731 10.8022 8.42065C11.2368 8.66931 11.2368 8.94998 11.2368 9.56465V9.63465C11.2368 9.89531 11.2115 10.1246 11.1715 10.324C11.6831 9.68193 12.0396 8.93047 12.2132 8.12811C12.3869 7.32574 12.373 6.49413 12.1727 5.698C11.9724 4.90187 11.5911 4.16272 11.0584 3.53807C10.5257 2.91343 9.85601 2.42015 9.1015 2.09665C8.73283 2.34531 8.22683 2.69798 8.05016 2.93998C7.96016 3.06331 7.83216 3.69465 7.41683 3.74665C7.30883 3.75998 7.16283 3.75065 7.00816 3.74065C6.5935 3.71398 6.02683 3.67731 5.8455 4.16998C5.73016 4.48198 5.71016 5.32998 6.08283 5.76998C6.14283 5.83998 6.15416 5.96998 6.1135 6.11598C6.06016 6.30731 5.95283 6.42398 5.91883 6.44798C5.85483 6.41065 5.72683 6.26198 5.6395 6.16131C5.43083 5.91798 5.1695 5.61465 4.83216 5.52131C4.7095 5.48731 4.57483 5.45931 4.4435 5.43131C4.0775 5.35465 3.6635 5.26731 3.56683 5.06198C3.49616 4.91131 3.49683 4.70398 3.49683 4.48531C3.49683 4.20731 3.49683 3.89331 3.36083 3.58865C3.31355 3.47992 3.24406 3.38227 3.15683 3.30198ZM7.00016 13.6666C3.31816 13.6666 0.333496 10.682 0.333496 6.99998C0.333496 3.31798 3.31816 0.333313 7.00016 0.333313C10.6822 0.333313 13.6668 3.31798 13.6668 6.99998C13.6668 10.682 10.6822 13.6666 7.00016 13.6666Z" fill="#596A73"/>
+                            </svg>
+                        <span class="ps-1 ea-bold">ÉMISSIONS </span>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <ul class="label-color mb-2">
+                                <li>Normes de polution : {{ devis?.generalInfo?.offer?.pollution }}</li>
+                                <li>Emission CO2 : {{ devis?.generalInfo?.offer?.co2?devis?.generalInfo?.offer?.co2:0 }} g/km</li>
+                                <li>Catégorie : {{ devis?.generalInfo?.offer?.lettreCo2 }}</li>
+                                <li *ngIf="devis?.generalInfo?.type !='occasion'">Référence : {{ devis?.generalInfo?.offer?.referenceAutovista }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6" *ngIf="devis?.generalInfo?.type !='occasion'">
+                            <ul class="label-color mb-2">
+                                <li>Emission CO2 WLTP : {{ devis?.generalInfo?.offer?.valeurEmissionCo2 }}</li>
+                            </ul>
+                            <div class="d-flex ps-4 position-relative">
+                                <svg width="13" height="80" viewBox="0 0 13 80" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 -2.62269e-07C9.81371 -1.17422e-07 12.5 2.68629 12.5 6L12.5 74C12.5 77.3137 9.8137 80 6.5 80C3.18629 80 0.499997 77.3137 0.499997 74L0.5 6C0.5 2.68629 3.18629 -4.07116e-07 6.5 -2.62269e-07Z" fill="url(#paint0_linear_108_22548)"/>
+                                    <defs>
+                                    <linearGradient id="paint0_linear_108_22548" x1="6.50005" y1="1.57036e-05" x2="6.50005" y2="80" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#71D186"/>
+                                    <stop offset="0.520833" stop-color="#F8CB5A"/>
+                                    <stop offset="1" stop-color="#E36E46"/>
+                                    </linearGradient>
+                                    </defs>
+                                    </svg>
+                                    <div class="circle class{{ devis?.generalInfo?.offer?.lettreCo2|uppercase }}"></div>
+
+                                    <div class="ms-4 ps-1 pe-1" *ngIf="devis?.generalInfo?.offer?.lettreCo2">
+                                        <div class="card-norme text-center">
+                                            <img ngSrc="tunnel/eco_bonus/{{ devis?.generalInfo?.offer?.lettreCo2|lowercase }}_eco.png" width="25" height="25" >
+                                            <span class="ms-1 ea-h6 label-color">{{ devis?.generalInfo?.offer?.valeurEmissionCo2 }}</span>
+                                        </div>
+                                        <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-2" (click)="open()">Voir le détail complet</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

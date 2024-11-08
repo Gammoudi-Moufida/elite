@@ -1,0 +1,9 @@
+<div class="p-[8px] text-center " [ngStyle]="{'background-color':bannerTop.couleur}" *ngIf= "showBanner">
+    <a class="font-bold text-[#fbfbfb] tw-font-size" [href]="bannerTop.lien" target="{{ bannerTop.typeTarget }}" *ngIf='bannerTop?.lien'>
+        {{ bannerTop.contenu }}
+    </a>
+    <div class="font-bold text-[#fbfbfb] tw-font-size" *ngIf='!bannerTop?.lien'>
+        {{ bannerTop.contenu }}
+    </div>
+ </div>
+

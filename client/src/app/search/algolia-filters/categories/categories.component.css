@@ -1,0 +1,21 @@
+.Elite_3{
+@apply text-[#124C63] ;
+   
+}
+
+.Elite_4{
+    @apply text-[#327793];
+
+}
+.Elite_1{
+    @apply text-[#3D4E05] ;
+   
+}
+
+/* .Elite_Access{
+    color: #5D7607;
+} */
+.tw-big-font{
+    @apply font-[16px]  tracking-normal font-bold ;
+
+}

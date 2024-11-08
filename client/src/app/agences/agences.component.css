@@ -1,0 +1,36 @@
+.tw-container {
+    @apply font-roboto;
+}
+
+.btn-dpt {
+    @apply bg-custom-black text-white rounded font-roboto font-bold text-center uppercase
+            text-xs md:text-sm lg:text-xl px-3 py-[6px] md:px-[14px] md:py-[7px] lg:px-5 lg:py-[10px];
+}
+
+:host ::ng-deep .map-agence {
+    @apply lg:w-[416px] lg:h-[340px] w-[300px] h-[225px] !important;
+}
+:host ::ng-deep .map-agence-big {
+    @apply lg:h-[378px] !important;
+}
+
+.open {
+    @apply bg-[#6CB213] w-[15px] h-[15px] rounded-lg mr-2;
+}
+
+.txt-open {
+    @apply  lg:text-[16px] text-[14px] lg:leading-[18.75px] leading-[16px] mb-1;
+}
+
+.title-service {
+    @apply lg:leading-[21px] leading-[17px] lg:text-[18px] text-[15px] font-black;
+}
+
+@media screen and (min-width: 1140px) and (max-width: 1280px)  {
+	:host ::ng-deep .map-agence {
+        @apply w-[320px] !important;
+    }
+    :host ::ng-deep .map-agence-big {
+        /* nothing */ 
+    }
+}

@@ -1,0 +1,231 @@
+<div class="tw-container px-3">
+    <div class="flex flex-wrap grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6">
+        <div class="w-full">
+            <p>
+                <strong>LE COMPARATEUR</strong>
+                <br>Comparez les modèles sélectionnés
+            </p>
+        </div>
+        <div class="w-full" [ngClass]="{'mobile-fixed-block' : blockFixed}">
+            <button type="button" class="tw-compareBtn text-center flex items-center justify-center" (click)="backAction()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-left mb-1 me-3" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                </svg>
+                Retour à la recherche</button>
+        </div>
+        <div class="w-full"
+            [ngClass]="{'md:col-span-1':4 > totalCompare, 'second-mobile-fixed-block' : blockFixed}">
+            <div class="compareNumber mb-3"><b>{{totalCompare}} véhicule<span *ngIf="totalCompare > 1">s</span></b> à
+                comparer</div>
+        </div>
+        <div class="w-full" *ngIf="4 > totalCompare">
+            <button type="button" class="tw-compareBtn" (click)="backAction()">Ajouter un véhicule</button>
+        </div>
+    </div>
+    <hr class="pb-3">
+    <div *ngIf="totalCompare > 0" class="card-deck-overflow" (scroll)="onScroll()" id="section">
+        <div class="card-deck">
+            <div class="tw-card border-0 tw-delete-action-btn" *ngFor="let result of results; let i = index;">
+                <button class="tw-btn-delete cursor-pointer border-0" (click)="deleteAction(result.id,i)"><b>X Supprimer</b></button>
+            </div>
+        </div>
+        <div class="card-deck" id="marqueModel">
+            <app-algolia-card class="tw-card border-radius-top" *ngFor="let result of results; let i = index;" 
+                [result]="result" [showImg]="true" [isComparator]="true">
+            </app-algolia-card>
+        </div>
+        <div class="stick" id="sticker" *ngIf="showSticky">
+            <div class="tw-container tw-pt">
+                <div class="card-deck">
+                    <app-algolia-card class="tw-card tw-card-background" *ngFor="let result of results; let i = index;"
+                         [result]="result" [showImg]="true" [isComparator]="true"
+                        [cardComparator]="true" [hideSticky]="!showSticky">
+                    </app-algolia-card>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck">
+            <div class="tw-card border-radius-bottom" *ngFor="let result of results; let i = index;">
+
+                <ul class="list-group list-group-flush">
+                    <li class="tw-list-group-item">
+                        <div class="flex justify-between">
+                            <div>Année</div>
+                            <div  class="text-end" *ngIf="result.anneeMiseEnCirculation">
+                                <b>{{result.anneeMiseEnCirculation}}</b>
+                            </div>
+                            <div *ngIf="!result.anneeMiseEnCirculation"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Date Mise en Circulation</div>
+                            <div  class="text-end" *ngIf="result.dateMiseEnCirculation"><b>{{result.dateMiseEnCirculation
+                                    | date: 'dd/MM/yyyy'}}</b></div>
+                            <div *ngIf="!result.dateMiseEnCirculation"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Kilométrage(km)</div>
+                            <div class="text-end" *ngIf="result.kilometrage"><b>{{result.kilometrage}}</b></div>
+                            <div *ngIf="!result.kilometrage"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Prix Financé/mois(*) </div>
+                            <div class="text-end" *ngIf="result.rent"><b>{{math.ceil(+result.rent)}}€/mois</b></div>
+                            <div *ngIf="!result.rent"><b>-</b></div>
+                        </div>
+                    </li>
+                    <li class="tw-list-group-item" *ngIf="result.technicalInfos">
+                        <div class="flex justify-between">
+                            <div>Carburant</div>
+                            <div class="text-end" *ngIf="result.energie"><b>{{result.energie}}</b></div>
+                            <div *ngIf="!result.energie"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Puissance (cv)</div>
+                            <div class="text-end" *ngIf="result.puissanceFiscaleNormalized">
+                                <b>{{result.puissanceFiscaleNormalized}}</b>
+                            </div>
+                            <div *ngIf="!result.puissanceFiscaleNormalized"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Type de Transmission</div>
+                            <div  class="text-end"*ngIf="result.technicalInfos.recap.transmission">
+                                <b >{{result.technicalInfos.recap.transmission}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.transmission"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Vitesse Maximale (Km/h) </div>
+                            <div  class="text-end" *ngIf="result.technicalInfos.recap.vitesseMax">
+                                <b>{{result.technicalInfos.recap.vitesseMax}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.vitesseMax"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Temps 0 à 100km/h (s)</div>
+                            <div  class="text-end" *ngIf="result.technicalInfos.recap.zeroAcent">
+                                <b>{{result.technicalInfos.recap.zeroAcent}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.zeroAcent"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Boite de Vitesse </div>
+                            <div  class="text-end" *ngIf="result.transmissionNormalized">
+                                <b>{{result.transmissionNormalized}}</b>
+                            </div>
+                            <div  class="text-end" *ngIf="!result.transmissionNormalized"><b>-</b></div>
+                        </div>
+                    </li>
+                    <li class="tw-list-group-item" *ngIf="result.technicalInfos">
+                        <div class="flex justify-between">
+                            <div>Conso. Urbaine (l/100Km)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.consoUrbaine">
+                                <b>{{result.technicalInfos.recap.consoUrbaine}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.consoUrbaine"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Conso. Extra-Urbaine (l/100Km)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.consoExtraUrbaine">
+                                <b>{{result.technicalInfos.recap.consoExtraUrbaine}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.consoExtraUrbaine"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Conso. Mixte (l/100Km) </div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.consoMixte">
+                                <b>{{result.technicalInfos.recap.consoMixte}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.consoMixte"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Emission CO2 (g/Km)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.valeurEmissionCo2">
+                                <b>{{result.technicalInfos.recap.valeurEmissionCo2.split(' ')[0]}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.valeurEmissionCo2"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div *ngIf=" result.technicalInfos.recap.ecoTaxe > 0">
+                                Malus écologique </div>
+                            <div
+                                *ngIf="!result.technicalInfos.recap.ecoTaxe || (result.technicalInfos.recap.ecoTaxe && 0 >= result.technicalInfos.recap.ecoTaxe)">
+                                Bonus écologique </div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.ecoTaxe">
+                                <b>{{result.technicalInfos.recap.ecoTaxe}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.ecoTaxe"><b>0</b></div>
+                        </div>
+                    </li>
+                    <li class="tw-list-group-item" *ngIf="result.technicalInfos">
+                        <div class="flex justify-between">
+                            <div>Dimension Pneu Avant</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.tyreFront">
+                                <b>{{result.technicalInfos.recap.tyreFront}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.tyreFront"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Dimension Pneu Arrière</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.tyreRear">
+                                <b>{{result.technicalInfos.recap.tyreRear}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.tyreRear"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Longueur (mm)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.longueur">
+                                <b>{{result.technicalInfos.recap.longueur}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.longueur"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Largeur (mm)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.largeur">
+                                <b>{{result.technicalInfos.recap.largeur}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.largeur"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Hauteur (mm)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.hauteur">
+                                <b>{{result.technicalInfos.recap.hauteur}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.hauteur"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Capacité Maximale Coffre (l)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.volumeCoffreMax">
+                                <b>{{result.technicalInfos.recap.volumeCoffreMax}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.volumeCoffreMax"><b>-</b></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>Capacité du Coffre (l)</div>
+                            <div class="text-end" *ngIf="result.technicalInfos.recap.volumeCoffreMin">
+                                <b>{{result.technicalInfos.recap.volumeCoffreMin}}</b>
+                            </div>
+                            <div *ngIf="!result.technicalInfos.recap.volumeCoffreMin"><b>-</b></div>
+                        </div>
+                    </li>
+                    <li class="tw-list-group-item" *ngIf="result.technicalInfos">
+                        <div *ngFor="let serialEquipements of result.technicalInfos.serialEquipements">
+                            <div *ngFor="let item of serialEquipements.equipements">
+                                <div class="inline-block  li-style">- </div>
+                                <div class="inline-block  li-label">{{item.descriptif}}</div>
+                            </div>
+                        </div>
+                        <div *ngIf="result.technicalInfos.option">
+                            <div *ngFor="let item of result.technicalInfos.option">
+                                <div class="inline-block  li-style">- </div>
+                                <div class="inline-block  li-label">{{item.label}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+</div>

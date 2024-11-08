@@ -1,0 +1,64 @@
+<div class="tw-custom-relative">
+    <h1 class="bg-custom-gray text-center text-[18px] font-bold pt-[8px] pb-[30px] max-[375px]:text-base"> Reprise voiture d'occasion chez Elite Auto</h1>
+    <div class="tw-container mx-auto px-[12px]">
+        <div class="rounded-lg p-0 mt-[-35px] bg-white">
+            <button type="button" class="tw-btn w-full tw-button-brands">Marques</button>
+        </div>
+        <ul *ngIf="showPlaceholder">
+            <div class="flex flex-wrap mx-0 mt-3 flex justify-between" *ngIf="n != 9">
+                <div class="relative bg-[#fff] rounded-[3px] tw-btn-class-shadow tw-btn flex-[1_0_0%] md:w-1/6 sm:w-1/3 ps-0 pe-0 "
+                    *ngFor="let x of numSequence(placeloads); let index = index;">
+                    <div class="tw-content-btn loads"></div>
+                </div>
+                <div class="relative bg-[#fff] rounded-[3px] tw-btn-class-shadow tw-btn flex-[1_0_0%] md:w-1/6 sm:w-1/3 ps-0 pe-0 "
+                    *ngFor="let x of numSequence(placeloads); let index = index;">
+                    <div class="tw-content-btn loads"></div>
+                </div>
+            </div>
+
+            <div class="tw-container mx-0 mt-3 flex justify-between" *ngIf="n == 9">
+
+                <div class="relative bg-[#fff] rounded-[3px] flex flex-wrap tw-btn-class-shadow tw-btn ps-0 pe-0 ">
+                    <div *ngFor="let x of numSequence(placeloads); let index = index;"
+                        class="flex-[1_0_0%] md:w-1/6 sm:w-1/3 tw-content-btn loads"></div>
+                </div>
+
+                <div class="relative bg-[#fff] rounded-[3px] flex flex-wrap tw-btn-class-shadow tw-btn ps-0 pe-0 ">
+                    <div *ngFor="let x of numSequence(placeloads); let index = index;"
+                        class="flex-[1_0_0%] md:w-1/6 sm:w-1/3 tw-content-btn loads"></div>
+                </div>
+
+                <div class="relative bg-[#fff] rounded-[3px] flex flex-wrap tw-btn-class-shadow tw-btn ps-0 pe-0 ">
+                    <div *ngFor="let x of numSequence(placeloads); let index = index;"
+                        class="flex-[1_0_0%] md:w-1/6 sm:w-1/3 tw-content-btn loads"></div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="tw-btn md:w-5/12  tw-content-btn loads"></button>
+            </div>
+        </ul>
+        <div *ngIf="!showPlaceholder">
+            <ul>
+                <div class="flex flex-wrap px-[12px] mx-0 tw-container mt-3 flex">
+                    <a href="{{brand.url}}" *ngFor="let brand of brands.slice(0,n)" type="button"
+                        class="tw-btn-class tw-btn flex-[0_0_auto] md:w-1/6 sm:w-1/3  ps-0 pe-0">
+                        {{ brand.name | titlecase }}
+                    </a>
+                </div>
+                <div [ngStyle]="{'display':showMore ? 'flex' : 'none' }"
+                    class="flex flex-wrap mx-0 tw-container px-[12px]">
+                    <a href="{{brand.url}}" *ngFor="let brand of brands.slice(n)" type="button"
+                        class="tw-btn-class tw-btn flex-[0_0_auto] w-1/12 md:w-1/6 sm:w-1/3 ps-0 pe-0">
+                        {{ brand.name | titlecase }}
+                    </a>
+                </div>
+            </ul>
+            <div class="text-center mb-3 mt-3">
+                <button *ngIf="!showMore" type="button" (click)="showMore=true"
+                    class="tw-btn md:w-5/12 tw-btn-color">Voir plus de
+                    marques</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+:host ::ng-deep h2 {
+   @apply md:text-[18px] text-[#007896] mt-[10px] mr-5 font-bold ml-0 leading-[26px]; 
+}
+:host ::ng-deep p { 
+    @apply md:text-base sm:text-xs text-justify xl:leading-normal sm:leading-3;
+}
+:host ::ng-deep h3 {
+    @apply text-[#6f6f6f] text-base mt-0 mx-5 mb-[5px] leading-[22px] font-bold ml-0; 
+}
+.tw-textSplit{
+    @apply overflow-hidden inline-block ;
+}
+@media screen and (max-width:767px) {
+    :host ::ng-deep  h2{ 
+        @apply text-[12px];
+    }
+    :host ::ng-deep p{ 
+        @apply text-[11px] leading-[16px];
+    }
+}
+@media only screen and (max-width : 444px) {
+    .tw-textSplit{
+        @apply max-h-[97px] !important;
+    }
+}
+@media only screen and (min-width : 445px) and (max-width: 479px) {
+   .tw-textSplit{
+       @apply max-h-[65px] !important;
+    }
+}
+@media only screen and (min-width : 480px) {
+   .tw-textSplit{
+       @apply max-h-[56px] !important;
+    }
+}

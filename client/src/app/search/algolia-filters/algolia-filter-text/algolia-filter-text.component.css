@@ -1,0 +1,15 @@
+
+.tw-input {
+    @apply relative flex items-stretch w-full border h-[44px] rounded-[8px] border-[1px] border-solid border-[#E3E3E3] bg-[#ffffff];
+}
+.tw-ea_search {
+    @apply w-full rounded-tr-lg rounded-br-lg p-2 outline-none border-2 border-white focus:outline-none focus:ring focus:border-[#a9c4f5]
+}
+.tw-icon {
+    @apply flex items-center text-base font-normal leading-normal  text-center whitespace-nowrap  px-3 py-1.5 border-solid bg-transparent ms-1 border-0;
+}
+.tw-ea_search::placeholder {
+    @apply font-semibold text-[16px] leading-5 text-[#989898] !important;
+}
+
+

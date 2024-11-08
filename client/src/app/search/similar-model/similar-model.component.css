@@ -1,0 +1,42 @@
+.tw-card {
+    @apply w-full mt-[1.5vw] rounded-none  bg-[#fff] border border-solid border-[rgba(0,0,0,0.175)]  max-h-full text-center;
+} 
+a img {
+    @apply w-[80%];
+}
+.tw-car-name {
+    @apply  font-raleway text-custom-slate-gray py-[0px] px-[10px];
+}
+
+.tw-card-footer{
+    @apply bg-custom-blue text-white p-[10px] mt-[10px] rounded-none; 
+}
+
+.tw-card-footer a{
+     @apply text-white; 
+}
+
+.tw-card-body {
+     @apply p-[0px]; 
+}
+.tw-footer {
+    @apply flex-[0_0_auto] w-[83%] text-[12px];
+}
+.tw-icon-footer {
+    @apply flex-[0_0_auto] w-[16%];
+}
+
+
+@media screen and (min-width:768px) {
+    .tw-card-sizing {
+       @apply flex !important; 
+    }
+}
+
+img {
+     @apply h-auto; 
+}
+
+.tw-arrow{
+    @apply text-[25px] p-[8px] leading-[18px];
+}

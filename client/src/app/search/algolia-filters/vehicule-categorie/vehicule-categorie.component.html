@@ -1,0 +1,13 @@
+
+  <ul>
+    <li *ngFor="let item of state?.items" class="ais-RefinementList-item " [class.ais-RefinementList-item--selected]="item.isRefined">
+      <label  class="ais-RefinementList-label">
+        <input value="{{item.isRefined}}" type="checkbox"
+        (click)="state.refine(item.value)"
+        [checked]="item.isRefined" class="ais-RefinementList-checkbox" type="checkbox"  />
+        <span >{{ item.label.split('_').join(' / ') | titlecase }} </span>
+         <span class="ais-RefinementList-count">{{ item.count }}</span> 
+      </label>
+    </li>
+  </ul>
+

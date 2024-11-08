@@ -1,0 +1,53 @@
+.h-card {
+    min-height: 105px;
+    max-height: 126px;
+}
+.mini-card-devis-1{
+    background: linear-gradient(0deg, rgba(0, 130, 35, 0.1), rgba(0, 130, 35, 0.1)), #FFFFFF;
+    border: 1px solid #008223;
+}
+.mini-card-devis-2{
+    background: linear-gradient(0deg, rgba(5, 106, 163, 0.1), rgba(5, 106, 163, 0.1)), #FFFFFF;
+    border: 1px solid #056AA3;
+}
+.mini-card-devis-3{
+    background: linear-gradient(0deg, rgba(141, 87, 194, 0.1), rgba(141, 87, 194, 0.1)), #FFFFFF;
+    border: 1px solid #8D57C2;
+}
+.mini-card-devis-4{
+    background: linear-gradient(0deg, rgba(215, 164, 14, 0.1), rgba(215, 164, 14, 0.1)), #FFFFFF;
+    border: 1px solid #D7A40E;
+}
+.border-r-8{
+    border-radius: 8px;
+}
+
+.img-ea-size {
+    width: 100px;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.color-1{
+    color: #3D4E05  ;
+  }
+  
+.color-2{
+    color: #5D7607  ;
+  }
+
+.color-3{
+    color: #124C63 ;
+  }
+  
+.color-4{
+    color: #327793  ;
+  }
+
+@media(max-width: 322px) {
+
+    .margin {
+      margin-bottom: 22px;
+    }
+  }

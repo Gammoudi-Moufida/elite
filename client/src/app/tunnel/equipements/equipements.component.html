@@ -1,0 +1,38 @@
+<div class="mt-3">
+    <div class="e-a-collapse-header bg-white text-uppercase p-3 mb-2 d-flex justify-content-between" (click)="collapse.toggle()" [attr.aria-expanded]="!isClosedCollapse">
+        <h2 class="ea-h5 ea-bold mb-0">ÉQUIPEMENTS DE SÉRIE</h2>
+        <div class="ea-collapse-icon">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!isClosedCollapse">
+                <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+            </svg>
+    
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="isClosedCollapse">
+                <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+            </svg>
+        </div>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isClosedCollapse">
+        <div class="row mb-2" *ngFor="let equipmentCateg of devis?.seriesEquipment?.equipementsSerie;let i = index;">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3">
+                        <img ngSrc="tunnel/icon_equipementsCategs/picto_equip_{{equipmentCateg.id}}gris.png" class="border-color" width="20" height="20" />
+                        <span class="ps-1 ea-bold">{{ equipmentCateg.name }}</span>
+                    </div>
+                    <div class="row align-items-end" *ngFor="let equipment of equipmentCateg?.equipements ; let i = index;" [hidden]="i > 5 && !showAllEquipements">
+                        <div class="col-10">
+                            <ul class="label-color mb-2">
+                                <li>{{equipment.descriptif}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" *ngIf="!showAllEquipements && equipmentCateg?.equipements.length > 6" (click)="showAll()">Tout Afficher (+{{equipmentCateg?.equipements.length - 6}})</p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

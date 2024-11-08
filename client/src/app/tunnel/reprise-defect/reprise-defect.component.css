@@ -1,0 +1,203 @@
+li {
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    padding: 0;
+}
+
+ a:not(.close_btn){text-indent:-500000px;}
+ li a{position:absolute;}
+
+.left-part {
+    position: relative;
+    height:134px;
+    width:300px;
+    background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat 0 0;
+}
+
+.right-part {
+    position: relative;
+    height:134px;
+    width:300px;
+    background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat 0 0;
+}
+
+.front-back-part {
+    position: relative;
+    height:134px;
+    width:340px;
+    background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat 0 0; 
+}
+
+
+/***** COTE GAUCHE *****/
+#cote_gauche{margin: 0 auto;position: relative;height:134px;width:300px;background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat 0 0;}
+
+#gauche_porte_av {left:82px;top:25px;}
+#gauche_porte_av a {height:87px; width:98px;}
+#gauche_porte_av a:hover, #gauche_porte_av a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -40px -215px;}
+
+#gauche_porte_ar {left:169px;top:24px;}
+#gauche_porte_ar a {height:88px;width:78px;}
+#gauche_porte_ar a:hover, #gauche_porte_ar a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -177px -213px;}
+
+#gauche_bas_porte_av {left:88px;top:94px;}
+#gauche_bas_porte_av a {height:23px; width:147px;}
+#gauche_bas_porte_av a:hover, #gauche_bas_porte_av a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -71px -390px;}
+
+#gauche_aile_av {left:0px;top:56px;}
+#gauche_aile_av a {height:56px;width:93px;}
+#gauche_aile_av a:hover, #gauche_aile_av a.active {background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -50px -144px;}
+
+#gauche_aile_ar {left:224px;top:32px;}
+#gauche_aile_ar a {height:63px;width:42px;}
+#gauche_aile_ar a:hover, #gauche_aile_ar a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -157px -318px;}
+
+#gauche_jante_av {left:36px;top:86px;}
+#gauche_jante_av a {height:52px; width:52px;}
+#gauche_jante_av a:hover, #gauche_jante_av a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -193px -150px;}
+
+#gauche_jante_ar {left:229px;top:86px;}
+#gauche_jante_ar a {height:52px; width: 52px;}
+#gauche_jante_ar a:hover, #gauche_jante_ar a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -193px -150px;}
+
+#gauche_retroviseur {left:84px;top:48px;}
+#gauche_retroviseur a {height:19px; width:27px;}
+#gauche_retroviseur a:hover, #gauche_retroviseur a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_gauche.5d1a4fd6b7dea2db8835.png') no-repeat -83px -340px;}
+
+
+/***** COTE DROIT *****/
+ #cote_droit{margin: 0 auto;position: relative;height:134px;width:300px;background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat 0 0;}
+
+#droite_porte_av {left:116px;top:25px;}
+#droite_porte_av a {height:87px; width:98px;}
+#droite_porte_av a:hover, #droite_porte_av a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -160px -215px;}
+
+#droite_porte_ar {left:52px;top:24px;}
+#droite_porte_ar a {height:88px;width:78px;}
+#droite_porte_ar a:hover, #droite_porte_ar a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -44px -213px;}
+
+#droite_bas_porte_av {left:65px;top:94px;}
+#droite_bas_porte_av a {height:23px; width:147px;}
+#droite_bas_porte_av a:hover, #droite_bas_porte_av a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -82px -390px;}
+
+#droite_aile_av {left:204px;top:56px;}
+#droite_aile_av a {height:56px;width:93px;}
+#droite_aile_av a:hover, #droite_aile_av a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -156px -144px;}
+
+#droite_aile_ar {left:23px;top:32px;}
+#droite_aile_ar a {height:63px;width:42px;}
+#droite_aile_ar a:hover, #droite_aile_ar a.active {background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -90px -317px;}
+
+#droite_jante_av {left:215px;top:86px;}
+#droite_jante_av a {height:52px; width:52px;}
+#droite_jante_av a:hover, #droite_jante_av a.active {background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -58px -150px;}
+
+#droite_jante_ar {left:22px;top:86px;}
+#droite_jante_ar a {height:52px; width:52px;}
+#droite_jante_ar a:hover, #droite_jante_ar a.active {background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -58px -150px;}
+
+#droite_retroviseur {left:186px;top:48px;}
+#droite_retroviseur a {height:19px; width:27px;}
+#droite_retroviseur a:hover, #droite_retroviseur a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_droite.03091d3668680dc10adb.png') no-repeat -189px -340px;}
+
+
+/***** FACE ARRIERE *****/
+ #face_avant_arriere{position: relative;height:134px;width:340px;background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat 0 0; margin:0 auto;}
+
+#face_pavillon{left:40px;top:21px;}
+#face_pavillon a {height:10px; width:88px;}
+#face_pavillon a:hover, #face_pavillon a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -40px -313px;}
+
+#face_parebrise {left:34px;top:28px;}
+#face_parebrise a {height:28px; width:98px;}
+#face_parebrise a:hover, #face_parebrise a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -35px -154px;}
+
+#face_capot {left:30px;top:56px;}
+#face_capot a {height:20px; width:107px;}
+#face_capot a:hover, #face_capot a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -31px -194px;}
+
+#face_parechoc {left:18px;top:85px;}
+#face_parechoc a {height:30px; width:130px;}
+#face_parechoc a:hover, #face_parechoc a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -19px -270px;}
+
+#face_phare_droit{left:25px;top:65px;}
+#face_phare_droit a {height:22px; width:28px;}
+#face_phare_droit a:hover, #face_phare_droit a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -25px -229px;}
+
+#face_phare_gauche{left:114px;top:65px;}
+#face_phare_gauche a {height:22px; width:28px;}
+#face_phare_gauche a:hover, #face_phare_gauche a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -114px -229px;}
+
+#arriere_pavillon {left:216px;top:21px;}
+#arriere_pavillon a {height:10px; width:81px;}
+#arriere_pavillon a:hover, #arriere_pavillon a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -216px -313px;}
+
+#arriere_parebrise {left:215px;top:31px;}
+#arriere_parebrise a {height:25px; width:83px;}
+#arriere_parebrise a:hover, #arriere_parebrise a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -216px -156px;}
+
+#arriere_coffre {left:205px;top:53px;}
+#arriere_coffre a {height:34px; width:105px;}
+#arriere_coffre a:hover, #arriere_coffre a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -205px -194px;}
+
+#arriere_parechoc {left:193px;top:70px;}
+#arriere_parechoc a {height:40px; width:130px;}
+#arriere_parechoc a:hover, #arriere_parechoc a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -193px -263px;}
+
+#arriere_phare_gauche{left:198px;top:56px;}
+#arriere_phare_gauche a {height:22px; width:20px;}
+#arriere_phare_gauche a:hover, #arriere_phare_gauche a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -199px -236px;}
+
+#arriere_phare_droit{left:295px;top:56px;}
+#arriere_phare_droit a {height:22px; width:28px;}
+#arriere_phare_droit a:hover, #arriere_phare_droit a.active{background:url('https://image.elite-auto.fr/general/reprise/estimation_eclate_vehicule_avant_arriere.b77ddc1814d6758875bc.png') no-repeat -296px -236px;}
+
+
+/*  Mobile ************************************************************************/
+/*  *********************************************************************************/
+
+@media screen and (max-width:425px) {  
+    .left-part, .right-part, .front-back-part {
+        background:none; 
+        margin-bottom:15px; 
+        overflow: auto; 
+        height:inherit;
+		width: 300px;
+       }
+	 a:not(.close_btn) {text-indent: 0px;}
+	#gauche_porte_av a:hover, #gauche_porte_av a.active,
+	#gauche_porte_ar a:hover, #gauche_porte_ar a.active,
+	#gauche_bas_porte_av a:hover, #gauche_bas_porte_av a.active,
+	#gauche_aile_av a:hover, #gauche_aile_av a.active,
+	#gauche_aile_ar a:hover, #gauche_aile_ar a.active,
+	#gauche_jante_av a:hover, #gauche_jante_av a.active,
+	#gauche_jante_ar a:hover, #gauche_jante_ar a.active,
+	#gauche_retroviseur a:hover, #gauche_retroviseur a.active,
+	#droite_porte_av a:hover, #droite_porte_av a.active,
+	#droite_porte_ar a:hover, #droite_porte_ar a.active,
+	#droite_bas_porte_av a:hover, #droite_bas_porte_av a.active,
+	#droite_aile_av a:hover, #droite_aile_av a.active,
+	#droite_aile_ar a:hover, #droite_aile_ar a.active,
+	#droite_jante_av a:hover, #droite_jante_av a.active,
+	#droite_jante_ar a:hover, #droite_jante_ar a.active,
+	#droite_retroviseur a:hover, #droite_retroviseur a.active,
+	#face_parebrise a:hover, #face_parebrise a.active,
+	#face_capot a:hover, #face_capot a.active,
+	#face_parechoc a:hover, #face_parechoc a.active,
+    #face_phare_droit a:hover, #face_phare_droit a.active,
+	#face_phare_gauche a:hover, #face_phare_gauche a.active,
+	#face_pavillon a:hover, #face_pavillon a.active,
+	#arriere_parebrise a:hover, #arriere_parebrise a.active,
+	#arriere_coffre a:hover, #arriere_coffre a.active,
+	#arriere_parechoc a:hover, #arriere_parechoc a.active,
+	#arriere_phare_gauche a:hover, #arriere_phare_gauche a.active,
+	#arriere_phare_droit a:hover, #arriere_phare_droit a.active
+	{background:none;}
+	 li a {position:relative;}
+	 li {position:static; float:none; margin-bottom:7px;}
+     #face_avant_arriere,  #cote_droit,  #cote_gauche{margin: 0 15px 0 0;}
+}

@@ -1,0 +1,60 @@
+version: '3.3'
+
+services: 
+# Service nginx  
+  nginx:
+    build:
+      context: ./nginx 
+    image: ea-nginx:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - client
+      - api
+    environment: 
+      - ENV=${ENV}
+      - WWW_EA_HOST=${WWW_EA_HOST}
+      - LEASING_EA_HOST=${LEASING_EA_HOST}
+      - UTILITAIRE_EA_HOST=${UTILITAIRE_EA_HOST}
+    restart: unless-stopped 
+    networks: 
+        - elite 
+
+  # Service client    
+  client:
+    build:
+      context: ./client
+    image: ea-client:latest
+    tty: true
+    restart: unless-stopped 
+    networks: 
+        - elite
+
+# image proxy service
+  image-proxy:
+      build:
+        context: ./img-proxy
+      image: ea-imgproxy:latest
+      networks: 
+        - elite 
+
+# Service api
+  api:
+    build:
+      context: ./api 
+    image: ea-api:latest
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - elite
+    environment:
+      - WWW_EA_HOST=${WWW_EA_HOST}
+      - ELITE_DELIVERY_URL=${ELITE_DELIVERY_URL}
+      - ELITE_DELIVERY_KEY=${ELITE_DELIVERY_KEY}
+      - WWW_EA_API=${WWW_EA_API}
+    restart: unless-stopped
+
+networks:
+    elite:
+        driver: bridge

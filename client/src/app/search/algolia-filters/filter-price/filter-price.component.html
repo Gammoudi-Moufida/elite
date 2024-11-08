@@ -1,0 +1,39 @@
+<app-interval-slider *ngIf="state?.range?.min && state?.range?.max " 
+  [priceFilter]="true"
+  [step]="false"
+  [minValue]="((testMin && (testMin >= state?.range?.min && testMin <= state?.range?.max)) && (testMin <= testMax)) ? testMin : state?.range?.min"
+  [maxValue]="((testMax && (testMax >= state?.range?.min && testMax <= state?.range?.max)) && (testMin <= testMax))  ? testMax : state?.range?.max"
+  [sliderParams]="
+  { 
+  'minRight': state?.range?.min, 
+  'minLeft': state?.range?.min, 
+  'maxRight': state?.range?.max, 
+  'maxLeft': state?.range?.max,
+  'minValue': state?.range?.min, 
+  'maxValue': state?.range?.max,
+  'step': 1 }
+  "
+  (sliderValuesEmitter)="sliderValues($event)"
+  (change)="refineState()"
+  >
+</app-interval-slider>
+
+<app-interval-slider *ngIf="!(state?.range?.min && state?.range?.max)" 
+[priceFilter]="true"
+[step]="false"
+[minValue]="0"
+[maxValue]="0" 
+[sliderParams]="
+{ 
+  'minRight': 0, 
+  'minLeft': 0, 
+  'maxRight': 0, 
+  'maxLeft': 0,
+  'minValue': 0, 
+  'maxValue': 0,
+  'step': 1 
+}"
+(sliderValuesEmitter)="sliderValues($event)"
+(change)="refineState()"
+>
+</app-interval-slider>

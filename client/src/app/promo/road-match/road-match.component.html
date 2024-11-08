@@ -1,0 +1,63 @@
+<ng-container *ngIf="roadMatchValue">
+    <ais-instantsearch *ngIf="configResults" [config]="configResults" (change)="getSearchResults($event)">
+        <ais-configure *ngIf="facetFilters" [searchParameters]="{facetFilters : facetFilters}"></ais-configure>
+        <ais-configure *ngIf="numericFilters" [searchParameters]="{numericFilters : numericFilters}"></ais-configure>
+        <!-- banner -->
+        <img ngSrc="general/roadmatch/header_mob.png" fill *ngIf="mode === 'mobile'" class="tw-custom-relative">
+
+        <img ngSrc="general/roadmatch/header_tab.png" fill *ngIf="mode === 'tablet'" class="tw-custom-relative">
+
+        <img ngSrc="general/roadmatch/header_desk.png" fill *ngIf="mode === 'desktop'" class="tw-custom-relative">
+        <div class="tw-container">
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+                <app-algolia-filter-order [filterLoyerChecked]="indexName.includes('LOYERS')" class="ml-[-4rem]"
+                    [isPromoPage]="true"></app-algolia-filter-order>
+                <button type="button" class="text-white uppercase text-lg font-bold p-2 px-4 rounded bg-[#30405b]"
+                    (click)="reset()">
+                    Je recommence le test
+                </button>
+            </div>
+
+            <div class="text-center pt-[16px]" *ngIf="results?.nbHits == 0 && !loadingResult">
+                <img ngSrc="general/noresults_ea.png" width="200" height="120">
+                <p class="font-bold">
+                    NOUS N'AVONS PAS TROUVÉ DE RÉSULTATS <br> AVEC VOS CRITÈRES DE RECHERCHE.<br>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 lg:grid-cols-2 gap-4">
+                <app-algolia-card class="flex items-stretch text-[12px] leading-[18px]"
+                    *ngFor="let result of results?.hits" [showComparator]="false" [isFlashSale]="false"
+                    [result]="result"></app-algolia-card>
+            </div>
+            <div class="grid grid-cols-12" [hidden]="results && results?.nbHits == 0">
+                <div class="col-span-12 lg:col-span-12 mt-4 hidden sm:hidden md:hidden lg:block xl:block">
+                    <ais-pagination [showFirst]="false" [padding]="4" [showLast]="false">
+                    </ais-pagination>
+                </div>
+                <div class="col-span-12 lg:col-span-12 mt-4 block sm:block md:block lg:hidden xl:hidden">
+                    <ais-pagination [showFirst]="false" [padding]="2" [showLast]="false">
+                    </ais-pagination>
+
+                </div>
+                <div class="col-span-12 mt-4 lg:col-span-12 flex justify-between">
+                    <ais-hits-per-page [items]="[
+                        { label: '15', value: 15, default: true },
+                        { label: '30', value: 30 },
+                        { label: '60', value: 60 },
+                        { label: '100', value: 100 }]"></ais-hits-per-page>
+                    <div class="hitPerPage" *ngIf="currentPage == 0 && results?.nbHits > hitsPerPage">
+                        Résultats : 1 - {{ hitsPerPage }} de {{ totalResult }}
+                    </div>
+                    <div class="hitPerPage" *ngIf="countPerPage > results?.nbHits">
+                        Résultats : {{ hitsPerPage * (currentPage) + 1 }} - {{ totalResult }} de {{ totalResult }}
+                    </div>
+                    <div class="hitPerPage" *ngIf="currentPage > 0 && countPerPage <= results?.nbHits">
+                        Résultats : {{ hitsPerPage * (currentPage) + 1 }} - {{ hitsPerPage * (currentPage + 1) }} de {{
+                        totalResult }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ais-instantsearch>
+</ng-container>

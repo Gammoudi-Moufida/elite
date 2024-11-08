@@ -1,0 +1,45 @@
+
+    <div class="w-full">
+      <div class="text-center pt-[16px]" *ngIf="(!loadingResult && !dataIsReady && !dataLoyerIsReady && !searchResult) || totalResult == 0">
+        <img ngSrc="general/noresults_ea.png" width="200" height="120">
+        <p class="font-bold">
+          NOUS N'AVONS PAS TROUVÉ DE RÉSULTATS <br> AVEC VOS CRITÈRES DE RECHERCHE.<br>
+        </p>
+        <h5 class="font-bold">Ces modèles peuvent vous intéresser</h5>
+      <div class="tw-loader" *ngIf="showPlaceholder">
+      </div>
+      <app-similar-model [cars]="modelsList" [showImg]="showImg" [type]="type" [isBrowser]="isBrowser"></app-similar-model>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 lg:grid-cols-2 gap-4">
+      <app-algolia-card class="flex items-stretch tw-offer-card"
+        *ngFor="let result of searchResult.slice(0,1); let i = index;" [isLcp]="isLcp"
+        [filterLoyerChecked]="filterLoyerChecked" (checkCompareEvent)="checkCompareEvent($event)"
+        [showComparator]="showComparator" [TypeRoute]="TypeRoute" [isFlashSale]="true" [result]="result"
+        [searchFilter]="searchFilter"></app-algolia-card>
+    <ng-container *ngIf="!dynamicCardCount">
+      <app-algolia-card class="flex items-stretch tw-offer-card" [TypeRoute]="TypeRoute"
+      *ngFor="let result of searchResult.slice(1,2); let i = index;" [filterLoyerChecked]="filterLoyerChecked"
+      (checkCompareEvent)="checkCompareEvent($event)" [showComparator]="showComparator" [isFlashSale]="true"
+      [result]="result" [searchFilter]="searchFilter"></app-algolia-card>
+    </ng-container>
+      
+    
+      <div class=" lg:flex md:col-span-2 lg:col-span-1 items-stretch tw-result-card tw-offer-card"
+        [ngClass]="{'tw-margin': screenMode == 3}"
+        *ngIf="(flashSaleData && flashSaleData?.encartPromotion) && ((loadingResult || dataLoyerIsReady || dataIsReady || searchResult) && totalResult != 0) && encartVisible">
+        <a href="https://www.elite-auto.fr{{flashSaleData.url}}" target="{{ flashSaleData.target }}">
+          <img ngSrc="{{ flashSaleData.img3 }}" fill  class="tw-position hidden tw-card-img-top tw-card-img-desktop">
+          <img ngSrc="{{ flashSaleData.img2 }}" fill  class="tw-position hidden tw-card-img-top tw-card-img-tablet">
+          <img ngSrc="{{ flashSaleData.img1 }}" fill  class="tw-position hidden tw-card-img-top tw-card-img-mobile">
+        </a>
+      </div>
+    
+      <app-algolia-card class="flex items-stretch tw-offer-card"  [TypeRoute]="TypeRoute"
+        *ngFor="let result of searchResult.slice(dynamicCardCount?tabletCardCount:desktopCardCount); let i = index;" [filterLoyerChecked]="filterLoyerChecked" (checkCompareEvent)="checkCompareEvent($event)"
+        [showComparator]="showComparator" [isFlashSale]="true" [result]="result" [searchFilter]="searchFilter"></app-algolia-card>
+    </div>
+
+    
+    
+    

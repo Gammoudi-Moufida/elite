@@ -1,0 +1,59 @@
+.tw-header {
+  @apply bg-[#556a74] bg-[url(https://image.elite-auto.fr/general/bg_header.jpg)] bg-no-repeat bg-cover mb-[2em] p-[2em] border-b-8 border-b-[solid] border-b-[#aab5ba];
+}
+
+.tw-header .tw-gimmick {
+  @apply bg-[#556a74] overflow-hidden shadow-[1px_2px_5px_1px_rgb(42_42_42_/_20%)] w-[100px] h-[100px] mb-[0.65em] mx-auto rounded-[80px] border-[solid] border-[4px] border-[#909ea5];
+}
+.tw-card {
+  @apply relative flex flex-col border-[#0389b1] rounded-[5px] min-w-0 text-[#212529] break-words bg-clip-border border border-solid;
+}
+.tw-header li {
+  @apply inline-flex;
+}
+.tw-header a {
+  @apply text-[#fff] text-[.85em];
+}
+@keyframes fade-in-down {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.tw-animation {
+  animation: fade-in-down 1s ease-in-out both 1s;
+}
+
+@media only screen and (min-width: 1024px) {
+  .tw-header .tw-gimmick {
+    @apply w-[150px] h-[150px];
+  }
+}
+:host ::ng-deep h2{ 
+  @apply text-custom-blue text-lg leading-[26px] font-bold mt-[10px] mr-5 ml-0 mb-0 !important; 
+}
+:host ::ng-deep h3{ 
+  @apply text-[#6f6f6f] text-base font-bold leading-[22px] mt-0 mx-5 mb-1
+}
+
+::ng-deep a:link {
+  @apply no-underline ;
+}
+
+:host ::ng-deep .tw-text-html p{
+  @apply inline
+}
+
+:host ::ng-deep .tw-text-html h2{
+  @apply leading-normal;  
+}
+.text-custom-gray {
+  color: var(--text-custom-gray-color, rgb(111 111 111)); 
+  font-family: "Roboto", sans-serif; 
+}
+

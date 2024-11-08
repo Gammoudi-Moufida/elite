@@ -1,0 +1,140 @@
+.loadImg {
+    @apply relative h-[352px] bg-[position:0%_24%] bg-cover bg-no-repeat !important;
+}
+.bloc{
+    @apply w-[50%];
+}
+.slogan {
+    @apply text-[24px] text-center text-black w-full font-bold;  
+}
+::placeholder {
+    @apply text-black;
+}
+.tw-form {
+    @apply relative flex-auto w-[1%] min-w-0 block w-full text-base font-normal leading-normal text-custom-dark-metal appearance-none bg-white bg-clip-padding px-3 py-1.5 outline-none border-solid border-[rgba(0,0,0,0.2)] focus:ring focus:border-[#a9c4f5];
+}
+.tw-orange-button{
+    @apply bg-[#f07434] text-white h-[45px] w-full text-[18px] font-semibold rounded-[0.35rem] !important;
+}
+.filter-accordion .accordion {
+    @apply bg-white cursor-pointer w-full text-left text-[black] text-[14px] outline-none font-bold capitalize transition-[0.4s] p-0 border-[none];
+}
+.filter-accordion .list{
+    @apply text-[14px] w-full text-left bg-white cursor-pointer font-normal outline-none capitalize text-[black] px-0 py-[5px] border-[none];
+  
+}
+.filter-accordion .list-selected{
+    @apply bg-custom-flash-white w-[95%] pl-[5px];
+
+}
+.filter-accordion .active, .accordion:hover {
+    @apply bg-white;
+}
+.filter-accordion .panel {
+    @apply bg-white max-h-0 overflow-hidden transition-[max-height] duration-[0.2s] ease-[ease-out] pl-0 pr-2.5 py-0;
+}
+
+.filter-accordion .show-accordion{
+    @apply max-h-[150px] overflow-y-auto mr-[18px] mt-[10px] pr-0 !important;
+}
+
+.filter-accordion .panel figure{
+    @apply w-[50px] cursor-pointer m-0 pt-[10px];
+}
+.filter-accordion .panel figcaption{
+    @apply text-[12px] text-custom-gray;
+}
+.filter-accordion .panel img{
+   @apply w-[72px];
+}
+.filter-accordion .panel label{
+    @apply text-[12px];
+}
+.filter-accordion .panel .form-group{
+   @apply mt-0;
+}
+.filter-accordion .panel .form-group label{
+   @apply mb-0;
+}
+.filter-accordion .panel .form-group span{
+    @apply font-bold text-[14px];
+}
+/* width */
+::-webkit-scrollbar {
+    @apply w-[35px];
+}
+  
+  /* Track */
+ ::-webkit-scrollbar-track {
+   @apply bg-white;
+}
+   
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    @apply bg-custom-flash-white rounded-[3px];
+
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover { 
+   @apply bg-custom-flash-white;
+}
+
+
+/*modal popup */
+.tw-modal {
+    @apply fixed top-0  justify-center items-center w-full inset-0 z-[1000] overflow-y-auto;
+}
+.tw-opicity-modal{
+    @apply fixed inset-0 bg-[#000] bg-opacity-50 transition-opacity;
+}
+.tw-content-modal {
+    @apply relative bg-white rounded-lg;
+}
+.tw-header-modal {
+    @apply relative bg-white rounded-lg shadow dark:bg-gray-700;
+}
+.tw-modal-body {
+    @apply relative flex-auto p-4;
+}
+.tw-border {
+    @apply border-b-[#dee2e6] border-b border-solid;
+}
+.tw-modal-footer {
+    @apply bg-custom-bright-gray p-[12px] rounded-b border-t-[#dee2e6] border-t border-solid;
+}
+.icon-class{
+    @apply w-[24px] h-[24px];
+}
+::ng-deep .modal-dialog {
+    @apply top-[11%] transform-none relative w-auto  mx-7;
+}
+::ng-deep .modal-content {
+    @apply border-none;
+}
+@media screen and (max-width: 991px) {  
+    .b-bottom{
+        @apply mb-[16px] pb-[16px] border-b-[#dee2e6] border-b border-solid !important;
+    }
+    .bloc{
+        @apply w-full flex-initial;
+    }
+}
+@media screen and (max-width: 699px) {
+    .placeload {
+        @apply w-[90%] !important;
+    }  
+}
+
+@media screen and (max-width : 375px) {
+    .slogan{
+        @apply text-[22px];
+    }
+    input{
+        @apply text-[small];
+    }
+    .text-size{
+        @apply text-[small];
+    }
+    
+}

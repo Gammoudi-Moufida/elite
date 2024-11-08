@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-pod
+spec:
+  selector:
+    matchLabels:
+      app: k8l-elite
+      tier: client-pod
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: k8l-elite
+        tier: client-pod
+        track: stable
+    spec:
+      containers:
+        - name: client
+          image: "midprnci.gra7.container-registry.ovh.net/elite-auto/client:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 4000
+      imagePullSecrets:
+      - name: priv-registry 

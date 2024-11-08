@@ -1,0 +1,72 @@
+<div class="bg-custom-gray relative box-border w-full align-top leading-none h-auto mb-0 border-b border-solid border-[#dde1e3]">
+    <div class="tw-container px-3 pt-[15px] pb-3 ">
+        <div class="w-full">
+            <div class="flex flex-wrap">
+                <div class="w-full">
+                    <div class="float-left">
+                        <h1 class="text-custom-jet-gray text-[15px] font-bold sm:m-0" *ngIf='data'>{{data?.title}}</h1>
+                        <div class="flex flex-wrap">
+                            <div class="w-full sm:w-1/2 md:w-full">
+                                <nav aria-label="breadcrumb" class="pt-[5px] mb-0" *ngIf='data'>
+                                    <ul class="hidden mb-0 sm:block " *ngIf='screenMode != 1'>
+                                        <li class="inline-block h-[10px] font-raleway text-xs" *ngFor="let item of data.menu; index as i;">
+                                            <a class="text-custom-jet-gray no-underline" href="{{item.url}}" *ngIf='!isOccasion'>{{item.text }}</a>
+                                            <a class="text-custom-jet-gray no-underline" routerLink="{{item.url}}" *ngIf='isOccasion'>{{item.text }}</a>
+                                            <span *ngIf="i != data.menu.length-1">&nbsp;/&nbsp;</span>
+                                        </li>
+                                    </ul>
+                                    <div ngbDropdown class="inline-block" *ngIf='screenMode == 1'>
+                                        <button class="underline btn-sm text-xs text-custom-jet-gray p-0"
+                                            ngbDropdownToggle>Navigation</button>
+                                        <ul class="hidden pl-1 mb-0 sm:block " ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <li class="inline-block h-[10px] font-raleway text-xs" *ngFor="let item of data.menu; index as i;">
+                                                <a class="text-custom-jet-gray no-underline" href="{{item.url}}" *ngIf='!isOccasion'>{{item.text }}</a>
+                                                <a class="text-custom-jet-gray no-underline" routerLink="{{item.url}}" *ngIf='isOccasion'>{{item.text }}</a>
+                                                <span *ngIf="i != data.menu.length-1">&nbsp;/&nbsp;</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>                                  
+                            </div>
+                            <div class="w-full sm:w-2/3 md:w-full">
+                                <div class="pb-[5px] leading-[1px] text-[#007892] font-bold sm:text-xs" *ngIf="data?.avis || data?.nbAvis && data.type!='utility'">
+                                    <ng-template #t let-fill="fill">
+                                        <span class="relative inline-block text-[#d3d3d3] cursor-pointer" [class.full]="fill === 100">
+                                            <span class="absolute inline-block overflow-hidden text-[#ffbf00] cursor-pointer" [style.width.%]="fill">&#9733;</span>&#9733;
+                                        </span>
+                                    </ng-template>
+
+                                    <span class="text-yellow-400">
+                                        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                                          <ng-container *ngIf="star <= data.avgNote; else emptyStar">
+                                            <span class="text-xl md:text-[18px]">★</span>
+                                          </ng-container>
+                                          <ng-template #emptyStar>
+                                            <span class="text-xl md:text-[18px]">☆</span>
+                                          </ng-template>
+                                        </ng-container>
+                                    </span>
+                            
+                                    <span class="text-[#007892] font-bold cursor-pointer md:text-[16px]" (click)='scrollToAvis()' pointer>({{data.nbAvis}}
+                                        avis)</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="float-right text-xl text-right" *ngIf="data?.remise && data.type!='lease' && data.type!='marque_modele_offres_finition_lease' && data.type!='marque_modele_offres_motorisation_lease' && screenMode == 3">
+                        <span class="leading-[21px]">Meilleure remise {{data.marque}}</span><br>
+                        <span class="font-bold text-[#007896]" >JUSQU’À -{{data.remise}}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="bg-custom-blue text-white text-center text-sm py-[7px] px-0 " *ngIf="data?.remise &&  data.type!='lease' &&  data.type!='marque_modele_offres_finition_lease'&&  data.type!='marque_modele_offres_motorisation_lease' && 3 > screenMode">
+    <div class="tw-container px-3">
+        <div class="text-xs" >Meilleure remise <strong>JUSQU’À -{{data.remise}}%</strong></div>
+    </div>
+</div>

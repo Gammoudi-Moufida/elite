@@ -1,0 +1,25 @@
+<div class="flex flex-wrap" *ngIf="cars">
+    <div class="w-full sm:w-full md:w-1/2 lg:w-1/3 py-[0px] px-[12px] tw-card-sizing" *ngFor="let item of cars; let i = index">
+        <div class="tw-card">
+            <a href="{{encode(item.urlMod)}}">
+                <div class="tw-card-body">
+                    <img src="{{item.photoUrl}}" alt='{{item.photoAlt}}' class="lazyload tw-card-img-top" height="233"
+                        width="350">
+                    <div class="tw-car-name text-center">{{item.marque}} <b>{{item.modele}}</b></div>
+                </div>
+                <div class="tw-card-footer">
+                    <div class="flex flex-wrap">
+                        <div class="tw-footer">
+                            <div class="w-full"> à partir de <span class="font-bold">{{item.prix |
+                                    currency:'EUR':'symbol':'4.0-2':'fr'}}</span></div>
+                            <div class="w-full" *ngIf="item.loyer">dès <span class="font-bold">{{item.loyer}}€
+                                    /mois</span></div>
+                            <div class="w-full" *ngIf="!item.loyer">nous consulter</div>
+                        </div>
+                        <span class="tw-icon-footer tw-arrow">&#10095;</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

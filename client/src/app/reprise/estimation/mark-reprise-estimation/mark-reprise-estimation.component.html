@@ -1,0 +1,58 @@
+<section *ngIf="!selectedVehicule">
+   
+    <div class="text-center bg-custom-gray flex flex-wrap mb-[16px] p-0">
+        <div class="w-full text-2xl max-[768px]:text-base capitalize mt-2 mb-2 text-center color-black">
+            <ng-container *ngFor="let item of res?.menu; let isFirst = first">
+                {{ isFirst ? '' : ' - ' }}
+                <a *ngIf="item.url" class="font-normal" href="{{item.url}}">
+                    {{item.text}}
+                </a>
+                <a *ngIf="!item.url" class="font-normal">
+                    {{item.text}}
+                </a>
+            </ng-container>
+        </div>
+    </div>
+    <div class="container mx-auto">
+        <h1 class="text-2xl mt-2 mb-2 text-center capitalize">
+            <span class="font-normal"> Reprise </span> <span class="font-bold"> {{mark}} {{model}}</span>
+        </h1>
+
+        <span *ngIf="textHaut?.length < 368">
+            <span class="textHtml" [innerHTML]="textHaut"></span>
+        </span>
+        <span *ngIf="textHaut?.length >= 368">
+            <span class="textHtml" [innerHTML]="textHaut" [ngClass]="{'tw-textSplit': isTextOpen}"></span>
+            <span *ngIf="isTextOpen" class='text-[#00779b] cursor-pointer  font-bold' (click)=" isTextOpen = ! isTextOpen">... Lire la
+                suite</span>
+            <span *ngIf="!isTextOpen" class='text-[#00779b] cursor-pointer  font-bold' (click)="isTextOpen = ! isTextOpen">Refermer</span>
+        </span>
+
+    </div>
+</section>
+
+<app-estimation-steps [isMarkPage]="true" (selectedEvent)="selectedEv($event)"></app-estimation-steps>
+
+<div class="tw-container mx-auto px-[12px] mb-4 pb-3">
+
+    <div class="flex flex-wrap" *ngFor="let section of textBasArray; let i = index">
+        <div [innerHtml]="section[0]"></div>
+
+        <span *ngIf="section[1]?.length < 368 || section[1]?.includes('liste_modeles')">
+            <span class="textHtml" [innerHTML]="section[1]?.replaceAll(';</li>', '</li>')"></span>
+        </span>
+        <span *ngIf="section[1]?.length >= 368 && !section[1]?.includes('liste_modeles')">
+            <span class="textHtml" [innerHTML]="section[1]" [ngClass]="{'tw-textSplit': isTextBasOpen[i]}"></span>
+            <span *ngIf="isTextBasOpen[i]" class='text-[#00779b] cursor-pointer  font-bold'
+                (click)=" isTextBasOpen[i] = ! isTextBasOpen[i]">... Lire la suite</span>
+            <span *ngIf="!isTextBasOpen[i]" class='text-[#00779b] cursor-pointer  font-bold'
+                (click)="isTextBasOpen[i] = ! isTextBasOpen[i]">Refermer</span>
+        </span>
+    </div>
+
+    <h2 *ngIf="links && mark">Les services <span class="text-capitalize">{{mark}}</span> </h2>
+    <div class="flex flex-wrap justify-between">
+        <a *ngFor="let link of links; let i = index" class="px-3 flex-1 w-full links"
+            href="{{link?.url}}">{{link?.title}}</a>
+    </div>
+</div>

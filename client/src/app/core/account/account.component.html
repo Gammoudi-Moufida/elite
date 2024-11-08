@@ -1,0 +1,8 @@
+<div class="text-center px-28 py-28 w-full fixed z-[80] bg-[#eee] overflow-auto" *ngIf="infoLoading">
+    <div class="tw-loader"></div>
+</div>
+<div *ngIf="data">
+    <app-account-info id="account-infos" [accountInfo]="data" [infoLoading]="infoLoading" (disconnectAction)="disconnectAction($event)" 
+        class="tw-account-style">
+    </app-account-info>
+</div>

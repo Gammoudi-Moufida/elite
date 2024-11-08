@@ -1,0 +1,12 @@
+<div *ngIf="state">
+    <input
+      #input
+      type="range"
+      step="1000"
+      [min]="state?.range?.min"
+      [max]="state?.range?.max"
+      (change)="refineState(inputValue)"
+      class="tw-ea-slider"
+      [(ngModel)]="inputValue"
+    />
+  </div>

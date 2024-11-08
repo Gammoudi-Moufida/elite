@@ -1,0 +1,65 @@
+<h2 class="mb-3 mt-3" *ngIf="!isHomePage">Nos avis clients</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4" *ngIf="listAvis">
+    <div class="col-span-2 md:col-span-1 flex items-center justify-center">
+        <a href="https://www.avis-verifies.com/avis-clients/elite-auto.fr" target="_blank">
+            <img ngSrc="pictos/widget21-13729.png" alt="avis elite-auto" width="175" height="86">
+        </a>
+    </div>
+    <div class="col-span-2 grid grid-cols-2 gap-3 mb-2" *ngIf="screenMode == 3">
+      <div class="col-span-1 tw-avis-bloc" *ngFor="let avis of listAvis | slice:0:2">
+        <span class="text-yellow-400">
+            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+              <ng-container *ngIf="star <= avis.rate; else emptyStar">
+                <span class="text-xl md:text-3xl">★</span>
+              </ng-container>
+              <ng-template #emptyStar>
+                <span class="text-xl md:text-3xl">☆</span>
+              </ng-template>
+            </ng-container>
+          </span>
+          <div class="tw-avis_comm">
+            <p>{{ avis.review }}</p>
+        </div>
+        <div class="tw-avis_date">le {{ avis.reviewDate }}</div>
+      </div>
+    </div>
+    <div class="col-span-2 grid grid-cols-1 gap-3" *ngIf="screenMode < 3">
+        <div class="flex justify-between px-5">
+            <div class="self-center">
+                <div *ngIf="carrouselImgsLength > 1" (click)="carrouselPrevAction()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff"
+                        class="bi bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="me-0 tw-avis-bloc" *ngFor="let item of carrouselItems" [ngStyle]="{'display':item.active ? 'block' : 'none' }">
+                <span class="text-yellow-400">
+                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                      <ng-container *ngIf="star <= item.avis.rate; else emptyStar">
+                        <span class="text-xl md:text-3xl">★</span>
+                      </ng-container>
+                      <ng-template #emptyStar>
+                        <span class="text-xl md:text-3xl">☆</span>
+                      </ng-template>
+                    </ng-container>
+                  </span>
+                  <div class="tw-avis_comm">
+                    <p>{{ item.avis.review }}</p>
+                </div>
+                <div class="tw-avis_date">le {{ item.avis.reviewDate }}</div>
+              </div>
+          
+            <div class="self-center">
+                <div *ngIf="carrouselImgsLength > 1 " (click)="carrouselNextAction()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ffffff"
+                        class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,4 @@
+
+.tw-icon-couleur{
+        @apply border shadow-[1px_1px_0_#dde1e3] w-5 h-5 ml-1 p-0.5 rounded-[50%] border-solid border-[#dde1e3];
+}

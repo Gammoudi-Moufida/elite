@@ -1,0 +1,26 @@
+<div class="relative overflow-x-auto">
+    <table class="tw-table w-full ">
+        <thead >
+            <tr>
+                <th scope="col">Marque</th>
+                <th scope="col">Modèle</th>
+                <th scope="col">Prix à partir de</th>
+                <th scope="col">Economie</th>
+                <th scope="col">Energie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cars; let i = index" (click)='clickLink(item.urlMod);' class="cursor-pointer bg-[#fff] hover:bg-[rgba(0,0,0,.05)]">
+                <td>{{item.marque}}</td>
+                <td>{{item.modele|uppercase}}</td>
+                <td class=" bg-[#d6e1e7]"><strong>{{item.prix | currency:'EUR':'symbol':'4.0-2':'fr'}}</strong></td>
+                <td>{{item.eco }} €</td>
+                <td>
+                    <span *ngFor="let energie of item.energie" >
+                        <img ngSrc="general/icon_equipement/{{energie.url}}" width="35" height="35" title="{{energie.name}}">
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,11 @@
+.title-service {
+    @apply lg:leading-[21px] leading-[17px] lg:text-[18px] text-[15px] font-black;
+}
+
+.service {
+    @apply flex items-center lg:text-[16px] text-[14px] lg:leading-[18.75px] leading-[16px] mb-3;
+}
+
+.text-underline {
+    @apply underline text-[#0A7B93] !important;
+}

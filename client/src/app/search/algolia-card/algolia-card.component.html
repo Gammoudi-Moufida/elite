@@ -1,0 +1,391 @@
+<a [href]="hit.isReserved ? 'javascript:void(0)' : offreUrl"  class="w-full  cursor-pointer tw-custom-card pb-[120px] lg:pb-[110px] xl:pb-[110px] "
+  [ngClass]="{'sticky':hideSticky === false,'card-comparator':isComparator === true,'cursor-auto': hit.isReserved}">
+  <div class="tw-loader" *ngIf="!showLoading"></div>
+
+
+
+
+  <ng-container *ngIf="hit.isVo == true" [class.tw-show]="hideSticky == false" class="tw-globalTag" >
+    <img ngSrc="vo/small/{{hit?.vignette}}" [priority]="isLcp" width="600" height="400" alt="{{imgAlt}}"
+      [class.display-img]="!isLcp && !showImg" class=" w-[100%] h-[100%]img-r-12 relative rounded-t-xl"
+      *ngIf="showLoading && hit?.vignette">
+    <img ngSrc="proxauto/apercu_nc.png" width="600" height="400" alt="{{imgAlt}}"
+      class=" w-[100%] h-100 img-r-12 relative " *ngIf="showLoading && !hit?.vignette">
+  </ng-container>
+
+  <!-- Fin Occasion Images -->
+  <div class="tw-tags" *ngIf="hideSticky == true">
+    <div class="block">
+      <div class="tw-tag bg-custom-orange"
+        *ngIf="textAvantageClient && remiseMessage && !isOccasion">
+        Avantage client
+      </div>
+      <div class="tw-tag font-bold bg-custom-black" *ngIf="remiseMessage && !isOccasion">
+        <span *ngIf=" !discretionRemise && !textAvantageClient">
+          - {{remiseMessage | number : '1.1-2' }} %
+        </span>
+        <span *ngIf=" discretionRemise && !textAvantageClient">
+          {{remiseMessage }}
+        </span>
+        <span *ngIf=" textAvantageClient">
+          {{remiseMessage | number : '1.0' }} €
+        </span>
+      </div>
+
+      <div class="tw-tag text-center bg-custom-orange" *ngIf="hit.flashSale && isFlashSale">
+        <span class="tw-label-tag">Déstockage</span>
+      </div>
+      <div class="tw-tag bg-custom-orange text-center" *ngIf="hit.isNouveaute && !hit.flashSale">
+        <span class="tw-label-tag">Nouveauté</span>
+      </div>
+      <div *ngIf="hit?.proxautoLabel" class="tw-tag bg-[#ebb71f]" >
+        <span class="tw-label-tag">{{hit?.proxautoLabel}}</span>
+      </div>
+      <div *ngIf="hit?.label" class="tw-tag bg-custom-black" >
+        <span class="tw-label-tag uppercase">{{hit?.label}}</span>
+      </div>
+    </div>
+
+    <div *ngIf="!isComparator && showComparator">
+      <div class="flex mb-0 cursor-pointer tw-card-compare">
+        <input class="tw-form-check-input-card ml-[4px]" type="checkbox" id="compareCheck{{id}}" [(ngModel)]="checkedCompare"
+          (click)="checkCompare(content)">
+        <label class="cursor-pointer form-check-label ms-1 text-custom-black" for="compareCheck{{id}}"><b>Comparer</b></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- images -->
+
+  <div class="flex justify-between" *ngIf="!hit.isVo && hit.OffreImages && hit.OffreImages?.length > 1"
+    [class.tw-show]="hideSticky == false">
+
+    <div class=" p-0 self-center text-custom-black" *ngIf="carrouselImgsLength > 1 && showLoading" (click)="carrouselPrevAction()">
+      <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-left"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+      </svg>
+    </div>
+
+    <div *ngFor="let item of carrouselItems; let i = index" [id]="i"
+      [ngStyle]="{'display':item.active ? 'block' : 'none' }" class="w-full text-center">
+      <ng-container *ngIf="!hit.isReserved" class="custom-black" >
+        <img ngSrc="visuel/{{hit.marque.toString().replace(' ', '')}}/peintures/600x400/{{item.image}}"
+          [priority]="isLcp" [class.display-img]="!isLcp && !showImg" width="600" height="400" alt="{{imgAlt}}"
+          class=" w-100 h-auto mt-[32px] mb-[31px]" *ngIf="showLoading">
+      </ng-container>
+    </div>
+    <div class="  p-0 self-center text-custom-black" *ngIf="carrouselImgsLength > 1 && showLoading" (click)="carrouselNextAction()">
+      <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-right"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+      </svg>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!hit.isVo && hit.OffreImages?.length <= 1 && hit.vignette && !hit.isReserved" [class.tw-show]="hideSticky == false"
+    class="custom-black" >
+    <img ngSrc="{{hit?.vignette}}" [priority]="isLcp" [class.display-img]="!isLcp && !showImg" width="600" height="400"
+      alt="{{imgAlt}}" class=" w-full h-full tw-img-r-12" *ngIf="showLoading">
+  </ng-container>
+
+  <div class="tw-reserved-box m-[41px] flex"
+    *ngIf="!hit.isVo && hit.OffreImages?.length <= 1 && hit.vignette && hit.isReserved && showLoading"
+    [class.tw-show]="hideSticky == false">
+    <img *ngIf="!hit.isVo && hit.OffreImages?.length <= 1 && hit.vignette && hit.isReserved"
+      ngSrc="visuel/{{hit.marque.toString().replace(' ', '')}}/peintures/600x400/{{hit.OffreImages}}" [priority]="isLcp"
+      [class.display-img]="!isLcp && !showImg" width="600" height="400" alt="{{imgAlt}}"
+      class=" w-100 h-100 opacity-30" [class.tw-show]="hideSticky == false">
+    <div class="tw-reserved-text"
+    [ngClass]="{'tw-comparator': !hideSticky}"
+      *ngIf="!hit.isVo && hit.OffreImages?.length <= 1 && hit.vignette && hit.isReserved && showLoading">
+      RÉSERVÉ
+    </div>
+  </div>
+  <ng-container class="custom-black" 
+    *ngIf="!hit.isVo && hit.OffreImages?.length==1 && hit?.vignette == null && !hit.isReserved"
+    [class.tw-show]="hideSticky == false">
+    <img ngSrc="visuel/{{hit.marque.toString().replace(' ', '')}}/peintures/600x400/{{hit.OffreImages}}"
+      [priority]="isLcp" [class.display-img]="!isLcp && !showImg" width="600" height="400" alt="{{imgAlt}}"
+      class=" tw-reserved-box m-[41px] flex" *ngIf="showLoading">
+  </ng-container>
+
+  <img *ngIf="!hit.isVo && hit.OffreImages?.length==1 && hit?.vignette == null && hit.isReserved && showLoading"
+    ngSrc="visuel/{{hit.marque.toString().replace(' ', '')}}/peintures/600x400/{{hit.OffreImages}}" [priority]="isLcp"
+    [class.display-img]="!isLcp && !showImg" width="600" height="400" alt="{{imgAlt}}"
+    class=" w-[75%] h-auto m-[41px] opacity-30" [class.tw-show]="hideSticky == false">
+  <div class="tw-reserved-text"
+  [ngClass]="{'tw-comparator': !hideSticky}"
+    *ngIf="!hit.isVo && hit.OffreImages?.length==1 && hit?.vignette == null && hit.isReserved && showLoading">
+    RÉSERVÉ
+  </div>
+
+  <ng-container *ngIf="!hit.isVo && hit.OffreImages?.length==0 && hit?.vignette == null  && !hit.isReserved"
+    [class.tw-show]="hideSticky == false" class="custom-black" >
+    <img ngSrc="visuel/{{hit.frontPicture.toString().replace('135x90','600x400')}}" alt="{{imgAlt}}" [priority]="isLcp"
+      [class.display-img]="!isLcp && !showImg" width="600" height="400" *ngIf="hit.frontPicture && showLoading"
+      class=" tw-ea-img-not-vo" [class.tw-show]="hideSticky == false">
+    <img ngSrc="general/apercu_nc.jpg" alt="{{imgAlt}}" *ngIf="!hit.frontPicture && showLoading" width="600"
+      height="400" class=" tw-ea-img-not-vo">
+  </ng-container>
+
+  <img ngSrc="visuel/{{hit.frontPicture}}" alt="{{imgAlt}}" width="600" height="400" [priority]="isLcp"
+    [class.display-img]="!isLcp && !showImg"
+    *ngIf="!hit.isVo && hit.OffreImages?.length==0 && hit?.vignette == null  && hit.isReserved && hit.frontPicture && showLoading"
+    [class.tw-show]="hideSticky == false" class=" w-100 h-100 opacity-30">
+
+  <img ngSrc="general/apercu_nc.jpg" alt="{{imgAlt}}"
+    *ngIf="!hit.isVo && hit.OffreImages?.length==0 && hit?.vignette == null  && hit.isReserved && !hit.frontPicture && showLoading"
+    width="600" height="400" class=" w-100 h-100 opacity-30">
+
+  <div class="tw-reserved-text"
+  [ngClass]="{'tw-comparator': !hideSticky}"
+    *ngIf="!hit.isVo && hit.OffreImages?.length==0 && hit?.vignette == null &&  hit.isReserved && showLoading">
+    RÉSERVÉ
+  </div>
+  <!-- fin images -->
+
+  <!-- marque & model $ couleurs -->
+
+  <div class="tw-container flex flex-wrap items-center">
+    <p class="grow shrink-0 basis-[0%] font-size-16 mt-2" [ngClass]="{'mb-0':hideSticky === false,'mb-2':hideSticky === true}">
+      <ais-highlight attribute="marque" class="tw-card-marque  font-extrabold uppercase" [hit]="hit"></ais-highlight>
+      <ais-highlight attribute="modelNormalized" class="font-semibold tw-name ps-2" [hit]="hit"></ais-highlight>
+    </p>
+    <div *ngIf="hideSticky == true && !hit.isVo" class="col-auto">
+      <img ngSrc="visuel/colors/{{ hit.ColorsImages[0].imageColor }}"
+          *ngFor="let color of hit.ColorsImages.slice(0, 1)" class="tw-imageColor" title="{{ color.libelleColor }}"
+          width="20" height="20" />
+        <small *ngIf="hit.ColorsImages.length > 1" title="+{{hit.ColorsImages.length - 1}} couleurs"
+          class="tw-numberColor relative" (click)="togglePopover()">
+          +{{hit.ColorsImages.length - 1}}
+          <div
+          [ngClass]="{
+            'hidden': !isPopoverVisible,
+            'flex': isPopoverVisible,
+            'margin-t': hit.ColorsImages.length - 1 > 6 && hit.ColorsImages.length - 1 < 15,
+            'margin-t-15': hit.ColorsImages.length - 1 >= 15
+          }"
+            id="tw-numberColor"
+           class="tw-popupColors">
+            <div class="tooltip-container1">
+              <ng-container *ngFor="let color of hit.ColorsImages.slice(1, hit.ColorsImages.length)">
+                <img ngSrc="visuel/colors/{{ color.imageColor }}" class="lazyload tw-items-colors"
+                  title="{{ color.libelleColor }}" width="20" height="20" />
+              </ng-container>
+            </div>
+            <div>
+              <i class="tw-arrow down"></i>
+            </div>
+          </div>
+        </small>
+    </div>
+  </div>
+
+<!-- fin marque & model $ couleurss -->
+
+<!--motorisation & finition & annee circulation-->
+<div class="tw-motorisation">
+  <div [ngClass]="{'mt-0':hideSticky === false,'mt-1':hideSticky === true}" class="tw-name-motorisation">
+    {{(hit.motorisation | uppercase).replace(hit.modelNormalized | uppercase,'')}} · {{hit.finition | uppercase}}
+  </div>
+  <div [ngClass]="{'mt-0':hideSticky === false,'mt-1':hideSticky === true}" class="tw-moto-details">
+    <span *ngIf="hit.anneeMiseEnCirculation">{{hit.anneeMiseEnCirculation}} </span>
+    <span *ngIf="hit.isOccasion == true && hit.kilometrage">· {{hit.kilometrage | number:'1.0-0':'fr'}} km </span>
+    <span *ngIf="hit.isOccasion == false">· 0 km </span>
+    <span *ngIf="hit.energieNormalized">· {{hit.energieNormalized | titlecase }} </span>
+    <span *ngIf="hit.transmissionNormalized">· {{hit.transmissionNormalized | titlecase }} </span>
+  </div>
+</div>
+
+<!--fin motorisation & finition & annee circulation-->
+
+<!-- badges -->
+<div class="flex p-2.5 cursor-pointer" *ngIf="hideSticky == true">
+  <div *ngIf="hit.category == 1" class="tw-ea-badge-sm  bg-custom-olive tw-small-badge ms-1">Occasion </div>
+  <div *ngIf="hit.category == 3" class="tw-ea-badge-sm  bg-custom-deep-blue   tw-small-badge mx-[4px]">
+    Neuf </div>
+  <div *ngIf="hit.category == 4" class="tw-ea-badge-sm bg-custom-ocean-blue tw-small-badge ">0 km
+  </div>
+  <div *ngIf="!reservedOffre && !isSpecial && isLoa && showLoading" class="tw-ea-badge-sm tw-ea-gray px-2 mx-1 ">      Uniquement
+    LOA/LLD </div>
+  <div *ngIf="!hit.isReserved && hit.isSpecial && showLoading" class="tw-ea-badge-sm tw-ea-gray px-2 mx-1">
+    Offre Spéciale
+  </div>
+  <div *ngIf="disponibiliteForFO == 'en stock' && isOccasion == false"
+ class="tw-bold tw-ea-badge-sm tw-ea-gray px-2 mx-1 ">
+    disponible </div>
+  <div *ngIf="disponibiliteForFO == 'sur commande' && isOccasion == false && showLoading"
+    class="tw-ea-badge-sm tw-ea-gray px-2 mx-1">sur commande </div>
+  <div *ngIf="disponibiliteForFO == 'en arrivage' && isOccasion == false && showLoading"
+    class="tw-ea-badge-sm tw-ea-gray px-2 mx-1">en arrivage</div>
+</div>
+  <!-- equipements-->
+  <div class="tw-equipement-icon py-0 " *ngIf="hideSticky == true && screenMode == 1 && showLoading">
+    <div *ngFor="let equipment of hit.equipments" class="tw-tooltip-container">
+      <img *ngIf="equipment.url"
+           ngSrc="general/icon_equipement/{{equipment?.url?.replace('.svg','-noir.svg')}}"
+           class="lazyload svg-icon"
+           title="{{equipment?.title}}"
+           class="me-1"
+           width="24"
+           height="24"
+           [class.tw-show]="equipment?.title == hit.energie || equipment?.title == hit.transmission">
+      <div class="tw-tooltip">{{equipment?.title}}</div>
+    </div>
+  </div>
+
+  <div class="tw-equipement-icon" *ngIf="hideSticky == true && screenMode > 1 && showLoading">
+    <div *ngFor="let equipment of hit.equipments" class="tw-tooltip-container">
+      <img *ngIf="equipment.url"
+           ngSrc="general/icon_equipement/{{equipment?.url?.replace('.svg','-noir.svg')}}"
+           class="lazyload svg-icon"
+           title="{{equipment?.title}}"
+           class="me-1"
+           width="24"
+           height="24"
+           [class.tw-show]="equipment?.title == hit.energie || equipment?.title == hit.transmission">
+      <div class="tw-tooltip ">{{equipment?.title}}</div>
+    </div>
+  </div>
+
+<!-- remise & prix-->
+<div class="tw-card-footer cursor-pointer mb-3 ">
+  <div *ngIf="hit.maxMontantReprise > 0" class="tw-textBas" [class.tw-show]="hideSticky == false">
+    Jusqu'à <strong>{{hit.maxMontantReprise | number:'1.0-0':'fr' }}€</strong> d'aide à la reprise
+  </div>
+  <div class=" tw-block-prix cursor-pointer " *ngIf="!hit.isReserved">
+    <div class="tw-offer ">
+      <div class="tw-col-7 ">
+        <div class=" tw-text-l">
+          <div class="tw-offer-text" *ngIf="hit.rent && !filterLoyerChecked">Dès</div>
+          <span *ngIf="hit.rent && !filterLoyerChecked" class="tw-offer-card-price">{{rent
+            |
+            number:'1.0-0':'fr'}}€</span>
+          <span *ngIf="filterLoyerChecked" class="tw-offer-card-price">{{hit.loyerMensuel |
+            number:'1.0-0':'fr'}}€</span>
+          <span *ngIf="hit.rent || filterLoyerChecked" class="tw-remise-text">/ mois &nbsp;</span>
+          <span *ngIf="!hit.rent && !filterLoyerChecked" class="tw-lld-text">LLD nous contacter </span>
+          <span (click)="open(infoContent)" class="self-center text-center" class="tw-info">i
+          </span>
+        </div>
+        <div class="flex-shrink-0 p-0">
+          <svg class="svg-separator" width="2" height="35" viewBox="0 0 2 35" fill="none">
+            <line x1="0.833008" x2="0.833008" y2="35" stroke="#666666" stroke-opacity="0.2" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="tw-prix">
+      <div
+        *ngIf="(hit.prixCatalogueForLease && hit.isOccasion == false) && !discretionRemise && (hit.prixCatalogueForLease > hit.priceForFront)"
+        class="line-through tw-offer-card-price font-bold">
+        <svg width="14" height="14" viewBox="0 0 14 15" fill="none" class="mb-1 me-1">
+          <path
+            d="M14 7.5C14 3.63418 10.8658 0.5 7 0.5C3.13418 0.5 0 3.63418 0 7.5C0 11.3658 3.13418 14.5 7 14.5C10.8658 14.5 14 11.3658 14 7.5ZM9.9087 6.90197L7.41394 9.90019C7.36341 9.96093 7.30013 10.0098 7.22859 10.0434C7.15706 10.0769 7.07901 10.0943 7 10.0943C6.92099 10.0943 6.84295 10.0769 6.77141 10.0434C6.69987 10.0098 6.63659 9.96093 6.58606 9.90019L4.0913 6.90197C4.02592 6.82334 3.98427 6.72772 3.97125 6.6263C3.95822 6.52487 3.97434 6.42183 4.01773 6.32923C4.06111 6.23663 4.12997 6.1583 4.21625 6.1034C4.30252 6.04851 4.40264 6.01931 4.5049 6.01923H9.4951C9.59736 6.01931 9.69748 6.04851 9.78375 6.1034C9.87003 6.1583 9.93889 6.23663 9.98228 6.32923C10.0257 6.42183 10.0418 6.52487 10.0288 6.6263C10.0157 6.72772 9.97408 6.82334 9.9087 6.90197Z"
+            fill="#327793" />
+        </svg>
+        {{hit.prixCatalogueForLease | number:'1.0-0':'fr' }}€
+      </div>
+      <div class="ms-2">
+        <div *ngIf="(hit.isOccasion == true ||  discretionRemise) && !voitureUtilitaire"
+          class="tw-offer-card-price me-1">
+          Prix T.T.C </div>
+        <div *ngIf="voitureUtilitaire" class="tw-offer-card-price me-1">Prix H.T</div>
+        <div *ngIf="hit.priceForFront" class="tw-offer-card-price mb-0 ">{{hit.priceForFront
+          |
+          number:'1.0-0':'fr' }}€</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex  tw-block-prix my-0.5 h-16" *ngIf="hit.isReserved">
+    <div class="tw-offer">
+      <div class="tw-col-7 ">
+        <div class="tw-text-l">
+          <div class=" tw-offer-text" *ngIf="hit.rent">Dès</div>
+          <span *ngIf="hit.rent" class="tw-remise-text">
+            <span class="tw-offer-card-price">{{rent | number:'1.0-0':'fr'}}€</span> / mois &nbsp;</span>
+          <span *ngIf="!hit.rent" class="tw-lld-text">LLD nous contacter  </span>
+          <span (click)="open(infoContent)" class="self-center text-center" class="tw-info">i
+          </span>
+        </div>
+        <div class="flex-shrink-0 p-0">
+          <svg width="2" height="35" viewBox="0 0 2 35" fill="none">
+            <line x1="0.833008" x2="0.833008" y2="35" stroke="#666666" stroke-opacity="0.2" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="tw-prix">
+      <div
+        *ngIf="(hit.prixCatalogueForLease && hit.isOccasion == false) && !discretionRemise && (hit.prixCatalogueForLease > hit.priceForFront)"
+        class="inline-block line-through tw-offer-card-price">
+        <svg width="14" height="14" viewBox="0 0 14 15" fill="none" class="mb-1 me-1">
+          <path
+            d="M14 7.5C14 3.63418 10.8658 0.5 7 0.5C3.13418 0.5 0 3.63418 0 7.5C0 11.3658 3.13418 14.5 7 14.5C10.8658 14.5 14 11.3658 14 7.5ZM9.9087 6.90197L7.41394 9.90019C7.36341 9.96093 7.30013 10.0098 7.22859 10.0434C7.15706 10.0769 7.07901 10.0943 7 10.0943C6.92099 10.0943 6.84295 10.0769 6.77141 10.0434C6.69987 10.0098 6.63659 9.96093 6.58606 9.90019L4.0913 6.90197C4.02592 6.82334 3.98427 6.72772 3.97125 6.6263C3.95822 6.52487 3.97434 6.42183 4.01773 6.32923C4.06111 6.23663 4.12997 6.1583 4.21625 6.1034C4.30252 6.04851 4.40264 6.01931 4.5049 6.01923H9.4951C9.59736 6.01931 9.69748 6.04851 9.78375 6.1034C9.87003 6.1583 9.93889 6.23663 9.98228 6.32923C10.0257 6.42183 10.0418 6.52487 10.0288 6.6263C10.0157 6.72772 9.97408 6.82334 9.9087 6.90197Z"
+            fill="#327793" />
+        </svg>
+        {{hit.prixCatalogueForLease | number:'1.0-0':'fr' }}€
+      </div>
+      <div class="ms-2">
+        <div *ngIf="(hit.isOccasion == true ||  discretionRemise) && !voitureUtilitaire"
+ class="tw-offer-card-price me-1">
+          Prix T.T.C </div>
+        <div *ngIf="voitureUtilitaire" class="tw-offer-card-price me-1">Prix H.T</div>
+
+        <div *ngIf="hit.priceForFront" class="tw-offer-card-price mb-0">
+          <span>{{hit.priceForFront |
+            number:'1.0-0':'fr' }}€</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</a>
+<ng-template #content let-modal>
+  <div class="tw-modal md:flex lg:flex" aria-labelledby="modal-title">
+    <div class="tw-opicity-modal"></div>
+    <div class="p-2 w-full md:max-w-[500px] justify-center items-center lg:max-w-[500px] xl:max-w-[500px]">
+      <div class="tw-content-modal">
+        <div class="tw-header-modal">
+          <div class="tw-text-header">
+            <h6 class="text-[18px] font-bold">Comparateur de véhicules</h6>
+          </div>
+          <div class="relative flex-auto p-[24px]">
+            <button type="button" class="tw-btn-danger ">4 véhicules
+              maximum peuvent être
+              comparés</button>
+          </div>
+          <div class="tw-btn-close">
+            <button type="button" class="tw-btn-modal" (click)="modal.close('Close click')">Fermer</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #infoContent let-modal>
+  <div class=" tw-modal md:flex lg:flex" aria-labelledby="modal-title">
+    <div class="tw-opicity-modal"></div>
+    <div class="p-2 w-full justify-center xl:w-[820px] items-center">
+      <div class="tw-content-modal">
+        <div class="tw-header-modal">
+          <div class="tw-text-header">
+            <h6 class="text-[16px] font-[inherit]">Information</h6>
+          </div>
+          <div class="p-[24px]">
+            <div *ngIf='loading'></div>
+            <p *ngIf='!loading'>{{text}}</p>
+          </div>
+          <div class="tw-btn-close">
+            <button type="button" class="tw-btn-modal" (click)="modal.close('Close click')">Fermer</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

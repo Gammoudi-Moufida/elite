@@ -1,0 +1,58 @@
+<div class="bg-custom-black p-[16px]">
+
+    <div class="tw-container mx-auto px-[12px] mb-[16px]">
+ 
+
+         <div class="grid grid-cols-3 gap-x-6">
+
+            <div class="flex-[1_0_0%] text-left" *ngIf=" screenMode != 1 || (screenMode == 1 && stepperStyle['width.%'] == 1)">
+                <div class="flex flex-wrap md:-mx-3">
+                    <div class="w-full lg:w-1/6 md:w-1/4 text-left h-[50px] bg-no-repeat my-0 step-1"></div>
+                    <div class="w-full lg:w-5/6 md:w-3/4 text-white">
+                        <p class="font-bold max-[992px]:text-sm mb-0">Votre voiture</p>
+                        <p><small>Etape 1 sur 3</small></p>
+                    </div>
+                </div>
+            </div>
+
+<!--            
+            <div class="col text-left" *ngIf=" screenMode != 1 || (screenMode == 1 && stepperStyle['width.%'] == 25)">
+                <div class="row">
+                    <div class="col-lg-3 col-md-5 text-left picto step-2"></div>
+                    <div class="col-lg-9 col-md-7 p-0 text-white">
+                        <p class="fw-bold small-font mb-0">Etat de votre voiture</p>
+                        <p><small>Etape 2 sur 4</small></p>
+                    </div>
+                </div>
+            </div> -->
+
+
+            <div class="flex-[1_0_0%] text-left" *ngIf=" screenMode != 1 || (screenMode == 1 && stepperStyle['width.%'] == 50)">
+                <div class="flex flex-wrap md:-mx-3">
+                    <div class="w-full lg:w-1/6 md:w-1/4 text-left h-[50px] bg-no-repeat my-0 step-3"></div>
+                    <div class="w-full lg:w-5/6 md:w-3/4 text-white">
+                        <p class="font-bold max-[992px]:text-sm mb-0">Votre profil</p>
+                        <p><small>Etape 2 sur 3</small></p>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="flex-[1_0_0%] text-left" *ngIf=" screenMode != 1 || (screenMode == 1 && stepperStyle['width.%'] == 75)">
+                <div class="flex flex-wrap">
+                    <div class="w-full lg:w-1/6 md:w-1/4 text-left h-[50px] bg-no-repeat my-0 step-4"></div>
+                    <div class="lg:w-5/6 md:w-3/4 text-white">
+                        <p class="font-bold max-[992px]:text-sm mb-0">Votre estimation</p>
+                        <p><small>Etape 3 sur 3</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div [ngStyle]="stepperStyle" class="h-2.5 rounded-full w-full h-[10px] rounded-[5px] bg-custom-blue" style="width: 45%" role="progressbar" aria-valuemin="0"
+            aria-valuemax="100"></div>
+          </div>
+    </div>
+</div>
+
+

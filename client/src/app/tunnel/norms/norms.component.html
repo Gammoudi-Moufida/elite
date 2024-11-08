@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <h4 class="modal-title ea-bold ea-uppercase"> Normes WLTP {{ devis?.generalInfo?.offer?.valeurEmissionCo2 }}</h4>
+    <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="ea-h5" *ngIf="devis?.generalInfo?.offer?.isUtilitaire && devis?.generalInfo?.offer?.co2 == 0 && devis?.generalInfo?.offer?.energieTextShort != 'k'">
+        <span class="ea-bold">Energie :</span> {{ devis?.generalInfo?.offer?.energieTextLong }}
+        <br />
+        <span class="ea-bold">Co2 : </span> Information non communiquée par notre fournisseur de données.
+        <br />
+        Merci de vous renseigner sur le site constructeur.
+    </p>
+    <div *ngIf="!(devis?.generalInfo?.offer?.isUtilitaire && devis?.generalInfo?.offer?.co2 == 0 && devis?.generalInfo?.offer?.energieTextShort != 'k')">
+        <span class="ea-h5 ea-bold">Eco info :</span>
+        <div class="row text-center background-img mb-3">
+            <div class="col-8">
+                <img ngSrc="tunnel/eco_bonus/img_eco.png" width="250" height="350" />
+            </div>
+            <div class="col-4">
+                <img  ngSrc="tunnel/eco_bonus/{{ devis?.generalInfo?.offer?.lettreCo2|lowercase }}_eco.png" *ngIf = "devis?.generalInfo?.offer?.lettreCo2" class="position-absolute class{{ devis?.generalInfo?.offer?.lettreCo2|uppercase }}" width="50" height="50" />
+            </div>
+        </div>
+        <p class="ea-h5">
+            <span class="ea-bold">Energie :</span> {{ devis?.generalInfo?.offer?.energieTextLong }}
+            <br />
+            <span> Emissions de CO2 {{ devis?.generalInfo?.offer?.typeEmissionCo2 }} : <span class="ea-bold"> {{ devis?.generalInfo?.offer?.valeurEmissionCo2 }} </span> ({{ devis?.generalInfo?.offer?.lettreCo2|uppercase }})</span>
+            <br />
+            <span *ngIf="devis?.generalInfo?.offer?.isUtilitaire"><span>ECOTAXE</span> = Sans</span>
+
+            <span *ngIf="!devis?.generalInfo?.offer?.isUtilitaire">
+                <span>
+                    <span *ngIf="devis?.generalInfo?.offer?.montantEcoBonusMalusWithoutCheck <= 0">
+                        BONUS
+                    </span>
+                    <span *ngIf="!devis?.generalInfo?.offer?.montantEcoBonusMalusWithoutCheck <= 0">
+                        MALUS
+                    </span>
+                </span>
+                =
+                <span *ngIf="devis?.generalInfo?.offer?.libEcoBonus">
+                    {{ devis?.generalInfo?.offer?.libEcoBonus }}
+                </span>
+                <span class="ea-bold" *ngIf="!devis?.generalInfo?.offer?.libEcoBonus">
+                    {{ devis?.generalInfo?.offer?.montantEcoBonusMalusWithoutCheck }}€ *
+                </span>
+            </span>
+        </p>
+        <p class="ea-h5">
+            À partir du 1er janvier 2011<br />
+            Cette taxe sur les véhicules polluants est appliquée depuis le 1er janvier 2011 pour tout véhicule particulier mis en circulation à; compter du 1er janvier 2011. Sont concernés les véhicules neufs.<br />
+            <br />
+            La consommation de carburant et les émissions de CO2 d'un véhicule sont fonction non seulement de son rendement énergétique, mais également du comportement au volant et d'autres facteurs non techniques.<br />
+            Nous attirons votre attention sur le fait que certaines options modifient à la hausse ou à la baisse le malus ou le bonus écologique.<br />
+            Les informations sur les consommations de carburant et les émissions de CO2 de tous les modèles de voitures particulières neuves, contenues dans le guide de l'ADEME, peuvent être obtenues gratuitement dans tous les
+            points de vente, auprès de l'ADEME et consultées sur le site : www.ademe.fr
+        </p>
+    </div>
+  </div>

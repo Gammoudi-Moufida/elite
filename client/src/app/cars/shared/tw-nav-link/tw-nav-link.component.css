@@ -1,0 +1,7 @@
+.tw-nav-link {
+    @apply text-custom-gray border focus:outline-none hover:bg-[#556a74] hover:text-white font-normal rounded-none text-sm text-center;
+  }
+
+.tw-btn-plus {
+    @apply mx-auto text-white bg-[#556a74] font-medium text-sm px-5 py-2.5;
+  }

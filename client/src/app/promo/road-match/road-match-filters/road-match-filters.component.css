@@ -1,0 +1,28 @@
+.custom-checkbox {
+  @apply w-4 h-4 rounded-md !important;
+}
+::ng-deep .tw-show {
+  @apply text-base font-bold px-4 py-0 lg:text-start xl:text-start 
+            lg:right-auto xl:right-auto !important;
+}
+
+@media (max-width: 992px) {
+  .tw-modal-width {
+    @apply w-[500px] !important;
+  }
+}
+@media (min-width: 1200px) {
+  .tw-modal-width {
+    @apply w-[1140px];
+  }
+}
+@media (max-width: 576px) {
+  .tw-modal-width {
+    @apply w-full !important;
+  }
+}
+@media (max-width: 320px) {
+  .tw-padding {
+    @apply px-0 !important;
+  }
+}

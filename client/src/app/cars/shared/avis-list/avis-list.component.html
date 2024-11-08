@@ -1,0 +1,31 @@
+<div id="avisList" *ngIf="pages"> 
+  <h2 *ngIf="markName">Les avis des modèles {{markName}}</h2>
+  <br>
+  <div class="tw-avis-title">
+      <div class="float-left cursor-pointer">
+          <span *ngIf="page != 1"(click)="setPagePrev()" class="tw-next-icon">❮</span>
+      </div>
+      {{totalAvis}} avis à lire
+      <div class="float-right cursor-pointer">
+          <span *ngIf="(pages > page) && totalAvis >4 "(click)="setPageNext()" class="tw-next-icon">❯</span>
+      </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-2">
+    <div class="border border-solid border-custom-gains-gray p-4 h-32 overflow-auto" *ngFor="let avis of avisList ; let i = index" >
+        <span class="text-yellow-400">
+            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+              <ng-container *ngIf="star <= avis.rate; else emptyStar">
+                <span class="text-xl">★</span>
+              </ng-container>
+              <ng-template #emptyStar>
+                <span class="text-xl">☆</span>
+              </ng-template>
+            </ng-container>
+          </span>
+        <div>
+            <i class="text-base font-bold text-custom-blue">{{ avis.lastName.slice(0, 1) }}. {{ avis.firstName }}</i>
+        </div>
+        <div class="text-sm overflow-hidden w-auto"> {{avis.review}}</div>
+    </div>
+  </div>

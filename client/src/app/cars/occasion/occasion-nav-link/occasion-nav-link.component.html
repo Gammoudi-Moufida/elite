@@ -1,0 +1,31 @@
+<div class="tw-container mx-auto px-3 pb-3">
+    <div class="w-full" *ngIf="!list && !links">
+        <div class="tw-loader"></div>
+    </div>
+    <h2 class="text-lg font-bold text-custom-blue leading-[26px] my-2.5 mr-5" *ngIf="list?.length > 0">
+        {{title}}
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2">
+        <div class="col-span-1" *ngFor="let item of list">
+            <div class="border border-solid border-custom-gains-gray h-full">
+                <a href={{item.url}} (click)="scrollToTop()">
+                    <p class="text-sm text-[#556a74] text-center m-0 py-1 hover:bg-custom-jet-gray hover:text-white">
+                        {{item.nom}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-lg font-bold text-custom-blue leading-[26px] my-2.5 mr-5" *ngIf="links?.length > 0">
+        Les services {{markTitleCase}}</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2" *ngIf="links?.length > 0">
+        <div class="col-span-1" *ngFor="let item of verify() | slice: 1:nbLinks">
+            <div class="border border-solid border-custom-gains-gray h-full">
+                <a href="{{item.url}}">
+                    <p class="text-sm text-[#556a74] text-center m-0 py-1 hover:bg-custom-jet-gray hover:text-white">
+                        {{item.title}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

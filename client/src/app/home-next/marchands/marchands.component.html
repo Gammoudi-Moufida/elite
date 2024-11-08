@@ -1,0 +1,439 @@
+<section class="bg-black text-white rounded shadow header-margin">
+    <div class="card-img relative h-[352px] bg-cover bg-top bg-no-repeat"
+        style="background-image: url('https://image.elite-auto.fr/proxauto/services/bg-desk.webp')"
+        *ngIf="screenMode == 3"></div>
+    <div class="card-img relative h-[352px] bg-cover bg-top bg-no-repeat"
+        style="background-image: url('https://image.elite-auto.fr/proxauto/services/bg-mob.webp')"
+        *ngIf="screenMode == 2"></div>
+    <div class="card-img relative h-[352px] bg-cover bg-top bg-no-repeat"
+        style="background-image: url('https://image.elite-auto.fr/proxauto/services/bg-tab.webp')"
+        *ngIf="screenMode == 1"></div>
+</section>
+<div class="card-img-overlay p-0 rounded-0 h-100">
+    <div class="container mx-auto px-5 py-5 slogan-style">
+        <div class="flex flex-col items-center  pt-4 md:pt-5 mt-4">
+            <img class="text-center  pt-4 md:pt-5 mt-3"
+                src="https://image.elite-auto.fr/proxauto/services/picto-header.webp" alt="Image description">
+            <div class="mt-auto mb-auto">
+                <div class="text-center px-3">
+                    <div class="h2 text-custom-orange-marchands ">VENTES MARCHANDS</div>
+                    <div class="h4 text-white  font-normal">Spécialiste Renault</div>
+                    <div class="h5 text-white  font-normal">Ventes aux professionnels de l'automobile, par lots ou à
+                        l'unité</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container ">
+    <section class="mt-12">
+
+        <div class="flex flex-row">
+            <div class="mr-2 mt-1" *ngIf="screenMode != 1">
+                <img src="https://image.elite-auto.fr/proxauto/services/picto_fr.webp">
+            </div>
+            <div class="mr-2" *ngIf="screenMode == 1">
+                <img src="https://image.elite-auto.fr/proxauto/services/picto_fr.webp">
+            </div>
+            <div class="h2 font-bold white-color text-uppercase">
+                <span *ngIf="screenMode == 3">VENTES MARCHANDS -</span> <span>Spécialiste Renault</span>
+            </div>
+            <br>
+        </div>
+        <div class="flex flex-row px-2 mb-3 h4 text-custom-orange-marchands text-uppercase font-normal "
+            *ngIf="screenMode == 3">par lots
+            ou à
+            l'unité</div>
+        <div class="flex flex-row mb-3 h4 text-custom-orange-marchands text-uppercase font-normal  "
+            *ngIf="screenMode != 3">vente dans
+            toute
+            l'europe</div>
+
+        <div class="flex flex-row px-0">
+            <p>Nous vous faisons profiter de ventes exclusives emmenant de partenaires automobiles et de constructeur.
+                <br>
+                Grace à nos partenariats exclusifs, le mix produit à la vente est varié et celui-ci est décliné sur un
+                grand volume de <b>VU et de VP</b>.
+                <br>
+                <br>
+                <b>Véhicules individuels, camions, véhicules utilitaires légers, tous les types, toutes les marques et
+                    tous les modèles de véhicules sont disponibles à la vente.</b>
+                <br>
+                L'ensemble de nos véhicules disposent :
+                <br>
+                -Des frais VO en €
+                <br>
+                -D'une expertise
+                <br>
+                -D'un pack photos
+                <br>
+                <br>
+                La gestion administrative est assurée par une équipe aguerrie et nous vous proposons même de gérer le
+                transport jusqu'à votre enseigne en France et sur l'Europe.
+                <br>
+                Nous livrons les véhicules avec tous les papiers nécessaires à l'achat et à la revente.
+                <br>
+            </p>
+        </div>
+
+        <div class="flex flex-row  px-2" *ngIf="screenMode == 3">
+            <div class="col uppercase font-bold text-center lib_class  mr-3 h5">simple</div>
+            <div class="col uppercase font-bold text-center lib_class  mx-3 h5">réactif</div>
+            <div class="col uppercase font-bold text-center lib_class  mx-3 h5">rapide</div>
+            <div class="col uppercase font-bold text-center lib_class  ml-3 h5">compétitif</div>
+        </div>
+
+        <div class="row px-2" *ngIf="screenMode == 2">
+            <div class="col">
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">simple</span>
+                    </div>
+                </div>
+
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">RÉACTIF</span>
+                    </div>
+                </div>
+                <div class="mb-2 p-2 ">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">RAPIDE</span>
+                    </div>
+                </div>
+                <div>
+                    <div class=" p-2 ">
+
+                        <div class="text-center lib_class">
+                            <span class="uppercase font-bold text-base">COMPÉTITIF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="screenMode == 1">
+
+            <div class="col py-2">
+                <div class=" text-center lib_class ">
+                    <span class="uppercase font-bold text-base">
+                        simple
+                    </span>
+                </div>
+            </div>
+            <div class="col py-2">
+                <div class=" text-center lib_class  ">
+                    <span class="uppercase font-bold text-base">
+                        réactif
+                    </span>
+                </div>
+            </div>
+
+            <div class="col py-2">
+                <div class=" text-center lib_class  ">
+                    <span class="uppercase font-bold text-base">
+                        rapide
+                    </span>
+                </div>
+            </div>
+            <div class="col py-2">
+                <div class=" text-center lib_class  ">
+                    <span class="uppercase font-bold text-base">
+                        compétitif
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row  mt-2">
+            <p>Plus de 1000 véhicules sont disponibles à la vente
+                <br>
+                <b>La vente à marchands est réservée aux professionnels de l'automobile.</b>
+                <br>
+                <br>
+                Vous avez des questions ou vous désirez recevoir une liste de VO ? Contactez notre expert Laurie aux
+                coordonnées ci-dessus.
+                <br>
+
+                <a class="text-custom-black" href="tel: 01 86 28 03 14">
+                    <img class="mr-2" src="https://image.elite-auto.fr/proxauto/services/picto_tel.webp">
+                    <b class="d-inline-block font-for-mobile"> 01 86 28 03 14 </b>
+                </a>
+
+                <a class="text-custom-black" href="mailto: laurie.borgese@elite-auto.fr">
+                    <img class="mx-2 m-1" src="https://image.elite-auto.fr/proxauto/services/picto_email.webp">
+                    <b class="d-inline-block font-for-mobile">
+                        laurie.borgese@elite-auto.fr </b>
+                </a>
+
+            </p>
+        </div>
+
+    </section>
+
+    <section class="mt-12">
+
+        <div class="flex items-stretch ">
+            <div class="mr-2 mt-1" *ngIf="screenMode != 1">
+                <img src="https://image.elite-auto.fr/proxauto/services/picto_en.webp">
+            </div>
+            <div class="mr-2" *ngIf="screenMode == 1">
+                <img src="https://image.elite-auto.fr/proxauto/services/picto_en.webp">
+            </div>
+            <div class="h2 font-bold white-color text-uppercase">
+                <span *ngIf="screenMode == 3">MERCHANT SALES - </span> <span>Renault specialist</span>
+            </div>
+            <br>
+        </div>
+        <div class="row h4 text-custom-orange-marchands text-uppercase font-normal px-2 mb-3" *ngIf="screenMode == 3">in
+            batches
+            or
+            individually</div>
+        <div class="row h4 text-custom-orange-marchands text-uppercase font-normal mb-3" *ngIf="screenMode != 3">sale in
+            all
+            europe</div>
+
+
+        <div class="row">
+            <p>Exclusive sales from automotive partners and manufacturers.
+                <br>
+                Thanks to our exclusive partnerships, our product mix is varied and available on a
+                large volume of <b>UV and PC</b>.
+                <br><br>
+                <b>Individual vehicles, trucks, light commercial vehicles, all types, all brands and
+                    all models of vehicles are available for sale.</b>
+                <br>
+                All of our vehicles have:
+                <br>
+                -UV costs in €
+                <br>
+                -Expertise
+                <br>
+                -A photo pack
+                <br>
+                <br>
+                Administrative management is provided by our professional team and we offer to manage transport to your
+                store in France and Europe.
+                <br>
+                We deliver the vehicles with all the necessary papers for purchase and resale.
+                <br>
+            </p>
+        </div>
+
+        <div class="flex flex-row px-2" *ngIf="screenMode == 3">
+            <div class="col uppercase font-bold text-center lib_class  mr-3 h5">simple</div>
+            <div class="col uppercase font-bold text-center lib_class  mx-3 h5">reactive</div>
+            <div class="col uppercase font-bold text-center lib_class  mx-3 h5">fast</div>
+            <div class="col uppercase font-bold text-center lib_class  ml-3 h5">competitive</div>
+        </div>
+
+
+
+
+        <div class="row px-2" *ngIf="screenMode == 2">
+            <div class="col">
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">simple</span>
+                    </div>
+                </div>
+
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">reactive</span>
+                    </div>
+                </div>
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">fast</span>
+                    </div>
+                </div>
+                <div>
+                    <div class=" p-2 ">
+                        <div class="text-center lib_class">
+                            <span class="uppercase font-bold text-base">competitive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div *ngIf="screenMode == 1">
+
+            <div class="col py-2">
+                <div class=" text-center lib_class ">
+                    <span class="uppercase font-bold text-base">
+                        simple
+                    </span>
+                </div>
+            </div>
+            <div class="col py-2">
+                <div class=" text-center lib_class  ">
+                    <span class="uppercase font-bold text-base">
+                        reactive
+                    </span>
+                </div>
+            </div>
+
+            <div class="col py-2">
+                <div class=" text-center lib_class  ">
+                    <span class="uppercase font-bold text-base">
+                        fast
+                    </span>
+                </div>
+            </div>
+            <div class="col py-2">
+                <div class=" text-center lib_class  ">
+                    <span class="uppercase font-bold text-base">
+                        competitive
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <p>More than 1000 vehicles are available for sale
+                <br>
+                <b>Sales to dealers are reserved for automotive professionals.</b>
+                <br>
+                <br>
+                Would you like to receive a list of used vehicles or have a question ? Contact our expert Laurie
+                <br>
+
+
+                <a class="text-custom-black" href="tel: 01 86 28 03 14">
+                    <img class="mr-2" src="https://image.elite-auto.fr/proxauto/services/picto_tel.webp">
+                    <b class="d-inline-block font-for-mobile"> 01 86 28 03 14 </b>
+                </a>
+
+                <a class="text-custom-black" href="mailto: laurie.borgese@elite-auto.fr">
+                    <img class="mx-2 m-1" src="https://image.elite-auto.fr/proxauto/services/picto_email.webp">
+                    <b class="d-inline-block font-for-mobile">
+                        laurie.borgese@elite-auto.fr </b>
+                </a>
+
+            </p>
+        </div>
+
+    </section>
+
+    <section class="mt-12">
+
+        <div class="flex items-stretch ">
+            <div class="mr-2 mt-1" *ngIf="screenMode != 1">
+                <img src="https://image.elite-auto.fr/proxauto/services/picto_por.webp">
+            </div>
+            <div class="mr-2" *ngIf="screenMode == 1">
+                <img src="https://image.elite-auto.fr/proxauto/services/picto_por.webp">
+            </div>
+            <div class="h2 font-bold white-color text-uppercase">
+                <span *ngIf="screenMode == 3">venda profissionais de automóveis "marchands" -</span> <span> especialista
+                    renault</span>
+            </div>
+            <br>
+        </div>
+        <div class="row h4 text-custom-orange-marchands text-uppercase font-normal mb-3 px-2" *ngIf="screenMode == 3">em
+            lotes ou
+            individual</div>
+        <div class="row h4 text-custom-orange-marchands text-uppercase font-normal mb-3" *ngIf="screenMode != 3">venda
+            em tudo
+            Europa</div>
+
+        <div class="row">
+            <p>Aproveita de vendas exclusivas de parceiros e fabricantes de automóveis.
+                <br>
+                Graças as nossas parcerias exclusivas, o mix dos produtos a venda é variado e declina sobre um volume
+                importante de carros comerciais e particulares.
+                <br><br>
+                <b>Veículos individuais, veículos comerciais leves e pesados, todos os tipos, todas as marcas a todos os
+                    modelos de veículos estão disponíveis para venda
+                    .</b>
+                <br>
+                Os nossos veículos disponhem :
+                <br>
+                -Do valor das despesas em €
+                <br>
+                -Dos danos
+                <br>
+                -De varias fotos
+                <br>
+                <br>
+                A gestão administrativa é assegurada por uma equipa experimentada e oferecemos igualmente a gestão do
+                transporte até sua empresa em França ou na Europa.<br>
+                Entregamos as viaturas com toda a documentação necessaria para compra revenda.
+                <br>
+            </p>
+        </div>
+
+        <div class="flex flex-row mb-3 px-2" *ngIf="screenMode == 3">
+            <div class="col uppercase font-bold text-center lib_class  mr-3 h5">simples</div>
+            <div class="col uppercase font-bold text-center lib_class  mx-3 h5">reativo</div>
+            <div class="col uppercase font-bold text-center lib_class  mx-3 h5">rápido</div>
+            <div class="col uppercase font-bold text-center lib_class  ml-3 h5">competitivo</div>
+        </div>
+
+
+        <div class="row px-2" *ngIf="screenMode == 2">
+            <div class="col">
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base">simple</span>
+                    </div>
+                </div>
+
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base"> reativo </span>
+                    </div>
+                </div>
+                <div class="mb-2 p-2">
+                    <div class="text-center lib_class">
+                        <span class="uppercase font-bold text-base"> rápido </span>
+                    </div>
+                </div>
+                <div>
+                    <div class=" mb-1 p-2 ">
+                        <div class="text-center lib_class">
+                            <span class="uppercase font-bold text-base">competitivo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <p>Mais de 1000 veículos estão disponíveis para venda
+                <br>
+                <b>A venda « à marchands » é reservada aos profissionais de automóveis.</b>
+                <br>
+                <br>
+                Alguma pergunta o deseja recever uma lista de veículos usados? Entre em contato com a nossa especialista
+                Bruno com os detalhes de contacto abaixo.
+                <br>
+
+                <a class="text-custom-black" href="tel: 01 40 20 42 31">
+                    <img class="mr-2" src="https://image.elite-auto.fr/proxauto/services/picto_tel.webp">
+                    <b class="d-inline-block font-for-mobile"> 01 40 20 42 31 </b>
+                </a>
+
+                <a class="text-custom-black" href="mailto: bruno.dantas@elite-auto.fr">
+                    <img class="mx-2 m-1" src="https://image.elite-auto.fr/proxauto/services/picto_email.webp">
+                    <b class="d-inline-block font-for-mobile">
+                        bruno.dantas@elite-auto.fr </b>
+                </a>
+
+            </p>
+        </div>
+
+
+    </section>
+</div>

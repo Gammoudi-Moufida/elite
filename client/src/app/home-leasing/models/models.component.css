@@ -1,0 +1,17 @@
+.tw-card {
+    @apply flex flex-col min-w-0 text-[#212529] break-words bg-clip-border bg-[#fff]
+}
+.sizeImg{
+    @apply h-[75%] w-[75%] !important ;
+}
+h2 {
+    @apply text-[#2a2a2a] text-[20px];
+}
+@media screen and (max-width: 767px) {
+    h2{
+        @apply text-[16px] ;
+    }
+    p{
+        @apply text-[14px] ;
+    }
+}

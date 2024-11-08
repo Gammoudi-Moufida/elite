@@ -1,0 +1,21 @@
+<div class="tw-Pagination">
+  <ul class="flex justify-center h-[45px] text-center">
+    <li class="inline-block tw-Pagination-item--previousPage tw-Pagination-item--disabled ">
+      <button class="tw-Pagination-link sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[35px]" (click)="redirect(state?.currentRefinement - 1)" [disabled]="state?.isFirstPage">
+        ‹</button>
+    </li>
+    <li *ngFor="let page of state?.pages"
+        class="tw-Pagination-item w-[45px]  "
+        [ngClass]="{
+          'tw-Pagination-item--page': true,
+          'tw-Pagination-item--selected bg-custom-blue rounded-[4px] mt-[0.25%] ': page === state?.currentRefinement
+        }"
+        (click)="redirect(page)">
+      <span class="tw-Pagination-link sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px]">{{ page + 1 }}</span>
+    </li>
+    <li class="tw-Pagination-item tw-Pagination-item--nextPage">
+      <button class="tw-Pagination-link sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] leading-[2rem]" (click)="redirect(state?.currentRefinement + 1)" [disabled]="state?.isLastPage">
+        ›</button>
+    </li>
+  </ul>
+</div>

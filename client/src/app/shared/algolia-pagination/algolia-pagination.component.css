@@ -1,0 +1,36 @@
+.tw-Pagination-link {
+    @apply shadow-none text-base font-semibold text-gray-600 bg-transparent border-0 cursor-pointer leading-[2.5rem] hover:text-custom-blue w-[45px] px-[4px];
+  }
+  .tw-Pagination-item:last-child > .tw-Pagination-link,
+  .tw-Pagination-item:first-child > .tw-Pagination-link {
+    @apply text-[2.5rem] font-light text-custom-gray-pagination bg-transparent border-0  shadow-none pb-5;
+  }
+  
+  .tw-Pagination-item--disabled .tw-Pagination-link {
+    @apply text-[2.5rem]  font-light text-custom-gray-pagination bg-transparent border-0 leading-[2rem] shadow-none;
+  }
+  
+  .tw-Pagination-list {
+    @apply justify-center ;
+  }
+  
+  .tw-Pagination-item--selected .tw-Pagination-link {
+    @apply font-normal text-white w-[45px] h-[45px] mt-[2px] rounded-[4px] p-[3px] shadow-none ;
+  }
+  
+  .tw-Pagination-item:not(.tw-Pagination-item--selected):not(.tw-Pagination-item--disabled) .tw-Pagination-link:hover {
+    @apply bg-none text-custom-blue;
+  }
+  
+/* algolia pagination media   */
+@media(max-width:374px) {
+    .tw-Pagination-link {
+      @apply w-[35px] h-[35px] !important;
+    }
+  }
+  @media (min-width:375px) and (max-width:424px) {
+    .tw-Pagination-link {
+      @apply w-[40px] h-[40px] !important;
+    }
+  }
+  

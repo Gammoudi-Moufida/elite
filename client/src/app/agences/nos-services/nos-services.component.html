@@ -1,0 +1,40 @@
+<p class="title-service my-2 lg:mt-0">
+    Nos services
+</p>
+<div class="service">
+    <div class="bg-custom-gray rounded-2xl p-[3px]">
+        <img ngSrc="agences/car1.png" width="24" height="24">
+    </div>
+    <span class="ml-2" *ngIf="!isElite">
+        <span class="font-black">Vente</span> de véhicules d’occasions<span *ngIf="address.includes('Coudray-Montceaux')">, à particuliers et marchands</span><br />
+       <a href="/prix-malin" class="text-underline" >Découvrez nos Prix Malin</a> 
+    </span>
+    <span class="ml-2" *ngIf="isElite">
+        <span class="font-black">Vente</span> Véhicules neufs, 0 km et d’occasion
+        <br />
+       <a href="https://www.elite-auto.fr/recherche?prod_ELITE_OFFERS[refinementList][category][0]=4&prod_ELITE_OFFERS[refinementList][category][1]=3" class="text-underline" >Découvrez nos véhicules neufs, <br /> 0 km</a> ou 
+       <a href="/occasion" class="text-underline">d’occasions</a>  
+    </span>
+</div>
+<div class="service">
+    <div class="bg-custom-gray rounded-2xl p-[3px]">
+        <img ngSrc="agences/car.png" width="20" height="20">
+    </div>
+    <span class="ml-2">
+        <span class="font-black">Reprise</span> de votre ancien véhicule
+        <br />
+       <a href="/reprise-voiture" class="text-underline">
+        Estimez votre véhicule en 2 minutes</a> 
+    </span>
+</div>
+<div class="service">
+    <div class="bg-custom-gray rounded-2xl p-[3px]">
+        <img ngSrc="agences/euro.png" width="20" height="20">
+    </div>
+    <span class="ml-2">
+        <span class="font-black">Financement</span> personnalisé
+        <br />
+       <a href="/leasing" class="text-underline">
+        En savoir plus</a> 
+    </span>
+</div>

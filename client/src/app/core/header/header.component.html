@@ -1,0 +1,168 @@
+<app-road-match-filters *ngIf="showModal" (modalClosed)="handleModalClosed($event)"></app-road-match-filters>
+  <div class="header-banner-top" id="header-banner">
+      <app-banner-top [bannerTop]="bannerTop" [type]="type" *ngIf="bannerTop"></app-banner-top>
+    <nav class="tw-navbar bg-custom-black px-[24px] py-[8px]">
+      <div class="tw-logo-elite">
+        <a class="flex justify-start" href="https://www.elite-auto.fr">
+          <img ngSrc="pictos/logo_elite.webp" alt="{{altText}}" height="24" width="61" class="responsive-logo" />
+        </a>
+        <div class="border border-white rounded-pill flex items-center px-1 mt-[0] mr-[0] mb-[0] ml-[16px]">
+          <a href="tel:{{numPhone}}" class="flex items-center">
+            <svg width="12" height="13" class="mx-2" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.98207 8.7656C9.60988 8.3906 8.70847 7.84333 8.27113 7.62278C7.7016 7.33591 7.65472 7.31247 7.20707 7.64505C6.90847 7.867 6.70996 8.06528 6.36051 7.99075C6.01105 7.91622 5.25168 7.49599 4.58676 6.83317C3.92183 6.17036 3.47722 5.38895 3.40246 5.04067C3.32769 4.69239 3.52926 4.49622 3.7491 4.19692C4.05894 3.77505 4.03551 3.70474 3.77066 3.1352C3.56418 2.69224 3.00097 1.79927 2.62457 1.42895C2.22191 1.03122 2.22191 1.10153 1.96246 1.20934C1.75123 1.29822 1.54859 1.40625 1.35707 1.53208C0.982068 1.78122 0.773943 1.98817 0.628396 2.29919C0.482849 2.6102 0.417458 3.33935 1.1691 4.70481C1.92074 6.07028 2.44808 6.76849 3.53957 7.85692C4.63105 8.94536 5.47035 9.5306 6.6973 10.2187C8.21512 11.0688 8.7973 10.9031 9.10926 10.7578C9.42121 10.6125 9.6291 10.4062 9.87871 10.0312C10.0049 9.84002 10.1131 9.6376 10.2021 9.42653C10.3102 9.16802 10.3805 9.16802 9.98207 8.7656Z"
+                fill="white" stroke="white" stroke-miterlimit="10" />
+            </svg>
+            <div class="text-white phone-number me-2 font-medium">
+              {{numPhone}}
+            </div>
+          </a>
+        </div>
+        <span class="border-icon rounded-[50rem] border border-[#fff] flex ms-2" (click)="OpenModal()">
+          <svg xmlns="https://www.w3.org/2000/svg" version="1.1" width="16" height="16" x="0" y="0" viewBox="0 0 513 513"
+            style="enable-background:new 0 0 512 512" xml:space="preserve">
+            <g>
+              <path xmlns="https://www.w3.org/2000/svg"
+                d="M513,256.5c0,68.38-26.629,132.667-74.98,181.02C389.667,485.871,325.38,512.5,257,512.5  c-52.59,0-103.121-15.831-146.131-45.78C82.215,446.767,58.23,421.541,40,392.438V446.5H0v-120h120v40H70.978  c38.392,65.347,108.17,106,186.022,106c119.103,0,216-96.897,216-216H513z M255,40.5c77.853,0,147.631,40.654,186.022,106H393v40  h119v-120h-40v54.061c-18.23-29.102-42.215-54.329-70.869-74.281C358.121,16.331,307.59,0.5,255,0.5  c-68.341,0-132.465,26.644-180.561,75.022C26.437,123.808,0,188.08,0,256.5h40C40,137.397,136.448,40.5,255,40.5z M179.354,141.5  l-25.857,25.642c-11.558,11.556-12.78,27.601-7.504,43.872c9.132,28.166,18.733,50.284,62.715,94.256  c43.981,43.973,67.283,51.094,94.663,62.379c6.303,2.598,12.257,3.85,17.836,3.85c9.917,0,18.648-3.958,26.045-11.353L373,334.297  l-66.149-66.245l-34.111,33.352c-9.043-6.616-19.285-15.482-31.988-28.182c-12.849-12.846-22.641-23.755-30.036-33.488  l33.113-33.385L179.354,141.5z"
+                fill="#FFFFFF" data-original="#000000" />
+            </g>
+          </svg>
+        </span>
+      </div>
+      <div class="flex justify-end">
+        <div class="flex items-center">
+          <div class="position pr-[1rem]" (click)="toggleAccount()">
+            <svg width="13" height="18" viewBox="0 0 16 21" fill="none" class="mb-1" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16 21H14V19C14 18.2044 13.6839 17.4413 13.1213 16.8787C12.5587 16.3161 11.7956 16 11 16H5C4.20435 16 3.44129 16.3161 2.87868 16.8787C2.31607 17.4413 2 18.2044 2 19V21H0V19C0 17.6739 0.526784 16.4021 1.46447 15.4645C2.40215 14.5268 3.67392 14 5 14H11C12.3261 14 13.5979 14.5268 14.5355 15.4645C15.4732 16.4021 16 17.6739 16 19V21ZM8 12C7.21207 12 6.43185 11.8448 5.7039 11.5433C4.97595 11.2417 4.31451 10.7998 3.75736 10.2426C3.20021 9.68549 2.75825 9.02405 2.45672 8.2961C2.15519 7.56815 2 6.78793 2 6C2 5.21207 2.15519 4.43185 2.45672 3.7039C2.75825 2.97595 3.20021 2.31451 3.75736 1.75736C4.31451 1.20021 4.97595 0.758251 5.7039 0.456723C6.43185 0.155195 7.21207 -1.17411e-08 8 0C9.5913 2.37122e-08 11.1174 0.632141 12.2426 1.75736C13.3679 2.88258 14 4.4087 14 6C14 7.5913 13.3679 9.11742 12.2426 10.2426C11.1174 11.3679 9.5913 12 8 12ZM8 10C9.06087 10 10.0783 9.57857 10.8284 8.82843C11.5786 8.07828 12 7.06087 12 6C12 4.93913 11.5786 3.92172 10.8284 3.17157C10.0783 2.42143 9.06087 2 8 2C6.93913 2 5.92172 2.42143 5.17157 3.17157C4.42143 3.92172 4 4.93913 4 6C4 7.06087 4.42143 8.07828 5.17157 8.82843C5.92172 9.57857 6.93913 10 8 10Z"
+                fill="white" />
+            </svg>
+          </div>
+          <span class="position logo-style px-1"></span>
+          <span class="position ps-2 cursor-pointer"  (click)="toggleNavbar()">
+            <svg width="21" height="2" class="block-svg" viewBox="0 0 20 2" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1H19" stroke="white" fill="white" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <svg width="21" height="2" class="block-svg my-1" viewBox="0 0 20 2" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1H19" stroke="white" fill="white" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <svg width="21" height="2" class="block-svg" viewBox="0 0 20 2" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1H19" stroke="white" fill="white" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+        </div>
+      </div>
+  
+      <div  [ngClass]="{'hidden': !showMenu}" class="tw-navbar-collapse grow basis-full justify-center tw-visible">
+        <ul class="flex-col tw-navbar-nav justify-between lg:flex lg:flex-row">
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              (click)="openRoadMatch()">Road match</a>
+              
+          </li>
+        </ul>
+        <ul class="flex-col tw-navbar-nav justify-between lg:flex lg:flex-row" *ngIf="promoData">
+          <li *ngFor="let promo of promoData">
+            <a *ngIf="promo?.promoVisibleEnTete" class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}{{promo?.url}}">{{promo?.promoName }}</a>
+          </li>
+        </ul>
+        <ul class="flex-col tw-navbar-nav justify-between lg:flex lg:flex-row">
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/recherche">Achat</a>
+          </li>
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/recherche?prod_ELITE_OFFERS[refinementList][category][0]=4">Neuf
+            </a>
+          </li>
+  
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/occasion">Occasion</a>
+          </li>
+  
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/voiture-en-stock">En
+              stock</a>
+          </li>
+  
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/leasing">LOA/LLD</a>
+          </li>
+  
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/reprise-voiture">Reprise voiture</a>
+          </li>
+
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/nos-agences">Nos agences</a>
+          </li>
+
+          <li>
+            <a class="text-white text-size font-medium tw-link"
+              href="{{protocol}}//www.{{eliteAutoUrl}}/marchands">Marchands</a>
+          </li>
+          <li>
+            <button class="tw-btn position" (click)="closeMenu()">FERMER</button>
+          </li>
+        </ul>
+      </div>
+      <div class="form-inline hidden display-account">
+        <a href="javascript:void(0);" (click)="toggleAccount()">
+          <svg width="16" height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 21H14V19C14 18.2044 13.6839 17.4413 13.1213 16.8787C12.5587 16.3161 11.7956 16 11 16H5C4.20435 16 3.44129 16.3161 2.87868 16.8787C2.31607 17.4413 2 18.2044 2 19V21H0V19C0 17.6739 0.526784 16.4021 1.46447 15.4645C2.40215 14.5268 3.67392 14 5 14H11C12.3261 14 13.5979 14.5268 14.5355 15.4645C15.4732 16.4021 16 17.6739 16 19V21ZM8 12C7.21207 12 6.43185 11.8448 5.7039 11.5433C4.97595 11.2417 4.31451 10.7998 3.75736 10.2426C3.20021 9.68549 2.75825 9.02405 2.45672 8.2961C2.15519 7.56815 2 6.78793 2 6C2 5.21207 2.15519 4.43185 2.45672 3.7039C2.75825 2.97595 3.20021 2.31451 3.75736 1.75736C4.31451 1.20021 4.97595 0.758251 5.7039 0.456723C6.43185 0.155195 7.21207 -1.17411e-08 8 0C9.5913 2.37122e-08 11.1174 0.632141 12.2426 1.75736C13.3679 2.88258 14 4.4087 14 6C14 7.5913 13.3679 9.11742 12.2426 10.2426C11.1174 11.3679 9.5913 12 8 12ZM8 10C9.06087 10 10.0783 9.57857 10.8284 8.82843C11.5786 8.07828 12 7.06087 12 6C12 4.93913 11.5786 3.92172 10.8284 3.17157C10.0783 2.42143 9.06087 2 8 2C6.93913 2 5.92172 2.42143 5.17157 3.17157C4.42143 3.92172 4 4.93913 4 6C4 7.06087 4.42143 8.07828 5.17157 8.82843C5.92172 9.57857 6.93913 10 8 10Z"
+              fill="white" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div class="fixed bottom-4 left-4 z-50">
+    <a href="javascript:Didomi.preferences.show()">
+      <img ngSrc="pictos/badge-cookies.webp" alt="Badge Cookies" width="40" height="40" class="tw-custom-relative">
+    </a>
+  </div>
+  <app-to-top></app-to-top>
+  <app-account *ngIf="showAccount"></app-account>
+  <div *ngIf="isModalOpen" class="fixed flex items-center justify-center inset-0 z-[1000]">
+    <div class="fixed inset-0 bg-black/50 transition-opacity"></div>
+    <div class="p-2">
+      <div class="relative bg-white rounded-lg">
+        <div class="items-start justify-between rounded-tl-[.3rem] rounded-tr-[.3rem]">
+          <div class="tw-title-modal">NOUS VOUS RAPPELONS GRATUITEMENT</div>
+          <button type="button" class="tw-close" aria-label="Close">
+            <span aria-hidden="true" class="tw-close-modal" (click)="OpenModal()">&times;</span>
+          </button>
+        </div>
+        <div class="tw-label-modal">Indiquez votre numéro de téléphone puis <br> confirmez votre choix.
+          Un conseiller vous rappelle.</div>
+          <div class="relative flex-auto p-[1rem]">
+            <div class="form">
+              <div class="text-[#007896] ml-[-4px] p-[5px]" *ngIf="showMsg">Votre demande a été prise en compte!</div>
+              <div class="text-[red] p-[5px] ml-[-1px]" *ngIf="message">{{message}}</div>
+              <input [(ngModel)]="phone" class="tw-select-modal mb-2 block" placeholder="-- Téléphone --" />
+              <select [(ngModel)]="time" class="browser-default tw-select-modal block">
+                <option value="" selected>-- Sélectionner horaire --</option>
+                <option *ngFor="let option of Horaires" [ngValue]="option">{{option}}</option>
+              </select>
+              <button class="tw-push_button mt-3" (click)="Onsubmit()">Appelez-moi</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+

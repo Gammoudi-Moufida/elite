@@ -1,0 +1,33 @@
+.tw-text {
+	@apply text-[13px] text-center text-[#6f6f6f];
+}
+
+.tw-apg_title {
+	@apply text-base font-bold text-white text-center bg-custom-jet-gray py-3;
+}
+
+.tw-border {
+	@apply border border-solid border-custom-gains-gray rounded h-full;
+}
+
+.gp {
+	@apply h-[107px] bg-transparent bg-[url('https://image.elite-auto.fr/general/logo_gp.png')] bg-no-repeat bg-center bg-top;
+}
+
+.partner {
+	@apply h-[50px] bg-transparent  bg-[url('https://image.elite-auto.fr/general/logo_partenaire.jpg')] bg-no-repeat bg-center bg-top;
+}
+
+.guarantee {
+	@apply h-[107px] bg-transparent bg-[url('https://image.elite-auto.fr/general/logo_garantie.jpg')] bg-no-repeat bg-center bg-top;
+}
+
+.gp:hover,
+.partner:hover,
+.guarantee:hover {
+	@apply bg-center bg-bottom;
+}
+
+h2 {
+    @apply text-lg font-bold text-custom-blue leading-[26px] mt-[10px] mr-5 mb-0 ml-0;
+}

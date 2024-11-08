@@ -1,0 +1,7 @@
+
+.tw-btn:active{
+   @apply bg-custom-steel-blue !important;
+}
+.contact{
+   @apply md:w-1/2 !important;
+}

@@ -1,0 +1,29 @@
+<app-home-next-filters [bestDiscount]="bestDiscount"></app-home-next-filters>
+<div class="container">
+    <h1 class="my-6 font-roboto text-custom-black">
+       {{h1Page}}.
+    </h1>
+</div>
+<section class="mt-4" *ngIf="subDomaine!='entreprise'">
+    <div class="container" *ngIf="!carrouselData">
+            <div class="w-full h-full mx-auto">
+                <div role="status" class="space-y-8 animate-pulse md:space-y-0 md:flex md:flex-col">
+                    <div class="h-2.5 bg-gray-200 rounded-full lg:w-[28rem] md:w-[28rem] w-48 mb-4"></div>
+                    <div class="flex items-center justify-center w-full h-48 bg-gray-300 rounded">
+                        <svg class="w-10 h-10 text-gray-200" aria-hidden="true" xmlns="https://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                            <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+      </div>
+    <!-- <app-home-next-slider *ngIf="carrouselData" [carrouselData]="carrouselData" [screenMode]="screenMode"></app-home-next-slider> -->
+    <div id="list-square-hp-haut-de-page-black-friday" style="display:block; --join-widget-square-mobile-height: 120px; --join-widget-square-desktop-height: 150px; margin: 5px 2px; min-height: calc(var(--join-widget-square-mobile-height) + 54px); position: relative;"></div>
+</section>
+ <app-home-next-brands [screenMode]="screenMode" [brands]="brands" [nosmarques_url]="nosmarques_url"></app-home-next-brands>
+ <app-home-next-cards *ngIf="subDomaine!='entreprise'" [infosCards]="infosCards" [screenMode]="screenMode"></app-home-next-cards>
+ <app-home-next-models *ngIf="subDomaine!='entreprise'" [categoriesModels]="categoriesModels"></app-home-next-models>
+ <app-home-next-new-offers *ngIf="newOffers && newOffers.length >0" [newOffers]="newOffers" [screenMode]="screenMode"></app-home-next-new-offers>
+ <app-home-next-occasions *ngIf="subDomaine!='entreprise'" [brands]="brandsOccasions" [screenMode]="screenMode"></app-home-next-occasions>
+ <app-home-next-recompenses [data]="textesSeo" [title]="txt"></app-home-next-recompenses>
+ <app-home-next-brands-leasing *ngIf="subDomaine!='entreprise'" [brands]="brandsLeasing" [screenMode]="screenMode"></app-home-next-brands-leasing>

@@ -1,0 +1,13 @@
+.tw-group-tags {
+  @apply inline-flex;
+}
+.tw-group-tags button {
+  @apply text-[10px] uppercase mb-2.5 rounded-none;
+}
+.tw-group-tags .tw-tag {
+  @apply text-[white] cursor-default h-auto pl-[7px] pr-1.5 py-[7px];
+  background: #35393f;
+}
+.tw-group-tags .tw-tag-close {
+  @apply bg-[#35393f] font-[bold] text-sm leading-4 text-[white] mr-2 pt-1 px-1.5 py-1.5 hover:bg-[#909ea5] hover:text-white;
+} 

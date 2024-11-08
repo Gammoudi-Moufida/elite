@@ -1,0 +1,8 @@
+.container {
+    @apply  font-raleway max-w-[1400px] !important;
+
+}
+
+.tw-btn {
+    @apply w-full rounded-none text-base font-normal leading-normal bg-[#6c757d] px-[0.75rem] py-[0.375rem] text-white border  inline-block text-center no-underline align-middle cursor-pointer select-none border-transparent;
+  }

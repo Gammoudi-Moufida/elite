@@ -1,0 +1,777 @@
+<div class="hidden sm:hidden md:hidden lg:block filter-mobile" [class.filter-mobile-show]="filterMobileShow">
+    <ais-hits>
+        <ng-template let-hits="hits" let-results="results">
+            <button type="button" class="tw-Close block sm:block md:block lg:hidden" aria-label="Close"
+                (click)="closeFilter()">
+                <span>&times;</span>
+            </button>
+            <div class="filters">
+                <p class="tw-filters-p">FILTRES</p>
+                <app-algolia-current-refinements [query]="results?.query" (clearQueryValue)="clearQueryValue($event)"
+                 (priceFilterRemoved)="priceFilterRemoved($event)"  (rentFilterRemoved)="rentFilterRemoved($event)" [promoName]="results?.userData ? results?.userData[0]?.promoName : null">
+                </app-algolia-current-refinements>
+                <app-algolia-clear-refinements
+                    *ngIf="results?.params.includes('facetFilters') || results?.params.includes('numericFilters') || results?.query"
+                    [autoHideContainer]="true" (clearAllQuery)="clearAllQuery($event)">
+                </app-algolia-clear-refinements>
+                <!-- <div class="filter-accordion">
+                    <app-flash-sale [hidden]="!(results?.userData && results?.userData[0]?.promoName)" [promoName]="results?.userData ? results?.userData[0]?.promoName : null"></app-flash-sale>
+                </div> -->
+                
+                <!-- <hr class="my-2"> -->
+                <!--<div class="tw-tile-category">
+                    <app-filter-newness [hidden]="!(results?.userData && filterByPromotion(results?.userData,'Nouveautés'))"></app-filter-newness>
+                  </div>
+                
+                <hr class="my-2">-->
+  
+                <div class="tw-tile-category">
+                  <app-filter-newness [hidden]="!(results?.userData && filterByPromotion(results?.userData,'Nouveautés'))"></app-filter-newness>
+                </div>
+              <div class="tw-tile-category">
+                  <app-filter-label></app-filter-label>
+              </div>
+              <div class="filter-proxauto-label">
+                <ais-refinement-list attribute="proxautoLabel"></ais-refinement-list>  
+               </div>
+               <!-- <div class="tw-tile-category">
+                <app-filter-frensh-days></app-filter-frensh-days>
+            </div> -->
+              <hr [hidden]="!results?._rawResults[0]?.facets?.isNouveaute" class="tw-hr">
+  
+                <div class="tw-tile-category">
+                    <div>
+                        <p class="mx-0 my-2.5 mb-3">Catégories</p>
+                    </div>
+                </div>
+                <app-categories></app-categories>
+                <hr class="tw-hr">
+                <div>
+                    <div class="tw-tile-category" >
+                        <p class="mx-0 my-2.5 mb-3">Types de véhicule </p>
+                    </div>
+                    <app-vehicule-type></app-vehicule-type>
+                </div>
+                <hr class="tw-hr">
+                <app-vehicule-categorie></app-vehicule-categorie>
+                <hr class="tw-hr">
+                <div class="filter-accordion" id="mark">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="markAccordion=!markAccordion"
+                        [class.active]="markAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Marques <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.marque.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.marque.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="markAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!markAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="markAccordion">
+                        <app-filter-marque (marqueChecked)="marqueChecked($event)"></app-filter-marque>
+  
+                    </div>
+                </div>
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion" id="model">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="modelAccordion=!modelAccordion"
+                        [class.active]="modelAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Modèles <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.modelGroupeNiveau1?.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.modelGroupeNiveau1?.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="modelAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!modelAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="modelAccordion">
+                        <ngb-alert class="tw-alert" *ngIf="!checkFilter(results?.params,'marque')&& !itsNotSearchPage"
+                            [dismissible]="false">
+                            <small class="text-[#5b5b5b]">
+                                <span class="text-[16px] text-[#6c757d]">&#9888;</span>
+                                Veuillez sélectionner une marque pour pouvoir filtrer par modèle.
+                            </small>
+                        </ngb-alert>
+                        <app-filter-model (modelChecked)="modelChecked($event)"
+                            *ngIf="checkFilter(results?.params,'marque')|| itsNotSearchPage">
+                        </app-filter-model>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="generationAccordion=!generationAccordion"
+                        [class.active]="generationAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Générations <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.modelNomCompl?.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.modelNomCompl?.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="generationAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!generationAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="generationAccordion">
+                        <ngb-alert class="tw-alert"
+                            *ngIf="!checkFilter(results?.params,'modelGroupeNiveau1')&& !itsNotSearchPage"
+                            [dismissible]="false">
+                            <small class="text-[#5b5b5b]">
+                                <span class="text-[16px] text-[#6c757d]">&#9888;</span>
+                                Veuillez sélectionner un modèle pour pouvoir filtrer par génération. </small>
+                        </ngb-alert>
+  
+                        <ais-refinement-list [limit]="50" searchPlaceholder=" "
+                            *ngIf="checkFilter(results?.params,'modelGroupeNiveau1')||itsNotSearchPage"
+                            attribute="modelNomCompl" operator="or" [sortBy]="['isRefined', 'name:asc']">
+                        </ais-refinement-list>
+                        <ais-refinement-list  attribute="modelId" hidden></ais-refinement-list>  
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="FinitionAccordion=!FinitionAccordion"
+                        [class.active]="FinitionAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Finitions <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.finitionForElastic?.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.finitionForElastic?.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="FinitionAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!FinitionAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="FinitionAccordion">
+                        <ngb-alert class="tw-alert"
+                            *ngIf="!checkFilter(results?.params,'modelGroupeNiveau1')&& !itsNotSearchPage"
+                            [dismissible]="false">
+                            <small class="text-[#5b5b5b]">
+                                <span class="text-[16px] text-[#6c757d]">&#9888;</span>
+                                Veuillez sélectionner un modèle pour pouvoir filtrer par finition. </small>
+                        </ngb-alert>
+                        <ais-refinement-list [limit]="50"
+                            *ngIf="checkFilter(results?.params,'modelGroupeNiveau1')||itsNotSearchPage"
+                            attribute="finitionForElastic" operator="or" [sortBy]="['isRefined', 'name:asc']">
+                        </ais-refinement-list>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="carburantAccordion=!carburantAccordion"
+                        [class.active]="carburantAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Énergies  <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.energieNormalized?.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.energieNormalized?.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="carburantAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!carburantAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel capitalize" [class.show-accordion]="carburantAccordion">
+                        <ais-refinement-list [limit]="50" attribute="energieNormalized"
+                            [transformItems]="transformCarburant" [sortBy]="['isRefined', 'name:asc']">
+                        </ais-refinement-list>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="KilometrageAccordion=!KilometrageAccordion"
+                        [class.active]="KilometrageAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">kilométrages <span
+                                  *ngIf="results?._state?.numericRefinements?.kilometrage && (results?._state?.numericRefinements?.kilometrage['<=']?.length > 0 || results?._state?.numericRefinements?.kilometrage['>=']?.length > 0)">(1)</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="KilometrageAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!KilometrageAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <label class="tw-label-category" *ngIf="KilometrageAccordion">De
+                        <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.kilometrage['>='] && results?._state?.numericRefinements?.kilometrage['>=']?.length)">{{+results?.facets_stats?.kilometrage?.min | number }}Km</span>
+                        <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.kilometrage['>='] && results?._state?.numericRefinements?.kilometrage['>=']?.length">{{+results?._state?.numericRefinements?.kilometrage['>=']  | number}}Km</span>
+                        à
+                        <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.kilometrage['<='] && results?._state?.numericRefinements?.kilometrage['<=']?.length)">{{+results?.facets_stats?.kilometrage?.max  | number}}Km</span>
+                        <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.kilometrage['<='] && results?._state?.numericRefinements?.kilometrage['<=']?.length">{{+results?._state?.numericRefinements?.kilometrage['<=']  | number}}Km</span>
+                    </label>
+                    <div class="panel" [class.show-accordion-slider]="KilometrageAccordion">
+                        <ais-range-slider *ngIf="((isBrowser && !initialShowRange) || (initialShowRange && showRange))" attribute="kilometrage" [min]="" [max]="" [pips]="false"
+                            [tooltips]="true" [ngClass]="{'pointer-events-none':isSliderDisabled(results,'kilometrage')}">
+                        </ais-range-slider>
+                        <br><br>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="YearAccordion=!YearAccordion"
+                        [class.active]="YearAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Années <span
+                                  *ngIf="results?._state?.numericRefinements?.anneeMiseEnCirculation && (results?._state?.numericRefinements?.anneeMiseEnCirculation['<=']?.length > 0 || results?._state?.numericRefinements?.anneeMiseEnCirculation['>=']?.length > 0)">(1)</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="YearAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!YearAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <label class="tw-label-category" *ngIf="YearAccordion">De
+                        <span class="tw-span-category">{{results?.facets_stats?.anneeMiseEnCirculation?.min }}</span>
+                        à
+                        <span class="tw-span-category">{{results?.facets_stats?.anneeMiseEnCirculation?.max }}</span>
+                    </label>
+                    <div class="panel tw-panel-show " [class.show-accordion-slider]="YearAccordion">
+                        <ais-range-slider *ngIf="((isBrowser && !initialShowRange) || (initialShowRange && showRange))" attribute="anneeMiseEnCirculation" [min]="" [max]=""
+                            [pips]="false" [tooltips]="true" [ngClass]="{'pointer-events-none':results?.facets_stats?.anneeMiseEnCirculation?.min == results?.facets_stats?.anneeMiseEnCirculation?.max}">
+                        </ais-range-slider>
+                        <br><br>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+  
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="DisponibilityAccordion=!DisponibilityAccordion"
+                        [class.active]="DisponibilityAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Disponibilités <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.disponibiliteForFO?.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.disponibiliteForFO?.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="DisponibilityAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                              *ngIf="!DisponibilityAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="DisponibilityAccordion">
+                        <app-vehicule-disponibilities>
+                        </app-vehicule-disponibilities>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="priceAccordion=!priceAccordion"
+                        [class.active]="priceAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Prix <span
+                                  *ngIf="results?._state?.numericRefinements?.priceForFront && (results?._state?.numericRefinements?.priceForFront['<=']?.length > 0 || results?._state?.numericRefinements?.priceForFront['>=']?.length > 0)">(1)</span>
+                          </p>
+                      </div>
+  
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="priceAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!priceAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+  
+                    <div class="panel tw-top" [class.show-accordion-slider]="priceAccordion" [class.tw-overflow-visible]="priceAccordion">
+                        <app-filter-price
+                         [priceFilterRemovedEvent] = "priceFilterRemovedEvent"
+                         [attribute]="priceForFront"
+                         [priceFilterTerminals]="priceFilterTerminals"
+                         ></app-filter-price>
+                        <br>
+                    </div>
+                    <ais-numeric-menu *ngIf="!((isBrowser && !initialShowRange) || (initialShowRange && showRange))" attribute="priceForFront" hidden [items]="[
+                            { end: 10000, label: 'less than 10000' },
+                            { end: 15000, label: 'less than 15000' },
+                            { end: 20000, label: 'less than 20000' },
+                            { end: 30000, label: 'less than 30000' },
+                          ]"></ais-numeric-menu>
+                </div>
+  
+                <hr class="tw-hr">
+  
+               <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="rentAccordion=!rentAccordion"
+                        [class.active]="rentAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Loyers
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="rentAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!rentAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+  
+       
+  
+                    <div class="panel tw-top" [class.show-accordion-slider]="rentAccordion" [class.tw-overflow-visible]="rentAccordion">
+  
+                        <app-filter-rent
+                        *ngIf="filterLoyers"
+                         [attribute]="'loyerMensuel'"
+                         [rentFilterRemovedEvent]="rentFilterRemovedEvent"
+                         [rentFilterTerminals]="rentFilterTerminals"
+                         ></app-filter-rent>
+  
+                        <app-filter-rent
+                        *ngIf="!filterLoyers"
+                         [attribute]="'loyers.loyer_mensuel'"
+                         [rentFilterRemovedEvent]="rentFilterRemovedEvent"
+                         [rentFilterTerminals]="rentFilterTerminals"
+                         ></app-filter-rent>
+  
+                        <br *ngIf="rentAccordion">
+                    </div>
+             
+  
+                    <label *ngIf="rentAccordion" class="text-sm text-custom-gray mb-0  pb-0"> Durée  
+                    <span *ngIf="rentAccordion &&  nbLoyer"> : {{nbLoyer}}mois</span>
+                    <label class="mb-0 pb-0"
+                        *ngIf="rentAccordion && !nbLoyer">(à définir)</label>
+                    </label>
+                   
+  
+                    <div class="panel tw-space tw-loyer" [class.show-accordion-slider]="rentAccordion">
+  
+                        <app-loyer-nb-loyer *ngIf="filterLoyers" attributeName="nbLoyer"
+                            [val]="results?._state?.disjunctiveFacetsRefinements?.nbLoyer" (nbLoyerValue)="nbLoyerValue($event)">
+                        </app-loyer-nb-loyer>
+  
+                        <app-loyer-nb-loyer *ngIf="!filterLoyers" attributeName="loyers.nb_loyer">
+                        </app-loyer-nb-loyer>
+  
+                        <br *ngIf="rentAccordion">
+                    </div>
+  
+                    <label *ngIf="rentAccordion" class="text-sm text-custom-gray mb-0  pb-0"> Apport
+                        <span *ngIf=" (rentAccordion && apport) || (rentAccordion && apport == 0)"> : {{+apport | number}}€</span>
+                        <label class="mb-0 pb-0"
+                            *ngIf="rentAccordion && (apport == null || !apport) && apport != 0">(à définir)</label>
+                    </label>
+  
+                    <div class="panel tw-space tw-loyer mt-[3%]" [class.show-accordion-slider]="rentAccordion">
+                        <app-loyer-apport *ngIf="filterLoyers" [attributeName]="'apport'"
+                            [val]="results?._state?.disjunctiveFacetsRefinements?.apport"
+                            (apportValue)="apportValue($event)"></app-loyer-apport>
+                        <app-loyer-apport *ngIf="!filterLoyers" [attributeName]="'loyers.apport'"></app-loyer-apport>
+                        <br *ngIf="rentAccordion">
+                    </div>
+  
+  
+                    <label *ngIf="rentAccordion" class="text-sm text-custom-gray mb-0  pb-0">Kilométrage annuel
+                        <span *ngIf="rentAccordion && kilometres"> : {{+kilometres | number}}Km</span>
+                        <label class="mb-0  pb-0"
+                            *ngIf="rentAccordion && !kilometres">(à définir)</label>
+                    </label>
+  
+                    <div class="panel tw-space tw-loyer" [class.show-accordion-slider]="rentAccordion">
+                        <app-loyer-kilometres *ngIf="filterLoyers" attributeName="kilometres"
+                            [val]="results?._state?.disjunctiveFacetsRefinements?.kilometres" (kilometresValue)="kilometresValue($event)"></app-loyer-kilometres>
+                        <app-loyer-kilometres *ngIf="!filterLoyers" attributeName="loyers.kilometres">
+                        </app-loyer-kilometres>
+                        <br *ngIf="rentAccordion">
+                    </div>
+                </div> 
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="discountAccordion=!discountAccordion"
+                        [class.active]="discountAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Remises <span
+                                  *ngIf="results?._state?.numericRefinements?.avantageFinalWithADiscretion && (results?._state?.numericRefinements?.avantageFinalWithADiscretion['<=']?.length > 0 || results?._state?.numericRefinements?.avantageFinalWithADiscretion['>=']?.length > 0)">(1)</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="discountAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!discountAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="discountAccordion">
+  
+                        <label class="tw-label-category" *ngIf="discountAccordion">De
+                            
+                        <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.avantageFinalWithADiscretion['>='] && results?._state?.numericRefinements?.avantageFinalWithADiscretion['>=']?.length)">{{results?.facets_stats?.avantageFinalWithADiscretion?.min }}%</span>
+                        <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.avantageFinalWithADiscretion['>='] && results?._state?.numericRefinements?.avantageFinalWithADiscretion['>=']?.length">{{results?._state?.numericRefinements?.avantageFinalWithADiscretion['>=']}}%</span>
+                        à
+                        <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.avantageFinalWithADiscretion['<='] && results?._state?.numericRefinements?.avantageFinalWithADiscretion['<=']?.length)">{{results?.facets_stats?.avantageFinalWithADiscretion?.max }}%</span>
+                        <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.avantageFinalWithADiscretion['<='] && results?._state?.numericRefinements?.avantageFinalWithADiscretion['<=']?.length">{{results?._state?.numericRefinements?.avantageFinalWithADiscretion['<=']}}%</span>
+                        
+                    </label>
+                        <div class="panel" [class.show-accordion-slider-step]="discountAccordion">
+                            <ais-range-slider *ngIf="((isBrowser && !initialShowRange) || (initialShowRange && showRange))" [pips]="true" [tooltips]="true"
+                                attribute="avantageFinalWithADiscretion" [min]="" [max]="" [ngClass]="{'pointer-events-none':isSliderDisabled(results,'avantageFinalWithADiscretion')}">
+                            </ais-range-slider>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <hr class="tw-hr">
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="motorisationAccordion=!motorisationAccordion"
+                        [class.active]="motorisationAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Motorisations <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.motorisationForElastic?.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.motorisationForElastic?.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="motorisationAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!motorisationAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+  
+                    <div class="panel" [class.show-accordion]="motorisationAccordion">
+                        <ngb-alert class="tw-alert"
+                            *ngIf="!checkFilter(results?.params,'modelGroupeNiveau1')&& !itsNotSearchPage"
+                            [dismissible]="false">
+                            <small class="text-[#5b5b5b]">
+                                <span class="text-[16px] text-[#6c757d]">&#9888;</span>
+                                Veuillez sélectionner un modèle pour pouvoir filtrer par motorisation.
+                            </small>
+                        </ngb-alert>
+                        <ais-refinement-list [limit]="50"
+                            *ngIf="checkFilter(results?.params,'modelGroupeNiveau1')|| itsNotSearchPage"
+                            attribute="motorisationForElastic" [sortBy]="['isRefined', 'name:asc']">
+                        </ais-refinement-list>
+                    </div>
+                </div>
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="transmissionAccordion=!transmissionAccordion"
+                        [class.active]="transmissionAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Transmissions <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.transmissionNormalized.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.transmissionNormalized.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="transmissionAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!transmissionAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+  
+                    </button>
+                    <div class="panel capitalize" [class.show-accordion]="transmissionAccordion">
+                        <ais-refinement-list [limit]="50" attribute="transmissionNormalized"
+                            [transformItems]="transformTransmission">
+                        </ais-refinement-list>
+                    </div>
+                </div>
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="doorsAccordion=!doorsAccordion"
+                        [class.active]="doorsAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Portes <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.nbPorte.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.nbPorte.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="doorsAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!doorsAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="doorsAccordion">
+                        <ais-refinement-list [limit]="50" attribute="nbPorte" [sortBy]="['name:asc']"
+                            [transformItems]="transformPortes">
+                        </ais-refinement-list>
+                    </div>
+                </div>
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="siegesAccordion=!siegesAccordion"
+                        [class.active]="siegesAccordion">
+                        
+                          <div class="p-0">
+                            <p class="mx-0 my-2.5">Sièges<span *ngIf="results?._state?.disjunctiveFacetsRefinements?.nbSiege.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.nbSiege.length}})</span></p>
+                          </div>
+                          <div class="ml-auto px-1">
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="siegesAccordion">
+                              <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+                            </svg>
+                            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!siegesAccordion">
+                              <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+                            </svg>
+                          </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="siegesAccordion">
+                        <ais-refinement-list [limit]="50" attribute="nbSiege" [sortBy]="['name:asc']"
+                            [transformItems]="transformSieges">
+                        </ais-refinement-list>
+                    </div>
+                </div>
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                    <button class="tw-tile-category flex items-center text-left m-0" (click)="colorsAccordion=!colorsAccordion"
+                        [class.active]="colorsAccordion">
+                        <div class="p-0">
+                          <p class="mx-0 my-2.5">Couleurs <span
+                                  *ngIf="results?._state?.disjunctiveFacetsRefinements?.couleurExterieurNormalized.length > 0">({{results?._state?.disjunctiveFacetsRefinements?.couleurExterieurNormalized.length}})</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="colorsAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!colorsAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                    </button>
+                    <div class="panel" [class.show-accordion]="colorsAccordion">
+                        <app-filter-colors>
+                        </app-filter-colors>
+                    </div>
+                </div>
+                <hr class="tw-hr">
+  
+  
+                <div class="filter-accordion">
+                  <button class="tw-tile-category flex items-center text-left m-0" (click)="puissanceAccordion=!puissanceAccordion"
+                      [class.active]="puissanceAccordion">
+                      <div class="p-0">
+                          <p class="mx-0 my-2.5">Puissances <span
+                                  *ngIf="results?._state?.numericRefinements?.puissanceFiscaleNormalized && (results?._state?.numericRefinements?.puissanceFiscaleNormalized['<=']?.length > 0 || results?._state?.numericRefinements?.puissanceFiscaleNormalized['>=']?.length > 0)">(1)</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="puissanceAccordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!puissanceAccordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+                  </button>
+                  <div class="panel" [class.show-accordion]="puissanceAccordion">
+                      <label class="tw-label-category" *ngIf="puissanceAccordion">De
+  
+                      <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.puissanceFiscaleNormalized['>='] && results?._state?.numericRefinements?.puissanceFiscaleNormalized['>=']?.length)">{{results?.facets_stats?.puissanceFiscaleNormalized?.min }}CV</span>
+                      <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.puissanceFiscaleNormalized['>='] && results?._state?.numericRefinements?.puissanceFiscaleNormalized['>=']?.length">{{results?._state?.numericRefinements?.puissanceFiscaleNormalized['>=']}}CV</span>
+                      à
+                      <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.puissanceFiscaleNormalized['<='] && results?._state?.numericRefinements?.puissanceFiscaleNormalized['<=']?.length)">{{results?.facets_stats?.puissanceFiscaleNormalized?.max }}CV</span>
+                      <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.puissanceFiscaleNormalized['<='] && results?._state?.numericRefinements?.puissanceFiscaleNormalized['<=']?.length">{{results?._state?.numericRefinements?.puissanceFiscaleNormalized['<=']}}CV</span>
+                      
+                      </label>
+                      <div class="panel" [class.show-accordion-slider-step]="puissanceAccordion">
+                      <ais-range-slider *ngIf="((isBrowser && !initialShowRange) || (initialShowRange && showRange))" [pips]="true" [tooltips]="true" 
+                              attribute="puissanceFiscaleNormalized" [min]="" [max]="" [ngClass]="{'pointer-events-none':isSliderDisabled(results,'puissanceFiscaleNormalized')}">
+                          </ais-range-slider> 
+                          <br>
+                      </div>
+                  </div>
+              </div>
+  
+                <hr class="tw-hr">
+  
+                <div class="filter-accordion">
+                  <button class="tw-tile-category flex items-center text-left m-0" (click)="co2Accordion=!co2Accordion"
+                      [class.active]="co2Accordion">
+                      <div class="p-0">
+                          <p class="mx-0 my-2.5">CO₂ <span
+                                  *ngIf="results?._state?.numericRefinements?.co2 && (results?._state?.numericRefinements?.co2['<=']?.length > 0 || results?._state?.numericRefinements?.co2['>=']?.length > 0)">(1)</span>
+                          </p>
+                      </div>
+                      <div class="ml-auto px-1">
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="co2Accordion">
+                              <path
+                                  d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+  
+                          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!co2Accordion">
+                              <path
+                                  d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                  fill="#6F6F6F" />
+                          </svg>
+                      </div>
+  
+                  </button>
+                  <div class="panel" [class.show-accordion]="co2Accordion">
+                      <label class="tw-label-category" *ngIf="co2Accordion">De
+  
+                      <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.co2['>='] && results?._state?.numericRefinements?.co2['>=']?.length)">{{results?.facets_stats?.co2?.min }}</span>
+                      <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.co2['>='] && results?._state?.numericRefinements?.co2['>=']?.length">{{results?._state?.numericRefinements?.co2['>=']}}</span>
+                      à
+                      <span class="tw-span-category" *ngIf="!(results?._state?.numericRefinements?.co2['<='] && results?._state?.numericRefinements?.co2['<=']?.length)">{{results?.facets_stats?.co2?.max }}</span>
+                      <span class="tw-span-category" *ngIf="results?._state?.numericRefinements?.co2['<='] && results?._state?.numericRefinements?.co2['<=']?.length">{{results?._state?.numericRefinements?.co2['<=']}}</span>
+                      
+                      </label>
+                      <div class="panel" [class.show-accordion-slider-step]="co2Accordion">
+                          <ais-range-slider *ngIf="((isBrowser && !initialShowRange) || (initialShowRange && showRange))" [pips]="true" [tooltips]="true" attribute="co2" [min]=""
+                              [max]="" [ngClass]="{'pointer-events-none':isSliderDisabled(results,'co2' )}">
+                          </ais-range-slider>
+                          <br>
+                      </div>
+                  </div>
+              </div>
+              <hr class="border-t border-solid border-gray-600 opacity-25">
+            </div> 
+            
+            <ais-refinement-list attribute="IsEnabledOrReservedClient"></ais-refinement-list> 
+  
+  
+              <div class="tw-fixed-valide-filters" id="divResult">
+                  <div class="tw-btnBorder" id="btnResult">
+                      <button class="tw-btn-valide-filters" id="btnResult1" (click)="scrollToTop()" (click)="closeFilter()">
+                          Voir les résultats ( {{totalResult? totalResult : results?.nbHits}} )
+                      </button>
+                  </div>
+              </div>
+            
+        </ng-template>
+    </ais-hits>
+  </div>

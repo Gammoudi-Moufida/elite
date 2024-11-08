@@ -1,0 +1,21 @@
+
+    <ul>
+        <li class="ais-RefinementList-item" [class.ais-RefinementList-item--selected] ="item.isRefined" *ngFor="let item of state?.items">
+            <label *ngIf="item.label != 'Inconnu'" class="ais-RefinementList-label ">
+
+                <input *ngIf="item.label != 'Inconnu'" type="checkbox"
+                    class="ais-RefinementList-checkbox" value="{{item.isRefined}}" (click)="state.refine(item.value)" [checked]="item.isRefined">
+                    <img ngSrc="{{colorImages?.blanc[0]}}" *ngIf="item.label == 'Blanc' && colorImages?.blanc?.length >0"  class="tw-icon-couleur"  width="20" height="20">
+                    <img ngSrc="{{colorImages?.bleu[0]}}" *ngIf="item.label == 'Bleu' && colorImages?.bleu?.length >0"  class="tw-icon-couleur"   width="20" height="20">
+                    <img ngSrc="{{colorImages?.gris[0]}}" *ngIf="item.label == 'Gris' && colorImages?.gris?.length >0"  class="tw-icon-couleur"   width="20" height="20">
+                    <img ngSrc="{{colorImages?.marron[0]}}" *ngIf="item.label == 'Marron' && colorImages?.marron?.length >0"  class="tw-icon-couleur"  width="20" height="20">
+                    <img ngSrc="{{colorImages?.noir[0]}}" *ngIf="item.label == 'Noir' && colorImages?.noir?.length >0"  class="tw-icon-couleur"   width="20" height="20">
+                    <img ngSrc="{{colorImages?.rouge[0]}}" *ngIf="item.label == 'Rouge' && colorImages?.rouge?.length >0"  class="tw-icon-couleur"  width="20" height="20">
+                    <img ngSrc="{{colorImages?.vert[0]}}" *ngIf="item.label == 'Vert' && colorImages?.vert?.length >0"  class="tw-icon-couleur" width="20" height="20">
+                    <img ngSrc="{{colorImages?.autre[0]}}" *ngIf="item.label == 'Autre' && colorImages?.autre?.length >0"  class="tw-icon-couleur"  width="20" height="20">
+
+                    <span class="ps-2"> {{ item.label }} </span>
+                    <span class="ais-RefinementList-count">{{ item.count }}</span>
+            </label>
+        </li>
+    </ul>

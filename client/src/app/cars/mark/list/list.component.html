@@ -1,0 +1,71 @@
+<ng-container *ngIf="cars">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 w-full">
+        <div class="tw-card-sizing" *ngFor="let item of cars; let i = index">
+            <div class="tw-card" *ngIf="screenMode > 1 || showImg || !isBrowser || i == 0">
+                <div class="flex-auto p-0">
+                    <div class="h-[4.5rem]">
+                        <div class="float-left h-full bg-custom-blue w-20 text-white uppercase text-[0.6rem] ml-[10%] px-[5px] py-2.5" *ngIf="type!='lease'">
+                            <div *ngIf="!item.RemiseMessage"> jusqu'à<br>
+                                <strong class="text-sm">{{item.remise}}%</strong><br>
+                                de remise
+                            </div>
+                            <div *ngIf="item.RemiseMessage" [innerHtml]='item.RemiseMessage'></div>
+                        </div>
+                        <div class="float-left h-full bg-custom-blue w-20 text-white uppercase text-[0.6rem] ml-[10%] px-[5px] py-2.5" *ngIf="type=='lease'"> jusqu'à<br>
+                            <strong class="text-sm">{{item.prixAdvantage}} €</strong><br>
+                            d'économie
+                        </div>
+                        <div class="float-right text-right mr-2.5">
+                            <ng-container *ngIf = "item.avis > 0 && type!='utility'">
+                                <ng-template #t let-fill="fill">
+                                    <span class="relative inline-block text-[#d3d3d3] text-[1.4rem]  cursor-pointer" [class.tw-full]="fill === 100">
+                                      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                                    </span>
+                                </ng-template>
+                                <span *ngFor="let star of stars" class="relative inline-block text-[#d3d3d3] text-[1.4rem]  cursor-pointer"  [class.tw-style]="star <= item.avis">&#9733;</span>
+                                <br>
+                                <p class="float-right font-bold text-custom-blue">({{item.avis}}/5)</p>
+                            </ng-container>
+                            <img ngSrc="general/pastille-loc.webp" class="lazyload  mt-[7px] w-[60px] h-auto" *ngIf = "item.exclusiviteLoa" width="128" height="128"/>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf = "item.txtRemise"><p class="text-[10px] text-center font-raleway font-medium m-0 pt-[9px] px-1">{{item.txtRemise}}</p></div>
+                <br>
+                <ng-container *ngIf = item.link>
+                    <div class="inline mx-[10]">
+                        <ng-container *ngFor="let l of item.link; let i = index">
+                            <ng-container *ngIf="(i < (item.link.length-1)) &&  (i > 0) ">
+                                <a href='{{l[1]}}' class="tw-prixtitle">{{l[0]}}</a>
+                                <span *ngIf="(i < (item.link.length-1)) &&  (i > 0)"> - </span>
+                            </ng-container>
+                            <ng-container *ngIf="i == (item.link.length-1)">
+                                <a href='{{l[1]}}' class="tw-prixtitle">{{l[0]}}</a>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <a href="{{item.urlMod}}">
+                    <figure>
+                        <img src="{{item.photoUrl}}" alt='{{item.photoAlt}}' class="lazyload  w-[80%] mt-[20px] mb-0 mx-auto rounded-none"  height="233" width="350">
+                        <figcaption>
+                            <div class="font-raleway text-custom-slate-gray px-2.5 py-0 text-center">{{item.marque}} <b>{{item.modele}}</b></div>
+                            <div class="bg-custom-blue text-white mt-2.5 p-2.5 rounded-none">
+                                <div class="flex flex-wrap -mx-3">                   
+                                    <div class="tw-card-footer"  *ngIf="type!='lease'">à partir de <strong class="text-lg">{{item.prix | currency:'EUR':'symbol':'4.0-2':'fr'}}</strong></div>
+                                    <div class="tw-card-footer"  *ngIf="type=='lease' &&  item.loyer">loyer à partir de <strong class="text-lg">{{item.loyer}}€ /mois</strong></div>
+                                    <div class="tw-card-footer"  *ngIf="type=='lease' &&  !item.loyer">nous consulter</div>
+                                    <span class="flex-[0_0_auto] w-1/6">&#10095;</span>
+                                </div>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="w-full" *ngIf="type=='newTarif' && (showImg || !isBrowser)">
+        <hr>
+        <app-table-price [cars]="cars"></app-table-price>
+    </div> 
+</ng-container> 

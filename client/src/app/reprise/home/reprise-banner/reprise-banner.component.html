@@ -1,0 +1,248 @@
+<div class="loadImg" *ngIf="filterBgImage" [lazyLoad]="filterBgImage">
+    <div class="tw-container mx-auto px-[12px] overflow-auto">
+        <div class="mt-12 mb-[16px] slogan">
+            Nos reprises ont la cote !
+        </div>
+        <div class="flex flex-wrap justify-center">
+            <div class="w-full sm:w-full md:w-5/12 lg:w-1/3 flex-[0_0_auto] md:px-[12px]">
+                <div class="relative flex flex-nowrap items-stretch w-full mb-3">
+
+                    <img class="h-[45px] small_height rounded-l border-none bg-white pl-[7px] p-[4px] bg-center bg-no-repeat"
+                        src="{{imgUrl}}/ico_immatriculation.jpg">
+
+                    <input type="text" name="immat" class="tw-form border-none text-size small_height "
+                        [(ngModel)]="matriculeToFind" placeholder="Votre immatriculation">
+
+                    <div class="bg-white">
+                        <svg class="cursor-pointer mt-[15px] me-2" (click)="getVehiculesByImmat()"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#0795b9"
+                            viewBox="0 0 26 26">
+                            <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
+                        </svg>
+                    </div>
+
+                    <div>
+                        <div class="absolute h-[30px] border-l-2 border-l-black border-solid top-[17%]">
+                        </div>
+                    </div>
+                    <img (click)="open(infoContent)" src="{{imgUrl}}/ico_filtres.png"
+                        class="h-[45px] px-3 py-1.5 rounded-r border-none bg-white cursor-pointer">
+                </div>
+            </div>
+            <div class="w-full sm:w-full md:w-5/12 lg:w-1/3 flex-[0_0_auto] md:px-[12px]">
+                <div class="relative flex flex-nowrap items-stretch w-full mb-3">
+                    <button (click)="goToEstimation()" class="tw-btn relative z-[2] border-none tw-orange-button">Demande
+                        d'estimation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #infoContent let-modal>
+    <div class="tw-modal md:flex lg:flex" aria-labelledby="modal-title">
+        <div class="tw-opicity-modal"></div>
+        <div class="p-2 w-full justify-center items-center md:max-w-[800px] lg:max-w-[800px] xl:max-w-[800px] absolute top-[11%]">
+            <div class="tw-content-modal">
+                <div class="tw-header-modal">
+                    <div
+                        class="flex items-center justify-between p-[16px] border-b-[#dee2e6] border border-solid rounded-t dark:border-gray-600">
+                        <div class="w-5/6">
+                            <h6 class=" font-bold float-start">Estimation manuelle</h6>
+                        </div>
+                        <div class="w-1/6 text-right" (click)="modal.close('Close click')">
+                            <svg class="icon-class float-end cursor-pointer" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 512 512">
+                                <path
+                                    d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="tw-modal-body tw-border">
+                        <div class="flex flex-wrap">
+                            <div class="bloc px-3 b-bottom">
+                                <div class="filter-accordion" id="years">
+                                    <button *ngIf="screenMode == 3" class="accordion flex flex-wrap">
+                                        <div class="w-full max-w-full flex-1">
+                                            <button class="accordion" [class.active]="yearAccordion">
+                                                Année
+                                            </button>
+                                        </div>
+                                    </button>
+                                    <button *ngIf="screenMode == 1 || screenMode == 2" class=" accordion flex flex-wrap"
+                                        (click)="yearAccordion = !yearAccordion">
+                                        <div class="w-full max-w-full flex-1">
+                                            <button class="accordion" [class.active]="yearAccordion">
+                                                Année
+                                            </button>
+                                        </div>
+                                        <div class="flex-initial w-auto px-3">
+                                            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                                *ngIf="yearAccordion">
+                                                <path
+                                                    d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                                    fill="#6F6F6F" />
+                                            </svg>
+
+                                            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                                *ngIf="!yearAccordion">
+                                                <path
+                                                    d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                                    fill="#6F6F6F" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div class="panel" [class.show-accordion]="yearAccordion">
+                                        <div *ngFor="let year of years">
+                                            <button value="{{year}}" (click)="selectYear($event.target.value)"
+                                                [checked]="year.selected" class="list"
+                                                [class.list-selected]="selectedYear == year">
+                                                {{year}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bloc px-3">
+                            <div class="filter-accordion" id="months">
+                                <button class="accordion flex flex-wrap" *ngIf="screenMode == 3">
+                                    <div class="w-full max-w-full flex-1">
+                                        <button class="accordion" [class.active]="monthAccordion">
+                                            Mois
+                                        </button>
+                                    </div>
+                                </button>
+
+                                <button class="accordion flex flex-wrap" *ngIf="screenMode == 1 || screenMode == 2"
+                                    (click)="monthAccordion = !monthAccordion">
+                                    <div class="w-full max-w-full flex-1">
+                                        <button class="accordion" [class.active]="monthAccordion">
+                                            Mois
+                                        </button>
+                                    </div>
+                                    <div class="flex-initial w-auto px-3">
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                            *ngIf="monthAccordion">
+                                            <path
+                                                d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                                fill="#6F6F6F" />
+                                        </svg>
+
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                            *ngIf="!monthAccordion">
+                                            <path
+                                                d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                                fill="#6F6F6F" />
+                                        </svg>
+                                    </div>
+                                </button>
+
+                                <div class="panel" [class.show-accordion]="monthAccordion">
+                                    <div *ngFor="let month of months">
+                                        <button value="{{month.id}}"
+                                            (click)="selectMonth($event.target.value); markAccordion = true"
+                                            class="list" [class.list-selected]="selectedMonth == month?.id">
+                                            {{month.name}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="tw-modal-body ">
+                        <div class="flex flex-wrap">
+                            <div class="bloc px-3 b-bottom">
+                                <div class="filter-accordion" id="marks">
+                                    <button class="accordion flex flex-wrap" (click)="markAccordion = !markAccordion">
+                                        <div class="w-full max-w-full flex-1">
+                                            <button class="accordion" [class.active]="markAccordion">
+                                                Marque
+                                            </button>
+                                        </div>
+                                        <div class="flex-initial w-auto px-3">
+                                            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                                *ngIf="markAccordion">
+                                                <path
+                                                    d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                                    fill="#6F6F6F" />
+                                            </svg>
+
+                                            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                                *ngIf="!markAccordion">
+                                                <path
+                                                    d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                                    fill="#6F6F6F" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div class="panel" [class.show-accordion]="markAccordion">
+
+                                        <div *ngFor="let mark of marks">
+                                            <button value="{{mark.id}}"
+                                                (click)="selectMark(mark); modelAccordion = true" class="list"
+                                                [class.list-selected]="selectedMark == mark?.id">
+                                                {{mark.name}}
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bloc px-3">
+                            <div class="filter-accordion" id="models">
+                                <button class="accordion flex flex-wrap" (click)="modelAccordion = !modelAccordion">
+                                    <div class="w-full max-w-full flex-1">
+                                        <button class="accordion" [class.active]="modelAccordion">
+                                            Modèle
+                                        </button>
+                                    </div>
+                                    <div class="flex-initial w-auto px-3">
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                            *ngIf="modelAccordion">
+                                            <path
+                                                d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z"
+                                                fill="#6F6F6F" />
+                                        </svg>
+
+                                        <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73"
+                                            *ngIf="!modelAccordion">
+                                            <path
+                                                d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z"
+                                                fill="#6F6F6F" />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="panel" [class.show-accordion]="modelAccordion">
+
+                                    <div *ngFor="let model of models">
+                                        <button value="{{model.id}}" (click)="selectModel(model)" class="list"
+                                            [class.list-selected]="selectedModel == model?.id">
+                                            {{model.name}}
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!--Modal footer-->
+                    <div class="tw-modal-footer">
+                        <div class="grid grid-cols-1 gap-y-4">
+                            <div class="tw-input-group w-full m-1 pl-[12px] pr-[12px] ps-0 pe-0 mx-auto">
+                                <button type="submit" (click)="onSubmit()" class="tw-btn tw-orange-button">Commencer
+                                    l'estimation</button>
+                            </div>
+                            <div class="tw-input-group w-full m-1 pl-[12px] pr-[12px] mx-auto">
+                                <button type="submit" (click)="initialise()"
+                                    class="tw-btn font-bold border-none text-black w-full">Recommencer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

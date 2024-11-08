@@ -1,0 +1,11 @@
+.tw-avis-title {
+    @apply font-bold text-sm text-center w-auto bg-[#eef0f1] mb-5 px-5 py-[10px];
+}
+
+.tw-next-icon {
+    @apply text-[26px] text-[#a7b2b7] relative;
+}
+
+h2 {
+    @apply text-lg font-bold text-custom-blue leading-[26px] mt-[10px] mr-5 mb-0 ml-0;
+}

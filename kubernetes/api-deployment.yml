@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-pod
+spec:
+  selector:
+    matchLabels:
+      app: k8l-elite
+      tier: api-pod
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: k8l-elite
+        tier: api-pod
+        track: stable
+    spec:
+      containers:
+        - name: api
+          image: "gmidprnci.gra7.container-registry.ovh.net/elite-auto/api:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+          - configMapRef:
+              name: k8l-config
+          env:
+          - name: WWW_EA_HOST
+            value: $(WWW_EA_HOST)
+          - name: ELITE_DELIVERY_URL
+            value: $(ELITE_DELIVERY_URL)
+          - name: ELITE_DELIVERY_KEY
+            value: $(ELITE_DELIVERY_KEY)
+          - name: WWW_EA_API
+            value: $(WWW_EA_API)
+      imagePullSecrets:
+      - name: priv-registry 

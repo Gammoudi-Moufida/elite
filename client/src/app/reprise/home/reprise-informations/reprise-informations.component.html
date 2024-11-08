@@ -1,0 +1,242 @@
+<div class="tw-loader" *ngIf='!ready'></div>
+<div class="tw-container mx-auto px-[12px]" *ngIf="data && ready">
+    <section>
+        <div class="flex flex-wrap">
+            <h2 class="pb-2 font-bold tw-title-size">Comment ça marche ?</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 -mx-3">
+
+            <div class="flex flex-wrap">
+                <div class="xl:w-1/6 w-1/6 pe-0 ps-0">
+                    <p class="tw-big-Numbers">1.</p>
+                </div>
+                <div class="xl:w-5/6 w-5/6 ps-0 tw-content_fonction">
+                    <p class="font-bold">J'effectue mon estimation <br><span class="font-normal">sur
+                            elite-auto.fr</span></p>
+                </div>
+            </div>
+            <div class="flex flex-wrap">
+                <div class="xl:w-1/6 w-1/6 pe-0 ps-0">
+                    <p class="tw-big-Numbers">2.</p>
+                </div>
+                <div class="xl:w-5/6 w-5/6 ps-0 tw-content_fonction">
+                    <p class=" font-bold ">Je prends rdv pour finaliser la vente <br><span class="font-normal ">dans
+                            l'un de nos nombreux centres</span></p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap">
+                <div class="xl:w-1/6 w-1/6 pe-0 ps-0">
+                    <p class="tw-big-Numbers">3.</p>
+                </div>
+                <div class="xl:w-5/6 w-5/6 ps-0 pe-0 tw-content_fonction ">
+                    <p class=" font-bold">Je reçois mon paiment<br><span class="font-normal ">facilement et
+                            rapidement</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap">
+            <p>
+                En 2021, on estimait à 6 millions d'unités le nombre de véhicules vendus sur le marché de l'occasion. Il
+                est
+                probable que vous fassiez parti des automobilistes qui vous souhaitent vendre ou acheter un
+                <span *ngIf="!showMore1 && screenMode == 1"> ...</span>
+                <a class="tw-showMore" *ngIf="!showMore1 && screenMode == 1" (click)="showMore1 = true"> Lire la
+                    suite</a>
+                <span *ngIf="showMore1 && screenMode == 1 || !showMore1 && screenMode != 1">nouveau véhicule d'occasion.
+                    Pour cela, Elite Auto vous accompagne lors de la reprise de votre
+                    voiture
+                    d'occasion.<br><br>
+
+                    Sans vous déplacer, vous obtenez l'estimation sans obligation de vente ou quoi que ce soit et
+                    décidez
+                    par la
+                    suite, de faire racheter cash votre voiture par Elite Auto. Disponible grâce à l'immatriculation de
+                    la
+                    voiture ou manuellement, l'estimation vous permet de gagner un temps précieux pour votre vente et
+                    d'établir
+                    dans un premier temps, votre projet.
+                </span>
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="pb-3 flex flex-wrap -mx-3 font-bold tw-title-size">{{data[0].title0}}</h2>
+        <div class="flex flex-wrap -mx-3">
+
+            <div class="w-full md:w-1/2 sm:w-full ps-0 pe-0  tw-price_left">
+            </div>
+            <div class="w-full md:w-1/2 sm:w-full tw-price_right">
+                <strong class="tw-title-size tw-title_estimation">{{data[0].question}}</strong>
+                <br>
+                <p>{{data[0].p}}</p>
+            </div>
+
+            <div class="mt-3 px-[12px]">
+                <p>
+                    <span>{{data[0].span}}</span>
+                    <span *ngIf="!showMore2 && screenMode == 1"> ...</span>
+                    <a class="tw-showMore" *ngIf="!showMore2 && screenMode == 1" (click)="showMore2 = true"> Lire la
+                        suite</a>
+                    <span *ngIf="showMore2 && screenMode == 1 || !showMore2 && screenMode != 1"
+                        [innerHtml]="data[0].span0">
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="flex flex-wrap">
+            <h2 class="pb-2 font-bold tw-title-size">{{data[1].title}}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2  gap-x-6 gap-y-2">
+
+                <div class="tw-card">
+                    <div class="flex-auto p-4">
+                        <img class="w-[40px] pe-2 pb-2" src="{{imgUrl}}/ico_paiement_immediat.png">
+                        <span class="tw-title-size font-bold">{{data[1].title1}}</span>
+
+                        <p class="mb-0">{{data[1].p1}}</p>
+                    </div>
+
+                </div>
+
+                <div class="tw-card">
+                    <div class="flex-auto p-4">
+                        <img class="w-[40px] pe-2 pb-2" src="{{imgUrl}}/ico_reprise_vehicule.png">
+                        <span class="tw-title-size font-bold">{{data[1].title2}}</span>
+                        <p class="mb-0">{{data[1].p2}}</p>
+                    </div>
+
+                </div>
+
+                <div class="tw-card min-h-[185px]">
+                    <div class="flex-auto p-4">
+                        <img class="rotate-[33deg] w-[30px] pe-2 pb-2" src="{{imgUrl}}/ico_transaction_securise.png">
+                        <span class="tw-title-size font-bold">{{data[1].title3}}</span>
+                        <p class="mb-0">{{data[1].p3}}</p>
+                    </div>
+
+                </div>
+
+                <div class="tw-card min-h-[185px]">
+                    <div class="flex-auto p-4">
+                        <img class="w-[40px] pe-2 pb-2" src="{{imgUrl}}/ico_gain_temps.png">
+                        <span class="tw-title-size font-bold">{{data[1].title4}}</span>
+                        <p class="mb-0">{{data[1].p4}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="flex flex-wrap mt-3">
+            <h2 class="pb-2 font-bold tw-title-size">{{data[2].title5}}</h2>
+            <p>
+                {{data[2].span1}}
+                <span *ngIf="!showMore3 && screenMode == 1"> ...</span>
+                <a class="tw-showMore" *ngIf="!showMore3 && screenMode == 1" (click)="showMore3 = true"> Lire la
+                    suite</a>
+                <span *ngIf="showMore3 && screenMode == 1 || !showMore3 && screenMode != 1" [innerHtml]="data[2].span2">
+
+                </span>
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6">
+
+            <div class="tw-card ">
+                <div class="flex-auto p-4 text-center ">
+                    <p>
+                        {{data[2].card1_p}}
+                    </p>
+                    <strong>{{data[2].card1_title}}</strong>
+                    <div>
+                        <a href="/centre-livreur" type="button"
+                            class="tw-btn w-2/3 text-white font-bold bg-custom-black font-size-meduim mt-2">
+                            {{data[2].card1_href}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tw-card">
+                <div class="flex-auto p-4 text-center">
+                    <p>
+                        {{data[2].card2_p}}
+                    </p>
+                    <strong>{{data[2].card2_title}}</strong>
+                    <div>
+                        <a href="/reprise-voiture" type="button"
+                            class="tw-btn w-2/3 text-white font-bold bg-custom-black font-size-meduim mt-2">
+                            {{data[2].card2_href}} </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="flex-wrap pb-3 mt-3">
+            <h2 class="pb-2 font-bold tw-title-size">{{data[3].title6}}</h2>
+
+            <div class="mt-0 pt-0">
+                <p>
+                    <span [innerHtml]="data[3].p5"></span>
+                </p>
+            </div>
+
+            <h2 class="pb-2 font-bold tw-title-size">{{data[3].subTitle0}}</h2>
+            <div class="mt-0 pt-0">
+                <p>
+                    {{data[3].card0_span0}}
+                </p>
+            </div>
+
+            <h3 class="mb-0 font-bold tw-title-size">{{data[3].subTitle1}}</h3>
+
+            <div class="mt-0 pt-0">
+                <p>
+                    <span>{{data[3].card1_span1}}</span>
+                    <span *ngIf="!showMore4 && screenMode == 1"> ...</span>
+                    <a class="tw-showMore" *ngIf="!showMore4 && screenMode == 1" (click)="showMore4 = true"> Lire la
+                        suite</a>
+                    <span *ngIf="showMore4 && screenMode == 1 || !showMore4 && screenMode != 1">
+                        {{data[3].card1_span2}}
+                    </span>
+                </p>
+            </div>
+
+            <h3 class="mb-0 font-bold tw-title-size">{{data[3].subTitle2}}
+            </h3>
+
+            <div class="mt-0 pt-0">
+                <p>
+                    <span [innerHtml]="data[3].card2_span1"></span>
+                    <span *ngIf="!showMore5 && screenMode == 1"> ...</span>
+                    <a class="tw-showMore" *ngIf="!showMore5 && screenMode == 1" (click)="showMore5 = true"> Lire la
+                        suite</a>
+                    <span *ngIf="showMore5 && screenMode == 1 || !showMore5 && screenMode != 1">
+                        {{data[3].card2_span2}}
+                    </span>
+                </p>
+            </div>
+
+            <h3 class="mb-0 font-bold tw-title-size">{{data[3].subTitle3}}</h3>
+
+            <div class="mt-0 pt-0">
+                <p>
+                    <span>{{data[3].card3_span1}}</span>
+                    <span *ngIf="!showMore6 && screenMode == 1"> ...</span>
+                    <a class="tw-showMore" *ngIf="!showMore6 && screenMode == 1" (click)="showMore6 = true"> Lire la
+                        suite</a>
+                    <span *ngIf="showMore6 && screenMode == 1 || !showMore6 && screenMode != 1"
+                        [innerHtml]="data[3].card3_span2">
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>

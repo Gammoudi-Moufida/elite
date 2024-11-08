@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="ea-h5 ea-bold">Côté gauche</div>
+        <ul class="left-part ea-list ms-auto me-auto">
+            <li *ngFor="let dataZone of listDataZoneLeft;" id="{{dataZone.name}}">
+                <a (click)="openPopupPane(dataZone.id - 1)" [ngClass]="{'active':selectedPaneIndex == dataZone.id - 1}"
+                    container="body" [autoClose]="'outside'" [ngbPopover]="popContent" [popoverTitle]="popTitle">
+                    {{ devis?.reprise?.aDefauts[dataZone.id - 1]["s_rub_libelle"] }}
+                </a>
+            </li>
+        </ul>
+        <ng-template #popTitle><b>{{selectedPane.s_rub_libelle}}</b></ng-template>
+        <ng-template #popContent>
+            <div class="d-flex align-items-center mb-2" *ngFor="let element of selectedPane.a_rub_elements; let i = index">
+                <input class="e-a-form-check-input" type="checkbox" (click)="selectPaneElement(element)"
+                    [checked]="element.selected" [id]="element.i_ele_id">
+                <label class="ea-check-label ea-h5 mb-0" [for]="element.i_ele_id">
+                    {{element.s_ele_libelle}}
+                </label>
+            </div>
+        </ng-template>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="ea-h5 ea-bold">Côté droit</div>
+        <ul class="right-part ea-list ms-auto me-auto">
+            <li *ngFor="let dataZone of listDataZoneRight;" id="{{dataZone.name}}">
+                <a (click)="openPopupPane(dataZone.id - 1)" [ngClass]="{'active':selectedPaneIndex == dataZone.id - 1}"
+                    container="body" [autoClose]="'outside'" [ngbPopover]="popContent2" [popoverTitle]="popTitle2">
+                    {{  devis?.reprise?.aDefauts[dataZone.id - 1]["s_rub_libelle"] }}
+                </a>
+            </li>
+        </ul>
+        <ng-template #popTitle2><b>{{selectedPane.s_rub_libelle}}</b></ng-template>
+        <ng-template #popContent2>
+            <div class="d-flex align-items-center mb-2" *ngFor="let element of selectedPane.a_rub_elements; let i = index">
+                <input class="e-a-form-check-input" type="checkbox" (click)="selectPaneElement(element)"
+                    [checked]="element.selected" [id]="element.i_ele_id">
+                <label class="ea-check-label ea-h5 mb-0" [for]="element.i_ele_id">
+                    {{element.s_ele_libelle}}
+                </label>
+            </div>
+        </ng-template>
+    </div>
+    <div class="col-12">
+        <div class="ea-h5 ea-bold">Face avant et arrière, pavillon</div>
+        <ul class="front-back-part ea-list ms-auto me-auto">
+            <li *ngFor="let dataZone of listDataZoneAvAr;" id="{{dataZone.name}}">
+                <a (click)="openPopupPane(dataZone.id - 1)" [ngClass]="{'active':selectedPaneIndex == dataZone.id - 1}"
+                    container="body" [autoClose]="'outside'" [ngbPopover]="popContent3" [popoverTitle]="popTitle3">
+                    {{  devis?.reprise?.aDefauts[dataZone.id - 1]["s_rub_libelle"] }}
+                </a>
+            </li>
+        </ul>
+        <ng-template #popTitle3><b>{{selectedPane.s_rub_libelle}}</b></ng-template>
+        <ng-template #popContent3>
+            <div class="d-flex align-items-center mb-2" *ngFor="let element of selectedPane.a_rub_elements; let i = index">
+                <input class="e-a-form-check-input" type="checkbox" (click)="selectPaneElement(element)"
+                    [checked]="element.selected" [id]="element.i_ele_id">
+                <label class="ea-check-label ea-h5 mb-0" [for]="element.i_ele_id">
+                    {{element.s_ele_libelle}}
+                </label>
+            </div>
+        </ng-template>
+    </div>
+    <div class="col-12">
+        <div class="ea-h5 ea-bold"> Défauts intérieur </div>
+        <div *ngFor="let pane of devis?.reprise?.aDefauts[22].a_rub_elements">
+            <div class="row">
+                <div class="col-12 col-sm-6 ea-h5 mb-1">{{pane.s_ele_libelle}} </div>
+                <div class="col-12 col-sm-6">
+                    <div class="d-flex align-items-center mb-2">
+                        <input class="e-a-form-check-input" type="checkbox" (click)="selectPane(pane)"
+                            [checked]="pane.selected" id="t_{{pane.i_ele_id}}">
+                        <label class="ea-check-label ea-h5 mb-0" for="t_{{pane.i_ele_id}}">
+                            Oui
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <input class="e-a-form-check-input" type="checkbox" (click)="selectPane(pane)"
+                            [checked]="!pane.selected" id="f_{{pane.i_ele_id}}">
+                        <label class="ea-check-label ea-h5 mb-0" for="f_{{pane.i_ele_id}}">
+                            Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+version: '3.3'
+
+services: 
+# Service nginx  
+  nginx:
+    image: midprnci.gra7.container-registry.ovh.net/elite-auto/nginx:latest
+    ports:
+      - "80:80"
+    environment: 
+      - ENV=${ENV}
+      - WWW_EA_HOST=${WWW_EA_HOST}
+      - LEASING_EA_HOST=${LEASING_EA_HOST}
+      - UTILITAIRE_EA_HOST=${UTILITAIRE_EA_HOST}
+    depends_on:
+      - client
+      - api
+    networks: 
+        - elite 
+
+  # Service client    
+  client:
+    image: midprnci.gra7.container-registry.ovh.net/elite-auto/client:latest
+    tty: true
+    ports:
+      - "4000:4000"
+    networks: 
+        - elite
+
+# image proxy service
+  image-proxy:
+    image: darthsim/imgproxy
+    restart: on-failure
+    environment:
+      - IMGPROXY_ENFORCE_WEBP=true
+    networks: 
+      - elite 
+
+  # Service client    
+  api:
+    image: midprnci.gra7.container-registry.ovh.net/elite-auto/api:latest
+    tty: true
+    networks: 
+        - elite
+
+
+networks:
+    elite:
+        driver: bridge

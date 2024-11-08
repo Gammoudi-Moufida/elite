@@ -1,0 +1,3 @@
+.tw-btn {
+    @apply bg-[#35393f] font-[bold] text-[white]  mt-[5%] p-1.5 mr-2 hover:bg-[#909ea5] hover:text-white;
+}

@@ -1,0 +1,105 @@
+<div class="row ea-blue-color">
+    <div class="col-10">
+        <span class="ea-h5" *ngIf="isLOA"> Valeur locative :</span>
+        <span class="ea-h5" *ngIf="!isLOA"> Montant emprunté :</span>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ montantEmprunt|number:'1.0-0':'fr' }} €</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-10">
+        <span class="ea-h5"> {{ txtpremierLoyer }}</span>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ premierLoyer|number:'1.0-2':'fr' }} €</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-10">
+        <span class="ea-h5"> Puis {{ financement?.result?.dureeFinal }} {{ txtMensualite }} (hors assurance) :</span>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ financement?.result?.mensualiteSansAssurance |number:'1.0-2':'fr' }} €</span>
+    </div>
+</div>
+<span class="ea-h5 ea-bold">Assurances:</span>
+
+<div class="row" *ngFor="let assurance of financement?.result?.assurances; let i = index">
+    <div class="col-10">
+        <input class="ea-form-check-input" type="checkbox" (change)="updatePrices();" [(ngModel)]="assurance.isChecked" name="{{ assurance.name }}_{{i}}" id="{{ assurance.name }}_{{i}}" />
+        <label class="ea-check-label ea-h5" for="{{ assurance.name }}_{{i}}">
+            {{ assurance.name }} ({{ i +1 }}):
+        </label>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ assurance.mensualite|number:'1.2-2':'fr' }} €/mois</span>
+    </div>
+</div>
+<div class="row" *ngIf="financement?.result?.extensionGarantie > 0">
+    <div class="col-10">
+        <input class="ea-form-check-input" type="checkbox" name="extensionGarantie" id="extensionGarantie" [attr.disabled]="financement?.result?.pack == true ? 'disabled' : null" (change)="updatePrices();" [(ngModel)]="financement.garantie" />
+        <label class="ea-check-label ea-h5" for="extensionGarantie">
+            Extension de Garantie :
+        </label>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ financement?.result?.extensionGarantie|number:'1.0-0':'fr' }} €/mois</span>
+    </div>
+</div>
+<div class="row ea-blue-color" [hidden]="financement?.totalAssurancesCheked == 0">
+    <div class="col-10">
+        <span> soit {{ financement?.result?.duree }} {{ txtMensualite }} avec assurances </span>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end" *ngIf="financement?.totalAssurancesCheked != 0" id="LmensualiteWithAssurance_{{ financement?.result?.typeFinancement }}"> {{ financement.LmesualiteAvecAssurance|number:'1.0-0':'fr' }} €</span>
+    </div>
+</div>
+
+<div *ngIf="!isLOA">
+    <span class="ea-h5"> TAEG fixe : {{ financement?.result?.TAEG }}% </span>
+    <br />
+    <span class="ea-h5">Taux débiteur fixe : {{ financement?.result?.tauxNominal }}%</span>
+</div>
+
+<div class="row">
+    <div class="col-10">
+        <span class="ea-h5" *ngIf="isLOA && !isLLD"> Coût total en cas d'acquisition sans assurance</span>
+        <span class="ea-h5" *ngIf="!isLOA"> Montant total dû sans assurance</span>
+    </div>
+    <div class="col-2">
+        <span *ngIf="!isLLD" class="ea-h5 ea-bold float-end"> {{ totalwithoutAssurance|number:'1.0-0':'fr' }} €</span>
+    </div>
+</div>
+<div class="row" *ngIf="financement.totalAssurancesCheked != 0">
+    <div class="col-10">
+        <span class="ea-h5" *ngIf="isLOA && !isLLD"> Coût total en cas d'acquisition avec assurance</span>
+        <span class="ea-h5" *ngIf="!isLOA">Montant total dû avec assurance</span>
+    </div>
+    <div class="col-2">
+        <span *ngIf="!isLLD" class="ea-h5 ea-bold float-end"> {{ totalWithAssurance|number:'1.0-0':'fr' }} €</span>
+    </div>
+</div>
+
+<div class="row" *ngIf="isLOA && financement?.result?.fraisDossier > 0">
+    <div class="col-10">
+        <span class="ea-h5"> dont frais de dossier</span>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ financement?.result?.fraisDossier|number:'1.0-0':'fr' }} €</span>
+    </div>
+</div>
+<div class="row" *ngIf="financement?.result?.typeFinancement == 'Leasing' && financement?.result?.libelleApplicatif != 'lld'">
+    <div class="col-10">
+        <span class="ea-h5"> Option d'achat à la fin du contrat</span>
+    </div>
+    <div class="col-2">
+        <span class="ea-h5 ea-bold float-end"> {{ financement?.result?.valeurRachat|number:'1.0-0':'fr' }} €</span>
+    </div>
+</div>
+<span class="ea-h5"> Offre sous réserve d'étude et d'acceptation par : </span>
+<p class="ea-h6">{{ financement?.result?.mentionsLegales }}</p>
+<p class="ea-h6" *ngFor="let assurance of financement?.result?.assurances; let i = index">
+    ({{ i+1 }}) - {{ assurance.mentionsLegales }}
+</p>
+<span class="ea-h5 ea-bold">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</span>

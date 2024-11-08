@@ -1,0 +1,72 @@
+.tw-big-Numbers {
+  @apply font-bold text-[42px] mt-[-11px] text-[#0c96bb];
+}
+.tw-content_fonction {
+  @apply min-w-max;
+}
+
+.tw-price_left {
+  @apply h-[225px] bg-[url(https://image.elite-auto.fr/reprise/images/img_reprise.jpg)] bg-no-repeat bg-left-top rounded-s;
+}
+.tw-price_right {
+  @apply rounded-e bg-[white] p-[24px] h-[225px];
+}
+
+.tw-title-size {
+  @apply text-[20px] leading-5;
+}
+
+.tw-showMore {
+  @apply text-custom-blue-green !important;
+}
+
+.tw-card {
+  @apply w-full relative flex flex-col bg-clip-border bg-white rounded min-h-[174px] border border-solid border-[rgba(0,0,0,0.175)]  break-words;
+}
+@media screen and (max-width: 1140px) {
+  .tw-big-Numbers {
+    @apply mt-[-11px] max-h-[45px];
+  }
+  .tw-content_fonction {
+    @apply min-w-[auto];
+  }
+  .tw-price_right {
+    @apply text-[14px] p-[21px];
+  }
+  .tw-title_estimation {
+    @apply text-[16px];
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .tw-price_left {
+    @apply rounded-se rounded-es-none;
+  }
+  .tw-price_right {
+    @apply rounded-es rounded-se-none text-[16px] p-[24px];
+  }
+  .tw-title_estimation {
+    @apply text-[20px];
+  }
+  .tw-card {
+    @apply mt-[15px];
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .tw-price_right {
+    @apply text-[14px] min-h-[275px] p-[21px];
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .tw-title-size {
+    @apply text-[16px];
+  }
+  p {
+    @apply text-[14px];
+  }
+  .tw-price_right {
+    @apply min-h-[300px];
+  }
+}

@@ -1,0 +1,65 @@
+<h2 class="mb-3 mt-3" >Nos récompenses, partenaires et garantie chez Elite Auto</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+    <div class="col-span-1">
+        <div class="tw-border">
+            <a href="/grand-prix-des-concessionnaires">
+                <p class="tw-apg_title">Récompense</p>
+                <div class="p-2">
+                    <p class="tw-text">
+                        <strong>Trophée Or</strong> pour Elite Auto dans la catégorie «Concession Digitale»<br /> 
+                        <em>par le magazine Auto Moto</em>
+                    </p> 
+                    <div class="gp" *ngIf="showImg"></div>
+                    <div class="tw-loader" *ngIf="!showImg"></div>                 
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-span-1">
+        <div class="tw-border">
+            <a href="/grand-prix-des-concessionnaires">
+                <p class="tw-apg_title">Récompense</p>
+                <div class="p-2" (mouseenter)="isHover=1" (mouseleave)="isHover=2">
+                    <p class="tw-text">
+                        "<strong>Élu meilleur service client</strong>"<br /> dans la catégorie mandataire automobile.
+                        <em>par le magazine Capital.</em>
+                    </p> 
+                    <div *ngIf="showImg">
+                        <img ngSrc="general/silver-capital.webp" class="tw-custom-relative" fill
+                        *ngIf="isHover == 0">
+                        <img ngSrc="general/silver-capital.webp" class="tw-custom-relative" fill
+                        *ngIf="showImg &&  isHover == 2">
+                        <img ngSrc="general/red-capital.webp" class="tw-custom-relative" fill
+                        *ngIf="showImg && isHover == 1">
+                    </div>
+                    <div class="tw-loader" *ngIf="!showImg"></div>              
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-span-1">
+        <div class="tw-border">
+            <p class="tw-apg_title">Partenaire</p>
+            <div class="p-2">
+                <p class="tw-text">
+                    "<strong>Partenaire Officiel</strong>"<br /> élu 2 fois meilleur mandataire automobile.
+                    <em>par le magazine AutoPlus.</em>
+                </p> 
+                <div class="partner" *ngIf="showImg"></div> 
+                <div class="tw-loader" *ngIf="!showImg"></div>                
+            </div>
+        </div>
+    </div>
+    <div class="col-span-1">
+        <div class="tw-border">
+            <p class="tw-apg_title">Garantie</p>
+            <div class="p-2">
+                <p class="tw-text">
+                    "<strong>Satisfait ou Remboursé</strong>"<br /> Nous vous remboursons si vous n'êtes pas satisfait.
+                </p> 
+                <div class="guarantee" *ngIf="showImg"></div> 
+                <div class="tw-loader" *ngIf="!showImg"></div>                
+            </div>
+        </div>
+    </div>
+</div>

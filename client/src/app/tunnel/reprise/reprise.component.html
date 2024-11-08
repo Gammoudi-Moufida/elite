@@ -1,0 +1,497 @@
+<div id="reprise">
+  <h2 class="ea-h1 ea-bold text-center mt-4 mb-4"> Estimez en quelques clics la valeur de reprise votre voiture </h2>
+  <div class="row mt-3 justify-content-center" *ngIf="mode == 1">
+      <div class="col-lg-3 col-md-3 col-sm-12 mb-3 cursor-pointer" (click)=" gender = 'noReprise' ; toggleWithReprise()" data-eventname="cta_aucune_reprise">
+          <div class="card text-center e-a-collapse-body h-100">
+              <div class="card-body m-2">
+                  <input class="e-a-form-radio-big-input cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault111"
+                  value="noReprise" [(ngModel)]="gender" (change)="toggleWithReprise()">
+                  <label class="d-block ea-h5 label-color mt-2 cursor-pointer">Non merci aucune reprise</label>
+              </div>
+            </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 mb-3 cursor-pointer" (click)=" gender = 'basicReprise' ; toggleWithReprise()" data-eventname="cta_voiture_moins_10_ans">
+          <div class="card text-center e-a-collapse-body h-100">
+              <div class="card-body m-2">
+                  <input class="e-a-form-radio-big-input cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+          value="basicReprise" [(ngModel)]="gender" (change)="toggleWithReprise()">
+                  <label class="d-block ea-h5 label-color mt-2 cursor-pointer">Voiture moins de 10 ans</label>
+              </div>
+            </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 mb-3" *ngFor="let reprise of devis?.reprise?.reprises">
+          <div class="card e-a-collapse-body h-100">
+              <div class="card-body text-center">
+                  <input class="e-a-form-radio-big-input" type="radio" name="flexRadioDefault" [id]="reprise.id" [value]="reprise"
+                  [(ngModel)]="gender" (change)="toggleWithReprise()">
+                  <label class="d-block ea-h5 label-color mt-2" [for]="reprise.id">
+                    <span [innerHTML]="reprise.label"></span>
+                  </label>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div *ngIf="mode == 2">
+      <div *ngIf="step == 1">
+          <div class="ea-h5 ea-bold mb-2"> Avez-vous déjà effectué une estimation de reprise ? </div>
+          <div class="d-inline-block me-5">
+            <div class="d-flex align-items-center">
+              <input class="e-a-form-radio-small-input" type="radio" name="exitRepriseValue" id="exitReprise1" value="0"
+                [(ngModel)]="exitRepriseValue" (change)="setExistReprise()">
+              <label class="ea-check-label ea-h5 mb-0" for="exitReprise1">
+                <span>Oui</span>
+              </label>
+            </div>
+          </div>
+          <div class="d-inline-block">
+            <div class="d-flex align-items-center">
+              <input class="e-a-form-radio-small-input" type="radio" name="exitRepriseValue" id="exitReprise2" value="1"
+                [(ngModel)]="exitRepriseValue" (change)="setExistReprise()">
+              <label class="ea-check-label ea-h5 mb-0" for="exitReprise2">
+                <span>Non</span>
+              </label>
+            </div>
+          </div>
+        </div>
+       
+         <hr class="ea-dotted-line" *ngIf="step == 1">
+        <div *ngIf="existReprise">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <label class="ea-h5">Identifiant de votre estimation</label>
+              <input class="form-control" [(ngModel)]="estimationId">
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="ea-h5">E-mail de votre estimation</label>
+              <input class="form-control" [(ngModel)]="estimationMail">
+            </div>
+          </div>
+          <div class="d-flex mt-3">
+            <div class="ms-auto">
+              <button type="button" class="btn ea-btn-outline-info btn-sm me-2" (click)="setListMode()">RETOUR</button>
+              <button type="button" class="btn ea-btn-info btn-sm" (click)="getEstimation()">VALIDER</button>
+            </div>
+          </div>
+          <div *ngIf="reprise && reprise.marque">
+            <div class="ea-h4 ea-primary-color ea-bold">
+              {{reprise.marque}} {{reprise.modeleCourt}}
+              <a class="text-decoration-none" (click)="openPopupReprise()">
+                <svg width="16" height="16" fill="#0388b1" class="bi bi-info-circle"
+                  viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path
+                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+              </a>
+            </div>
+            <div class="ea-h5">
+              Estimation de reprise :
+              <span *ngIf="reprise.prix" class="ea-h4 ea-primary-color ea-bold"> {{ reprise.prix }} € </span>
+              <span *ngIf="!reprise.prix" style="cursor: help;" class="ea-h4 ea-primary-color ea-bold"
+                title="Nous nous engageons à vous communiquer dans un délai de 3 heures une estimation de reprise réalisée par nos experts occasion*. *notre estimation de reprise est communiquée dans un délai de 3 heures pendant les horaires d’ouverture.">
+                estimation sous 3 heures
+                <svg width="16" height="16" fill="#0388b1" class="bi bi-info-circle"
+                  viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path
+                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+              </span>
+            </div>
+            <div class="ea-h5"> Offre valable jusqu'au: {{reprise.dateRentreePrevisionnelle}} </div>
+            <div class="ea-h5"> Identifiant de votre estimation: {{reprise.identifiant}} </div>
+            <div class="ea-h5"> {{reprise.carburant}} {{reprise.nbPorte}} portes</div>
+            <div class="d-flex mt-3">
+              <div class="ms-auto">
+                <button type="button" class="btn ea-btn-info btn-sm" (click)="existedEstimationChosen()">ÉTAPE
+                  SUIVANTE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!existReprise">
+          <div class="d-flex mt-3">
+            <div class="ms-auto">
+              <button type="button" class="btn ea-btn-outline-info btn-sm" (click)="preview()">PRÉCEDENT</button>
+            </div>
+          </div>
+          <div *ngIf="selectedVehicule && selectedVehicule.sMarque" class="mt-3 mb-3">
+            <div class="row">
+              <div class="col-12 col-sm-7 mb-3">
+                <div class="ea-h4 ea-primary-color ea-bold"> {{selectedVehicule.sMarque}} {{selectedVehicule.sVersion}}
+                </div>
+                <div class="ea-h5"> {{selectedVehicule.dDateMec}} </div>
+                <div class="ea-h5"> {{selectedVehicule.iNbPortes}} portes </div>
+                <div class="ea-h5"> {{selectedVehicule.sTransType}} </div>
+                <div class="ea-h5"> {{selectedVehicule.fHP}} chevaux fiscaux </div>
+              </div>
+              <div class="col-12 col-sm-5">
+                <img src="{{selectedVehicule.imgUrl}}" class="w-75"  />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="step == 1" class="row">
+            <div class="col-12 col-sm-6">
+              <div class="ea-h2 ea-bold"> Estimation automatique
+                <span class="ea-primary-color float-end d-none d-sm-block"> OU </span>
+              </div>
+              <div class="ea-h5 ea-bold"> Pour une estimation rapide, renseignez votre immatriculation </div>
+              <input class="form-control mt-2 mb-2" [(ngModel)]="matriculeToFind">
+              <div class="d-flex">
+                <div class="ms-auto">
+                  <button type="button" class="btn ea-btn-info btn-sm" (click)="getVehiculesByImmat()">VALIDER</button>
+                </div>
+              </div>
+              <div class="title-select" *ngIf="vehiculesByImmat?.length > 0"> Sélectionnez votre véhicule :</div>
+              <ul class="ea-list" *ngIf="vehiculesByImmat?.length > 0">
+                <li *ngFor="let vbi of vehiculesByImmat">
+                  <a (click)="choseVehicule(vbi)"> {{vbi.libVehicule}} -
+                    {{vbi.dateVehicule}} > </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="ea-h2 ea-bold"> Estimation manuelle </div>
+              <label class="ea-h4">Année du véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedYear" (change)="selectYear($event.target.value)">
+                <option selected value="0">Année</option>
+                <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+              </select>
+              <label class="ea-h4 mt-3">Mois du véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedMonth" (change)="selectMonth($event.target.value)">
+                <option selected value="0">Mois</option>
+                <option *ngFor="let month of months" value="{{month.id}}">{{month.name}}</option>
+              </select>
+              <label class="ea-h4 mt-3">Marque du véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedMarque" (change)="selectMarque()">
+                <option selected [ngValue]=null>Marque du véhicule</option>
+                <option *ngFor="let marque of marques" [ngValue]="marque">{{marque.name}}</option>
+              </select>
+              <label class="ea-h4 mt-3">Modèle du véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedModel" (change)="selectModel()">
+                <option selected [ngValue]=null>Modèle du véhicule</option>
+                <option *ngFor="let model of models" [ngValue]="model">{{model.name}}</option>
+              </select>
+              <label class="ea-h4 mt-3">Motorisation du véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedMotorisation" (change)="selectMotorisation()">
+                <option selected [ngValue]=null>Motorisation du véhicule</option>
+                <option *ngFor="let motorisation of motorisations" [ngValue]="motorisation">{{motorisation.name}}
+                </option>
+              </select>
+              <label class="ea-h4 mt-3">Finition du véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedFinition" (change)="selectFinition()">
+                <option selected [ngValue]=null>Finition du véhicule</option>
+                <option *ngFor="let finition of finitions" [ngValue]="finition">{{finition.name}}</option>
+              </select>
+              <label class="ea-h4 mt-3">Votre Véhicule</label>
+              <select class="form-select" [(ngModel)]="selectedVehicule" (change)="selectVehiculeByCmb()">
+                <option selected [ngValue]=null>Votre Véhicule</option>
+                <option *ngFor="let vehicule of vehicules" [ngValue]="vehicule">{{vehicule.sVersion}}</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="step == 2" class="step step2">
+            <div class="ea-h2 ea-bold">RENSEIGNEMENTS DE BASE</div>
+            <br>
+            <label class="ea-h5">Kilométrage</label>
+            <input class="form-control w-50" type="number" [(ngModel)]="kilometrage">
+            <br>
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <label class="ea-h5 m-0">
+                  <span>Véhicule d'importation</span>
+                </label>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="d-inline-block me-5">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions0" id="firstOptions00"
+                      [value]="true" [(ngModel)]="firstOptions[0]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions00">
+                      <span>Oui</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-inline-block">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions0" id="firstOptions01"
+                      [value]="false" [(ngModel)]="firstOptions[0]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions01">
+                      <span>Non</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <label class="ea-h5 m-0">
+                  <span>1ère main</span>
+                </label>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="d-inline-block me-5">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions1" id="firstOptions10"
+                      [value]="true" [(ngModel)]="firstOptions[1]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions10">
+                      <span>Oui</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-inline-block">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions1" id="firstOptions11"
+                      [value]="false" [(ngModel)]="firstOptions[1]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions11">
+                      <span>Non</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <label class="ea-h5 m-0">
+                  <span>Carnet d'entretien à jour</span>
+                </label>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="d-inline-block me-5">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions2" id="firstOptions20"
+                      [value]="true" [(ngModel)]="firstOptions[2]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions20">
+                      <span>Oui</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-inline-block">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions2" id="firstOptions21"
+                      [value]="false" [(ngModel)]="firstOptions[2]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions21">
+                      <span>Non</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <label class="ea-h5 m-0">
+                  <span>Courroie de distribution changée</span>
+                </label>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="d-inline-block me-5">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions3" id="firstOptions30"
+                      [value]="true" [(ngModel)]="firstOptions[3]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions30">
+                      <span>Oui</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="d-inline-block">
+                  <div class="d-flex align-items-center">
+                    <input class="e-a-form-radio-small-input" type="radio" name="firstOptions3" id="firstOptions31"
+                      [value]="false" [(ngModel)]="firstOptions[3]">
+                    <label class="ea-check-label ea-h5 mb-0" for="firstOptions31">
+                      <span>Non</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="step == 3">
+            <div class="d-flex align-items-center mb-2" *ngFor="let option of options">
+              <input class="e-a-form-check-input" type="checkbox" [name]="option.iId" [id]="option.iId"
+                [(ngModel)]="option.Selected">
+              <label class="ea-check-label ea-h5 mb-0" [for]="option.iId">
+                {{option.sNom}}
+              </label>
+            </div>
+          </div>
+          <div *ngIf="step == 4" class="row">
+            <div class="col-12 col-sm-6 mb-3">
+              <div>Couleur extérieure </div>
+              <div *ngFor="let item of externalColors; let i=index" [ngStyle]="{'background-color': item.color}"
+                (click)="setExteriorColor(item.label)" class="choix_couleur"
+                [ngClass]="{'ea-color-selected' : selectedExteriorColor && selectedExteriorColor == item.label}"
+                [title]="item.label">
+                <div *ngIf=" selectedExteriorColor && selectedExteriorColor == item.label">
+                  <svg width="24" height="24" fill="#abafb0" class="bi bi-check-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div>Couleur interieure </div>
+              <div *ngFor="let item of internalColors; let i=index" [ngStyle]="{'background-color': item.color}"
+                (click)="setInteriorColor(item.label)" class="choix_couleur"
+                [ngClass]="{'ea-color-selected' : selectedInteriorColor && selectedInteriorColor == item.label}"
+                [title]="item.label">
+                <div *ngIf="selectedInteriorColor && selectedInteriorColor == item.label">
+                  <svg width="24" height="24" fill="#abafb0" class="bi bi-check-lg"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
+                  </svg>
+                </div>
+              </div>
+              <select class="form-select mt-2" [(ngModel)]="selectedTexture">
+                <option selected value=''>Choix texture</option>
+                <option value='Alcantara'>Alcantara</option>
+                <option value='Cuir'>Cuir</option>
+                <option value='Cuir+Alcantara'>Cuir Alcantara</option>
+                <option value='Drap'>Drap</option>
+                <option value='Jean'>Jean</option>
+                <option value='Semi-cuir'>Semi-cuir</option>
+                <option value='Simili'>Simili</option>
+                <option value='Tissus'>Tissus</option>
+                <option value='Tissus-cuir'>Tissus-cuir</option>
+                <option value='Tweed'>Tweed</option>
+                <option value='Velours'>Velours</option>
+              </select>
+            </div>
+          </div>
+          <div *ngIf="step == 5">
+            <div class="ea-h2 ea-bold mb-3"> DÉFAUTS DE VOTRE VOITURE </div>
+            <div class="ea-h5 ea-bold">
+              Pour les mentionner, sélectionnez l'élément correspondant en cliquant dessus.
+            </div>
+            <ul class="ea-h5 ea-list">
+              <li>rayure = Peinture</li>
+              <li>Eraflure profonde, léger enfoncement = Tôlerie + peinture</li>
+              <li>Déformation importante, élément à remplacer = Remplacement + Peinture</li>
+            </ul>
+            <app-reprise-defect [devis]="devis"></app-reprise-defect>
+          </div>
+          <div *ngIf="step == 6" class="row">
+            <div class="col-12 col-sm-6">
+              <div class="ea-h5 ea-bold">
+                Estimez l'usure de vos pneus avant
+              </div>
+              <div class="d-flex align-items-center">
+                <input class="e-a-form-check-input" type="radio" name="frontState" id="frontState0"
+                  (change)="selectState(0)" [checked]="states[0] == true">
+                <label class="ea-check-label ea-h5 mb-0" for="frontState0">
+                  Bon état
+                </label>
+              </div>
+              <div class="d-flex align-items-center">
+                <input class="e-a-form-check-input" type="radio" name="frontState" id="frontState1"
+                  (change)="selectState(1)" [checked]="states[1] == true">
+                <label class="ea-check-label ea-h5 mb-0" for="frontState1">
+                  Usés à 50%
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="ea-h5 ea-bold">
+                Estimez l'usure de vos pneus arrière
+              </div>
+              <div class="d-flex align-items-center ">
+                <input class="e-a-form-check-input" type="radio" name="backState" id="backState0"
+                  (change)="selectState(2)" [checked]="states[2] == true">
+                <label class="ea-check-label ea-h5 mb-0" for="backState0">
+                  Bon état
+                </label>
+              </div>
+              <div class="d-flex align-items-center ">
+                <input class="e-a-form-check-input" type="radio" name="backState" id="backState1"
+                  (change)="selectState(3)" [checked]="states[3] == true">
+                <label class="ea-check-label ea-h5 mb-0" for="backState1">
+                  Usés à 50%
+                </label>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="step == 7">
+            <div class="d-flex align-items-center mb-2">
+              <input class="e-a-form-check-input" type="checkbox" id="immatriculation" (change)="toggleOk(1)">
+              <label class="ea-check-label ea-h4 mb-0" for="immatriculation">
+                Je déclare que mon véhicule immatriculé
+              </label>
+            </div>
+            <input class="form-control w-50" [(ngModel)]="matricule">
+            <div class="ea-h4 mt-3">
+              n'a jamais été gravement accidenté (passage au marbre par exemple) et que celui-ci est conforme en tous
+              points à l'estimation
+              et aux éléments de la carte grise correspondante. Le véhicule devra être en parfait état de
+              fonctionnement,
+              aucune modification technique (tant au niveau moteur que châssis) n'aura été apportée, et ne devra pas
+              être
+              gagé.
+            </div>
+          </div>
+          <div *ngIf="step == 8">
+            <div *ngIf="!loader">
+              <fieldset>
+                <legend class="mb-0">Votre reprise</legend>
+                <div class="row" *ngIf="aideReprise > 0">
+                  <div class="col-8">
+                    Aide à la reprise de votre ancien véhicule <span *ngIf="primeDeduite"> (non déduite) </span>
+                  </div>
+                  <div class="col-4">
+                    <span class="text-end ea-primary-color"> {{ aideReprise | number:'1.0-0':'fr' }} € </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-8">
+                    Estimation de reprise (non déduite) incluant les frais de remise en état
+                    <a class="text-decoration-none" (click)="openPopupReprise()">
+                      <svg width="16" height="16" fill="#0388b1"
+                        class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path
+                          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="col-4">
+                    <span *ngIf="reprise.prix"> {{ reprise.prix | number:'1.0-0':'fr' }} € </span>
+                    <span *ngIf="!reprise.prix" style="cursor: help;" class="text-end ea-primary-color"
+                      title="Nous nous engageons à vous communiquer dans un délai de 3 heures une estimation de reprise réalisée par nos experts occasion*. *notre estimation de reprise est communiquée dans un délai de 3 heures pendant les horaires d’ouverture.">
+                      estimation sous 3 heures
+                      <svg width="16" height="16" fill="#0388b1"
+                        class="bi bi-info-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path
+                          d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+                <div class="reprise_total" *ngIf="aideReprise > 0">
+                  <div class="row">
+                    <div class="col-8">
+                      Estimation de reprise
+                    </div>
+                    <div class="col-4">
+                      <span *ngIf="reprise.prix" class="text-end ea-primary-color"> {{ reprise.prix + aideReprise |
+                        number:'1.0-0':'fr' }} € </span>
+                      <span *ngIf="!reprise.prix" class="text-end ea-primary-color"> {{ aideReprise |
+                        number:'1.0-0':'fr' }} € </span>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="loader" *ngIf="loader">
+            </div>
+          </div>
+          <div class="d-flex mt-3" *ngIf="step != 1">
+            <div class="ms-auto" [hidden]="step == 8">
+              <button type="button" class="btn ea-btn-info btn-sm" (click)="next()">ÉTAPE SUIVANTE</button>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+

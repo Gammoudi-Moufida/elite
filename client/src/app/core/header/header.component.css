@@ -1,0 +1,189 @@
+
+.tw-navbar {
+	@apply relative flex flex-wrap items-center min-h-[70px] z-[1000] justify-between !important;
+}
+.tw-logo-elite {
+	@apply flex justify-start text-[1.25rem] items-center no-underline whitespace-nowrap p-[0] me-0 !important;
+}
+.tw-link {
+	@apply block py-[0.5rem] !important ;
+}
+.block-svg {
+	@apply block !important;
+  }
+.tw-btn {
+	@apply flex items-center justify-center w-full px-[6px] py-[8px] rounded text-[#000] border-solid  bg-[#f8f9fa] hover:bg-[#d3d4d5] mb-[3.25rem] mt-3;
+}
+.tw-visible {
+	@apply visible !important;
+}
+.logo-style {
+	@apply h-[18px] border-l-white border-l border-solid;
+}
+.phone-number {
+	@apply text-[13px];
+}
+.text-size {
+	@apply text-sm;
+}
+.border-icon{
+    @apply p-[5px];
+}
+.rounded-pill{
+	@apply h-[35px] rounded-[50rem];
+}
+.tw-push_button {
+	@apply relative block w-[235px] h-[34px] font-raleway leading-[32px] text-[13px] font-normal text-center no-underline box-content text-[#fff] cursor-pointer bg-[#007896] border-[#007896];
+}
+.tw-label-modal {
+	@apply text-[#717171] font-raleway text-xs ml-[0px] mr-[47px] mt-[4px] mb-[5px] pt-[5px] pb-[0px] px-[20px];	
+}
+.tw-title-modal {
+	@apply text-left font-raleway font-bold text-[13px] pl-[20px] pr-[45px] pt-[20px] pb-0 border-t-[5px] border-t-[#007896] border-solid;
+}
+.tw-select-modal {
+	@apply bg-[#f3f3f4] h-[40px] w-[247px] border-none text-[#717171] mt-[0px] mb-[10px] mx-0;
+}
+.tw-close-modal {
+	@apply absolute text-[40px]  opacity-50 font-semibold pt-[5px] pb-[10px] px-[10px] mt-[-10px] mr-[0px] mx-[0px] right-[.3em] top-[13px];
+}
+.tw-navbar-nav {
+	@apply flex-col mb-0 pl-0 list-none;
+ }
+ 
+@media (min-width: 992px) {
+.tw-navbar-nav{
+    @apply flex flex-row !important;
+} 
+.rounded-pill {
+	width: 150px;
+}
+}
+@media screen and (max-width: 991px) {
+	ul li{
+		@apply border-b-white border-b border-solid;
+  }
+  .tw-navbar{
+	@apply min-h-[52px] h-[52px] !important;
+  }
+  .tw-navbar-collapse {
+	@apply absolute h-[495.06px] bg-[#2a2a2a] w-full top-[45px] left-[0] pl-[15px] pr-[15px];
+  }
+  .phone-number {
+	@apply text-xs;
+}
+	.rounded-pill{
+	@apply h-[30px] rounded-[50rem] !important;
+}
+	.tw-navbar{
+	@apply pl-[1rem] pr-[1rem] !important;
+}
+	.border-icon{
+	@apply p-[4px] !important;
+	}
+}
+@media screen and (min-width: 992px) { 
+	.display-account{
+	   @apply block !important;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.logo-elite{
+		@apply h-[34px] w-[87px];
+	  }
+ }
+ 
+@media screen and (min-width: 991px) { 
+  .rounded-pill{
+	@apply px-2 rounded-[50rem] !important;
+}
+}
+
+@media screen and (max-width:374px) {
+	.tw-navbar{
+		@apply p-[0.3rem] !important;
+	}
+	.rounded-pill{
+		@apply ml-[0.5rem] rounded-[50rem] !important;
+	}
+	.logo-style{
+		@apply pl-[0] !important;
+	}
+
+	.form-inline{
+		@apply pr-[0.8rem] !important;
+
+	}
+}
+@media screen and (min-width: 768px) and (max-width: 991px)  {
+	.rounded-pill{
+		@apply ml-[0.5rem]  rounded-[50rem] !important;
+	}
+	.text-size{
+		@apply text-xs;
+	}
+	.phone-number{
+		@apply text-xs;
+	}
+	.tw-navbar{
+		@apply px-[1rem] !important;
+
+	}
+}
+@media (min-width: 992px){
+	.position {
+		@apply hidden !important;
+	}
+  }
+
+@media (min-width: 992px) {
+    .tw-navbar-collapse {
+      @apply flex  basis-auto !important;
+    }
+	.expand-lg {
+		@apply flex-nowrap justify-start;
+	}
+	.tw-link {
+		@apply px-[0.5rem]  !important ;
+	}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1028px)  {
+	.tw-link{
+		@apply px-1 text-[13px] !important;
+	}
+}
+
+@media screen and (min-width: 1029px) and (max-width: 1097px)  {
+	.tw-link{
+		@apply px-1 !important;
+	}
+}
+
+@media (max-width: 768px) { 
+	.fixed.bottom-4 {
+		bottom: 60px; 
+	}
+  }
+  @media (max-width: 320px) { 
+	.fixed.bottom-4 {
+		bottom: 50px; 
+	}
+  }
+  @media (min-width: 375px) and (max-width: 425px) {
+	.fixed.bottom-4 {
+		bottom: 59px; 
+	}	
+}
+.responsive-logo {
+    width: 111px; 
+}
+@media only screen and (max-width: 767px) {
+    .responsive-logo {
+        width: 61px; 
+    }
+	.phone-number-width {
+		width: 14px; 
+	}
+}

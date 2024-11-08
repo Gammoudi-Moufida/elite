@@ -1,0 +1,9 @@
+.tw-label {
+    @apply items-center cursor-pointer flex-nowrap text-[0.84rem] leading-3 text-[#596A73] font-bold uppercase;
+}
+
+@media screen and (max-width : 375px) {
+    .font-label{
+        @apply text-[11.80px] !important;
+    }
+}

@@ -1,0 +1,164 @@
+<div class="modal-header">
+    <h4 class="modal-title  ea-bold ea-uppercase">DÉTAIL DE L'OFFRE</h4>
+    <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+        <div class="row" *ngIf="devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion">
+            <div class="col-8">
+                <span class="ea-h5"> Prix catalogue :</span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{devis?.generalInfo?.prices?.catalog_price | number:'1.0-0':'fr'}} €</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <span class="ea-h5"> Options supplémentaires :</span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{devis?.generalInfo?.prices?.optionsCataloguePrice | number:'1.0-0':'fr'}} €</span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.offer?.showPrice && devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion">
+            <div class="col-8">
+                <span class="ea-h5"> Avantage </span>
+                <span *ngIf="devis?.generalInfo?.type == 'lease'">mise en location :</span>
+                <span *ngIf="devis?.generalInfo?.type != 'lease'">client :</span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> -{{devis?.generalInfo?.prices?.avantageClient + devis?.generalInfo?.prices?.remiseOptions | number:'1.0-0':'fr'}} € </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <span class="ea-h5"> Prix Elite-Auto : </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end" *ngIf="devis?.generalInfo?.offer?.showPrice || devis?.generalInfo?.type == 'lease'"> {{ elitePrice | number:'1.0-0':'fr'}} € </span>
+                <span class="ea-h5 ea-bold float-end" *ngIf="!(devis?.generalInfo?.offer?.showPrice || devis?.generalInfo?.type == 'lease')"> A discrétion</span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.type == 'utility'">
+            <div class="col-8">
+                <span class="ea-h5"> T.V.A {{ devis?.generalInfo?.prices?.tva }}% </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{ tvaPrice | number:'1.0-0':'fr'}} € </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.prices.fraisLivraison != -1">
+            <div class="col-8">
+                <span class="ea-h5"> Livraison : {{ devis?.generalInfo?.livraisonLabel}}</span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{ devis?.generalInfo?.prices?.fraisLivraison | number:'1.0-0':'fr'}} € </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <span class="ea-h5"> Frais de mise à disposition : </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{devis?.generalInfo?.prices?.administrativePrice | number:'1.0-0':'fr'}} € </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.offer?.ecoTaxe < 0 && (devis?.generalInfo?.type != 'utility')">
+            <div class="col-8">
+                <span class="ea-h5"> Bonus écologique : </span>
+                <span *ngIf="!devis?.generalInfo?.offer?.prime"> (non déduit) </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{ devis?.generalInfo?.offer?.ecoTaxe|number:'1.0-0':'fr'}} €* </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.prices?.reprise != -1">
+            <div class="col-8">
+                <span class="ea-h5"> Votre reprise : <span [innerHTML]="devis?.generalInfo?.prices?.repriseLabel"></span></span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{devis?.generalInfo?.prices?.reprise | number:'1.0-0':'fr'}} € </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.prices?.aideReprise > 0">
+            <div class="col-8">
+                <span class="ea-h5"> Aide à la reprise de votre ancien véhicule <span *ngIf="primeDeduite"> (non déduite) </span> :</span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{devis?.generalInfo?.prices?.aideReprise | number:'1.0-0':'fr'}} € </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.prices?.demandeReprise == 1">
+            <div class="col-8">
+                <span class="ea-h5" [innerHTML]="devis?.generalInfo?.prices?.repriseLabel"></span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end" *ngIf="devis?.generalInfo?.prices?.demandeReprisePrice != -1"> {{ devis?.generalInfo?.prices?.demandeReprisePrice | number:'1.0-0':'fr' }} € </span>
+                <span
+                    class="ea-h5 ea-bold float-end"
+                    *ngIf="devis?.generalInfo?.prices?.demandeReprisePrice == -1"
+                    title="Nous nous engageons à vous communiquer dans un délai de 3 heures une estimation de reprise réalisée par nos experts occasion*. *notre estimation de reprise est communiquée dans un délai de 3 heures pendant les horaires d’ouverture."
+                >
+                    estimation sous 3 heures
+                </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.prices?.aideReprise > 0 && devis?.generalInfo?.prices?.demandeReprisePrice != -1">
+            <div class="col-8">
+                <span class="ea-h5"> Prix de reprise minimum </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end" *ngIf="devis?.generalInfo?.prices?.demandeReprisePrice != -1">
+                    {{ devis?.generalInfo?.prices?.demandeReprisePrice + devis?.generalInfo?.prices?.aideReprise | number:'1.0-0':'fr' }} €
+                </span>
+            </div>
+        </div>
+        <div class="row ea-blue-color" *ngIf="devis?.generalInfo?.type != 'utility'">
+            <div class="col-8">
+                <span class="ea-h5"> Votre tarif (options incluses) : </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end" *ngIf="devis?.generalInfo?.offer?.showPrice || devis?.generalInfo?.type == 'lease'"> {{ totalPrice | number:'1.0-0':'fr'}} €** </span>
+                <span class="ea-h5 ea-bold float-end" *ngIf="!(devis?.generalInfo?.offer?.showPrice || devis?.generalInfo?.type == 'lease')"> Nous contacter </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.offer?.ecoTaxe > 0 && (devis?.generalInfo?.type == 'new' || devis?.generalInfo?.type == 'lease')">
+            <div class="col-8">
+                <span class="ea-h5">Malus écologique, à prévoir en supplément </span>
+                <br />
+                <span class="ea-h6">Donné à titre indicatif. Malus écologique pouvant varier en fonction des options et de la réglementation en vigueur le jour de la livraison. </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{ devis?.generalInfo?.offer?.ecoTaxe|number:'1.0-0':'fr'}} €** </span>
+            </div>
+        </div>
+        <div class="row ea-blue-color" *ngIf="devis?.generalInfo?.type == 'utility'">
+            <div class="col-8">
+                <span class="ea-h5"> Votre tarif T.T.C : </span>
+            </div>
+            <div class="col-4">
+                <span class="ea-h5 ea-bold float-end"> {{ ttcPrice | number:'1.0-0':'fr'}} €** </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.offer?.ecoTaxe < 0 && (devis?.generalInfo?.type != 'utility')">
+            <div class="col-12">
+                <span class="ea-h6"> (*)Eco info {{ devis?.generalInfo?.offer?.libEco }}</span>
+            </div>
+        </div>
+        <div class="row ea-blue-color">
+            <div class="col-12">
+                <span class="ea-h6"> (**)Tarifs et promotions modifiables sans préavis, mais garantis jusqu'à la livraison une fois le {{(devis?.generalInfo?.provenance =='FRANCE' && devis?.generalInfo?.dispo == 'Sur commande') ? 'mandat' : 'bon de commande'}} accepté par Elite-Auto.</span>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.generalInfo?.text">
+            <div class="col-12">
+                <span class="ea-h5">{{devis?.generalInfo?.text}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <app-conditions [devis]="devis"></app-conditions>
+            </div>
+        </div>
+  </div>

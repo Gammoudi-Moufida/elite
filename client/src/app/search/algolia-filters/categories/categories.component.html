@@ -1,0 +1,20 @@
+
+
+    <ul>
+        <li class="ais-RefinementList-item mb-2" [class.ais-RefinementList-item--selected]="item.isRefined"
+            *ngFor="let item of state?.items">
+            <label class="ais-RefinementList-label ">
+                <input type="checkbox" class="ais-RefinementList-checkbox" value="{{item.isRefined}}"
+                    (click)="state.refine(item.value)" [checked]="item.isRefined">
+                <div class="line-height">
+                    <span class="tw-big-font text-[16px]" class="Elite_{{item.value}}">{{item.label}}</span>
+                    <!-- <p class="form-check-label small-font " *ngIf="item.value == '1'"> Occasion récente et 1er prix</p> -->
+                    <!-- <p class="form-check-label small-font " *ngIf="item.value == '2'"> Occasion 1er prix </p> -->
+                    <!-- <p class="form-check-label small-font " *ngIf="item.value == '3'"> Neuf sur commande </p>
+                    <p class="form-check-label small-font " *ngIf="item.value == '4'"> Neuf disponible (0km) </p> -->
+                </div><br>
+                <span class="ais-RefinementList-count">{{ item.count }}</span>
+            </label>
+        </li>
+    </ul>
+

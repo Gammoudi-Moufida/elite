@@ -1,0 +1,9 @@
+.txt-position {
+	@apply text-left;
+}
+
+@media (max-width: 1024px){
+	.txt-position {
+		@apply text-center;
+	}
+ }

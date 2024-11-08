@@ -1,0 +1,18 @@
+<div class="container my-3">
+  <div *ngIf="!links" class="h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
+  <h2 class="font-bold text-lg text-custom-blue my-2">{{links?.title}}</h2>
+    <div class="grid lg:grid-cols-6 md:grid-cols-6 grid-cols-2 gap-3 mt-3">
+      <ng-container *ngIf="!links">
+        <div class="tw-nav-link bg-gray-200 h-8 space-y-8 animate-pulse p-2.5" 
+        *ngFor="let n of numSequence(links?.results.length)"></div>
+      </ng-container>
+      <ng-container *ngIf="links">
+        <a type="button" class="tw-nav-link p-2 font-roboto" *ngFor="let link of links?.results" 
+        href="{{ link.url }}">
+            {{ link.marque | titlecase }}  {{ link.slugModel | titlecase }}
+        </a>
+      </ng-container>
+    </div>
+</div>
+  
+

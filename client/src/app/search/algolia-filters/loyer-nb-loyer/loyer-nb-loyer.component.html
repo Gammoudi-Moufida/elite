@@ -1,0 +1,11 @@
+<div *ngIf="state">
+    <input type="range" [min]="24" list="tickmarks" [max]="84" [step]="12" class="tw-ea-range-slider h-[3px]" (change)="stateRefine()" [(ngModel)]="inputValue"/>
+    <datalist id="tickmarks" class="mt-[4px]">
+        <option value="24" class="tw-btn-loyer"></option>
+        <option value="36" class="tw-btn-loyer"></option>
+        <option value="48" class="tw-btn-loyer"></option>
+        <option value="60" class="tw-btn-loyer"></option>
+        <option value="72" class="tw-btn-loyer"></option>
+        <option value="84" class="tw-btn-loyer"></option>
+    </datalist>
+</div>

@@ -1,0 +1,56 @@
+.lib_class{
+    background: #e2e2e2;
+    padding: 20px;
+}
+.container{
+    max-width: 1327px;
+}
+@media only screen and (max-width : 1024px) {
+    .container{
+        padding: 0 55px;
+    }
+}
+@media only screen and (max-width : 768px) {
+    .container{
+        padding: 0 55px;
+    }
+    .h2{
+        margin-bottom: 0px;
+    }
+}
+
+@media only screen and (max-width : 425px) {
+    .h2{
+        font-size: 27px;
+    }
+    .h4{
+        font-size: 22px;
+    }
+    .h5{
+        font-size: 20px;
+    }
+    .label-style{
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .font-for-mobile{
+        font-size: 14px;
+    }
+    .section-margin-top{
+        margin-top:25px;
+    }
+}
+@media only screen and (max-width : 375px) {
+    .h2{
+        font-size: 25px;
+    }
+    .h4{
+        font-size: 20px;
+    }
+    .h5{
+        font-size: 15px;
+    }
+}
+a:hover{
+    color: black !important ;
+}

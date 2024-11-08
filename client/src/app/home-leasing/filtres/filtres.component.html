@@ -1,0 +1,45 @@
+<div class="loadImg tw-custom-relative" [lazyLoad]="filterBgImage">
+    <div class="container pt-4">
+        <h1 class="text-white text-[32px] font-bold text-center pt-2 m-0 pb-2">LEASING AUTO</h1>
+
+        <div class="slogan w-full text-center">
+            <b class="font-medium">En LOA, LLD ou crédit :</b> <span> Trouvez facilement le véhicule qui correspond à vos besoins</span>
+        </div>
+
+        <div class="flex flex-wrap xl:pb-4 mt-4">
+            <div class="w-full sm:w-full md:w-2/3 lg:w-1/2 xl:w-1/2 mx-auto">
+                <div class="slogan w-full text-center margin-1">
+                    <span class="tw-h3 ">Budget mensuel: de </span>
+                    <span class="tw-h3 font-bold">{{carsFilters.minMonthBudget | number}}€</span>
+                    <span class="tw-h3 "> à </span>
+                    <span class="tw-h3 font-bold">{{carsFilters.maxMonthBudget | number}}€</span>
+                </div>
+            <app-interval-slider [step]="false" [minValue]="minMonthBudget1" [maxValue]="maxMonthBudget1" [sliderParams] = "sliderParams" (sliderValuesEmitter)="sliderValues($event)"></app-interval-slider>
+        </div> 
+
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-4 text-center pt-[16px] mx-auto">
+            <div class="mx-auto slogan text-center w-full md:w-2/3 lg:w-full py-0 mt-2 mb-2">
+                <span class="tw-h3">Durée du financement: <span
+                        class="font-bold tw-h3">{{financingTerm}}</span> mois </span>
+                <input (ngModelChange)="filterAction();" type="range" min="24" max="84" step="12" class="tw-ea-slider"  [(ngModel)]="financingTerm"/>
+            </div>
+            <div class="mx-auto slogan text-center w-full md:w-2/3 lg:w-full py-0 mt-2 mb-2">
+                <span class="tw-h3">Kilométrage annuel: <span class="font-bold tw-h3">{{AnnualMileage | number}}</span> Km </span>
+                <input (ngModelChange)="filterAction();" type="range" min="5000" max="25000" step="5000" class="tw-ea-slider"  [(ngModel)]="AnnualMileage" />
+            </div>
+            <div class="mx-auto slogan text-center w-full md:w-2/3 lg:w-full py-0 mt-2 mb-2">
+                <span class="tw-h3 ">Apport (non obligatoire): <span class="font-bold tw-h3">{{apport | number}}€</span>  </span>
+                <input (ngModelChange)="filterAction();" type="range" min="0" max="9000" step="1000" class="tw-ea-slider" [(ngModel)]="apport" />
+            </div>
+        </div>
+        <div class="flex flex-wrap pt-[1rem] md:pt-[1rem]">
+            <div class="pt-[2px] lg:pt-4 px-3 mx-auto">
+                <p class="text-center">
+                    <button type="submit" (click)="redirect();" class="rounded tw-btn-danger" id="validSearch"
+                        [innerHTML]="searchResult"> </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

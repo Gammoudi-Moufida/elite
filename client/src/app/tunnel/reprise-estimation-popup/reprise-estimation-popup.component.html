@@ -1,0 +1,56 @@
+<div class="ea-modal-header">
+    <div class="ea-modal-close">
+        <button type="button" class="close " aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <h4 class="modal-title">Estimation de reprise</h4>
+    <div class="ea-h5 ea-italic">(*) champs obligatoires</div>
+</div>
+<div class="modal-body">
+    <ngb-alert class="ea-danger" type="danger" [dismissible]="false" *ngIf="message">{{ message }}</ngb-alert>
+    <div class="row">
+        <div class="col-2">
+            <select class="form-control" [(ngModel)]="currentUser.civility">
+                <option value="Mr">Mr.</option>
+                <option value="Mme">Mme.</option>
+                <option value="Mlle">Mlle.</option>
+            </select>
+        </div>
+        <div class="col-5">
+            <input [(ngModel)]="currentUser.lastname" class="form-control" placeholder="Nom *" />
+        </div>
+        <div class="col-5">
+            <input [(ngModel)]="currentUser.firstname" class="form-control" placeholder="Prénom *" />
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-4">
+            <input [(ngModel)]="currentUser.postalCode" class="form-control" placeholder="Code Postal *" />
+        </div>
+        <div class="col-8">
+            <input [(ngModel)]="currentUser.tel" class="form-control" placeholder="Téléphone *" />
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <input [(ngModel)]="currentUser.mail" class="form-control" placeholder="Email *" />
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <input [(ngModel)]="currentUser.promoCode" class="form-control" placeholder="Code Promo" />
+        </div>
+    </div>
+    <div class="ea-checkbox-container mt-3">
+        <input class="ea-form-check-input" type="checkbox" name="flexCheckBox" id="flexCheckBox1"
+            [(ngModel)]="currentUser.newsletter">
+        <label class="ea-check-label ea-h5" for="flexCheckBox1">
+            <b>OUI</b>, je souhaite recevoir la newsletter d'Elite-Auto et ses bons plans par voie électronique (email &
+            sms)
+        </label>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn ea-btn-info" (click)="passBack()" ngbAutofocus>Envoyer</button>
+</div>

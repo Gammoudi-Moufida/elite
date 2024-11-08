@@ -1,0 +1,46 @@
+.choix_couleur {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid #adadad;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 8px;
+    margin-top: 5px;
+}
+
+.choix_couleur.ea-color-selected {
+    opacity: 0.8;
+    padding: 7px;
+}
+
+fieldset {
+    border: 1px solid #0388b1;
+    padding: 10px;
+}
+
+fieldset legend {
+    text-align: left;
+    color: #0388b1;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: auto;
+}
+
+.reprise_total {
+    padding-top: 10px;
+    border-top: 1px solid #388eb0;
+    width: 100%;
+    float: left;
+}
+.padding-left{
+    padding-left: 1px!important;
+}
+.e-a-form-check-input:after {
+    width: 15px!important;
+    height: 15px!important;
+    left: -1px!important;
+    top: -4px!important;
+}

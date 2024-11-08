@@ -1,0 +1,11 @@
+.tw-leaseCard{
+    @apply rounded-[5px] p-[30px];
+}
+@media screen and (max-width: 767px) {
+    .tw-leaseCard {
+        @apply text-[14px] mb-[10px];
+	}
+    h2{
+        @apply text-[16px];
+    }
+}

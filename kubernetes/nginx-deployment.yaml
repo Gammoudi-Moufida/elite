@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-pod
+spec:
+  selector:
+    matchLabels:
+      app: k8l-elite
+      tier: nginx-pod
+      track: stable
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: k8l-elite
+        tier: nginx-pod
+        track: stable
+    spec:
+      containers:
+        - name: nginx
+          image: "midprnci.gra7.container-registry.ovh.net/elite-auto/nginx:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          envFrom:
+          - configMapRef:
+              name: k8l-config
+          env:
+          - name: WWW_EA_HOST
+            value: $(WWW_EA_HOST)
+          - name: LEASING_EA_HOST
+            value: $(LEASING_EA_HOST)
+          - name: UTILITAIRE_EA_HOST
+            value: $(UTILITAIRE_EA_HOST)
+      imagePullSecrets:
+      - name:  priv-registry

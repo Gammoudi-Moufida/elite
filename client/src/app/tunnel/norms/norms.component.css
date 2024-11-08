@@ -1,0 +1,29 @@
+.classA {
+    top:9%;
+}
+.classB {
+    top:15%;
+}
+.classC {
+    top:20%;
+}
+.classD {
+    top:25%;
+}
+.classE {
+    top:31%;
+}
+.classF {
+    top:36%;
+}
+.classG {
+    top:41%;
+}
+.background-img {
+    background: #000000;
+    opacity: 0.7;
+    width: 272px;
+    margin: 0 auto;
+    border: 1px solid;
+    border-radius: 5px;
+}

@@ -1,0 +1,184 @@
+<ais-instantsearch *ngIf="configResults" [config]="configResults" (change)="getSearchResults($event)">
+  <ais-configure [searchParameters]="{hitsPerPage:100}"></ais-configure>
+<div class="ea_content">
+  <div class="tw-loader text-center" *ngIf="!data"></div>
+    <app-model-sub-header [data]="data"></app-model-sub-header>
+  <div class="tw-container w-full px-3 my-3">
+    <app-model-text-seo [type]="type" [text]="topTextData" [isTop]="true"></app-model-text-seo>
+  </div>
+  <div class="flex flex-wrap list-none bg-custom-gray pt-[0px] pb-[150px] lg:pt-[43px] py-3">
+    <div class="tw-container w-full px-3 md:mt-2 lg:mt-0 pt-3">
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-1/4 py-[0px] pr-[12px]">
+          <app-algolia-filters (click)="isFilterClicked = true" class="w-full lg:w-1/4" [isCarbPage]="true"
+            [filterMobileShow]="filterMobileShow" [itsNotSearchPage]="true" [totalResult]="totalResult">
+          </app-algolia-filters>
+        </div>
+        <div class="w-full lg:w-3/4 lg:py-[0px] lg:px-[12px] text-sm text-custom-gray">
+          <div *ngIf="screenMode != 3 " class="w-full ps-0 pe-0 inline-flex pb-3">
+            <div class="w-1/2 pe-0">
+
+              <app-algolia-filter-order (orderChecked)="orderFilterChecked($event)" >
+              </app-algolia-filter-order> 
+
+            </div>
+            <div class="w-1/2 block ">
+              <button class="tw-btn-filters" *ngIf='data && algoliaData' (click)="filterMobileShow = !filterMobileShow">FILTRES
+                (6)</button>
+            </div>
+          </div>
+          <app-summary *ngIf='data && algoliaData && itemsForCategoryFilter' (filterCategorieEv)="filterCategorieEv($event)" [urlToCatalogue]="urlToCatalogue" [data]="data" [totalResult]='totalResult' [fuel]="aFuel" [algoliaData]="algoliaData" [items]="itemsForCategoryFilter"></app-summary>
+          <div class="tw-loader" *ngIf="!data">
+          </div>
+          <div class="w-full ps-0 pe-0 mt-[0px] mb-[10px] inline-flex lg:mt-[50px] lg:mb-[10px]" id='listOffreTable'>
+            <div class="flex-[1_0_0%] pt-3 ps-0 " *ngIf="totalResult">
+              <p class="title mb-0">
+                <strong>{{totalResult?totalResult:0}} <span *ngIf="totalResult > 1">véhicules correspendent</span> <span *ngIf="totalResult == 1">véhicule correspond</span> à votre recherche</strong>
+              </p>
+            </div>
+            <div class="w-1/2 lg:w-5/12 pe-0" *ngIf="totalResult && screenMode == 3">
+                <app-algolia-filter-order (orderChecked)="orderFilterChecked($event)" >
+                </app-algolia-filter-order>
+            </div>
+            <div *ngIf="screenMode  == 3" class="w-1/2 md:w-1/3 lg:w-0 block sm:block md:block lg:hidden"
+              [ngClass]="{'w-full':!totalResult}">
+              <button class="tw-btn-filters" *ngIf='data' (click)="filterMobileShow = !filterMobileShow">FILTRES</button>
+            </div>
+          </div>
+
+          <div class="tw-loader" *ngIf="loadingResults"></div>
+
+          <div class="flex flex-wrap" *ngIf="!loadingResults && (!this.totalResult || this.totalResult ==0)">
+            <div class="w-full text-center">
+              <h5 *ngIf="modelsList" class="font-bold">Ces modèles peuvent vous intéresser</h5>
+              <div class="tw-loader" *ngIf="showPlaceholder"></div>
+              <app-similar-model *ngIf="modelsList" [cars]="modelsList" [showImg]="showImg" [type]="type"
+                [isBrowser]="isBrowser"></app-similar-model>
+            </div>
+          </div>
+          <div *ngIf="totalResult > 0">
+            <div class="overflow-x-auto">
+            <table class="tw-table tw-table-hover mt-3">
+              <thead class="tw-thead-dark">
+                <tr>
+                  <th class="rounded-tl-[7px] text-white" scope="col">Modèle</th>
+                  <th class="text-center text-white" scope="col">Finition</th>
+                  <th class="text-center text-white" scope="col">Prix</th>
+                  <th class="text-center text-white" scope="col">Remise</th>
+                  <th class="rounded-tr-[7px]" scope="col"></th>
+                </tr>
+              </thead>
+              <tbody *ngIf="algoliaData">
+                <tr *ngFor="let data of algoliaData">
+                  <a class="contents" href="{{data.offreUrl}}">
+                    <td class="tw-pointer pt-3 pb-3">
+                      <a class="no-underline">
+                        <div class="md:flex flex-wrap -mx-3">
+                          <div class="xl:w-1/3 md:w-1/2 lg:pr-[12px] tw-padding">
+                            <div><img ngSrc="visuel/{{data.marque.toString().replace(' ', '')}}/peintures/600x400/{{data.OffreImages[0]}}" 
+                             *ngIf="!data.isVo && data.OffreImages[0] && data?.OffreImages[0].length" fill class="lazyload tw-custom-relative w-full h-full "></div>
+
+                            <div><img ngSrc="visuel/{{data.frontPicture.toString().replace('135x90','600x400')}}"
+                            *ngIf="!data.isVo && !data.OffreImages[0] && data?.vignette == null" fill class="lazyload tw-custom-relative w-full h-full "></div>
+
+                            <div><img ngSrc="{{data?.vignette}}" 
+                              *ngIf="!data.isVo && !data.OffreImages[0] && data.vignette" fill class="lazyload tw-custom-relative w-full h-full "></div>
+
+                            <div><img ngSrc="vo/small/{{data?.vignette}}" 
+                              *ngIf="data.isVo && data?.vignette" fill class="lazyload tw-custom-relative w-full h-full "></div>
+                              
+                            <div><img ngSrc="proxauto/apercu_nc.png" 
+                                *ngIf="data.isVo && !data?.vignette" fill class="lazyload tw-custom-relative w-full h-full "></div>
+
+                          </div>
+                          <div class="xl:w-2/3 md:w-1/2 px-[12px]">
+                            <span class="text-[#212529] font-bold text-base"> {{ data.marque }} {{
+                              data.modelNormalized }}</span>
+                            <br>
+                            <span
+                              class="text-[#212529] no-underline font-semibold">{{data.motorisation}}</span><br>
+                            <div class="flex flex-wrap">
+                              <img ngSrc="general/icon_equipement/{{equipment.url.replace('.svg','-noir.svg')}}"
+                                *ngFor="let equipment of data.equipments"
+                                class="lazyload tw-equipment-icon no-underline"
+                                title="{{equipment.title}}" width="35" height="35">
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </td>
+                    <td class="tw-pointer text-center">
+                      <a class="no-underline text-[#212529] font-semibold">
+                        {{data.finition}}<br>
+                        <div class="inline-block items-center" *ngIf="!data.isVo">
+                        <img src="{{colorUrl}}{{color.imageColor}}" *ngFor="let color of data.ColorsImages.slice(0,4)"
+                          class="lazyload tw-icon-color" 
+                          title="{{color.libelleColor}}" width="20" height="20">
+                        <ng-template #popContent>
+                          <img src="{{colorUrl}}{{color.imageColor}}" *ngFor="let color of data.ColorsImages.slice(4)"
+                            class="lazyload tw-icon-color" 
+                            title="{{color.libelleColor}}" width="20" height="20">
+                        </ng-template>
+                        <span *ngIf="data.ColorsImages.length >4" class="tw-badge-color-plus"
+                          triggers="mouseenter:mouseleave"
+                          [ngbPopover]="popContent">+{{data.ColorsImages.length-4}}</span>
+                        </div>
+                      </a>
+                    </td>
+                    <td class="text-center price tw-pointer">
+                      <a class="no-underline ">
+                        <div class="text-[#212529] text-xl font-bold">
+                          {{ +data.priceForFront | number:'1.0-0':'fr' }}€
+                        </div>
+                        <div class="flex" *ngIf="data.isOccasion == false && !setRemise(data).discretionRemise">
+                          <span class="me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-caret-down-square-fill text-custom-gray border rounded-lg border-solid border-white" viewBox="0 0 16 16">
+                              <path
+                                d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6H4z" />
+                            </svg>
+                          </span>
+                          <span class="text-sm line-through text-[#212529] font-bold"> {{ +data.prixCatalogueForLease |
+                            number:'1.0-0':'fr' }}€ TTC
+                          </span>
+                        </div>
+                      </a>
+                    </td>
+                    <td class="text-center font-bold remise tw-pointer text-white">
+                      <div
+                        class="inline-block card-remise-percent_{{data.category}} me-1 mb-1 ps-2 pe-2 pt-1 pb-1 font-bold text-white"
+                        [innerHtml]="setRemise(data).remiseMessage">
+                      </div>
+                    </td>
+                    <td class="tw-pointer">
+                      <svg class="fill-[#556a74] w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                        <path
+                          d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                      </svg>
+                    </td>
+                  </a>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-container w-full px-3 pb-3">
+    <app-shared-nav-link *ngIf="modelId && eurotaxId && (showImg || !isBrowser)" [typePage]="type" [eurotaxModelId]="modeleurotaxIdId"
+      [mark]="eurotaxId">
+    </app-shared-nav-link>
+    <hr />
+    <app-shared-reward [showImg]="true"></app-shared-reward>
+    <hr />
+    <app-shared-avis [screenMode]="screenMode" [listAvis]="data?.listeEkomi">
+    </app-shared-avis>
+    <hr *ngIf="basTextData"/>
+    <app-model-text-seo *ngIf="basTextData" [text]="basTextData"></app-model-text-seo>
+  </div>
+</div>
+
+</ais-instantsearch>

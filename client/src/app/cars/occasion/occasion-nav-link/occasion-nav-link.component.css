@@ -1,0 +1,17 @@
+ 
+
+
+.tw-btn-collapse {
+  @apply bg-custom-jet-gray px-[100px] py-[5px] text-sm text-[#fff] rounded-none;
+}
+.tw-btn {
+  @apply bg-custom-jet-gray font-normal text-[14px] leading-6 text-center no-underline align-middle cursor-pointer;
+}
+.tw-show {
+  @apply hidden !important;
+}
+@media screen and (max-width:699px) {
+	.tw-btn-collapse {
+    @apply px-[50px] py-[5px];
+  }
+}

@@ -1,0 +1,169 @@
+<div class="tw-group-tags" *ngIf="query" >
+    <span class="inline-flex">
+      <button type="button" class="tw-tag">{{query}}</button>
+      <button type="button" class="tw-tag-close" (click)="clearQuery()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </div>
+<div class="tw-group-tags" *ngFor="let item of state?.items">
+  <span  *ngIf="item.attribute == 'loyerMensuel' || item.attribute == 'co2' || item.attribute == 'puissanceFiscaleNormalized' || item.attribute == 'avantageFinalWithADiscretion' || item.attribute == 'priceForFront'  || item.attribute == 'kilometrage' || item.attribute == 'anneeMiseEnCirculation' || item.attribute == 'loyers.loyer_mensuel' ">
+    <span class="inline-flex" *ngIf="item.refinements[0]?.value && !(item.refinements[1]?.value) && item.refinements[0].operator == '<='">
+      <button type="button" class="tw-tag">
+        <span *ngIf="item.attribute == 'avantageFinalWithADiscretion'">remise inférieure à</span>
+        <span *ngIf="item.attribute == 'loyerMensuel'">loyer Mensuel inférieur à</span>
+         {{item.refinements[0]?.value }} 
+        <span *ngIf="item.attribute == 'puissanceFiscaleNormalized'"> CV</span>
+        <span *ngIf="item.attribute == 'avantageFinalWithADiscretion'">%</span>
+        <span *ngIf="item.attribute == 'priceForFront' || item.attribute == 'loyers.loyer_mensuel'">€</span>
+        <span *ngIf="item.attribute == 'kilometrage'">KM</span>
+
+       </button>
+       <button type="button" class="tw-tag-close"
+         (click)="handleChange(item.refinements[0])">
+         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+        </button>
+    </span>
+    <span class="inline-flex" *ngIf="item.refinements[0]?.value && !(item.refinements[1]?.value) && item.refinements[0].operator == '>='">
+      <button type="button" class="tw-tag">
+        <span *ngIf="item.attribute == 'avantageFinalWithADiscretion'">remise supérieure à</span>
+        <span *ngIf="item.attribute == 'loyerMensuel'">loyer Mensuel supérieur à</span>
+        {{item.refinements[0]?.value }}
+        <span *ngIf="item.attribute == 'puissanceFiscaleNormalized'"> CV</span>
+        <span *ngIf="item.attribute == 'avantageFinalWithADiscretion'">%</span>
+        <span *ngIf="item.attribute == 'priceForFront' || item.attribute == 'loyers.loyer_mensuel'">€</span>
+        <span *ngIf="item.attribute == 'kilometrage'">KM</span>
+
+       </button>
+       <button type="button" class="tw-tag-close"
+         (click)="handleChange(item.refinements[0])">
+         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+        </button>
+    </span>
+    <span class="inline-flex" *ngIf="item.refinements[0]?.value && item.refinements[1]?.value">
+      <button type="button" class="tw-tag">
+        <span *ngIf="item.attribute == 'avantageFinalWithADiscretion'">remise</span>
+        <span *ngIf="item.attribute == 'loyerMensuel'">loyer Mensuel</span>
+
+       entre {{item.refinements[0]?.value }} et {{item.refinements[1]?.value }} 
+       <span *ngIf="item.attribute == 'puissanceFiscaleNormalized'"> CV</span>
+       <span *ngIf="item.attribute == 'avantageFinalWithADiscretion'">%</span>
+       <span *ngIf="item.attribute == 'priceForFront' || item.attribute == 'loyerMensuel'">€</span>
+       <span *ngIf="item.attribute == 'kilometrage'">KM</span>
+
+       </button>
+       <button type="button" class="tw-tag-close"
+         (click)="handleChange(item.refinements[0]);handleChange(item.refinements[1])">
+         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+        </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'category' ">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button" class="tw-tag" *ngIf="refinement.value == '1'"> Occasions</button>
+      <!-- <button type="button" class="tag" *ngIf="refinement.value == '2'"> Access</button> -->
+      <button type="button" class="tw-tag" *ngIf="refinement.value == '3'"> Neuf</button>
+      <button type="button" class="tw-tag" *ngIf="refinement.value == '4'"> 0 km</button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'isFrenchDaysPromo'">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button" class="tw-tag"> French Days</button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'flashSale' ">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button" class="tw-tag"> Déstockage</button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'isNouveaute' ">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button" class="tw-tag"> Nouveautés</button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'typeForRecherche' ">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button" class="tw-tag" *ngIf="refinement.value == 'Particulier'"> Véhicules Particuliers</button>
+      <button type="button" class="tw-tag" *ngIf="refinement.value == 'Professionnel'"> Véhicules Utilitaires</button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'apport' ">
+    <span class="inline-flex">
+      <button type="button" class="tw-tag"> 
+      <span>apport</span>
+      {{item?.refinements[0].value}}
+    </button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(item?.refinements[0]);handleChange(item?.refinements[1])">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute == 'disponibiliteForFO' ">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button" class="tw-tag" *ngIf="refinement.value == 'en stock'">Disponible</button>
+      <button type="button" class="tw-tag" *ngIf="refinement.value == 'en arrivage'">En arrivage</button>
+      <button type="button" class="tw-tag" *ngIf="refinement.value == 'sur commande'">Sur commande</button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+  <span *ngIf="item.attribute !='apport' && item.attribute !='flashSale' && item.attribute !='isNouveaute' && item.attribute !='modelId' && item.attribute != 'IsEnabledOrReservedClient' && item.attribute != 'loyerMensuel' && item.attribute != 'id' && item.attribute != 'loyers.nb_loyer' && item.attribute != 'puissanceFiscaleNormalized' && item.attribute != 'co2' && item.attribute != 'avantageFinalWithADiscretion' && item.attribute != 'category'  && item.attribute != 'disponibiliteForFO' && item.attribute != 'priceForFront'  && item.attribute != 'loyers.loyerMensuel'  && item.attribute != 'kilometrage'  && item.attribute != 'anneeMiseEnCirculation' &&  item.attribute != 'loyers.loyer_mensuel' && item.attribute != 'typeForRecherche' && item.attribute != 'isFrenchDaysPromo'">
+    <span class="inline-flex" *ngFor="let refinement of item?.refinements">
+      <button type="button"
+        class="tw-tag">
+        <span *ngIf="item.attribute == 'kilometres'"> kilométrage </span>
+        <span *ngIf="item.attribute == 'nbLoyer'"> durée  </span>
+
+        {{refinement.label}}
+
+        <span *ngIf="item.attribute == 'kilometres'"> km </span>
+        <span *ngIf="item.attribute == 'nbLoyer'"> mois </span>
+
+      </button>
+      <button type="button" class="tw-tag-close" (click)="handleChange(refinement)">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M6.99967 13.6666C3.31767 13.6666 0.333008 10.6819 0.333008 6.99992C0.333008 3.31792 3.31767 0.333252 6.99967 0.333252C10.6817 0.333252 13.6663 3.31792 13.6663 6.99992C13.6663 10.6819 10.6817 13.6666 6.99967 13.6666ZM6.99967 12.3333C8.41416 12.3333 9.77072 11.7713 10.7709 10.7712C11.7711 9.77096 12.333 8.41441 12.333 6.99992C12.333 5.58543 11.7711 4.22888 10.7709 3.22868C9.77072 2.22849 8.41416 1.66659 6.99967 1.66659C5.58519 1.66659 4.22863 2.22849 3.22844 3.22868C2.22824 4.22888 1.66634 5.58543 1.66634 6.99992C1.66634 8.41441 2.22824 9.77096 3.22844 10.7712C4.22863 11.7713 5.58519 12.3333 6.99967 12.3333ZM6.99967 6.05725L8.88501 4.17125L9.82834 5.11459L7.94234 6.99992L9.82834 8.88525L8.88501 9.82859L6.99967 7.94258L5.11434 9.82859L4.17101 8.88525L6.05701 6.99992L4.17101 5.11459L5.11434 4.17125L6.99967 6.05725Z" fill="white"/>
+          </svg>
+      </button>
+    </span>
+  </span>
+
+</div>

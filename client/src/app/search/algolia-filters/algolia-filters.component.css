@@ -1,0 +1,176 @@
+.filters {
+  @apply text-[#556a74] px-[20px] ;
+} 
+.filters .filter-accordion .panel {
+    @apply max-h-0 overflow-hidden transition-[max-height] duration-[0.2s] ease-[ease-out]  pr-2.5 py-0;
+}
+.filters span {
+  @apply text-[#596a73] font-bold text-sm;
+}
+.filters .filter-accordion .show-accordion {
+    @apply max-h-[300px] overflow-y-auto !important;
+  }
+.filters .filter-accordion .show-accordion-slider {
+    @apply max-h-[300px] pl-[25px] pr-[27px] pt-[60px];
+}
+.filters .filter-accordion .show-accordion-slider-step {
+    @apply max-h-[300px] pl-[17px] pr-[23px] pt-[60px] pb-[20px];
+}
+.tw-loyer {
+  @apply p-0 mb-[1rem] !important;
+}
+.loading {
+    @apply text-center;
+  }
+.selected-cars-type .figure-caption {
+    @apply text-[#0389b1] !important;
+  }
+
+.tw-btn-valide-filters {
+    @apply h-[50px] text-white text-[14px] outline-none bg-[#327793] font-bold border-[solid] border-[#dde1e3];
+
+  }
+.tw-btnBorder {
+    @apply h-[70px] p-2.5 bg-[linear-gradient(180deg,#00000000,#DDE1E3_50%)];
+  }
+.tw-Close {
+  @apply float-right font-bold text-2xl leading-none text-black opacity-50 p-0 m-[20px];
+}
+.tw-tile-category {
+  @apply bg-[#f1f1f1] cursor-pointer p-0 w-full border-none  outline-none text-[#556a74] text-[16px] font-bold uppercase;
+}
+.tw-label-category{
+  @apply text-[12px] inline-block text-[#556a74];
+}
+.tw-span-category {
+  @apply text-[14px] font-bold;
+}
+
+.tw-filters-p {
+  @apply text-black no-underline cursor-pointer text-[14px] font-bold mt-[5px];
+}
+.tw-alert {
+  @apply  relative bg-[#fff3cd] text-base p-4 border-solid border-[1px]  border-[#ffe69c] rounded;
+}
+.tw-space {
+  @apply pt-[0%] !important;
+}
+
+.tw-top {
+    @apply pl-0 pr-0 !important;
+}
+.tw-hr {
+  @apply my-2 border-t border-solid border-gray-600 opacity-25;
+}
+.tw-overflow-visible {
+  @apply overflow-visible !important;
+}
+
+:host ::ng-deep .filter-proxauto-label .ais-Highlight{
+  @apply text-[16px] leading-[14px] text-[#596a73] font-bold uppercase;
+
+}
+
+.unsetPostion {
+     @apply static !important;
+} 
+  .noShadow {
+    @apply bg-none;
+  }
+  .fixedTop {
+    @apply top-0;
+  }
+  :host ::ng-deep .noUi-tooltip {
+    @apply block absolute text-black text-center whitespace-nowrap text-xs font-semibold rounded-[3px];
+  }
+
+@media only screen and (max-width: 1023px) {
+    .tw-btn-valide-filters {
+      @apply w-full !important;
+    }
+    .tw-btnBorder {
+      @apply w-full bg-transparent !important;
+    }
+    .tw-fixed-valide-filters {
+      @apply fixed w-full  z-[3] right-0 bottom-0 bg-[linear-gradient(180deg,#00000000,#E2E2E2_15%)] !important;
+    }
+    .filter-mobile-show {
+      @apply block !important;
+    }
+    .mobile-input-search {
+      @apply hidden;
+    }
+  }
+
+@media only screen and (min-width : 992px),
+screen and (max-width : 1199px) {
+    .tw-btnBorder {
+        @apply w-[224px];
+    }
+
+    .tw-btn-valide-filters {
+        @apply w-[204px];
+    }
+}
+
+@media only screen and (min-width : 1200px),
+screen and(max-width : 1399px) {
+    .tw-btn-valide-filters {
+        @apply w-[250px] !important;
+    }
+
+    .tw-btnBorder {
+        @apply w-[270px] !important;
+        
+    }
+}
+
+@media only screen and (min-width : 1400px) {
+    .tw-btn-valide-filters {
+        @apply w-[300px] !important;
+
+    }
+
+    .tw-btnBorder {
+        @apply w-[320px] !important;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .tw-btn-valide-filters {
+      @apply z-[2] mb-[5px] bottom-0;
+    }
+    .tw-btnBorder {
+      @apply fixed z-[3] bottom-0;
+    }
+  }
+
+@media only screen and (max-width: 1023px) {
+    .filter-mobile {
+      @apply fixed z-[1010] w-full h-fit overflow-scroll max-h-full m-0 p-0 left-0 top-0 bg-[#f1f1f1];
+    }
+  }
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+ 
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {}
+
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {
+    .filters {
+      @apply pl-[20px] !important;
+    }
+    .mobile-input-search-filter {
+      @apply hidden;
+    }
+  }
+@media only screen and (max-width: 992px) {
+    .filters {
+      @apply p-[50px] !important;
+    }
+  }

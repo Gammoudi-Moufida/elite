@@ -1,0 +1,10 @@
+<app-home-leasing-filtres [screenMode]="screenMode"></app-home-leasing-filtres>
+<section class="container ">
+    <!-- <app-offers-description *ngIf="offersDescriptions" [offersDescriptions]="offersDescriptions"></app-offers-description> -->
+    <app-brands [showImg]="showImg"  [showPlaceholder] = "showPlaceholder" [brands] = "brands" [type] = "type" [nosmarques_url] = "nosmarques_url"></app-brands>
+    <app-home-leasing-models *ngIf="leasingCategoriesUrls" [leasingCategoriesUrls]="leasingCategoriesUrls" [screenMode]="screenMode"></app-home-leasing-models>
+    <app-home-leasing-lease-cards *ngIf="cards" [cards]="cards"></app-home-leasing-lease-cards>
+    <app-home-leasing-top-models *ngIf="models" [models]="models" [screenMode]="screenMode"></app-home-leasing-top-models>
+    <app-home-leasing-questions *ngIf="cardsQuestions" [screenMode]="screenMode" [cardsQuestions]="cardsQuestions" [imgUrl]="imgUrl"></app-home-leasing-questions>
+</section>
+

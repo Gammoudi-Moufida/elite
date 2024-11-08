@@ -1,0 +1,3 @@
+.tw-container {
+  @apply m-auto w-full pt-[30px] pb-[25px] pl-[16px] max-w-[1400px];
+}

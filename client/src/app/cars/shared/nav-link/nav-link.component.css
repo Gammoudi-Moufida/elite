@@ -1,0 +1,27 @@
+h2 {
+  @apply text-lg font-bold text-custom-blue leading-[26px] my-[10px] mr-5;
+}
+
+.tw-border {
+	@apply border border-solid border-custom-gains-gray h-full;
+}
+
+.tw-link {
+  @apply text-sm text-[#556a74] text-center m-0 py-1 ;
+}
+
+.model-actif {
+  @apply text-white ;
+}
+
+.is-active{
+  @apply bg-custom-jet-gray ;
+}
+
+.tw-border:hover {
+  @apply bg-custom-jet-gray text-white ; 
+}
+
+p:hover {
+  @apply text-white ;
+}

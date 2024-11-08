@@ -1,0 +1,91 @@
+<div class="flex flex-wrap align-center card-deck pt-6 pb-4">
+    <div class="w-full basis-auto">
+        <h2 class="text-xl font-bold md:mt-4">Nos modèles leasing les plus vendus au meilleur prix</h2>
+        <div *ngIf="screenMode !=  3">
+            <div class="flex">
+                <div class="w-[30px] pt-[70px]  mt-2">
+                    <div class="cursor-pointer" *ngIf="!carrouselItems[0]?.active && nbModels > carrouselPart"
+                        (click)="carrouselColorPrevAction()"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex justify-around w-full">
+                    <div *ngFor="let item of activeFilter()">
+                        <div>
+                        <a href="{{ item.model.url }}">
+                            <figure class="h-[98px] inline-block">
+                                <div><img ngSrc="{{item.model.photoUrl}}" fill class="backg mx-auto pr-1 pl-1 block tw-custom-relative h-[75%]"></div>
+                                <figcaption class="figure-caption text-custom-blue text-[18px] font-bold text-center w-full"> {{item.model.name.split(' ')[0]|titlecase}}</figcaption>
+                                <p class="tw-sub-caption text-[19px] text-custom-black text-center mb-0"> {{item.model.name.split(' ')[1]}}</p>
+                                    <div *ngIf="item.model.monthlyRent != 0" class="badge black-badge text-center flex align-center">
+                                        <span class="pr-1 text-center font-size">Dès {{ item.model?.monthlyRent }}</span>
+                                        <svg (click)="open(infoContent, item.model.modeleId)" class="align-self-center text-center" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z" fill="#EBEBEC" />
+                                            <path d="M8 10.6667V8" stroke="#35393F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M8 5.33337H8.0075" stroke="#35393F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                            </figure>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="w-[30px] pt-[70px] mt-2">
+                    <div class="cursor-pointer"
+                        *ngIf="!carrouselItems[nbModels - 1]?.active && nbModels > carrouselPart"
+                        (click)="carrouselColorNextAction()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap" *ngIf="screenMode ==  3">
+            <div class="lg:w-1/6 p-0" *ngFor="let model of models">
+                <a  href="{{ model.url }}">
+                    <div> <img ngSrc="{{model.photoUrl}}" class="mx-auto tw-custom-relative sizeImg" fill>
+                    </div>
+                <figcaption class="figure-caption text-custom-blue text-[18px] font-bold text-center w-full"> {{model.name.split(' ')[0]|titlecase}}</figcaption>
+                <p class="tw-sub-caption text-[19px] text-custom-black text-center"> {{model.name.split(' ')[1]}}</p>
+                    <div *ngIf="model.monthlyRent != 0" class="badge black-badge text-center flex align-center xl:ml-[3rem]">
+                        <span class="pr-1 text-center font-size">Dès {{ model?.monthlyRent }}</span>
+                        <svg (click)="open(infoContent, model.modeleId)" class="self-center text-center" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M7.99967 14.6667C11.6816 14.6667 14.6663 11.6819 14.6663 8.00004C14.6663 4.31814 11.6816 1.33337 7.99967 1.33337C4.31778 1.33337 1.33301 4.31814 1.33301 8.00004C1.33301 11.6819 4.31778 14.6667 7.99967 14.6667Z" fill="#EBEBEC" />
+                            <path d="M8 10.6667V8" stroke="#35393F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8 5.33337H8.0075" stroke="#35393F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #infoContent let-modal>
+    <div class=" tw-modal md:flex lg:flex" aria-labelledby="modal-title">
+        <div class="tw-opicity-modal"></div>
+        <div class="p-2 w-full   justify-center xl:w-[820px] items-center">
+            <div class="tw-content-modal">
+                <div class="tw-header-modal">
+                    <div class="tw-text-header">
+                        <h6 class="text-[16px] font-[inherit]">Information</h6>
+                    </div>
+                    <div class="p-4">
+                        <div *ngIf='loading'></div>
+                        <p *ngIf='!loading'>{{text}}</p>
+                    </div>
+                    <div class="tw-btn-close">
+                        <button type="button" class="tw-btn-modal" (click)="modal.close('Close click')">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

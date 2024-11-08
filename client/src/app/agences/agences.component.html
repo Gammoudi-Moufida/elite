@@ -1,0 +1,94 @@
+
+<section class="bg-no-repeat bg-[url('https://images.elite-auto.fr/agences/background_agences.jpg')] h-[200px]
+md:h-[400px] bg-cover bg-center bg-blend-overlay bg-[#2a2a2a]">
+    <div class="px-8 mx-auto max-w-screen-xl text-center pt-12 md:pt-32 lg:pt-36 ">
+        <p class="text-[32px] md:text-[42px] text-white font-roboto leading-[37px] md:leading-[49px]">
+            Les agences
+            <span class="font-black md:text-[40px] block">Elite Auto</span>
+        </p>
+    </div>
+</section>
+<div class="bg-custom-gray">
+    <div class="bg-white mb-4" *ngFor="let agence of secureAgences; let i=index">
+       <div class="tw-container p-2.5" [id]="'agence'+i">
+            <div class="lg:leading-[21px] leading-[18.75px]">
+                <div class="lg:text-[18px] text-[16px] font-black text-black">{{agence.name}}</div>
+                <span class="text-[12px] text-black">{{agence.location}}</span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8" *ngIf="screenMode != 2">
+                <div [innerHTML]="agence.secureMapSource"></div>
+                <div>
+                    <p class="lg:text-[18px] text-[14px] font-black mb-0">Adresse :</p>
+                    <span class="lg:text-[16px] text-[14px] leading-[18.75px]">{{agence.address}}</span>
+                    <p class="lg:text-[16px] text-[14px] mb-2">
+                        <span class="font-black">Tel : </span>{{agence.phoneNumber}}
+                    </p>
+                    <div class="flex items-center" *ngFor="let openingHour of agence.openingHours">
+                        <div class="open"></div>
+                        <div class="txt-open">
+                            <p class="mb-0"><span class="font-black">{{openingHour.days}}</span> :</p>
+                            <span>{{openingHour.hours}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <app-nos-services [isElite]="agence.isElite" [address]="agence.address"></app-nos-services>
+                    <div class="w-full lg:w-80" *ngIf="agence.navette">
+                        <span class="title-service">Navette :</span>
+                        <span class="lg:text-[16px] text-[14px] lg:leading-[18.75px] leading-[16px]">
+                            {{agence.navette.description}}
+                        </span>
+                        <br />
+                        <span class="lg:text-[16px] text-[14px] leading-[20px]">
+                            <span class="font-black">Tel : </span>{{agence.navette.phoneNumber}}
+                        </span>  
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2" *ngIf="screenMode == 2">
+                <div>
+                    <div [innerHTML]="agence.secureMapSource"></div>
+                    <p class="lg:text-[18px] text-[14px] font-black mb-0">Adresse :</p>
+                    <span class="lg:text-[16px] text-[14px] leading-[18.75px]">{{agence.address}}</span>
+                    <p class="lg:text-[16px] text-[14px] mb-">
+                        <span class="font-black">Tel : </span>{{agence.phoneNumber}}
+                    </p>
+                    <div class="flex items-center" *ngFor="let openingHour of agence.openingHours">
+                        <div class="open"></div>
+                        <div class="txt-open">
+                            <p class="mb-0"><span class="font-black">{{openingHour.days}}</span> :</p>
+                            <span>{{openingHour.hours}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="mt-2">
+                        <app-nos-services [isElite]="agence.isElite" [address]="agence.address"></app-nos-services>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2" *ngIf="screenMode == 2 && agence.navette">
+                <span class="title-service">Navette :</span>
+                <span class="lg:text-[16px] text-[14px] lg:leading-[18.75px] leading-[16px]">
+                    {{agence.navette.description}}
+                </span>
+                <br />
+                <span class="lg:text-[16px] text-[14px] leading-[20px]">
+                    <span class="font-black">Tel : </span>{{agence.navette.phoneNumber}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="tw-container p-2.5 bg-white flex flex-wrap justify-center gap-7">
+        <div class="flex w-auto md:w-1/2 justify-center">
+            <img ngSrc="agences/rea_capital.webp" width="200" height="200">
+            <img ngSrc="agences/rea_autoplus.webp" width="200" height="200">
+        </div>
+        <div class="flex w-auto md:w-1/2 justify-center">
+            <img ngSrc="agences/rea_automoto.webp" width="200" height="200">
+            <img ngSrc="agences/rea_gp.webp" width="200" height="200">
+        </div>
+    </div>
+</div>
+

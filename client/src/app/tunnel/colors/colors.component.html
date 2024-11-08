@@ -1,0 +1,225 @@
+<div class="mt-2" id="couleurs&selleries">
+    <div class="e-a-collapse-header bg-white p-3 mb-2 d-flex justify-content-between" (click)="collapse.toggle()" [attr.aria-expanded]="!isClosedColorCollapse">
+        <h2 class="ea-h5 ea-bold mb-0">COULEURS & SELLERIES <span class="ea-h5 ea-bold ea-blue-color">*(champs obligatoires pour réserver)</span></h2>
+        <div class="ea-collapse-icon">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!isClosedColorCollapse">
+                <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+            </svg>
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="isClosedColorCollapse">
+                <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+            </svg>
+        </div>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isClosedColorCollapse">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3" *ngIf="devis?.colors?.images.length > 0">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M2.84274 4.33328L2.64608 3.84661C2.61327 3.76541 2.59678 3.67854 2.59755 3.59097C2.59832 3.5034 2.61634 3.41684 2.65058 3.33623C2.68481 3.25562 2.7346 3.18255 2.79708 3.12119C2.85957 3.05983 2.93353 3.01138 3.01474 2.97861L9.19608 0.481277C9.3599 0.415185 9.54326 0.416818 9.70589 0.485817C9.86851 0.554816 9.9971 0.68554 10.0634 0.849277L13.8101 10.1213C13.8429 10.2025 13.8594 10.2893 13.8586 10.3769C13.8578 10.4645 13.8398 10.5511 13.8056 10.6317C13.7713 10.7123 13.7216 10.7853 13.6591 10.8467C13.5966 10.9081 13.5226 10.9565 13.4414 10.9893L7.26008 13.4866C7.17888 13.5194 7.09201 13.5359 7.00444 13.5351C6.91687 13.5344 6.8303 13.5163 6.7497 13.4821C6.66909 13.4479 6.59602 13.3981 6.53466 13.3356C6.4733 13.2731 6.42485 13.1992 6.39208 13.1179L6.33341 12.9733V12.9999H3.66674C3.48993 12.9999 3.32036 12.9297 3.19534 12.8047C3.07032 12.6797 3.00008 12.5101 3.00008 12.3333V12.1533L0.766744 11.2513C0.602843 11.185 0.471994 11.0563 0.402982 10.8935C0.333969 10.7307 0.332444 10.5472 0.398744 10.3833L2.84274 4.33328ZM4.33341 11.6666H5.80608L4.33341 8.02194V11.6666ZM3.00008 7.50394L1.88474 10.2646L3.00008 10.7386V7.50394ZM4.13208 3.96461L7.37874 12.0006L12.3241 10.0026L9.07741 1.96728L4.13208 3.96461ZM6.11741 5.31994C5.95342 5.38616 5.76984 5.38452 5.60706 5.31538C5.44428 5.24624 5.31563 5.11527 5.24941 4.95128C5.1832 4.78728 5.18484 4.60371 5.25398 4.44092C5.32311 4.27814 5.45409 4.14949 5.61808 4.08328C5.78207 4.01697 5.96568 4.01853 6.12853 4.08761C6.29137 4.15668 6.42011 4.28762 6.48641 4.45161C6.55272 4.6156 6.55116 4.79922 6.48208 4.96206C6.41301 5.12491 6.28207 5.25364 6.11808 5.31994H6.11741Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">COULEUR</span>
+                    </div>
+                    <div class="row align-items-end g-2" *ngFor="let item of devis?.colors?.images; let i = index;" [hidden]="i > 2 && !showColors">
+                        <div class="col-9">
+                            <div class="d-flex align-items-center padding-list" (click)="checkColor(item)" [ngClass]="{'disable': devis?.colors?.images.length ==  1}">
+                                <input class="e-a-form-radio-small-input" type="radio" name="flexRadioDefault" id="{{item.libelleColor}}_{{item.colorId}}" [checked]="devis.colors.isCheckedColor"/>
+                                <label class="ps-3 mb-0 text-s-14" for="{{item.libelleColor}}_{{item.colorId}}">
+                                    <span class="ea-bold label-color">{{item.libelleColor}} </span>
+                                    <img ngSrc="{{item.imageColor}}" class="e-a-img-rounded" height="20" width="20"/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <span class="ea-h5 ea-bold float-end pe-3" *ngIf="item.referencePrixCatalogue > 0">(+{{item.referencePrixCatalogue}}€)</span>
+                        </div>
+                    </div>
+                    <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" *ngIf="!showColors && devis?.colors?.images.length > 3" (click)="showAllColors()">Tout Afficher (+ {{devis?.colors?.images.length - 3}})</p>
+                </div>
+                <div class="e-a-collapse-body bg-white p-3" *ngIf="devis?.colors?.images.length == 0 && (devis?.colors?.type == 'new' && devis?.generalInfo?.offer?.isStock == true)">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M2.84274 4.33328L2.64608 3.84661C2.61327 3.76541 2.59678 3.67854 2.59755 3.59097C2.59832 3.5034 2.61634 3.41684 2.65058 3.33623C2.68481 3.25562 2.7346 3.18255 2.79708 3.12119C2.85957 3.05983 2.93353 3.01138 3.01474 2.97861L9.19608 0.481277C9.3599 0.415185 9.54326 0.416818 9.70589 0.485817C9.86851 0.554816 9.9971 0.68554 10.0634 0.849277L13.8101 10.1213C13.8429 10.2025 13.8594 10.2893 13.8586 10.3769C13.8578 10.4645 13.8398 10.5511 13.8056 10.6317C13.7713 10.7123 13.7216 10.7853 13.6591 10.8467C13.5966 10.9081 13.5226 10.9565 13.4414 10.9893L7.26008 13.4866C7.17888 13.5194 7.09201 13.5359 7.00444 13.5351C6.91687 13.5344 6.8303 13.5163 6.7497 13.4821C6.66909 13.4479 6.59602 13.3981 6.53466 13.3356C6.4733 13.2731 6.42485 13.1992 6.39208 13.1179L6.33341 12.9733V12.9999H3.66674C3.48993 12.9999 3.32036 12.9297 3.19534 12.8047C3.07032 12.6797 3.00008 12.5101 3.00008 12.3333V12.1533L0.766744 11.2513C0.602843 11.185 0.471994 11.0563 0.402982 10.8935C0.333969 10.7307 0.332444 10.5472 0.398744 10.3833L2.84274 4.33328ZM4.33341 11.6666H5.80608L4.33341 8.02194V11.6666ZM3.00008 7.50394L1.88474 10.2646L3.00008 10.7386V7.50394ZM4.13208 3.96461L7.37874 12.0006L12.3241 10.0026L9.07741 1.96728L4.13208 3.96461ZM6.11741 5.31994C5.95342 5.38616 5.76984 5.38452 5.60706 5.31538C5.44428 5.24624 5.31563 5.11527 5.24941 4.95128C5.1832 4.78728 5.18484 4.60371 5.25398 4.44092C5.32311 4.27814 5.45409 4.14949 5.61808 4.08328C5.78207 4.01697 5.96568 4.01853 6.12853 4.08761C6.29137 4.15668 6.42011 4.28762 6.48641 4.45161C6.55272 4.6156 6.55116 4.79922 6.48208 4.96206C6.41301 5.12491 6.28207 5.25364 6.11808 5.31994H6.11741Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">COULEUR</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list">
+                                <p class="ea-h5 ea-bold label-color">
+                                    La couleur n'est pas disponible.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3" *ngIf="devis?.colors?.selleries.length > 0">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M6.6665 2.66671V3.33337H9.33317V2.66671H6.6665ZM5.99984 1.33337C5.63165 1.33337 5.33317 1.63185 5.33317 2.00004V4.00004C5.33317 4.36823 5.63165 4.66671 5.99984 4.66671H6.33317V5.33337H4.6665C4.29831 5.33337 3.99984 5.63185 3.99984 6.00004V11.3334H3.35532C2.91313 11.3334 2.58558 11.7312 2.68411 12.1486L3.15624 14.1486C3.2278 14.4517 3.5063 14.6667 3.82745 14.6667H12.1722C12.4934 14.6667 12.7719 14.4517 12.8434 14.1486L13.3156 12.1486C13.4141 11.7312 13.0865 11.3334 12.6444 11.3334H11.9998V6.00004C11.9998 5.63185 11.7014 5.33337 11.3332 5.33337H9.6665V4.66671H9.99984C10.368 4.66671 10.6665 4.36823 10.6665 4.00004V2.00004C10.6665 1.63185 10.368 1.33337 9.99984 1.33337H5.99984ZM8.33317 4.66671H7.6665V5.33337H8.33317V4.66671ZM4.21897 12.6667L4.37635 13.3334H11.6233L11.7807 12.6667H11.3343L11.3332 12.6667H4.6665L4.66536 12.6667H4.21897ZM5.33317 11.3334H10.6665V6.66671H5.33317V11.3334Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">SELLERIE</span>
+                    </div>
+                    <div class="row align-items-end g-2" *ngFor="let item of devis?.colors?.selleries; let i = index;" [hidden]="i > 2 && !showSelleries">
+                        <div class="col-9">
+                            <div class="d-flex align-items-center padding-list" (click)="checkSellerie(item)">
+                                <input class="e-a-form-radio-small-input" type="radio" name="flexRadioDefault2" id="{{item.label}}_{{item.id}}" [checked]="devis.colors.isCheckedSellerie" />
+                                <label class="ps-3 mb-0 text-s-14" for="{{item.label}}_{{item.id}}">
+                                    <span class="ea-bold label-color">{{item.label}} </span>
+                                    <img ngSrc="{{item.thumbnail}}" class="e-a-img-rounded" height="20" width="20" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <span class="ea-h5 ea-bold float-end pe-3" *ngIf="item.prices.price > 0">(+{{item.prices.price}}€)</span>
+                        </div>
+                    </div>
+                    <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" *ngIf="!showSelleries && devis?.colors?.selleries.length > 3" (click)="showAllSelleries()">Tout Afficher (+ {{devis?.colors?.images.length - 3}})</p>
+                </div>
+                <div class="e-a-collapse-body bg-white p-3" *ngIf="devis?.colors?.selleries.length == 0 && (devis?.colors?.type == 'new' && devis?.generalInfo?.offer?.isStock == true)">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M6.6665 2.66671V3.33337H9.33317V2.66671H6.6665ZM5.99984 1.33337C5.63165 1.33337 5.33317 1.63185 5.33317 2.00004V4.00004C5.33317 4.36823 5.63165 4.66671 5.99984 4.66671H6.33317V5.33337H4.6665C4.29831 5.33337 3.99984 5.63185 3.99984 6.00004V11.3334H3.35532C2.91313 11.3334 2.58558 11.7312 2.68411 12.1486L3.15624 14.1486C3.2278 14.4517 3.5063 14.6667 3.82745 14.6667H12.1722C12.4934 14.6667 12.7719 14.4517 12.8434 14.1486L13.3156 12.1486C13.4141 11.7312 13.0865 11.3334 12.6444 11.3334H11.9998V6.00004C11.9998 5.63185 11.7014 5.33337 11.3332 5.33337H9.6665V4.66671H9.99984C10.368 4.66671 10.6665 4.36823 10.6665 4.00004V2.00004C10.6665 1.63185 10.368 1.33337 9.99984 1.33337H5.99984ZM8.33317 4.66671H7.6665V5.33337H8.33317V4.66671ZM4.21897 12.6667L4.37635 13.3334H11.6233L11.7807 12.6667H11.3343L11.3332 12.6667H4.6665L4.66536 12.6667H4.21897ZM5.33317 11.3334H10.6665V6.66671H5.33317V11.3334Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">SELLERIE</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list">
+                                <p class="ea-h5 ea-bold label-color">
+                                    La sellerie n'est pas disponible.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-2" *ngIf="devis?.colors?.type != 'occasion'">
+                <div class="e-a-collapse-body bg-white p-3" *ngIf="devis?.colors?.images.length == 0 && !(devis?.colors?.type == 'new' && devis?.generalInfo?.offer?.isStock == true)">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M2.84274 4.33328L2.64608 3.84661C2.61327 3.76541 2.59678 3.67854 2.59755 3.59097C2.59832 3.5034 2.61634 3.41684 2.65058 3.33623C2.68481 3.25562 2.7346 3.18255 2.79708 3.12119C2.85957 3.05983 2.93353 3.01138 3.01474 2.97861L9.19608 0.481277C9.3599 0.415185 9.54326 0.416818 9.70589 0.485817C9.86851 0.554816 9.9971 0.68554 10.0634 0.849277L13.8101 10.1213C13.8429 10.2025 13.8594 10.2893 13.8586 10.3769C13.8578 10.4645 13.8398 10.5511 13.8056 10.6317C13.7713 10.7123 13.7216 10.7853 13.6591 10.8467C13.5966 10.9081 13.5226 10.9565 13.4414 10.9893L7.26008 13.4866C7.17888 13.5194 7.09201 13.5359 7.00444 13.5351C6.91687 13.5344 6.8303 13.5163 6.7497 13.4821C6.66909 13.4479 6.59602 13.3981 6.53466 13.3356C6.4733 13.2731 6.42485 13.1992 6.39208 13.1179L6.33341 12.9733V12.9999H3.66674C3.48993 12.9999 3.32036 12.9297 3.19534 12.8047C3.07032 12.6797 3.00008 12.5101 3.00008 12.3333V12.1533L0.766744 11.2513C0.602843 11.185 0.471994 11.0563 0.402982 10.8935C0.333969 10.7307 0.332444 10.5472 0.398744 10.3833L2.84274 4.33328ZM4.33341 11.6666H5.80608L4.33341 8.02194V11.6666ZM3.00008 7.50394L1.88474 10.2646L3.00008 10.7386V7.50394ZM4.13208 3.96461L7.37874 12.0006L12.3241 10.0026L9.07741 1.96728L4.13208 3.96461ZM6.11741 5.31994C5.95342 5.38616 5.76984 5.38452 5.60706 5.31538C5.44428 5.24624 5.31563 5.11527 5.24941 4.95128C5.1832 4.78728 5.18484 4.60371 5.25398 4.44092C5.32311 4.27814 5.45409 4.14949 5.61808 4.08328C5.78207 4.01697 5.96568 4.01853 6.12853 4.08761C6.29137 4.15668 6.42011 4.28762 6.48641 4.45161C6.55272 4.6156 6.55116 4.79922 6.48208 4.96206C6.41301 5.12491 6.28207 5.25364 6.11808 5.31994H6.11741Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">COULEUR</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list">
+                                <label class="mb-0 text-s-14">
+                                    <span class="ea-bold label-color">Les couleurs ne sont pas disponibles dans notre base ! Veuillez nous en excuser. Merci d'indiquez vos préférences :</span>
+                                    <input class="mt-3 form-control" type="textColor" name="textColor" [(ngModel)]="textColor" (ngModelChange)="textColorChange()" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="devis?.colors?.type != 'occasion'">
+                <div class="e-a-collapse-body bg-white p-3" *ngIf="devis?.colors?.selleries.length == 0 && devis?.colors?.images == 0 && !(devis?.colors?.type == 'new' && devis?.generalInfo?.offer?.isStock == true)">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M6.6665 2.66671V3.33337H9.33317V2.66671H6.6665ZM5.99984 1.33337C5.63165 1.33337 5.33317 1.63185 5.33317 2.00004V4.00004C5.33317 4.36823 5.63165 4.66671 5.99984 4.66671H6.33317V5.33337H4.6665C4.29831 5.33337 3.99984 5.63185 3.99984 6.00004V11.3334H3.35532C2.91313 11.3334 2.58558 11.7312 2.68411 12.1486L3.15624 14.1486C3.2278 14.4517 3.5063 14.6667 3.82745 14.6667H12.1722C12.4934 14.6667 12.7719 14.4517 12.8434 14.1486L13.3156 12.1486C13.4141 11.7312 13.0865 11.3334 12.6444 11.3334H11.9998V6.00004C11.9998 5.63185 11.7014 5.33337 11.3332 5.33337H9.6665V4.66671H9.99984C10.368 4.66671 10.6665 4.36823 10.6665 4.00004V2.00004C10.6665 1.63185 10.368 1.33337 9.99984 1.33337H5.99984ZM8.33317 4.66671H7.6665V5.33337H8.33317V4.66671ZM4.21897 12.6667L4.37635 13.3334H11.6233L11.7807 12.6667H11.3343L11.3332 12.6667H4.6665L4.66536 12.6667H4.21897ZM5.33317 11.3334H10.6665V6.66671H5.33317V11.3334Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">SELLERIE</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list">
+                                <label class="mb-0 text-s-14">
+                                    <span class="ea-bold label-color">Les selleries ne sont pas disponibles dans notre base ! Veuillez nous en excuser. Merci d'indiquez vos préférences :</span>
+                                    <input class="mt-3 form-control" type="textSellerie" name="textSellerie" [(ngModel)]="textSellerie" (ngModelChange)="textSellerieChange()" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="devis?.colors?.type == 'occasion'">
+            <div class="col-12 mb-2" *ngIf="devis?.colors?.images.length == 0">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M2.84274 4.33328L2.64608 3.84661C2.61327 3.76541 2.59678 3.67854 2.59755 3.59097C2.59832 3.5034 2.61634 3.41684 2.65058 3.33623C2.68481 3.25562 2.7346 3.18255 2.79708 3.12119C2.85957 3.05983 2.93353 3.01138 3.01474 2.97861L9.19608 0.481277C9.3599 0.415185 9.54326 0.416818 9.70589 0.485817C9.86851 0.554816 9.9971 0.68554 10.0634 0.849277L13.8101 10.1213C13.8429 10.2025 13.8594 10.2893 13.8586 10.3769C13.8578 10.4645 13.8398 10.5511 13.8056 10.6317C13.7713 10.7123 13.7216 10.7853 13.6591 10.8467C13.5966 10.9081 13.5226 10.9565 13.4414 10.9893L7.26008 13.4866C7.17888 13.5194 7.09201 13.5359 7.00444 13.5351C6.91687 13.5344 6.8303 13.5163 6.7497 13.4821C6.66909 13.4479 6.59602 13.3981 6.53466 13.3356C6.4733 13.2731 6.42485 13.1992 6.39208 13.1179L6.33341 12.9733V12.9999H3.66674C3.48993 12.9999 3.32036 12.9297 3.19534 12.8047C3.07032 12.6797 3.00008 12.5101 3.00008 12.3333V12.1533L0.766744 11.2513C0.602843 11.185 0.471994 11.0563 0.402982 10.8935C0.333969 10.7307 0.332444 10.5472 0.398744 10.3833L2.84274 4.33328ZM4.33341 11.6666H5.80608L4.33341 8.02194V11.6666ZM3.00008 7.50394L1.88474 10.2646L3.00008 10.7386V7.50394ZM4.13208 3.96461L7.37874 12.0006L12.3241 10.0026L9.07741 1.96728L4.13208 3.96461ZM6.11741 5.31994C5.95342 5.38616 5.76984 5.38452 5.60706 5.31538C5.44428 5.24624 5.31563 5.11527 5.24941 4.95128C5.1832 4.78728 5.18484 4.60371 5.25398 4.44092C5.32311 4.27814 5.45409 4.14949 5.61808 4.08328C5.78207 4.01697 5.96568 4.01853 6.12853 4.08761C6.29137 4.15668 6.42011 4.28762 6.48641 4.45161C6.55272 4.6156 6.55116 4.79922 6.48208 4.96206C6.41301 5.12491 6.28207 5.25364 6.11808 5.31994H6.11741Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">COULEUR EXTÉRIEURE</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list">
+                                <label class="mb-0 text-s-14">
+                                    <span class="ea-bold label-color">{{ devis?.generalInfo?.offreOccasion?.couleurExterieure }} </span>
+                                    <svg viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="e-a-img-rounded feather feather-camera-off" width="20" height="20">
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        <path d="M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3m3-3h6l2 3h4a2 2 0 0 1 2 2v9.34m-7.72-2.06a4 4 0 1 1-5.56-5.56"></path>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="devis?.colors?.selleries.length == 0">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M6.6665 2.66671V3.33337H9.33317V2.66671H6.6665ZM5.99984 1.33337C5.63165 1.33337 5.33317 1.63185 5.33317 2.00004V4.00004C5.33317 4.36823 5.63165 4.66671 5.99984 4.66671H6.33317V5.33337H4.6665C4.29831 5.33337 3.99984 5.63185 3.99984 6.00004V11.3334H3.35532C2.91313 11.3334 2.58558 11.7312 2.68411 12.1486L3.15624 14.1486C3.2278 14.4517 3.5063 14.6667 3.82745 14.6667H12.1722C12.4934 14.6667 12.7719 14.4517 12.8434 14.1486L13.3156 12.1486C13.4141 11.7312 13.0865 11.3334 12.6444 11.3334H11.9998V6.00004C11.9998 5.63185 11.7014 5.33337 11.3332 5.33337H9.6665V4.66671H9.99984C10.368 4.66671 10.6665 4.36823 10.6665 4.00004V2.00004C10.6665 1.63185 10.368 1.33337 9.99984 1.33337H5.99984ZM8.33317 4.66671H7.6665V5.33337H8.33317V4.66671ZM4.21897 12.6667L4.37635 13.3334H11.6233L11.7807 12.6667H11.3343L11.3332 12.6667H4.6665L4.66536 12.6667H4.21897ZM5.33317 11.3334H10.6665V6.66671H5.33317V11.3334Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">COULEUR INTÉRIEURE</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list">
+                                <label class="mb-0 text-s-14">
+                                    <span class="ea-bold label-color">{{devis?.generalInfo?.offreOccasion?.couleurInterieure}} </span>
+                                    <svg viewBox="0 0 27 27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="e-a-img-rounded feather feather-camera-off" width="20" height="20">
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        <path d="M21 21H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3m3-3h6l2 3h4a2 2 0 0 1 2 2v9.34m-7.72-2.06a4 4 0 1 1-5.56-5.56"></path>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

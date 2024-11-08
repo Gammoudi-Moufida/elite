@@ -1,0 +1,208 @@
+<div class="fp-scroll-mac fp-viewing-0 backgroung-Img" [ngStyle]="{'height.px': getScreenHeight}"
+    style="background-image: url({{imgUrl}}/vente-privee/052023/bg_cover.jpg);">
+    <div fullpage id="fullpage" [options]="config" (ref)="getRef($event)" class="fullscreen">
+
+        <div class="section container fp-section fp-table fp-is-overflow active fp-completely" id="section0" #section0>
+            <div class="fp-overflow" style="overflow-y: unset;">
+                <div class="row align-items-center margin-bottom">
+                    <div class="col-12 col-lg-6 col-xl-6 text-center"><img class="img-fluid vip"
+                            src="{{imgUrl}}/vente-privee/052023/ventevip.png"></div>
+
+                    <div class="col-12 col-lg-6 col-xl-6 text-position">
+                        <img class="img-fluid logo" src="{{imgUrl}}/vente-privee/052023/logo.png">
+                        <h1>Bienvenue</h1>
+                        <p class="slide1">Venez profiter des offres exclusives durant notre événement “ Vente Privée ”
+                            <br> du
+                            <strong>9 au 10 Juin 2023</strong>.
+                        </p>
+                        <p class=""><a (click)="scroll('section1')"
+                                class="btn col-xl-6 col-md-5 col-sm-5 btn-secondary">Je
+                                m'inscris</a></p>
+                        <p class="slide1">Fin des offres dans :</p>
+                        <p id="timer" class="timer">10 jours 11h 30m 52s </p>
+                    </div>
+                </div>
+                <footer class="text-center">
+                    <a (click)="scroll('section1')" class="cursor-pointer"><img
+                            src="{{imgUrl}}/vente-privee/052023/arrowbot.png"></a>
+                </footer>
+            </div>
+        </div>
+
+        <div class="container fp-section fp-table fp-is-overflow active fp-completely" id="section1" #section1>
+            <div class="section container fp-section fp-table fp-is-overflow active fp-completely" data-fp-styles="null"
+                style="">
+                <div class="fp-overflow" style="overflow-y: unset;">
+                    <div class="col-12">
+                        <h2>Pour profiter de la Vente Privée</h2>
+                        <p>Appelez-nous au <strong>01 30 49 40 40</strong> ou remplissez le formulaire ci-dessous :</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-lg-6 col-xl-6 box">
+                            <p>Profitez de nos offres exclusives en vous inscrivant à notre Vente Privée qui aura lieu
+                                <strong>du
+                                    9 au 10 Juin 2023</strong> à l’adresse suivante :
+                            </p>
+                            <div class="row">
+                                <div class="col-4"><img class="img-fluid logo"
+                                        src="{{imgUrl}}/vente-privee/052023/logo.png"></div>
+                                <p class="col-8"><strong>Elite Auto</strong><br>195 Route Nationale 10,<br>78310
+                                    Coignières</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 col-xl-6 text-center px-lg-4 px-sm-0 px-md-0 padding-l-small padding-r-small">
+                            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                                <div class="container padding-l-small padding-r-small" *ngIf="screenMode == 1 || screenMode == 3">
+                                    <div class="row">
+                                        <div class="col-6 padding-l-small">
+                                            <div class="form-select py-0 margin-select">
+                                                <select id="civilite" class="form-control" name="civility"
+                                                    formControlName="civility">
+                                                    <option selected value="">Civilité</option>
+                                                    <option value="Mme">Madame</option>
+                                                    <option value="Mr">Monsieur</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 padding-l-small">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="nom" placeholder="Votre Nom"
+                                                    name="lastname" formControlName="lastname"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                                                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.lastname.errors.required">Nom obligatoire</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 padding-r-small">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="prenom" name="firstname"
+                                                    formControlName="firstname" placeholder="Votre Prénom"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                                                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.firstname.errors.required">Prénom obligatoire</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 padding-l-small">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="Votre Email" name="mail" formControlName="mail"
+                                                    [ngClass]="{'is-invalid':submitted && f.mail.errors ,'mail_error_existed': mailExists}" />
+                                                <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.mail.errors.required">Email obligatoire</div>
+                                                    <div *ngIf="f.mail.errors.pattern">Email invalide</div>
+                                                </div>
+                                                <div *ngIf="mailExists" class="invalid-feedback d-block">
+                                                    <div>Email existe déja</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 padding-r-small">
+                                            <div class="form-group">
+                                                <input type="tel" class="form-control" name="tel" formControlName="tel"
+                                                    id="tel" placeholder="Votre Téléphone"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" />
+                                                <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.tel.errors.required">Téléphone obligatoire</div>
+                                                    <div *ngIf="f.tel.errors.pattern">Téléphone invalide</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container px-0" *ngIf="screenMode == 2">
+                                    <div class="row px-0">
+                                        <div class="col-4 ps-0">
+                                            <div class="form-select py-0 margin-select">
+                                                <select id="civilite" class="form-control" name="civility"
+                                                    formControlName="civility">
+                                                    <option selected value="">Civilité</option>
+                                                    <option value="Mme">Madame</option>
+                                                    <option value="Mr">Monsieur</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="nom" placeholder="Votre Nom"
+                                                    name="lastname" formControlName="lastname"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                                                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.lastname.errors.required">Nom obligatoire</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 pe-0">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="prenom" name="firstname"
+                                                    formControlName="firstname" placeholder="Votre Prénom"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                                                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.firstname.errors.required">Prénom obligatoire</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row px-0">
+                                        <div class="col-6 ps-0">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="email"
+                                                    placeholder="Votre Email" name="mail" formControlName="mail"
+                                                    [ngClass]="{'is-invalid':submitted && f.mail.errors ,'mail_error_existed': mailExists}" />
+                                                <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.mail.errors.required">Email obligatoire</div>
+                                                    <div *ngIf="f.mail.errors.pattern">Email invalide</div>
+                                                </div>
+                                                <div *ngIf="mailExists" class="invalid-feedback d-block">
+                                                    <div>Email existe déja</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 pe-0">
+                                            <div class="form-group">
+                                                <input type="tel" class="form-control" name="tel" formControlName="tel"
+                                                    id="tel" placeholder="Votre Téléphone"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" />
+                                                <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.tel.errors.required">Téléphone obligatoire</div>
+                                                    <div *ngIf="f.tel.errors.pattern">Téléphone invalide</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row ">
+                                    <button type="submit" class="btn btn-lg btn-secondary col-6 ms-lg-3">Je
+                                        participe
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-12 margin-bottom mt-2">
+                        <p class="text-center validation" [innerHTML]="msg" *ngIf="validInscription"></p>
+                    </div>
+                    <footer class="text-center">
+                        <a (click)="scroll('section0')" class="cursor-pointer"><img
+                                src="{{imgUrl}}/vente-privee/052023/arrowtop.png"></a>
+                    </footer>
+                </div>
+                <div class="fp-watermark" style="right: 0;">
+                    <a href="" rel="nofollow noopener" target="_blank" style="text-decoration:none; color: #000;">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/vendors/scrolloverflow.min.js"></script>

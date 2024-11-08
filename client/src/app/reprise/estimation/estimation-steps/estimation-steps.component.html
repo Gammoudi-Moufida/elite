@@ -1,0 +1,15 @@
+<app-stepper *ngIf="stepperProgress!=100" [stepperProgress]="stepperProgress"></app-stepper>
+
+<h1 *ngIf="!isMarkPage" class="text-2xl mt-[1rem] mb-2 text-center leading-[29px]">ESTIMATION DE VOTRE VÉHICULE</h1>
+
+<app-recap-estimation *ngIf="selectedCar" [selectedVehicule]="selectedCar" (stepperEvent)="stepperEvent($event)"
+  [repriseEstimation]="repriseEstimation" (suggestCalendlyReservation)="suggestCalendlyReservation($event)">
+</app-recap-estimation>
+
+<app-contact-reprise *ngIf="selectedCar" [selectedVehicule]="selectedCar" [repriseEstimation]="repriseEstimation"
+  [suggestCalendlyReservation]="suggestCalendlyReservation">
+</app-contact-reprise>
+
+<app-estimation *ngIf="!selectedCar" (stepperEvent)="stepperEvent($event)" (selectedCarEvent)="selectedCarEvent($event)"
+  (repriseSimulationSelected)="repriseSimulationSelected($event)">
+</app-estimation>

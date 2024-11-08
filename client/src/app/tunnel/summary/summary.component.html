@@ -1,0 +1,150 @@
+<div class="padding-top" [ngClass]="{'sticky-top':screenWidth && 991 < screenWidth }">
+    <div *ngIf="devis?.generalInfo?.avisMoyenne" (click)='scrollToAvis()'>
+        <ngb-rating  [(rate)]="devis.generalInfo.avisMoyenne" [starTemplate]="t" [readonly]="true" [max]="5" pointer></ngb-rating>
+        <span class="avisNote"> {{devis?.generalInfo?.avisNote| number:'1.0-2'}}/5  ({{devis?.generalInfo?.nbrAvis}})</span>
+    </div>
+    <h1 class="mb-0">
+        <p class="ea-h2 mb-2"><span class="ea-bold">
+            <span *ngIf="devis?.generalInfo?.type == 'lease' && !isLease">LEASING </span>{{devis?.generalInfo?.marque | uppercase}}</span> {{devis?.generalInfo?.model | uppercase}}
+        </p>
+        <p class="mb-1 ea-h5 ea-gray-color">{{devis?.generalInfo?.titleH1 | uppercase}}</p>
+    </h1>
+    <p class="ea-h5 ea-gray-color mb-1" *ngIf="devis?.generalInfo">
+        <span *ngIf="(devis?.generalInfo?.type == 'occasion' || devis?.generalInfo?.isOccasion )&& devis?.generalInfo?.offer?.annee">{{devis?.generalInfo?.offer?.annee}} - </span> 
+        <span *ngIf="devis?.generalInfo?.isOccasion">{{devis?.generalInfo?.offer?.kilometrage | number:'1.0-0':'fr'}} KM - </span>
+        <span *ngIf="!devis?.generalInfo?.isOccasion">0 KM - </span>
+        <span>{{devis?.generalInfo?.offer?.energieNormalized | titlecase}} - </span>
+        <span>{{devis?.generalInfo?.offer?.transmissionNormalized | titlecase}}</span>
+    </p>
+
+    <div class="mb-3">
+        <div class="ea-badge-block" *ngIf="devis?.generalInfo?.offer?.category == 1">
+            <div class="ea-badge-sm elite_prime px-2 text-white">Occasion</div>
+        </div>
+        <!-- <div class="ea-badge-block" *ngIf="devis?.generalInfo?.offer?.category == 2">
+            <div class="ea-badge-sm elite_access px-2 text-white">Elite Access</div>
+        </div> -->
+        <div class="ea-badge-block" *ngIf="devis?.generalInfo?.offer?.category == 3">
+            <div class="ea-badge-sm elite_new px-2 text-white">Neuf</div>
+        </div>
+        <div class="ea-badge-block" *ngIf="devis?.generalInfo?.offer?.category == 4">
+            <div class="ea-badge-sm small-badge elite_smart px-2 text-white">0 km</div>
+        </div>
+        <div class="ea-badge-block" *ngIf="devis?.generalInfo?.dispo == 'En stock' && !devis?.generalInfo?.isOccasion">
+            <div class="ea-badge-sm e-stock px-2 text-white">Disponible</div>
+        </div>
+        <div class="ea-badge-block" *ngIf="devis?.generalInfo?.dispo == 'Sur commande' && !devis?.generalInfo?.isOccasion">
+            <div class="ea-badge-sm e-stock px-2 text-white">Sur commande</div>
+        </div>
+        <div class="ea-badge-block" *ngIf="devis?.generalInfo?.dispo == 'En arrivage' && !devis?.generalInfo?.isOccasion">
+            <div class="ea-badge-sm e-stock px-2 text-white">En arrivage</div>
+        </div>
+    </div>
+
+    <div class="justify-content-center pt-2 mb-2 d-inline-flex" *ngFor="let equipment of devis?.generalInfo?.eqIcones">
+        <img *ngIf="equipment.url" ngSrc="general/icon_equipement/{{equipment.url}}"
+        class="img-equipement me-2" title="{{equipment.title}}" ngbTooltip="{{equipment.title}}" triggers="click:blur" width="35" height="35" />
+    </div>
+    <hr>
+    <p class="font-title ea-bold mb-2"> Besoin d'infos ? On vous rappelle immédiatement</p>
+    <div class="invalid-feedback mb-1" *ngIf="msgAlert" [ngClass]="{ 'd-block': msgAlert }">{{msgAlert}}</div>
+        <form class="row" [formGroup]="callbackForm">
+            <div class="col-8 pe-1">
+                <input type="tel" name="tel" formControlName="tel" placeholder="Numéro de téléphone*" class="form-control transparent-background p-10 ea-h5 b-radius-5 " [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" />
+                <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                    <div *ngIf="f.tel.errors.required">Téléphone obligatoire</div>
+                    <div *ngIf="f.tel.errors.pattern">Téléphone invalide</div>
+                </div>
+            </div>
+            <div class="col-4 ps-1">
+                <button type="button" class="w-100 btn e-a-btn-outline-info ea-bold p-10 ea-h5 " (click)="onSubmit()">ENVOYER</button>
+            </div>
+    </form>
+    <hr>
+    <div class="ea-padding-header e-a-light mt-2" data-eventname="cta_bloc_price">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-{{devis?.generalInfo && !isLease ? '5' : '6'}} col-md-6" [ngClass]="{
+       'col-lg-6': devis?.generalInfo && !isLease && remiseMessage && devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion,
+       'col-lg-4': !(remiseMessage && devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion)
+     }" *ngIf="devis?.generalInfo && !isLease">
+                    <div class="loader mt-0 mb-4" *ngIf="!devis?.generalInfo"></div>
+                        <div class="e-a-opacity float-start" (click)="open()">
+                            <span class="ea-h5" *ngIf="devis?.generalInfo?.type != 'utility'">Prix TTC </span>
+                            <span class="ea-h5" *ngIf="devis?.generalInfo?.type == 'utility'">Prix HT </span>
+                            <svg class="m-md-right" width="18" height="19" viewBox="0 0 18 19" fill="none">
+                                <path d="M9 17C13.1421 17 16.5 13.6421 16.5 9.5C16.5 5.35786 13.1421 2 9 2C4.85786 2 1.5 5.35786 1.5 9.5C1.5 13.6421 4.85786 17 9 17Z" fill="#35393F"/>
+                                <path d="M9 12.5V9.5" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 6.5H9.0075" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                        </div>
+                        <div class="float-start">
+                            <span class="ea-h3 ea-bold" *ngIf="totalPrice">{{ totalPrice | number:'1.0-0':'fr'}} €</span>
+                            <span class="ms-2 ea-h5 ea-crossed" *ngIf="totalPrice &&  !devis?.generalInfo?.isOccasion &&  !devis?.generalInfo?.isExclusiveLOA && (devis?.generalInfo?.prices.catalog_price > totalPrice)"> {{devis?.generalInfo?.prices.catalog_price | number:'1.0-0':'fr'}}€ </span>
+                            <span class="ms-1">
+                                <div class="ea-badge-block d-inline" *ngIf="remiseMessage && devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion">
+                                    <div class="ea-badge-sm e-new" *ngIf=" !discretionRemise && !textAvantageClient">
+                                        - {{remiseMessage | number : '1.1-2' }} %
+                                    </div>
+                                    <div class="ea-badge-sm e-new" *ngIf="discretionRemise && !textAvantageClient">
+                                        {{remiseMessage}}
+                                    </div>
+                                    <div class="ea-badge-sm e-new" *ngIf="textAvantageClient">
+                                        {{remiseMessage | number:'1.0-0':'fr' }} €
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                </div>
+               <div class="col-6 p-md-right" *ngIf="devis?.generalInfo && isLease">
+                    <span class="ea-h5 ea-gray-color">Exclusivement LOA/LLD</span>
+                </div>
+                    <div class="col-6 col-md-6 col-lg-6 p-md-right pl-0  " [ngClass]="{
+                    'custom-width': (remiseMessage && devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion)
+                  }" (click)="toggleLoaPrice()">
+                    <div class="loader mt-0 mb-4" *ngIf="loader"></div>
+                    <div class="ea-gray-color float-end" *ngIf="!loader">
+                        <span class="ea-h5 me-md-1 ms-md-1" *ngIf="!loader && bestLoaInfo"><span *ngIf="!isLease">ou</span> {{bestLoaInfo?.result?.nomFinancement}}</span>
+                        <svg width="18" height="19" viewBox="0 0 18 19" fill="none">
+                            <path d="M9 17C13.1421 17 16.5 13.6421 16.5 9.5C16.5 5.35786 13.1421 2 9 2C4.85786 2 1.5 5.35786 1.5 9.5C1.5 13.6421 4.85786 17 9 17Z" fill="#596A73"/>
+                            <path d="M9 12.5V9.5" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 6.5H9.0075" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                    </div>
+                    <span class="ea-underline  float-right float-md-end border-gray-700">
+                        <span class="ea-h3 ea-bold ea-gray-color" *ngIf="!loader && bestLoaPrice != -1">{{bestLoaPrice | number:'1.1-2':'fr'}}€ /mois</span>
+                        <span class="ea-h3 ea-bold ea-gray-color" *ngIf="!loader && bestLoaPrice == -1">- - € /mois</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    <div class="row mt-3 mb-2" [ngClass]="{'fixed justify-content-center':screenWidth && 992 > screenWidth}" *ngIf="devis?.initDevis?.isVo && !devis?.initDevis?.activeState">
+        <div class="col-6 mt-0">
+            <button type="button" class="btn ea-btn-danger padding w-100 h-100 ea-bold ea-h5 pointer-events-none">VENDUE</button>
+        </div>
+    </div>
+    <div class="row g-2 mt-3 mb-2" [ngClass]="{'fixed':screenWidth && 992 > screenWidth}" *ngIf="devis?.initDevis && !(devis?.initDevis?.isVo && !devis?.initDevis?.activeState)">
+        <div class="col-6 mt-0">
+            <button type="button" class="btn e-a-btn-info padding w-100 h-100 ea-bold ea-h5" (click)="openFormClient()" [disabled]="!loadDevis" data-eventname="cta_offre_gratuite">OFFRE GRATUITE</button>
+        </div>
+        <div class="col-6 mt-0">
+            <button type="button" class="btn ea-btn-info padding w-100 h-100 ea-bold ea-h5" (click)="openReservationForm()" [disabled]="!loadDevis" data-eventname="cta_reserver">RÉSERVER (*)</button>
+        </div>
+
+    </div>
+    <hr>
+    <div class="row text-center ea-bold ea-blue-color ea-h5">
+        <div class="col-6 border-r">
+            Provenance 
+            <p class="ea-h5 ea-color-secondary">{{devis?.generalInfo?.provenance| titlecase}} </p> 
+        </div>
+        <div class="col-6">
+            Garantie
+            <p class="ea-h5 ea-color-secondary ea-color-black" *ngIf="devis?.generalInfo && devis?.generalInfo?.type != 'occasion'">Jusqu'à {{devis?.generalInfo?.garantie}} mois</p>
+            <p class="ea-h5 ea-color-secondary ea-color-black" *ngIf="devis?.generalInfo?.type == 'occasion' && devis?.generalInfo?.garantie != null">{{devis?.generalInfo?.libGarantie}}</p>
+        </div>
+    </div>
+    <p class="ea-h5 ea-gray-color font-txt" *ngIf="devis?.generalInfo?.reimbursement">
+        Elite Auto vous rembourse votre voiture si vous n'êtes pas satisfait dans un délai de 14 jours & 1100 km
+    </p>
+
+</div>

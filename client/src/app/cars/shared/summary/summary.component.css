@@ -1,0 +1,26 @@
+.tw-categorie-card {
+  @apply bg-custom-gray rounded-lg text-center py-2.5 cursor-pointer border-[rgba(0,0,0,0.175)];
+}
+.tw-active {
+  @apply bg-white border-[#327793] !important;
+}
+.tw-btn {
+  @apply text-base leading-normal border shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_1px_1px_rgba(0,0,0,0.075)] inline-block text-center align-middle select-none px-3 border-transparent border-solid;
+}
+.tw-card {
+  @apply relative flex flex-col min-w-0 text-[#212529] break-words bg-clip-border border rounded-md border-[rgba(0,0,0,0.175)] border-solid;
+}
+.Elite_3 {
+  @apply text-custom-deep-blue;
+}
+.Elite_4 {
+  @apply text-custom-ocean-blue;
+}
+.Elite_1 {
+  @apply text-custom-olive;
+}
+@media screen and (max-width: 992px) {
+  .tw-padding {
+    @apply px-[10px];
+  }
+}

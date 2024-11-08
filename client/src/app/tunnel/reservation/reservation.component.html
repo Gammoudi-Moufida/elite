@@ -1,0 +1,113 @@
+<div class="ea-modal-header">
+    <div class="ea-modal-close">
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="ea-h3 ea-bold modal-title">Réserver mon véhicule</div>
+    <div class="ea-h5 ea-italic">(*) champs obligatoires</div>
+</div>
+<div class="modal-body">
+    <button type="button" class="btn ea-btn-danger w-100 ea-bold p-2" *ngIf="message?.type != ''" (click)="emptyRedirect(message.type)">{{ message.text }}</button>
+    <form [formGroup]="reservationForm" *ngIf="message?.type == ''">
+        <div class="row mt-3">
+            <div class="col-3">
+                <select class="form-control" name="civility" formControlName="civility">
+                    <option value="Mr" selected>Mr.</option>
+                    <option value="Mme">Mme.</option>
+                    <option value="Mlle">Mlle.</option>
+                </select>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" name="lastname" formControlName="lastname" placeholder="Nom*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                            <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastname.errors.required">Nom obligatoire</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <input type="text" name="firstname" formControlName="firstname" placeholder="Prénom*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                            <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstname.errors.required">Prénom obligatoire</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <input type="text" name="company" formControlName="company" placeholder="Société" class="form-control" />
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <input type="text" name="tel" formControlName="tel" placeholder="Téléphone*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" />
+                    <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                        <div *ngIf="f.tel.errors.required">Téléphone obligatoire</div>
+                        <div *ngIf="f.tel.errors.pattern">Téléphone invalide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="form-group">
+                    <input type="text" name="adress" formControlName="adress" placeholder="Adresse*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.adress.errors }" />
+                    <div *ngIf="submitted && f.adress.errors" class="invalid-feedback">
+                        <div *ngIf="f.adress.errors.required">Adresse obligatoire</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <input type="text" name="postalCode" formControlName="postalCode" placeholder="Code postal*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" />
+                    <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                        <div *ngIf="f.postalCode.errors.required">Code postal obligatoire</div>
+                        <div *ngIf="f.postalCode.errors.pattern">Code postal invalide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <input type="text" name="city" formControlName="city" placeholder="Ville*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                        <div *ngIf="f.city.errors.required">Ville obligatoire</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="form-group">
+                    <input type="text" name="mail" formControlName="mail" placeholder="Email*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mail.errors }" />
+                    <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                        <div *ngIf="f.mail.errors.required">Email obligatoire</div>
+                        <div *ngIf="f.mail.errors.pattern">Email invalide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <input type="text" name="promoCode" formControlName="promoCode" placeholder="Code Promo" class="form-control" />
+                </div>
+            </div>
+            <div class="col-6 mt-3">
+                <div class="form-group">
+                    <input type="text" name="clubCard" formControlName="clubCard" placeholder="N° Carte Club" class="form-control" />
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="ea-checkbox-container" (click)="toggleNewsletter()">
+                    <input class="ea-form-check-input" type="checkbox" name="flexCheckBox" id="flexCheckBox1" />
+                    <label class="ea-check-label ea-h5" for="flexCheckBox1"> <span class="ea-bold"> OUI,</span> je souhaite recevoir la newsletter d'Elite-Auto et ses bons plans par voie électronique (email & sms) </label>
+                </div>
+            </div>
+            <div class="col-12 mt-3 text-center">
+                <button type="submit" class="btn ea-btn-info w-100 ea-bold ea-h3" (click)="onSubmit()">
+                    <span class="loader d-inline-block" *ngIf="isLoadedSave"></span>
+                    RÉSERVER MON VÉHICULE
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

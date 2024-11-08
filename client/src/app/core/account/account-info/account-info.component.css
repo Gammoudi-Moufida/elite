@@ -1,0 +1,7 @@
+.tw-link {
+    @apply flex items-center border p-2 mb-2 text-base bg-white text-[#566a73] font-bold w-52;
+}
+
+.tw-content {
+    @apply bg-white text-[#546a74] text-[13px] border-r border-solid border-[#e7e7e7] h-24 p-3; 
+}

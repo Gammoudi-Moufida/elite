@@ -1,0 +1,17 @@
+
+.tw-card {
+    @apply text-center w-full mt-[1.5vw] border relative bg-white flex flex-col min-w-0 border-solid bg-clip-border border-[rgba(0,0,0,0.175)] rounded-none;
+}
+
+.tw-prixtitle{
+    @apply  font-raleway text-xs text-custom-dark-blue cursor-pointer;}
+.tw-card-footer {
+    @apply flex-[0_0_auto] px-2 w-5/6 text-xs;}
+.tw-style {
+        @apply text-[#ffbf00] !important;
+    }
+@media screen and (min-width:768px) {
+        .tw-card-sizing {
+            @apply flex !important;
+        }
+    }

@@ -1,0 +1,52 @@
+<div class="col-12">
+    <div class="row align-items-center pb-0 pt-4" [ngClass]="{'pb-4':carrouselPart == 3}">
+        <div class="col-12">
+            <div class="d-flex">
+                <div class="ea-carrousel-color-action mt-2">
+                    <div class="ea-cursor-pionter"
+                    *ngIf="element.card.id != 1"
+                        (click)="carrouselColorPrevAction()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-chevron-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="w-100 card-deck-overflow">
+                    <div class="row justify-content-center me-0 ms-0 card-flex">
+                        <div *ngFor="let item of carrouselItems;let i = index;" class="col card-deck" [hidden]="item.hidden">
+                            <div class="card card-h border-radius" [ngClass]="{'card-opacity':!item.active}">
+                                <div class="triangle-topleft position-absolute"></div>
+
+                                <div class="col-sm-1 star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                </div>
+                                <p class="ea-h3 ea-bold text-center mobile-padding mb-1 ">
+                                    {{item.card.title}}
+                                </p>
+                                <p class="text-center card-padding" [innerHtml]="item.card.description">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ea-carrousel-color-action mt-2">
+                    <div class="ea-cursor-pionter"
+                    *ngIf="(carrouselPart == 1 && element.card.id != 3) || (carrouselPart == 2 && element.card.id != 2)"
+                        (click)="carrouselColorNextAction()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

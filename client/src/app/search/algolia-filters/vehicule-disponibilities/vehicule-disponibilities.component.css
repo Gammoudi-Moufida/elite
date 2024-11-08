@@ -1,0 +1,10 @@
+
+.en_stock {
+    @apply  inline-block text-white text-[12px] font-bold italic px-[6px] py-0 bg-[#70ab73];
+  }
+  .en_arrivage {
+    @apply inline-block text-white text-[12px] font-bold italic px-[6px] py-0 bg-[#fca04d] ;
+  }
+  .sur_commande {
+    @apply inline-block text-white text-[12px] font-bold italic px-[6px] py-0 bg-[#097893] ;
+  }

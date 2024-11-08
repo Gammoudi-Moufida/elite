@@ -1,0 +1,29 @@
+.bg-desk {
+    background-image: url('https://image.elite-auto.fr/home/bg-img-desk.webp'); 
+    min-height: 650px;
+}
+
+.bg-tab {
+    background-image: url('https://image.elite-auto.fr/home/bg-img-tab.webp');
+    min-height: 550px; 
+}
+
+.bg-mob {
+    background-image: url('https://image.elite-auto.fr/home/bg-img-mob.webp'); 
+    min-height: 430px;
+}
+
+.bg-enterprise-desk {
+    background-image: url('https://image.elite-auto.fr/home/bg-img-vu-desk.webp');
+    min-height: 650px;
+  }
+
+.bg-enterprise-tab {
+    background-image: url('https://image.elite-auto.fr/home/bg-img-vu-tab.webp');
+    min-height: 550px;
+  }
+
+.bg-enterprise-mob {
+    background-image: url('https://image.elite-auto.fr/home/bg-img-vu-mob.webp');
+    min-height: 430px;
+  }

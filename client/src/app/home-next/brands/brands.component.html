@@ -1,0 +1,38 @@
+<div class="container my-3">
+    <div *ngIf="!brands" class="h-2.5 bg-gray-200 rounded-full w-48 mb-4"></div>
+    <h2 class="font-roboto text-custom-black" *ngIf="brands">Nos marques</h2>
+    <div class="grid grid-cols-3 grid-rows-3 gap-2 sm:grid-cols-5 sm:grid-rows-2 mt-3">
+        <ng-container *ngIf="screenMode !=1">
+          <ng-container *ngIf="!brands">
+            <div class="tw-btn-class bg-gray-200 h-8 space-y-8 animate-pulse p-2.5" 
+            *ngFor="let n of numSequence(10)"></div>
+          </ng-container>
+          <ng-container *ngIf="brands">
+            <a type="button" class="tw-btn-class p-2.5 font-roboto" *ngFor="let brand of brands | slice: 0:10" 
+            href="{{ brand.url }}">
+                {{ brand.name | titlecase }}
+            </a>
+          </ng-container>
+        </ng-container>
+        <ng-container class="display-contents" *ngIf="screenMode ==1">
+          <ng-container *ngIf="!brands">
+            <div class="tw-btn-class bg-gray-200 h-8 space-y-8 animate-pulse p-2.5" 
+            *ngFor="let n of numSequence(9)"></div>
+          </ng-container>
+          <ng-container *ngIf="brands">
+            <a type="button" class="tw-btn-class p-2.5 font-roboto" *ngFor="let brand of brands | slice: 0:9" 
+            href="{{ brand.url }}">
+                {{ brand.name | titlecase }}
+            </a>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="flex justify-center my-[30px]">
+        <div *ngIf="!brands" class="tw-btn-class w-56 bg-gray-200 h-9 space-y-8 animate-pulse"></div>
+        <div class="text-center">
+          <a *ngIf="brands" class="bg-custom-blue text-white font-bold py-[.75rem] px-4 rounded font-roboto" 
+          href="{{ nosmarques_url }}">Voir toutes les marques</a>
+        </div>
+      </div>
+</div>
+  

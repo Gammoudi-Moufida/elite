@@ -1,0 +1,61 @@
+.tw-offer-card {
+    @apply px-[10px] mb-[1.5rem] text-[12px] leading-[18px] min-h-[500px];
+}
+
+.alert-info {
+    @apply bg-[#0084a0] border border-[#9eeaf9];
+}
+
+h1 {
+    @apply text-custom-jet-gray text-[15px] font-bold font-arial;
+}
+
+@media only screen and (max-width : 444px) {
+    .textSplit {
+        @apply max-h-[97px];
+    }
+}
+
+@media only screen and (min-width : 445px) and (max-width: 479px) {
+    .textSplit {
+        @apply max-h-[65px];
+    }
+}
+
+@media only screen and (min-width : 480px) {
+    .textSplit {
+        @apply max-h-[56px];
+    }
+}
+
+@media only screen and (max-width : 480px) {
+
+    .mobile-fixed-block {
+        @apply fixed top-0 right-3 z-[3] bg-white px-[10px] py-[12px] flex w-full shadow-[0px_8px_6px_6px_#dde1e3];
+    }
+
+    :host ::ng-deep h2 {
+        @apply text-[12px];
+    }
+
+    :host ::ng-deep .textHtml p {
+        @apply text-[11px] leading-3;
+    }
+}
+
+:host ::ng-deep .textHtml h2 {
+    @apply leading-normal;
+}
+
+:host ::ng-deep .textHtml p {
+    @apply inline;
+}
+
+/*modal popup */
+.tw-modal {
+    @apply fixed top-0 justify-center items-center w-full inset-0 z-[1000] overflow-y-auto;
+}
+
+.tw-btn-close {
+    @apply flex shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b;
+}

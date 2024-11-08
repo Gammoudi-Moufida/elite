@@ -1,0 +1,36 @@
+<div *ngIf="screenMode == 1">
+    <h2 class="font-bold">Modèles disponibles en leasing</h2>
+    <div>
+        <ul class="p-0 mb-0">
+            <div class="flex flex-wrap m-auto justify-center">
+                <a *ngFor="let model of leasingCategoriesUrls" href="{{model.url}}"
+                    class="tw-card w-1/2 p-0 border-0 decoration-none">
+                    <img ngSrc="{{model.urlImg}}" fill class=" mx-auto sizeImg tw-custom-relative">
+                    <figcaption class="text-custom-blue text-[18px] font-bold text-center w-full "> {{model.name}}</figcaption>
+                    <p class="text-dark text-center color-dark tw-h3"> en leasing</p>
+                </a>
+            </div>
+        </ul>
+    </div>
+</div>
+<div *ngIf="screenMode != 1">
+    <h2 class="font-bold md:mt-[1.5rem]">Modèles disponibles en leasing</h2>
+    <div class="flex m-auto justify-between pt-[1rem]">
+        <div class="md:w-1/4 sm:w-1/4 p-0" *ngFor="let model of leasingCategoriesUrls.slice(0,4)">
+            <a href="{{model.url}}" class="tw-card border-0 decoration-none">
+                <img ngSrc="{{model.urlImg}}" fill class="mx-auto sizeImg tw-custom-relative">
+                <figcaption class="text-custom-blue text-[18px] font-bold text-center w-full"> {{model.name}}</figcaption>
+                <p class="text-center tw-h3 text-dark"> en leasing</p>
+            </a>
+        </div>
+    </div>
+    <div class="flex m-auto justify-between">
+        <div class="md:w-1/4 sm:w-1/4 grow basis-0 p-0" *ngFor="let model of leasingCategoriesUrls.slice(4,8)">
+            <a href="{{model.url}}" class="tw-card border-0 decoration-none">
+                <img ngSrc="{{model.urlImg}}" fill class="mx-auto sizeImg tw-custom-relative">
+                <figcaption class="text-custom-blue text-[18px] font-bold text-center w-full ">
+                    {{model.name}}</figcaption>
+                <p class="text-center tw-h3 text-dark"> en leasing</p>
+            </a>
+        </div>
+    </div>

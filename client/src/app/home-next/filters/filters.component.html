@@ -1,0 +1,79 @@
+<section class="bg-no-repeat bg-bottom bg-cover h-[650px]" [ngClass]="{
+    'bg-enterprise-desk': type == 'entreprise' && bgImgUrl.includes('desk'),
+    'bg-enterprise-mob': type == 'entreprise' && bgImgUrl.includes('mob'),
+    'bg-enterprise-tab': type == 'entreprise' && bgImgUrl.includes('tab'),
+    'bg-desk': type != 'entreprise' && bgImgUrl.includes('desk'),
+    'bg-mob': type != 'entreprise' && bgImgUrl.includes('mob'),
+    'bg-tab': type != 'entreprise' && bgImgUrl.includes('tab')
+}">
+    <div class="md:hidden sm:ml-6 sm:block text-center pt-2">
+        <a href="{{protocol}}//www.{{eliteAutoUrl}}/recherche" 
+        class="px-3 no-underline text-white hover:tw-custom-link hover:underline-offset-2 hover:font-bold font-roboto">Achat
+        </a>
+        <a href="{{protocol}}//www.{{eliteAutoUrl}}/reprise-voiture" 
+        class="px-3 text-white hover:tw-custom-link  hover:underline-offset-2 hover:font-bold font-roboto">Reprise
+        </a>
+        <a href="{{protocol}}//www.{{eliteAutoUrl}}/leasing" class="px-3 text-white hover:tw-custom-link 
+        hover:underline-offset-2 hover:font-bold font-roboto">Financement
+        </a>
+    </div>
+       
+        
+    <div class="px-8 mx-auto max-w-screen-xl text-center pt-52 md:pt-40 lg:pt-52 ">
+        <p class="tw-slogan" *ngIf="type != 'entreprise'">
+            Votre voiture neuve ou d’occasion moins chère
+        </p>
+        <p class="tw-slogan" *ngIf="type == 'entreprise'">
+            Votre véhicule d'occasion ou neuf jusqu'à -{{bestDiscount}}%
+        </p>
+        <p class="mb-8 text-lg text-gray-300 lg:text-xl sm:px-16 lg:px-52 font-roboto ">
+            <a class="text-gray-300" href="{{protocol}}//www.{{eliteAutoUrl}}/occasion">
+                Occasion
+            </a>
+            -
+            <a class="text-gray-300" href="{{protocol}}//www.{{eliteAutoUrl}}/recherche?prod_ELITE_OFFERS[refinementList][category][0]=4">
+                0 Km
+            </a>-<a class="text-gray-300" href="{{protocol}}//www.{{eliteAutoUrl}}/recherche?prod_ELITE_OFFERS[refinementList][category][0]=4&prod_ELITE_OFFERS[refinementList][category][1]=3"> Neuf</a>
+        </p>
+        <div class="relative mx-auto w-full md:w-1/2 lg:w-1/3">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3" (click)="redirect('filter')">
+                <img class="border border-solid border-gray-400 rounded-2xl" width="28" height="28" ngSrc="home/filters.webp"/>
+            </div>
+            <input type="text" id="voice-search" class="bg-gray-50 text-lg rounded-3xl block w-full pl-12 py-2.5 border border-gray-400 ring ring-gray-200 ring-opacity-60 focus:outline-none placeholder-black" placeholder="Marque, modèle, finition ..."  [(ngModel)]="carsFilters.text" (ngModelChange)="onChangeText();"  [ngbTypeahead]="search" (keydown.enter)="redirect('search')">
+            <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3" (click)="redirect('search')">
+                <img width="28" height="28" ngSrc="home/search.webp"/>
+            </button>
+        </div>
+    </div>
+   
+</section>
+ <div class="bottom-0 left-0 w-full h-24 bg-custom-black flex justify-center space-x-6 lg:space-x-12 md:space-x-12 font-roboto">
+        <div class="text-center text-sm">
+            <div class="flex items-center justify-center">
+                <img width="40" height="40" ngSrc="home/picto1.webp" alt="Picto 1" />
+            </div>
+            <p class="text-white mb-1">Depuis</p>
+            <p class="text-white font-bold">1995</p>
+        </div>
+        <div class="text-center text-sm">
+            <div class="flex items-center justify-center">
+                <img width="40" height="40" ngSrc="home/picto2.webp" alt="Picto 1" />
+            </div>
+            <p class="text-white font-bold mb-1">x7 primé</p>
+            <p class="text-white">Capital</p>
+        </div>
+        <div class="text-center text-sm">
+            <div class="flex items-center justify-center">
+                <img width="40" height="40" ngSrc="home/picto3.webp" alt="Picto 3" />
+            </div>
+            <p class="text-white mb-1">Groupe</p>
+            <p class="text-white font-bold">Cosmobilis</p>
+        </div>
+        <div class="text-center text-sm">
+            <div class="flex items-center justify-center">
+                <img width="40" height="40" ngSrc="home/picto4.webp" alt="Picto 4" />
+            </div>
+            <p class="text-white font-bold mb-1">+200 000</p>
+            <p class="text-white">Clients</p>
+        </div>
+    </div>

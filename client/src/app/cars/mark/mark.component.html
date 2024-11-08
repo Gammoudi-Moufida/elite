@@ -1,0 +1,42 @@
+
+<div class="tw-loader" *ngIf="!dataIsReady "></div>
+<div class="ea_content " *ngIf="dataIsReady">
+    <div *ngIf="subHeaderData">
+        <app-model-sub-header [data]="subHeaderData" [screenMode]="screenMode"></app-model-sub-header>
+    </div>
+    <div class="tw-container px-3">
+        <div *ngIf="topTextData || gamme">
+            <app-model-text-seo class="topText" [type]="type" [subtexttop]="gamme?.title" [text]="topTextData" [isTop]="true"></app-model-text-seo>
+        </div>
+        <!-- <br>
+        <h2 *ngIf="!showGammeCategory"> {{gamme?.title}}</h2> -->
+        <!-- <hr *ngIf="!showGammeCategory"> -->
+        <button type="button" class="tw-btn mt-3 mb-3" *ngIf="1024 >  screenWidth && !showGammeCategory"
+            (click)="openModal()"><b class="uppercase">GAMME {{gamme?.marqueName}}</b><span class="float-right">&#10095;</span></button>
+        <div class="grid grid-cols-1 lg:grid-cols-4 ">
+            <div class="w-full lg:col-span-1 h-[850px] sticky top-[0px] pt-6 max-w-full lg:pr-3" *ngIf="screenWidth >= 1024">
+                <app-car-sale-mark-sidenav [links]="links" [type]="type"></app-car-sale-mark-sidenav>
+                <div *ngIf="!links && (showImg || !isBrowser)">
+                    <div class="tw-loader" *ngIf="!showImg"></div>
+                </div>
+            </div>
+            <div class="w-full lg:col-span-3 max-w-full lg:pl-3">
+                <app-car-sale-mark-list [cars]="cars" [showImg]="showImg" [type]="type" [isBrowser]="isBrowser"></app-car-sale-mark-list><br>
+                <hr/>
+                <div id="avisList" *ngIf="showImg || !isBrowser">
+                    <app-shared-avis-list [mark]="mark" [markName]="gamme?.marqueName" [type]="type"></app-shared-avis-list>
+                </div>
+                <app-shared-reward [showImg]="showImg" *ngIf="showImg || !isBrowser"></app-shared-reward>
+                <div class="bg-[#eef1f3] mt-[20px] mb-[20px]" *ngIf="showImg || !isBrowser">
+                    <app-shared-avis [listAvis]="avis" [showImg]="showImg" [screenMode]="screenMode"></app-shared-avis>
+                </div>
+                <div *ngIf="showImg || !isBrowser">
+                    <app-model-text-seo class="text-bloc" [text]="textBas" [screenMode]="screenMode"></app-model-text-seo>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="links && showGammeCategory && (showImg || !isBrowser)" class="h-full absolute z-[100] w-full top-0 pt-[50px] bg-white p-[30px]">
+    <app-car-sale-mark-sidenav [links]="links" [type]="type" (closeModal)="closeModal()"></app-car-sale-mark-sidenav>
+</div>

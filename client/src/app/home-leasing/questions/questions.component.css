@@ -1,0 +1,14 @@
+@media screen and (max-width: 767px){
+    h2{
+        @apply text-[16px];
+    }
+    .blue-h3{
+        @apply text-[16px]  ;
+    }
+    p{
+        @apply text-[14px];
+    }
+    h3{
+         @apply text-[16px] ;
+    }
+}

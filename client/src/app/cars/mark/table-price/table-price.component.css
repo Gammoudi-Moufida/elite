@@ -1,0 +1,14 @@
+.tw-table{
+    @apply text-[#000] border-spacing-px bg-[#fff] w-full align-top mb-4 border-[#dee2e6] mt-[50px] border-separate border-0;   
+}
+
+  td{
+    @apply pt-[5px] pr-[5px] pb-[5px] pl-[10px] align-middle font-[inherit];
+} 
+
+tr:hover td:first-child{
+   @apply border-l-[3px] border-l-[#e6461d] border-solid;}
+
+ th{
+    @apply   text-[#000] bg-custom-cadet p-2 border border-solid border-white;
+}

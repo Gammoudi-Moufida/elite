@@ -1,0 +1,19 @@
+button:focus {
+    outline: 0;
+}
+
+.row {
+    width: 80%;
+    margin: auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media screen and (max-width:425px) {
+    .row {
+        width: 100%;
+        text-align: center;
+    }
+}

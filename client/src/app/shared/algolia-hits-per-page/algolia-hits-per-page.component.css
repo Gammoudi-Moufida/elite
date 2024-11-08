@@ -1,0 +1,9 @@
+.custom-border {
+    @apply border rounded-sm border-solid border-[rgba(102,102,102,0.5)] !important;
+  }
+.tw-hits{
+  @apply  text-[16px] leading-[16px] text-center  ;
+}
+.list{
+    @apply  pl-4 pr-10 py-0 appearance-none outline-none bg-custom-silver   shadow-md cursor-pointer w-full h-[40px]  relative  text-gray-600   rounded-sm  
+}

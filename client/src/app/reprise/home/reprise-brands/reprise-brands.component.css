@@ -1,0 +1,55 @@
+
+.tw-button-brands {
+  @apply border font-semibold cursor-[inherit] rounded-lg border-solid border-custom-flash-white focus:shadow-none !important;
+}
+ul {
+  @apply list-none;
+}
+ul a {
+  @apply text-black text-sm font-medium no-underline break-words px-[5px] hover:bg-inherit;
+}
+.tw-btn-color {
+  @apply bg-custom-black text-white font-bold !important;
+}
+
+.tw-btn-class {
+  @apply max-w-[9%] text-[black] h-[35px] mb-[5px] m-px px-[5px] border-custom-flash-white;
+}
+
+.tw-btn-class-shadow {
+  @apply m-px max-w-[9%];
+}
+.tw-content-btn {
+  @apply w-[95%] h-9 ml-[13px] mb-[10px] rounded-[5px];
+}
+
+@media screen and (max-width: 1140px) {
+  .tw-btn-class {
+    @apply m-[0.05rem] mb-[5px] h-[36px] max-w-[13%];
+  }
+  .tw-btn-class-shadow {
+    @apply m-[0.05rem] max-w-[13%];
+  }
+  ul a {
+    @apply text-[14px] mr-[1%];
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tw-btn-class {
+    @apply min-w-[13%] h-[55px];
+  }
+  .tw-btn-class-shadow {
+    @apply m-[0.05rem] max-w-[13%];
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .tw-btn-class {
+    @apply min-w-[30%];
+  }
+  .tw-btn-class-shadow {
+    @apply min-w-[25%];
+  }
+}
+

@@ -1,0 +1,270 @@
+.tw-container {
+  @apply mx-auto px-3 w-full max-w-[1024px] !important;
+}
+.tw-img-r-12 {
+  @apply rounded-tl-xl rounded-tr-xl rounded-t-none;
+}
+.tw-custom-card {
+  @apply relative flex flex-col bg-clip-border border border-[#0000002b]  bg-white min-w-full break-words rounded-xl;
+}
+.tw-equipement-icon {
+  @apply flex p-2.5 cursor-pointer;
+}
+
+.tw-card-compare {
+  @apply bg-custom-silver rounded-[3px] items-center w-[83px] h-[23px];
+}
+
+.tw-label-card {
+  @apply flex relative inset-y-0 inset-x-0 p-[16px] justify-between h-[26px];
+}
+
+.tw-tags {
+  @apply flex justify-between absolute p-4 inset-0  h-[26px] z-[2] ;
+}
+
+.tw-tag {
+  @apply inline-block text-white pt-1 pb-1 ps-2 pe-2 cursor-pointer;
+  
+}
+
+.tw-label-tag {
+  @apply text-white font-bold self-center text-center items-center mx-auto;
+}
+/* marque & model $ couleurs */
+.tw-color-popup {
+  @apply relative inline-block top-[-8%] left-[15%] !important;
+}
+
+.tw-card-marque {
+  @apply flex-none text-base my-2 sm:mb-2 cursor-pointer text-custom-black !important;
+}
+
+.tw-name {
+  @apply text-base text-[#353a3f] !important;
+}
+
+.tw-card-model {
+  @apply text-custom-black uppercase;
+}
+.tw-colorIcon {
+  @apply flex-none pr-[5%] ml-[50px] md:ml-auto;
+}
+.tw-color-list {
+  @apply z-10 bg-white border border-[#dee2e6] p-[0.5rem] rounded-lg;
+}
+
+.tw-items-colors {
+  @apply border border-[#dee2e6] rounded-full p-[2px] mr-[5px] leading-[14px] cursor-pointer;
+}
+/* motorisation & finition & annee circulation*/
+
+.tw-motorisation {
+  @apply flex flex-wrap w-full items-center cursor-pointer;
+}
+
+.tw-name-motorisation {
+  @apply shrink-0 w-full max-w-full font-medium text-sm leading-[16px] px-3 text-custom-gray-light ;
+}
+
+.tw-moto-details {
+  @apply shrink-0 w-full max-w-full font-medium text-sm leading-[16px] px-3 text-custom-gray-light;
+}
+/* badges */ 
+.tw-ea-badge-sm {
+  @apply mt-0 p-[2px] font-semibold inline-block text-[12px] px-2 !important;
+}
+.tw-ea-gray {
+  @apply  bg-[#ebebec] text-black rounded-[0_4px_4px_0] !important;
+}
+.tw-small-badge {
+  @apply text-white rounded-l-[4px] !important;
+}
+.tw-ea-gray-middle {
+  @apply bg-white text-custom-black rounded-none !important ;
+}
+.tw-bold {
+  @apply font-bold !important;
+}
+.tw-remise-per{
+  @apply inline-block bg-custom-black text-white ps-2 pe-2 pt-1 pb-1 font-bold;
+}
+.tw-black-friday{
+  @apply inline-block bg-custom-black text-white ps-2 pe-2 pt-1 pb-1;
+}
+.tw-popup-container{
+  @apply w-[100%] h-auto ml-auto;
+}
+.tw-popup{
+  @apply w-auto px-[2px] py-[2%] z-10 bg-white border border-gray-200 rounded-md;
+}
+.tw-imageColor{
+  @apply w-[20px] h-[20px] text-gray-600 border border-gray-200 rounded-full p-[2px] ml-[7px] leading-[14px] cursor-pointer focus:outline-none;
+}
+.tw-numberColor{
+  @apply text-gray-600 border border-gray-200 rounded-[10px] py-[3px] px-[6px] ml-[7px] leading-[14px] cursor-pointer mt-1;
+}
+/*footer*/
+.tw-textBas{
+  @apply font-medium text-[12px] leading-4 text-gray-600 ms-3 mb-2;
+}
+.tw-card-footer{
+  @apply p-3 flex flex-col mt-auto bg-transparent border-t-0 flex-1 min-h-[1px] absolute bottom-0 w-full;
+}
+.tw-offer-text {
+  @apply inline-block font-semibold mr-[0.25rem] me-1 leading-5 text-gray-700 text-[16px] !important;
+}
+.tw-offer {
+  @apply pt-[3px] pr-[4px] pb-[2px] pl-[13px] text-left self-center flex-shrink-0 w-7/12;
+}
+.tw-col-7{
+  @apply flex md:flex-wrap mr-[-0.75rem];
+}
+.card-comparator {
+  @apply m-0 rounded-[inherit]  h-full !important ;
+}
+@media screen and (max-width: 567px) {
+  .card-comparator * {
+    @apply text-[12px];
+  }
+  .font-size-16 {
+    @apply text-xs;
+  }
+  .tw-name {
+    @apply text-[12px] !important;
+  }
+}
+.sticky {
+  @apply relative z-[2] bg-[#eff0f2] overflow-auto pt-[5px];
+}
+.tw-text-l {
+  @apply  self-center  flex flex-1 items-center flex-wrap;
+}
+.tw-block-prix {
+@apply text-center flex flex-wrap bg-custom-silver rounded-md mr-[1px] ml-[1px] h-[60px];
+}
+.tw-offer-card-price {
+  @apply font-bold text-base cursor-pointer leading-4 text-[#35393F] ;
+}
+.tw-remise-text{
+  @apply inline-block font-semibold cursor-pointer leading-5 text-gray-700 text-[13px];
+}
+.tw-lld-text{
+  @apply inline-block   text-custom-black text-xs me-1;
+}
+.tw-info{
+  @apply h-3.5 w-3.5 bg-[#35393f] cursor-pointer text-white flex justify-center items-center text-[10px] font-bold rounded-[14px];
+}
+.tw-prix {
+  @apply pe-1 px-0 ms-auto self-center flex-shrink-0 w-2/5;
+}
+
+.tw-ea-img-not-vo {
+  @apply w-[75%] h-auto m-[41px];
+}
+.tw-reserved-text {
+  @apply absolute left-[26%] top-[20%] font-bold text-[36px] text-custom-black !important;
+}
+.tw-comparator {
+  @apply hidden !important;
+}
+.divTop{
+  @apply scroll-mt-[145px];
+}
+
+.tw-form-check-input-card {
+  @apply relative h-4 w-4 appearance-none bg-white border-custom-blue cursor-pointer rounded-[3px] border-[1px] after:absolute after:left-0 after:top-0 after:h-full after:w-full
+  after:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMSAxMCIgd2lkdGg9IjExIiBoZWlnaHQ9IjEwIj48c3R5bGU+dHNwYW4geyB3aGl0ZS1zcGFjZTpwcmUgfS5zaHAwIHsgZmlsbDogbm9uZTtzdHJva2U6ICNmZmZmZmY7c3Ryb2tlLXdpZHRoOiAyIH0gPC9zdHlsZT48cGF0aCBpZD0iTGF5ZXIiIGNsYXNzPSJzaHAwIiBkPSJNMSw1bDMuNSwzbDUuNSwtNyIgLz48L3N2Zz4=')]
+  after:bg-[length:65%_65%] after:bg-center after:bg-no-repeat after:content-[''] checked:bg-custom-blue;
+}
+@media screen and (max-width: 700px) {
+  .display-img {
+    @apply hidden;
+  }
+}
+
+::ng-deep .modal-content {
+  @apply border-none !important;
+}
+
+.tw-reserved-box {
+  @apply w-[75%] h-auto;
+}
+.tooltip-content {
+  @apply text-[1.2em] !important; 
+}
+.tw-popupColors {
+  @apply absolute top-1/2  transform -mt-10 -translate-x-[63%] -translate-y-1/2 bg-white border p-3 rounded h-auto w-[668%] !important;
+}
+.tooltip-container1::before {
+  @apply absolute top-1/2 left-1/2 transform -mt-11 -translate-x-1/2 -translate-y-1/2 border bg-white p-3 rounded h-auto w-[max-content] z-50;
+}
+
+.tw-arrow {
+  @apply absolute top-[95%] left-[70%] ml-[0px] bg-white border-solid border-t-[0px] border-r-[1px] border-b-[1px] border-l-[0px] inline-block p-[3px];
+}
+
+.margin-t{
+  @apply -mt-12 !important ;
+}
+.margin-t-15 {
+  @apply mt-[-3.5rem] !important ;
+}
+.down {
+  @apply transform rotate-45;
+}
+
+/*modal popup */
+.tw-modal {
+  @apply fixed top-0  justify-center items-center w-full inset-0 z-[1000] overflow-y-auto;
+}
+.tw-opicity-modal{
+  @apply fixed inset-0 bg-[#000]/75;
+}
+.tw-content-modal {
+  @apply relative bg-white rounded-lg;
+}
+.tw-header-modal {
+  @apply relative bg-white rounded-lg shadow dark:bg-gray-700;
+}
+.tw-btn-close {
+  @apply flex shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b;
+}
+.tw-btn-modal {
+  @apply ms-3 text-base font-normal leading-normal text-[#212529] bg-white focus:outline-none rounded-lg border border-[#212529] px-3 py-1.5 hover:text-white hover:bg-[#212529] focus:z-10;
+}
+.tw-text-header{
+  @apply shrink-0 text-center block p-4 border-b rounded-t;
+}
+.tw-title {
+  @apply pb-1 pt-2 block text-center;
+}
+.tw-btn-danger {
+  @apply bg-[#e6461d] hover:bg-[#c03715] text-white font-bold p-2 rounded w-full;
+}
+
+.tw-tooltip-container {
+  @apply relative inline-block !important;
+}
+.tw-show {
+  @apply hidden !important;
+}
+
+.tw-tooltip {
+  @apply  invisible w-max    bg-custom-black  text-white text-center rounded-[5px] p-[5px] absolute z-10 bottom-[125%] left-[50%]  -translate-x-[50%] opacity-0 ;
+}
+@media screen and (max-width: 1023px) {
+  .tw-tooltip{
+    @apply max-w-[286%] -translate-x-[43%] !important;
+  }
+}
+.textBase{
+  @apply text-base !important ;
+}
+.tw-tooltip::before {
+  @apply content-[''] absolute top-[100%] left-[50%] -ml-[5px] border-[5px] border-solid  border-[#000_transparent_transparent_transparent] ;
+}
+
+.tw-tooltip-container:hover .tw-tooltip {
+  @apply visible opacity-100 ;
+}

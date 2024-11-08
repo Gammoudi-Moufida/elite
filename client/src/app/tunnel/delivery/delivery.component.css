@@ -1,0 +1,7 @@
+.card-border-raduis {
+    border-radius: 8px;
+}
+
+:host ::ng-deep  .dropdown-item.active, .dropdown-item:active {
+    background-color: #0183a0;
+}

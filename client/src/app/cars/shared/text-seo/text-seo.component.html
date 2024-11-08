@@ -1,0 +1,35 @@
+<div *ngIf="isTop">
+  <span *ngIf="text?.length < 368">
+    <span class="tw-text-html" [innerHTML]="html"></span>
+  </span>
+  <span *ngIf="text?.length >= 368">
+    <span class="tw-text-html" [innerHTML]="html" [ngClass]="{'tw-text-split':isTextOpen}"></span>
+    <span *ngIf="isTextOpen" class='tw-read-more' (click)="toggleText()">... Lire la suite</span>  
+    <span *ngIf="!isTextOpen" class='tw-read-more' (click)="toggleText()">Refermer</span> 
+  </span>
+</div>
+<div *ngIf="!isTop">
+  <span class="tw-text-html" [innerHTML]="html"></span>
+</div>
+<p *ngIf="type=='lease' || type=='marque_modele_offres_finition_lease' || type=='marque_modele_offres_motorisation_lease'" class="fw-bold" >Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</p>
+<h2 *ngIf='subtexttop'>{{ subtexttop }}</h2>
+
+<div class="relative" id="content">
+  <ng-container *ngFor="let item of itemCarousel; let i = index">
+    <div class="text-center card-padding" [class.hidden]="!item.active">
+      <p [innerHtml]="item.element"></p>
+    </div>
+  </ng-container>
+  <button *ngIf="itemCarousel.length >1" aria-label="slide backward" class="absolute top-1/2 left-0 transform -translate-y-1/2 px-4 py-2" 
+  (click)="prevSlide()">
+    <svg width="22" height="22" viewBox="0 0 8 14" fill="none" xmlns="https://www.w3.org/2000/svg">
+      <path d="M7 1L1 7L7 13" stroke="#ffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+  <button *ngIf="itemCarousel.length >1" aria-label="slide forward" class="absolute top-1/2 right-0 transform -translate-y-1/2 px-4 py-2"
+   (click)="nextSlide()">
+    <svg width="22" height="22" viewBox="0 0 8 14" fill="none" xmlns="https://www.w3.org/2000/svg">
+      <path d="M1 1L7 7L1 13" stroke="#ffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+</div>

@@ -1,0 +1,130 @@
+<div class="mt-3" id="livraison">
+  <div class="e-a-collapse-header bg-white p-3 mb-2 d-flex justify-content-between" (click)="collapse.toggle()" [attr.aria-expanded]="!isClosedDeliveryCollapse">
+      <h2 class="ea-h5 ea-bold mb-0">LIVRAISON <span class="ea-h5 ea-bold ea-blue-color" *ngIf="!devis?.generalInfo?.offreOccasion?.livraison">*(champs obligatoires pour réserver)</span></h2>
+      <div class="ea-collapse-icon">
+          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!isClosedDeliveryCollapse">
+              <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+          </svg>
+
+          <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="isClosedDeliveryCollapse">
+              <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+          </svg>
+      </div>
+  </div>
+  <div #collapse="ngbCollapse" [(ngbCollapse)]="isClosedDeliveryCollapse">
+      <div class="e-a-collapse-body bg-white p-3 mb-1">
+          <div class="row">
+              <div class="col-12" *ngIf="devis?.generalInfo?.offreOccasion?.livraison">
+                  <p class="ea-h5 ea-bold mb-0">
+                      {{ devis?.generalInfo?.offreOccasion?.livraison }}
+                  </p>
+              </div>
+              <div class="col-12" *ngIf="!devis?.generalInfo?.offreOccasion?.livraison">
+                    <ng-template #rt let-r="result" let-t="term">
+                        <ngb-highlight [result]="r.code+' '+ r.nomDepartement" [term]="t"></ngb-highlight>
+                    </ng-template>
+                    <input class="form-control" id="postalCode" [(ngModel)]="postalCode" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" placeholder="code postal" (ngModelChange)="postalCodeChange()" (focusout)=" onFocusOutEvent($event)" (keyup)="keyup($event)" autofocus (keydown.tab)="$event.preventDefault()" tabindex="-1" />
+              </div>
+          </div>
+      </div>
+      <div class="loader" *ngIf="loadDelivery"></div>
+      <div class="row g-2" *ngIf="!devis?.generalInfo?.offreOccasion?.livraison">
+          <div class="col-sm mb-1" *ngIf="devis?.delivery?.domicilePrice && (devis?.delivery?.domicilePrice != -1) && devis?.delivery?.error == 0 && !loadDelivery">
+              <div class="card card-finance-ea h-100 card-border-raduis">
+                  <div class="card-header bg-transparent">
+                      <div class="row mt-1 mb-1">
+                          <div class="col-10">
+                              <svg width="18" height="18" viewBox="0 0 20 17" fill="none">
+                                  <path
+                                      d="M16.6668 15.6666C16.6668 15.8877 16.579 16.0996 16.4228 16.2559C16.2665 16.4122 16.0545 16.5 15.8335 16.5H4.16683C3.94582 16.5 3.73385 16.4122 3.57757 16.2559C3.42129 16.0996 3.3335 15.8877 3.3335 15.6666V8.16664H0.833496L9.43933 0.343307C9.59275 0.203706 9.79273 0.126343 10.0002 0.126343C10.2076 0.126343 10.4076 0.203706 10.561 0.343307L19.1668 8.16664H16.6668V15.6666Z"
+                                      fill="#596A73"
+                                  />
+                              </svg>
+                              <span class="ps-1 ea-bold">Livraison à domicile</span>
+                          </div>
+                          <div class="col-2">
+                              <input class="e-a-form-radio-big-input" type="radio" name="flexCheckBox" id="flexCheckBox1" (click)="selectPartenaireFirstType($event)" />
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-title ea-h5">Saisissez le code postal où vous souhaitez être livrés</h6>
+                      <p class="card-text ea-bold ea-h5 mt-2 mb-2"> {{devis?.delivery?.depName}} ({{postalCode.code}})</p>
+                      <h6 class="card-text ea-h5 mt-2 mb-2">Elite Auto livre votre véhicule chez vous ou sur votre lieu de travail</h6>
+                      <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" (click)="open(content,'lg')">Comment ça marche ?</p>
+                  </div>
+                  <div class="card-footer bg-transparent">
+                      <span class="ea-h2 ea-bold" *ngIf="devis?.delivery?.domicilePrice == -1">Aucun prix</span>
+                      <span class="ea-h2 ea-bold" *ngIf="devis?.delivery?.domicilePrice != -1">{{devis?.delivery?.domicilePrice}} €</span>
+                  </div>
+              </div>
+          </div>
+          <div class="col-sm mb-1" [ngClass]="{'col-12': !devis?.delivery?.domicilePrice || (devis?.delivery?.domicilePrice != -1)}">
+              <div class="card card-finance-ea h-100 card-border-raduis" *ngIf="devis?.delivery?.partners?.length > 0 && devis?.delivery?.error == 0 && !loadDelivery">
+                  <div class="card-header bg-transparent">
+                      <div class="row mt-1 mb-1">
+                          <div class="col-10">
+                            <svg  width="18" height="18" viewBox="0 0 19 16" fill="none">
+                              <path d="M17.0002 13.8333H18.6668V15.5H0.333496V13.8333H2.00016V1.33333C2.00016 1.11232 2.08796 0.900358 2.24424 0.744078C2.40052 0.587797 2.61248 0.5 2.8335 0.5H11.1668C11.3878 0.5 11.5998 0.587797 11.7561 0.744078C11.9124 0.900358 12.0002 1.11232 12.0002 1.33333V13.8333H13.6668V5.5H16.1668C16.3878 5.5 16.5998 5.5878 16.7561 5.74408C16.9124 5.90036 17.0002 6.11232 17.0002 6.33333V13.8333ZM5.3335 7.16667V8.83333H8.66683V7.16667H5.3335ZM5.3335 3.83333V5.5H8.66683V3.83333H5.3335Z" fill="#596A73"/>
+                              </svg>
+                              <span class="ps-1 ea-bold">Livraison relais confiance</span>
+                          </div>
+                          <div class="col-2">
+                              <input class="e-a-form-radio-big-input" type="radio" name="flexCheckBox" id="flexCheckBox2"  (click)="selectPartenaireSecondType($event)" />
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <h6 class="card-title ea-h5">Sélectionnez votre agence parmis plus de 200 centres</h6>
+                      <select class="form-control form-select mb-3 w-100 p-2" aria-label=".form-select-lg example" [(ngModel)]="devis.delivery.selectedPartner" (change)="selectPartenaire(devis.delivery.selectedPartner);">
+                        <option [ngClass]="{'ea-bold':partner.tarifNum == 0}" [attr.disabled]="partner.id == -1 ? true : null" *ngFor="let partner of devis?.delivery?.partners" [ngValue]="partner" [innerHTML]="partner.libelle">
+                            Open this select menu
+                        </option>
+                    </select>
+                     <div class="d-flex align-items-center pt-1">
+                      <svg  width="15" height="19" viewBox="0 0 15 19" fill="none">
+                        <path d="M7.5 16.5833L11.625 12.4583C12.4408 11.6425 12.9963 10.6031 13.2213 9.47154C13.4463 8.34 13.3308 7.16714 12.8892 6.10127C12.4477 5.0354 11.7 4.1244 10.7408 3.48345C9.78149 2.8425 8.6537 2.5004 7.5 2.5004C6.3463 2.5004 5.21851 2.8425 4.25924 3.48345C3.29997 4.1244 2.55229 5.0354 2.11076 6.10127C1.66923 7.16714 1.55368 8.34 1.77871 9.47154C2.00374 10.6031 2.55926 11.6425 3.375 12.4583L7.5 16.5833ZM7.5 18.94L2.19667 13.6366C1.14779 12.5877 0.433489 11.2514 0.144107 9.79652C-0.145275 8.34166 0.0032557 6.83367 0.570916 5.46323C1.13858 4.09279 2.09987 2.92145 3.33324 2.09735C4.5666 1.27324 6.01665 0.833374 7.5 0.833374C8.98336 0.833374 10.4334 1.27324 11.6668 2.09735C12.9001 2.92145 13.8614 4.09279 14.4291 5.46323C14.9968 6.83367 15.1453 8.34166 14.8559 9.79652C14.5665 11.2514 13.8522 12.5877 12.8033 13.6366L7.5 18.94ZM7.5 9.99998C7.94203 9.99998 8.36595 9.82438 8.67851 9.51182C8.99107 9.19926 9.16667 8.77534 9.16667 8.33331C9.16667 7.89128 8.99107 7.46736 8.67851 7.1548C8.36595 6.84224 7.94203 6.66664 7.5 6.66664C7.05798 6.66664 6.63405 6.84224 6.32149 7.1548C6.00893 7.46736 5.83334 7.89128 5.83334 8.33331C5.83334 8.77534 6.00893 9.19926 6.32149 9.51182C6.63405 9.82438 7.05798 9.99998 7.5 9.99998ZM7.5 11.6666C6.61595 11.6666 5.7681 11.3155 5.14298 10.6903C4.51786 10.0652 4.16667 9.21736 4.16667 8.33331C4.16667 7.44925 4.51786 6.60141 5.14298 5.97629C5.7681 5.35116 6.61595 4.99998 7.5 4.99998C8.38406 4.99998 9.2319 5.35116 9.85703 5.97629C10.4821 6.60141 10.8333 7.44925 10.8333 8.33331C10.8333 9.21736 10.4821 10.0652 9.85703 10.6903C9.2319 11.3155 8.38406 11.6666 7.5 11.6666Z" fill="#596A73"/>
+                        </svg>
+                        <span class="ps-3 ea-h5 ea-bold">{{devis.delivery.selectedPartner.region}} {{devis.delivery.selectedPartner.departement}}</span>
+                     </div>
+                     
+                  </div>
+                  <div class="card-footer bg-transparent">
+                      <span class="ea-h2 ea-bold">{{devis.delivery.selectedPartner.tarif}}</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="e-a-collapse-body bg-white p-3 ea-bold ea-h4 text-center mt-2" *ngIf="postalCode && res && res.indexOf('postalCode') == -1 && devis?.delivery?.error == 1 &&  !loadDelivery">
+        Aucune livraison possible pour ce code postal
+    </div>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body pt-0">
+      <div class="row">
+          <div class="col-12 p-0">
+              <img ngSrc="pdf/topdf_p5.png" class="position-relative" fill />
+          </div>
+          <div class="col-12">
+              <span class="ea-h5 ea-bold">Comment ça marche ?</span>
+              <p class="ea-h5 p-1">
+                  > Vous choisissez le lieu et le créneau horaire pour la livraison.
+                  <br />
+                    > 1 jour avant, nous vous contactons afin de confirmer la date, l'heure et le lieu de livraison. <br />
+                    > Avant de convoyer votre véhicule, notre chauffeur professionnel vérifie la conformité du véhicule que vous avez commandé. <br />
+                    > Votre voiture est véhiculée par la route par notre convoyeur professionnel sur le lieu que vous avez choisi (lors de ce transport, votre véhicule est assuré tous risques afin d'éviter tout désagrément). <br />
+                    > Votre voiture est nettoyée avant de vous être livrée. <br/>
+                    > Une mise en main précise vous est effectuée (éléments de signalisation, équipements, écran de navigateur...) . <br />
+                    > Notre convoyeur vous remet tous les documents nécessaires.
+                  <br />
+              </p>
+          </div>
+      </div>
+  </div>
+</ng-template>

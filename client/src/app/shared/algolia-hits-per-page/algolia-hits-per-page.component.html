@@ -1,0 +1,7 @@
+<div class="tw-hits font-normal">
+  <select class="custom-border list bg-right-[1rem] bg-pattern bg-no-repeat bg-right-[2px]  bg-size-[50px]-auto bg-image font-normal" (change)="redirect($event.target.value)">
+    <option class="bg-white" *ngFor="let item of state?.items"  [value]="item.value"
+    [selected]="item.isRefined">{{ item.label }}</option>
+  </select>
+</div>
+  

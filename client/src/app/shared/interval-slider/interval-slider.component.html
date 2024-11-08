@@ -1,0 +1,39 @@
+<div class="tw-price-rent-values">
+    <label *ngIf="priceFilter || rentFilter">
+        <span *ngIf="priceFilter" class="tw-font">De </span>
+        <span *ngIf="rentFilter" class="tw-font">Loyer de </span> 
+        <span class="font-bold">{{+sliderValues?.valueLeft | number }} €</span>
+        à
+        <span class="font-bold">{{+sliderValues?.valueRight | number }} €</span>
+    </label>
+    </div>
+    <div class="relative" [class.tw-margin-slider-customized]="priceFilter || rentFilter">
+        <input class="tw-multi-range-slider absolute w-full" type="range" [step]="sliderParams.step"
+            [min]="sliderParams.minRight" [max]="sliderParams.maxRight" [(ngModel)]="sliderValues.valueRight"
+            (ngModelChange)="rangeInputChange()">
+    
+        <input class="tw-multi-range-slider absolute w-full" type="range" [step]="sliderParams.step"
+            [min]="sliderParams.minLeft" [max]="sliderParams.maxLeft" [(ngModel)]="sliderValues.valueLeft"
+            (ngModelChange)="rangeInputChange()">
+    
+    
+    
+    
+        <div class="tw-MultiRangeSlider relative">
+            <div class="track absolute w-full"></div>
+            <div [ngStyle]="range" class="range absolute"></div>
+            <div [ngStyle]="thumbLeft" class="thumb left absolute">
+                <div *ngIf="priceFilter || rentFilter || promoPage" class="tw-show">{{+sliderValues?.valueLeft | number }} €</div>
+                <div class="absolute tw-circle"></div>
+            </div>
+            <div [ngStyle]="thumbRight" class="thumb right absolute">
+                <div *ngIf="priceFilter || rentFilter || promoPage" class="tw-show">{{+sliderValues?.valueRight | number }} €</div>
+                <div class="absolute tw-circle"></div>
+            </div>
+            <datalist class="tw-stepTop" id="tickmarks">
+                <div *ngFor="let st of stepTab">
+                    <option class="tw-circleStep" [ngClass]="{'bg-[#d8e0f3]' : st < minValueForStep || maxValueForstep <  st}"
+                        (click)="onStepClick($event)" [value]="st"></option>
+                </div>
+            </datalist>
+        </div>

@@ -1,0 +1,233 @@
+<div class="modal-header">
+    <h4 class="modal-title ea-bold">
+        Votre estimation
+        <div class="ea-h5">minimum de reprise</div>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<div class="modal-body">
+    <div class="loader" *ngIf="!reprise">
+    </div>
+    <div class="row mt-2" *ngIf="reprise">
+        <div class="col-12 text-center">
+            <h6 class="ea-uppercase ea-warning-color mb-3"> DÉTAILS DU PRIX </h6>
+            <p class="ea-primary-color ea-h5">
+                N°Accord {{ reprise.accord }}
+                <br>
+                Identifiant {{ reprise.identifiant }}
+            </p>
+        </div>
+        <div class="col-12 col-sm-6 ea-primary-color ea-h5">
+            Offre valable jusqu'au {{reprise.dateRentreePrevisionnelle}}
+        </div>
+        <div class="col-12 col-sm-6"></div>
+        <div class="col-12 col-sm-6  ea-warning-color ea-h1 ea-bold">
+            Estimation de reprise *
+        </div>
+        <div class="col-12 col-sm-6  ea-warning-color ea-h1 ea-bold">
+            <span *ngIf="!reprise.prix"> NC </span>
+            <span *ngIf="reprise.prix"> {{ reprise.prix| number:'1.0-0':'fr' }} € TTC </span>
+        </div>
+        <div class="col-12 col-sm-6 ea-warning-color ea-h6">
+            incluant les frais de remise en état
+        </div>
+    </div>
+    <div class="text-center">
+        <div class="ea-h5 mb-1 mt-3">Informations légales :</div>
+        <p class="ea-primary-color ea-h6">
+            * sous réserve que le descriptif soit fidèle au véhicule décrit ci-dessous.<br>
+            Offre valable 15 jours, au-delà une indexation mensuelle de 2% sera appliquée.
+            <br />
+            L'offre doit être signée par les deux parties pour être valide.
+        </p>
+    </div>
+    <hr>
+    <div class="text-center">
+        <h6 class="ea-uppercase ea-warning-color mb-3">Désignation du Véhicule à reprendre</h6>
+        <img ngSrc="{{ reprise.image }}&width=500" fill class="position-relative w-auto" *ngIf="reprise.image">
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Marque
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.marque }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Modèle
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.modeleCourt }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Puissance
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.chevauxDin }} ch DIN
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Finition
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.finition }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Carburant
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.carburant }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Immatriculation
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.immatriculation }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Nombre de porte
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.nbPorte }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Peinture métalisée
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.peintureMetalisee"> Oui </span>
+            <span *ngIf="!reprise.peintureMetalisee"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Première main
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.premiereMain"> Oui </span>
+            <span *ngIf="!reprise.premiereMain"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Véhicule d'importation
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.importation"> Oui </span>
+            <span *ngIf="!reprise.importation"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Carnet d'entretien à jour
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.carnetAJour"> Oui </span>
+            <span *ngIf="!reprise.carnetAJour"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Véhicule accidenté
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.accidente"> Oui </span>
+            <span *ngIf="!reprise.accidente"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Destiné à la casse
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.casse"> Oui </span>
+            <span *ngIf="!reprise.casse"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Kilométrage garanti
+        </div>
+        <div class="col-12 col-sm-4">
+            <span *ngIf="reprise.kilometrageGaranti"> Oui </span>
+            <span *ngIf="!reprise.kilometrageGaranti"> Non </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Kilométrage
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.kilometrage | number:'1.0-0':'fr' }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Kilométrage maxi prévisionnel
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.kilometragePrev | number:'1.0-0':'fr' }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Couleur extérieure
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.couleurExterne }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Couleur intérieur
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.couleurInterne }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 ea-bold">
+            Date mise en circulation
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ reprise.dateMiseCirculation }}
+        </div>
+    </div>
+    <div class="row" *ngFor="let libInfo of reprise.infoSupplementaire; let key = index">
+        <div class="col-12 col-sm-6 ea-bold">
+            {{ libInfo.name }}
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ libInfo.value }}
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <h6 class="ea-uppercase ea-warning-color mb-3">Désignation des <b>frais de remise en état</b></h6>
+    </div>
+    <div class="row" *ngFor="let frais of reprise.frais; let key = index">
+        <div class="col-12 col-sm-6 ea-bold">
+            {{ frais.sLDELib }}
+        </div>
+        <div class="col-12 col-sm-4">
+            {{ frais.fLDESubtotal }} € (TTC)
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>

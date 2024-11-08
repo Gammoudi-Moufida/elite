@@ -1,0 +1,7 @@
+
+ a:link{
+    @apply text-custom-slate-gray;
+}
+a:visited{
+    @apply text-custom-slate-gray;
+}

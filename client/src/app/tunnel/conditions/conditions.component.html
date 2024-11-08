@@ -1,0 +1,25 @@
+<div class="mt-2">
+    <div class="ea-5 ea-bold">Conditions de l’offre :</div>
+    <p class="ea-h5" *ngIf ="devis?.generalInfo?.type != 'occasion'">
+        Garantie Constructeur - {{ devis?.generalInfo?.garantie }} mois
+        <span [innerHTML]="devis?.generalInfo?.offer?.dateDebutGaranti ? ' à compter du ' + devis?.generalInfo?.offer?.dateDebutGaranti : ' à compter de la 1ère date de mise en circulation'"></span>
+        <span class="d-block" *ngIf="devis?.generalInfo?.textGuaranty">{{devis?.generalInfo?.textGuaranty}}</span>
+        <br/>
+        <span [innerHTML]="devis?.generalInfo?.offer?.isStock ? ' Dans la limite des stocks disponibles': ' Sous réserve de production et de disponibilité du véhicule'"></span>
+        <span *ngIf="devis?.generalInfo?.type != 'occasion' && !devis?.generalInfo?.isOccasion">
+            <br *ngIf="devis?.generalInfo?.offer?.maxDateCommande || devis?.generalInfo?.offer?.maxDateLivraison"/>
+           <span *ngIf="devis?.generalInfo?.offer?.maxDateCommande">Si commande avant le {{ devis?.generalInfo?.offer?.maxDateCommande }}</span>
+           <span *ngIf="devis?.generalInfo?.offer?.maxDateCommande && devis?.generalInfo?.offer?.maxDateLivraison"> - </span>
+           <span *ngIf="devis?.generalInfo?.offer?.maxDateLivraison"> Si livraison avant le {{ devis?.generalInfo?.offer?.maxDateLivraison }}</span>
+        </span>
+        <br />
+        <span>{{getTextMiseEncirculation()}}</span>
+        <br />
+        <span [innerHTML]="getTextReserve()"></span>
+    </p>
+    <p class="ea-h5" *ngIf ="devis?.generalInfo?.type == 'occasion'">
+       <span *ngIf="devis?.generalInfo?.libGarantie && devis?.generalInfo?.libGarantie != ' mois' ">Garantie - {{ devis?.generalInfo?.libGarantie }}</span> 
+        <br *ngIf="devis?.generalInfo?.libGarantie && devis?.generalInfo?.libGarantie != ' mois' "/>
+        <span>{{getTextMiseEncirculation()}}</span>
+    </p>
+</div>

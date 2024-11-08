@@ -1,0 +1,213 @@
+<div class="mt-3">
+    <div class="e-a-collapse-header bg-white text-uppercase p-3 mb-2 d-flex justify-content-between" (click)="collapse.toggle()" [attr.aria-expanded]="!isClosedCollapse">
+        <h2 class="ea-h5 ea-bold mb-0" *ngIf="devis?.generalInfo?.type != 'occasion'">OPTIONS DU VÉHICULE</h2>
+        <h2 class="ea-h5 ea-bold mb-0" *ngIf="devis?.generalInfo?.type == 'occasion'">ÉQUIPEMENTS</h2>
+        <div class="ea-collapse-icon">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="!isClosedCollapse">
+                <path d="M7.00001 2.82795L2.05001 7.77795L0.636013 6.36395L7.00001 -4.63327e-05L13.364 6.36395L11.95 7.77795L7.00001 2.82795Z" fill="#6F6F6F" />
+            </svg>
+
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="#596A73" *ngIf="isClosedCollapse">
+                <path d="M6.99999 5.17192L11.95 0.221924L13.364 1.63592L6.99999 7.99992L0.635986 1.63592L2.04999 0.221924L6.99999 5.17192Z" fill="#6F6F6F" />
+            </svg>
+        </div>
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isClosedCollapse">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center pb-3" *ngIf="devis?.generalInfo?.type != 'occasion'">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path
+                                d="M1.66683 0H12.3335L13.6668 2.66667V11.3333C13.6668 11.5101 13.5966 11.6797 13.4716 11.8047C13.3465 11.9298 13.177 12 13.0002 12H1.00016C0.823352 12 0.653782 11.9298 0.528758 11.8047C0.403734 11.6797 0.333496 11.5101 0.333496 11.3333V2.66933L1.66683 0ZM12.3335 4H1.66683V10.6667H12.3335V4ZM12.1762 2.66667L11.5095 1.33333H2.4915L1.82483 2.66667H12.1762ZM7.66683 7.33333H9.66683L7.00016 10L4.3335 7.33333H6.3335V4.66667H7.66683V7.33333Z"
+                                fill="#596A73"
+                            />
+                        </svg>
+                        <span class="ps-1 ea-bold">INCLUSES</span>
+                    </div>
+                    <div class="row align-items-center g-2" *ngFor="let option of devis?.choiceOptions?.optionsSorted">
+                        <div class="col-9">
+                            <ul class="label-color mb-2">
+                                <li>{{ option.label }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-3">
+                            <span class="ea-h5 ea-bold float-end pe-3 mb-2" *ngIf="option.price != 0">({{ option.price }}€)</span>
+                        </div>
+                    </div>
+                    <div *ngIf = "devis?.generalInfo?.type == 'occasion'">
+                        <div class="row mb-2 align-items-center margin-list" *ngFor="let equipement of devis?.choiceOptions?.options; let i = index;">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center padding-list" (click)="toggleOption(equipement)" *ngIf="equipement.tatoOption != true">
+                                    <input class="e-a-form-check-input" type="checkbox" [checked]="equipement.selected">
+                                    <label class="ea-h5 ps-2 mb-0 label-color" title="{{ equipement.libelle }}">
+                                        {{ equipement.libelle }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <span class="ea-h5 font-price float-end pe-3" *ngIf="equipement.tatoOption != true"> (+{{ equipement.referencePrixVente }}€)</span>
+                            </div>
+                        </div>
+                        <div class="row align-items-center" *ngFor="let equipCateg of devis?.seriesEquipment?.equipementsSerie">
+                            <div class="col-12" *ngFor="let equip of equipCateg.equipements; let i = index;" [hidden]="i > 7 && !showAllOptions">
+                                <ul class="label-color mb-2">
+                                    <li>{{equip.descriptif}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" *ngIf="!showAllOptions && (devis?.generalInfo?.type == 'occasion' && devis?.seriesEquipment?.equipementsSerie && devis?.seriesEquipment?.equipementsSerie[0]?.equipements.length > 8 )" (click)="showAll()">Tout Afficher (+{{devis?.seriesEquipment?.equipementsSerie[0]?.equipements.length - 8 }})</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2" *ngIf="devis?.generalInfo?.type != 'occasion'">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M12.3887 10.1333L13.1901 10.614C13.2395 10.6436 13.2804 10.6855 13.3088 10.7356C13.3372 10.7858 13.3522 10.8424 13.3522 10.9C13.3522 10.9576 13.3372 11.0143 13.3088 11.0644C13.2804 11.1145 13.2395 11.1564 13.1901 11.186L7.3434 14.694C7.23971 14.7563 7.12103 14.7892 7.00007 14.7892C6.8791 14.7892 6.76042 14.7563 6.65673 14.694L0.810066 11.186C0.76063 11.1564 0.71971 11.1145 0.691297 11.0644C0.662884 11.0143 0.647949 10.9576 0.647949 10.9C0.647949 10.8424 0.662884 10.7858 0.691297 10.7356C0.71971 10.6855 0.76063 10.6436 0.810066 10.614L1.6114 10.1333L7.00007 13.3667L12.3887 10.1333ZM12.3887 7.00001L13.1901 7.48067C13.2395 7.51027 13.2804 7.55217 13.3088 7.6023C13.3372 7.65242 13.3522 7.70905 13.3522 7.76667C13.3522 7.82429 13.3372 7.88092 13.3088 7.93105C13.2804 7.98117 13.2395 8.02308 13.1901 8.05267L7.00007 11.7667L0.810066 8.05267C0.76063 8.02308 0.71971 7.98117 0.691297 7.93105C0.662884 7.88092 0.647949 7.82429 0.647949 7.76667C0.647949 7.70905 0.662884 7.65242 0.691297 7.6023C0.71971 7.55217 0.76063 7.51027 0.810066 7.48067L1.6114 7.00001L7.00007 10.2333L12.3887 7.00001ZM7.34273 0.872672L13.1901 4.38067C13.2395 4.41027 13.2804 4.45217 13.3088 4.5023C13.3372 4.55242 13.3522 4.60905 13.3522 4.66667C13.3522 4.72429 13.3372 4.78092 13.3088 4.83105C13.2804 4.88117 13.2395 4.92308 13.1901 4.95267L7.00007 8.66667L0.810066 4.95267C0.76063 4.92308 0.71971 4.88117 0.691297 4.83105C0.662884 4.78092 0.647949 4.72429 0.647949 4.66667C0.647949 4.60905 0.662884 4.55242 0.691297 4.5023C0.71971 4.45217 0.76063 4.41027 0.810066 4.38067L6.65673 0.872672C6.76042 0.810377 6.8791 0.777466 7.00007 0.777466C7.12103 0.777466 7.23971 0.810377 7.3434 0.872672H7.34273ZM7.00007 2.22134L2.92473 4.66667L7.00007 7.11201L11.0754 4.66667L7.00007 2.22134Z" fill="#596A73"/>
+                            </svg>
+                        <span class="ps-1 ea-bold">DISPONIBLES</span>
+                    </div>
+                    <div class="row align-items-center g-2">
+                        <div class="col-9">
+                            <div class="d-flex align-items-center padding-list" (click)="toggleTatoOption($event)">
+                                <input class="e-a-form-check-input" type="checkbox" name="Tatouage_antivol" id="Tatouage_antivol">
+                                <label class="ea-h5 ps-2 mb-0 label-color" title="Tatouage antivol - Gravage de toutes les vitres ( N° de châssis ) et inscription fichier Argos( assurance )"  for="Tatouage_antivol"> Tatouage antivol - Gravage de toutes les vitres ( N° de châssis ) et inscription fichier Argos (assurance)
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" title="Contrat de tatouage" (click)="open(contentTato, 'lg')">
+                                        <path d="M8.00016 14.6667C11.6821 14.6667 14.6668 11.6819 14.6668 8.00004C14.6668 4.31814 11.6821 1.33337 8.00016 1.33337C4.31826 1.33337 1.3335 4.31814 1.3335 8.00004C1.3335 11.6819 4.31826 14.6667 8.00016 14.6667Z" fill="#35393F"/>
+                                        <path d="M8 10.6667V8" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 5.33337H8.0075" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                </label>
+                              </div>  
+                        </div>
+                        <div class="col-3">
+                            <span class="ea-h5 float-end pe-3 font-price"> (+{{ devis?.choiceOptions?.fraisGravage }}€)</span>
+                        </div>
+                    </div>
+                    <div class="row mb-2 align-items-center g-2" *ngFor="let equipement of devis?.choiceOptions?.options; let i = index;" [hidden]="i > 1 && !showAllOptions">
+                        <div class="col-9">
+                            <div class="d-flex align-items-center padding-list" (click)="toggleOption(equipement)" *ngIf="equipement.tatoOption != true">
+                                <input class="e-a-form-check-input" type="checkbox" [checked]="equipement.selected">
+                                <label class="ea-h5 ps-2 mb-0 label-color" title="{{ equipement.libelle }}">
+                                    {{ equipement.libelle }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <span class="ea-h5 font-price float-end pe-3" *ngIf="equipement.tatoOption != true"> ({{ equipement.referencePrixVente > 0 ? '+' : '' }}{{ equipement.referencePrixVente }}€)</span>
+                        </div>
+                    </div>
+                    <p class="ea-h5 ea-bold ea-blue-color text-decoration mt-3" *ngIf="!showAllOptions && totalOptions > 2" (click)="showAll()">Tout Afficher (+ {{totalOptions - 2 }})</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2" *ngIf="devis?.generalInfo?.type != 'occasion' && devis?.choiceOptions?.guarantees?.length">
+            <div class="col-12">
+                <div class="e-a-collapse-body bg-white p-3">
+                    <div class="d-flex align-items-center">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 0.666626L11.478 1.88396C11.7827 1.95196 12 2.22196 12 2.53463V9.19263C12 10.53 11.3313 11.7793 10.2187 12.5206L6 15.3333L1.78133 12.5206C0.668 11.7786 0 10.53 0 9.19329V2.53463C0 2.22196 0.217333 1.95196 0.522 1.88396L6 0.666626ZM6 2.03263L1.33333 3.06929V9.19263C1.33333 10.084 1.77867 10.9166 2.52067 11.4113L6 13.7313L9.47933 11.4113C10.2213 10.9166 10.6667 10.0846 10.6667 9.19329V3.06929L6 2.03329V2.03263ZM8.968 5.48129L9.91133 6.42396L5.66867 10.6666L2.84 7.83796L3.78267 6.89529L5.668 8.78063L8.968 5.48063V5.48129Z" fill="#596A73"/>
+                            </svg>
+                            <span class="ps-1 ea-bold" title="GarantieM">EXTENSION DE GARANTIE SUPPLEMENTAIRE 
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" (click)="open(contentGarantie, 'lg')">
+                                <path d="M8.00016 14.6667C11.6821 14.6667 14.6668 11.6819 14.6668 8.00004C14.6668 4.31814 11.6821 1.33337 8.00016 1.33337C4.31826 1.33337 1.3335 4.31814 1.3335 8.00004C1.3335 11.6819 4.31826 14.6667 8.00016 14.6667Z" fill="#35393F"/>
+                                <path d="M8 10.6667V8" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 5.33337H8.0075" stroke="#EBEBEC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                        </span>
+                    </div>
+
+                    <div class="row mb-2 align-items-center">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center padding-list" (click)="selectNoGuarantee()">
+                                <input class="e-a-form-radio-small-input" type="radio"  name="form_devis_options_guarantee_none" id="form_devis_options_guarantee_none" [checked]="noGuarantee">
+                                <label class="ea-h5 ps-2 mb-0 label-color" for="form_devis_options_guarantee_none">
+                                   Aucune extension de garantie supplémentaire souhaitée
+                                </label>  
+                              </div>
+                        </div>
+                    </div>
+                    <div class="ms-3" *ngIf="devis?.choiceOptions?.newTypeWarantie">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div *ngFor="let guarantee of devis?.choiceOptions?.guarantees; let first = first;" (click)="selectGuarantee(guarantee)" (click)="selectGuarantee(guarantee)">
+                                    <div *ngIf="first" class="ea-bold mb-1">
+                                        Paiement mensuel
+                                    </div>
+                                    <div class="my-1 d-flex align-items-center" *ngIf="guarantee.typePayment === 1">
+                                        <input class="e-a-form-radio-small-input" type="radio" name="{{ guarantee.id }}" id="{{ guarantee.id }}" [checked]="guarantee.selected" />
+                                        <label class="ea-check-label ea-h5 label-color" for="form_devis_options_guarantee_{{ guarantee.id }}">
+                                            <span class="">{{ guarantee.prix|number:'1.2-2'}} € </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <div *ngFor="let guarantee of devis?.choiceOptions?.guarantees; let first = first;" (click)="selectGuarantee(guarantee)">
+                                    <div *ngIf="first" class="ea-bold mb-1">Paiement comptant</div>
+                                    <div class="my-1 d-flex align-items-center" *ngIf="guarantee.typePayment === 2">
+                                        <input class="e-a-form-radio-small-input" type="radio" name="{{ guarantee.id }}" id="{{ guarantee.id }}" [checked]="guarantee.selected" />
+                                        <label class="ea-check-label ea-h5 label-color" for="form_devis_options_guarantee_{{ guarantee.id }}">
+                                            <span class="ea-h5"> {{ guarantee.prix|number:'1.2-2'}} € / {{ guarantee.duree }} mois</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="devis?.choiceOptions?.newTypeWarantie == 0">
+                        <div class="row" *ngFor="let guarantee of devis?.choiceOptions?.guarantees" (click)="selectGuarantee(guarantee)">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center padding-list">
+                                    <input class="e-a-form-radio-small-input" type="radio"  name="{{ guarantee.id }}" id="{{ guarantee.id }}" [checked]="guarantee.selected">
+                                    <label class="ea-h5 ps-2 mb-0 label-color" for="form_devis_options_guarantee_{{ guarantee.id }}">
+                                        {{ guarantee.duree }} mois d'extension de garantie
+                                    </label>  
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <span class="ea-h5 font-price float-end pe-3">(+{{ guarantee.prix|number:'1.2-2'}}€)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #contentTato let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title ea-bold ea-uppercase">CONTRAT DE TATOUAGE</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="modal-body text-center">
+      <img src="{{imgUrl}}/tunnel/tatouage/contrat_tatouage_recto.jpg?v=1" />
+        <br />
+      <img src="{{imgUrl}}/tunnel/tatouage/contrat_tatouage_verso.jpg?v=1" />
+    </div>
+</ng-template>
+<ng-template #contentGarantie let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title ea-bold ea-uppercase">  L'EXTENSION DE GARANTIE GARANTIEM</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="modal-body modal-garantie" *ngIf="urlWarantie" >
+        <iframe [src]="urlWarantie" width="100%" height="100%"> </iframe>
+    </div>
+    <div class="modal-body modal-garantie" *ngIf="!urlWarantie"> 
+        <iframe src="https://image.elite-auto.fr/tunnel/pdf/extenstion_garantie_caarea.pdf" width="100%" height="100%"> </iframe>
+    </div>
+    <!-- <div class="modal-footer">
+        <a href="https://www.elite-auto.fr/pdf/extension_garantie/cgv_caarea_comptant.pdf" target="_blank" type="button" class="btn ea-btn-info">Les conditions générales</a>
+
+      </div> -->
+    </ng-template>

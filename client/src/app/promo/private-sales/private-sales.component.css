@@ -1,0 +1,210 @@
+.fp-section {
+    position: relative;
+    -webkit-box-sizing: border-box; /* Safari<=5 Android<=3 */
+    -moz-box-sizing: border-box; /* <=28 */
+    box-sizing: border-box;
+    height: 100%;
+    display: block;
+}
+.fp-table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+.fp-overflow{
+    outline:none;
+}
+.backgroung-Img{
+background-size: cover;
+position: relative;
+overflow: hidden;
+background-color: #378fa3;
+color: #ffffff;
+background-position: 25% 75%;
+}
+.mail_error_existed{
+  border-color: #dc3545!important;
+}
+/* Customize website's scrollbar like Mac OS
+Not supports in Firefox and IE */
+.fp-scroll-mac .fp-overflow::-webkit-scrollbar {
+    background-color: transparent;
+    width: 9px;
+}
+.fp-scroll-mac .fp-overflow::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+html,
+body {
+  height: 100%;
+  background-size: cover;
+  background-position: 25% 75%;
+}
+p{
+  font-size: 26px;
+  font-weight: 100;
+}
+:host ::ng-deep strong{
+  font-weight: 700!important;
+}
+
+.timer{
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 40px;
+}
+.cover-container {
+  max-width: 42em;
+}
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 900;
+  font-size: 24px;
+}
+.box{
+  background-color: rgba(21,138,161,0.6);
+  color: #ffffff;
+  padding: 30px;
+  line-height: normal;
+  border-radius: 5px;
+}
+
+.form-control{
+  border: 1px solid #ffffff;
+  padding: 10px;
+}
+.validation{
+  background-color: rgba(31,31,31,0.6);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 29px;
+  font-size: 22px;
+  line-height: 24px;
+}
+.box_mentions{
+  padding: 0;
+}
+.mentions{
+  font-size: 16px;
+  line-height: 20px;
+}
+.mastfoot {
+  color: #ffffff;
+  padding-bottom: 12px;
+}
+.mastfoot p{
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  font-weight: 700;
+  text-shadow: none;
+  background-color: #f04c04;
+  border: .05rem solid #f04c04;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  font-size: 20px;
+}
+.form-group{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.margin-bottom{
+  margin-bottom: 100px!important;
+}
+.margin-select{
+  margin-top: 9px;
+  margin-bottom: 10px;
+}
+/* Sur tous types d'écran, quand la largeur de la fenêtre est comprise entre 1024px et 1280px */
+@media screen and (max-width: 991px) {
+  .text-position{
+    text-align: center;
+  }
+  .btn-secondary{
+    font-size: 20px;
+  }
+    .row{
+      margin: 0;
+    }
+    h1{
+      font-size: 26px;
+    }
+    h2{
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    p {
+      font-size: 12px;
+      line-height: 16px;
+      margin-bottom: 10px;
+    }
+    strong{
+      font-size: 12px;
+    }
+    form{
+      margin-top: 10px;
+    }
+    /* .form-control{
+      height: 30px;
+    } */
+    input::placeholder {
+      font-size: 12px;
+    }
+    .slide1{
+      font-size: 18px;
+      line-height: 24px;
+    }
+    .slide1 strong{
+      font-size: 18px;
+      line-height: 24px;
+    }
+    .box p{
+      font-size: 12px;
+      line-height: 16px;
+    }
+    .box{
+      padding: 10px;
+    }
+  
+    .validation{
+      font-size: 12px;
+      line-height: 16px;
+      margin-bottom: 10px;
+    }
+    .mentions{
+      font-size: 12px;
+      line-height: 16px;
+    }
+    .timer{
+      font-size: 26px;
+      line-height: 32px;
+    }
+    .vip{
+      width: 65%;
+    }
+
+    footer img{
+      width: 20px;
+    }
+  }
+
+@media screen and (max-width: 700px) {
+  .btn-secondary{
+   width: 100%;
+  }
+  .padding-r-small{
+    padding-right: 0px;
+  }
+  .padding-l-small{
+    padding-left: 0px;
+  }
+  
+}

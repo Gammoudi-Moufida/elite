@@ -1,0 +1,84 @@
+<div class="ea-modal-header">
+    <div class="ea-modal-close">
+        <button type="button" class="close " aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="ea-h3 ea-bold modal-title">Recevoir mon offre gratuite</div>
+    <div class="ea-h5 ea-italic">(*) champs obligatoires</div>
+</div>
+<div class="modal-body">
+    <form [formGroup]="registerForm">
+        <div class="row mt-3">
+            <div class="col-2">
+                <select class="form-control" name="civility" formControlName="civility">
+                    <option value="Mr" selected>Mr.</option>
+                    <option value="Mme">Mme.</option>
+                    <option value="Mlle">Mlle.</option>
+                </select>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <input type="text" name="lastname" formControlName="lastname" placeholder="Nom*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastname.errors.required">Nom obligatoire</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <input type="text" name="firstname" formControlName="firstname" placeholder="Prénom*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstname.errors.required">Prénom obligatoire</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mt-3">
+                <div class="form-group">
+                    <input type="text" name="postalCode" formControlName="postalCode" placeholder="Code postal*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" />
+                    <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                        <div *ngIf="f.postalCode.errors.required">Code postal obligatoire</div>
+                        <div *ngIf="f.postalCode.errors.pattern">Code postal invalide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8  mt-3">
+                <div class="form-group">
+                    <input type="tel" name="tel" formControlName="tel" placeholder="Téléphone*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tel.errors }" />
+                    <div *ngIf="submitted && f.tel.errors" class="invalid-feedback">
+                        <div *ngIf="f.tel.errors.required">Téléphone obligatoire</div>
+                        <div *ngIf="f.tel.errors.pattern">Téléphone invalide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="form-group">
+                    <input type="text" name="mail" formControlName="mail" placeholder="Email*" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mail.errors }" />
+                    <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                        <div *ngIf="f.mail.errors.required">Email obligatoire</div>
+                        <div *ngIf="f.mail.errors.pattern">Email invalide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="form-group">
+                    <input type="text" name="promoCode" formControlName="promoCode" placeholder="Code Promo" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="ea-checkbox-container" (click)="toggleNewsletter()">
+                    <input class="ea-form-check-input" type="checkbox" name="flexCheckBox" id="flexCheckBox1">
+                    <label class="ea-check-label ea-h5" for="flexCheckBox1">
+                        <span class="ea-bold"> OUI,</span> je souhaite recevoir la newsletter d'Elite-Auto et ses bons plans par voie électronique (email & sms)
+                    </label>  
+                  </div> 
+            </div>
+            <div class="col-12 mt-3 text-center">
+                <button type="submit" class="btn ea-btn-info w-100 ea-bold ea-h3" (click)="onSubmit()">
+                    <span class="loader d-inline-block" *ngIf="isLoadedSave"></span>
+                       RECEVOIR MON OFFRE GRATUITE 
+                  </button>
+            </div>
+        </div>
+    </form>
+</div>

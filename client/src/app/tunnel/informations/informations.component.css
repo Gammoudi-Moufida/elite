@@ -1,0 +1,10 @@
+.e-a-content {
+    display: grid;
+    margin-left: 5px;
+}
+
+@media only screen and (min-width : 1024px) {
+    .margin-l-r {
+        margin: 0px 3px 0px 3px;
+    }
+}

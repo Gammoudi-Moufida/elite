@@ -1,0 +1,254 @@
+<ais-instantsearch *ngIf="configResults" [config]="configResults" (change)="getSearchResults($event)">
+
+    <ais-configure *ngIf="facetFilters" [searchParameters]="{ facetFilters : facetFilters }"></ais-configure>
+    <ais-configure *ngIf="filters" [searchParameters]="{ filters : filters }"></ais-configure>
+    <div class="w-full text-center" *ngIf="loadingResult">
+        <div class="tw-loader"></div>
+    </div>
+    <!-- banner -->
+    <div [ngClass]="{'bg-custom-gray p-0':isPrintempsPromo || isFrenshDaysPromo}">
+        <div [ngClass]="{'tw-container m-auto p-3 pb-0':isPrintempsPromo || isFrenshDaysPromo}">
+            <img ngSrc="Promo/mobile/{{ promoData.bandeauImg }}" fill *ngIf="!isProxautoPromo && promoData && mode === 'mobile'"
+            class="w-full -mt-[1px] tw-custom-relative" [class.cursor-pointer]="isProxautoPromo"
+            (click)=" isProxautoPromo? open(infoContent) : false">
+    
+            <img ngSrc="Promo/tablet/{{ promoData.bandeauImg }}" fill *ngIf="!isProxautoPromo && promoData && mode === 'tablet'"
+                class="w-full -mt-[1px] tw-custom-relative" [class.cursor-pointer]=" isProxautoPromo"
+                (click)=" isProxautoPromo? open(infoContent) : false">
+    
+            <img ngSrc="Promo/desktop/{{ promoData.bandeauImg }}" fill *ngIf="!isProxautoPromo && promoData && mode === 'desktop' "
+            class="w-full -mt-[1px] tw-custom-relative"
+                [class.cursor-pointer]=" isProxautoPromo" (click)=" isProxautoPromo? open(infoContent) : false"> 
+        </div>
+    </div>
+    <ng-container *ngIf="!loadingResult && !isProxautoPromo && !isPrintempsPromo && !isFrenshDaysPromo">
+        <div class=" tw-container mx-auto px-3 w-full pb-[25px] pt-3 ">
+            <div id="divTop" #divTop>
+                <h1>{{promoData.h1}}</h1>
+                <div class="flex flex-wrap">
+                    <!-- optional filters -->
+                    <div class="flex flex-wrap justify-content-between">
+                        <div class="w-full px-3 py-1" *ngIf="promoData?.showAvailabilityFilter">
+                            <app-categories>
+                            </app-categories>
+                        </div>
+
+                        <div class="w-full px-3 py-1 mb-sm-3" *ngIf="promoData?.showCategoryFilter">
+                            <app-vehicule-categorie></app-vehicule-categorie>
+                        </div>
+                        <div class="w-full px-3 py-1">
+                            <app-algolia-filter-order [isPromoPage]="true"></app-algolia-filter-order>
+                        </div>
+                    </div>
+
+                    <div class="results w-full ">
+                        <div class="flex flex-wrap">
+                            <!-- results of optional filters -->
+                            <div class="w-full">
+                                <div [dismissible]="false"
+                                    class="p-4  mt-3 mb-4 text-sm text-yellow-800 rounded-lg bg-[#fff3cd] dark:bg-gray-800 dark:text-yellow-300"
+                                    role="alert" *ngIf="results?.nbHits == 0 && !loadingResult">
+                                    <small class="text-muted">
+                                        <strong>
+                                            <span>&#9888;</span>
+                                            Nous n'avons pas trouvé de résultats avec vos critères de recherche.
+                                        </strong>
+                                        Merci de modifier votre recherche.
+                                    </small>
+                                </div>
+                            </div>
+                            <!-- results -->
+                            <div class="w-full contents">
+                                <app-algolia-card
+                                    class="basis-auto w-full sm:w-full md:w-1/2 lg:w-1/3 mt-3 items-stretch inline-flex tw-offer-card"
+                                    (checkCompareEvent)="checkCompareEvent($event)" [showComparator]="false"
+                                    [isFlashSale]="results?.userData ? results?.userData : null"
+                                    *ngFor="let result of results?.hits" [result]="result"></app-algolia-card>
+                            </div>
+                        </div>
+                        <!-- pagination -->
+                        <div class="w-full" [hidden]="loadingResult || results?.nbHits == 0 " *ngIf="results?.userData">
+                            <div class="w-full mt-4 hidden sm:hidden md:hidden lg:block">
+                                <ais-pagination [showFirst]="false" [padding]="4" [showLast]="false">
+                                </ais-pagination>
+                            </div>
+                            <div class="w-full mt-4 block sm:block md:block lg:hidden">
+                                <ais-pagination [showFirst]="false" [padding]="2" [showLast]="false">
+                                </ais-pagination>
+                            </div>
+                            <div class="flex justify-between mt-4">
+                                <ais-hits-per-page [items]="[
+                                    { label: '15', value: 15, default: true },
+                                    { label: '30', value: 30 },
+                                    { label: '60', value: 60 },
+                                    { label: '100', value: 100 },
+                                    ]">
+                                </ais-hits-per-page>
+                                <div class="hitPerPage" *ngIf="currentPage == 0 && totalResult >hitsPerPage">
+                                    Résultats : 1 - {{hitsPerPage}} de {{ totalResult }}
+                                </div>
+
+                                <div class="hitPerPage" *ngIf="countPerPage > totalResult">
+                                    Résultats : {{hitsPerPage * (currentPage ) + 1 }} - {{totalResult }} de {{
+                                    totalResult }}
+                                </div>
+
+                                <div class="hitPerPage" *ngIf="currentPage > 0 && countPerPage <= totalResult">
+                                    Résultats : {{hitsPerPage * (currentPage ) + 1 }} - {{hitsPerPage * (currentPage
+                                    + 1) }} de {{
+                                    totalResult
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <!-- Page promo avec filter  -->
+    <div class="bg-custom-gray p-0" *ngIf="isProxautoPromo || isPrintempsPromo || isFrenshDaysPromo">
+        <div class="tw-container m-auto px-3 py-[25px]">
+            <ng-container *ngIf="isProxautoPromo">
+                <img ngSrc="moteur/bandeau_prixmalin_mob.webp" fill
+                *ngIf="isProxautoPromo && promoData && mode === 'mobile'" class="mb-3 w-full -mt-[1px] tw-custom-relative"
+                [class.cursor-pointer]="isProxautoPromo" (click)=" isProxautoPromo? open(infoContent) : false">
+
+                <img ngSrc="moteur/bandeau_prixmalin_tab.webp" fill
+                    *ngIf="isProxautoPromo && promoData && mode === 'tablet'" class="mb-3 w-full -mt-[1px] tw-custom-relative"
+                    [class.cursor-pointer]=" isProxautoPromo" (click)=" isProxautoPromo? open(infoContent) : false">
+
+                <img ngSrc="moteur/bandeau_prixmalin_desk.webp" fill
+                    *ngIf="isProxautoPromo && promoData && mode === 'desktop'" class="mb-3 w-full -mt-[1px] tw-custom-relative"
+                    [class.cursor-pointer]=" isProxautoPromo" (click)=" isProxautoPromo? open(infoContent) : false">
+
+                 <!-- texte Referencement -->
+                <div *ngIf="textHaut &&  isProxautoPromo" class="tw-container m-auto px-3 pb-[25px] bg-white mb-3">
+                    <span *ngIf="textHaut?.length < 368">
+                        <span class="textHtml" [innerHTML]="textHaut"></span>
+                    </span>
+                    <span *ngIf="textHaut?.length >= 368">
+                        <span class="textHtml" [innerHTML]="textHaut" [ngClass]="{'textSplit': isTextOpen}"></span>
+                        <span *ngIf="isTextOpen" class='font-bold' (click)=" isTextOpen = ! isTextOpen">... Lire la
+                            suite</span>
+                        <span *ngIf="!isTextOpen" class='font-bold' (click)="isTextOpen = ! isTextOpen">Refermer</span>
+                    </span>
+                </div>
+            </ng-container>
+
+            <div class="flex flex-wrap">
+                <div class="basis-auto w-full sm:w-full md:w-full lg:w-3/4 mobile-input-search mb-1">
+                    <app-algolia-filter-text></app-algolia-filter-text>
+                </div>
+
+                <div class="w-full sm:w-full md:w-1/4 lg:w-1/4 hidden sm:hidden md:hidden lg:block">
+                    <app-algolia-filter-order></app-algolia-filter-order>
+                </div>
+            </div>
+            <div class="flex flex-wrap py-[5px]"
+                [ngClass]="{'mobile-fixed-block' : blockFixed &&  screenWidth <= 480}">
+                <div class="w-1/2 lg:w-0 p-0 block sm:block md:block lg:hidden">
+                    <app-algolia-filter-order></app-algolia-filter-order>
+                </div>
+                <div class="w-1/2 lg:w-0 p-0 text-end block sm:block md:block lg:hidden">
+                    <button class="tw-btn-filters " (click)="filterMobileShow = !filterMobileShow">
+                        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" class="mb-1 me-1">
+                            <path
+                                d="M4.74967 2.16667C4.28944 2.16667 3.91634 2.53977 3.91634 3C3.91634 3.46023 4.28944 3.83333 4.74967 3.83333C5.20991 3.83333 5.58301 3.46023 5.58301 3C5.58301 2.53977 5.20991 2.16667 4.74967 2.16667ZM2.39193 2.16667C2.73512 1.19568 3.66116 0.5 4.74967 0.5C5.83817 0.5 6.76426 1.19568 7.10742 2.16667H13.083C13.5433 2.16667 13.9163 2.53977 13.9163 3C13.9163 3.46023 13.5433 3.83333 13.083 3.83333H7.10742C6.76426 4.80433 5.83817 5.5 4.74967 5.5C3.66116 5.5 2.73512 4.80433 2.39193 3.83333H1.41634C0.956108 3.83333 0.583008 3.46023 0.583008 3C0.583008 2.53977 0.956108 2.16667 1.41634 2.16667H2.39193ZM9.74967 7.16667C9.28942 7.16667 8.91634 7.53975 8.91634 8C8.91634 8.46025 9.28942 8.83333 9.74967 8.83333C10.2099 8.83333 10.583 8.46025 10.583 8C10.583 7.53975 10.2099 7.16667 9.74967 7.16667ZM7.39192 7.16667C7.73509 6.19567 8.66117 5.5 9.74967 5.5C10.8382 5.5 11.7643 6.19567 12.1074 7.16667H13.083C13.5433 7.16667 13.9163 7.53975 13.9163 8C13.9163 8.46025 13.5433 8.83333 13.083 8.83333H12.1074C11.7643 9.80433 10.8382 10.5 9.74967 10.5C8.66117 10.5 7.73509 9.80433 7.39192 8.83333H1.41634C0.956108 8.83333 0.583008 8.46025 0.583008 8C0.583008 7.53975 0.956108 7.16667 1.41634 7.16667H7.39192ZM4.74967 12.1667C4.28944 12.1667 3.91634 12.5398 3.91634 13C3.91634 13.4602 4.28944 13.8333 4.74967 13.8333C5.20991 13.8333 5.58301 13.4602 5.58301 13C5.58301 12.5398 5.20991 12.1667 4.74967 12.1667ZM2.39193 12.1667C2.73512 11.1957 3.66116 10.5 4.74967 10.5C5.83817 10.5 6.76426 11.1957 7.10742 12.1667H13.083C13.5433 12.1667 13.9163 12.5398 13.9163 13C13.9163 13.4602 13.5433 13.8333 13.083 13.8333H7.10742C6.76426 14.8043 5.83817 15.5 4.74967 15.5C3.66116 15.5 2.73512 14.8043 2.39193 13.8333H1.41634C0.956108 13.8333 0.583008 13.4602 0.583008 13C0.583008 12.5398 0.956108 12.1667 1.41634 12.1667H2.39193Z"
+                                fill="white" />
+                        </svg>
+                        FILTRES
+                        <span> (1)</span>
+                    </button>
+                </div>
+            </div>
+
+            <hr class="my-2 border-t border-solid border-gray-600 opacity-25" />
+            <div class="flex flex-wrap">
+                <!-- FILTERS -->
+                <div class="w-full lg:w-1/4 lg:pr-3">
+                    <app-algolia-filters class="w-full lg:w-1/4" [itsNotSearchPage]="true"
+                        [filterMobileShow]="filterMobileShow" [totalResult]="totalResult"
+                        (closeFilterEvent)="closeFilterEvent()">
+                    </app-algolia-filters>
+                </div>
+                <!-- RESULTS -->
+                <div class="w-full lg:w-3/4 lg:pl-3">
+                    <div class="flex flex-wrap">
+                        <div class="col self-center state-txt mb-3 ">
+                            <span id="offresvehicules">{{totalResult}} Véhicules</span>
+                        </div>
+                        <div class="w-full">
+                            <ng-container *ngIf="loadingResult">
+                                <div class="tw-loader"></div>
+                            </ng-container>
+                            
+                            <app-algolia-results *ngIf="!loadingResult" [flashSaleData]="flashSaleData"
+                                [encartVisible]="encartVisible" [showComparator]="true"
+                                [searchResult]="results?.hits" [totalResult]="totalResult"
+                                [searchFilter]="results?.state" [loadingResult]="loadingResult"
+                                (checkCompareResultEvent)="checkCompareEvent($event)">
+                            </app-algolia-results>
+                            <button type="button" class="tw-compare-btn" (click)="comparatorRedirect()"
+                                *ngIf="totalCompare > 0"><b>{{totalCompare}}
+                                    véhicule<span *ngIf="totalCompare > 1">s</span></b> à comparer</button>
+
+                        </div>
+                        <div class="w-full" [hidden]=" totalResult == 0 || loadingResult">
+                            <div class="w-full mt-4">
+                                <app-algolia-pagination [searchResults]="searchResults"
+                                    [sortBy]="sortBy"></app-algolia-pagination>
+                            </div>
+                            <div class="flex justify-between mt-4">
+                                <app-algolia-hits-per-page [flashSaleData]="flashSaleData"
+                                    [encartVisible]="encartVisible" [searchResults]="searchResults"
+                                    [sortBy]="sortBy"></app-algolia-hits-per-page>
+                                <div class="tw-hitPerPage" *ngIf="currentPage == 0 && totalResult > hitsPerPage">
+                                    Résultats : 1 - {{hitsPerPage}} de {{ totalResult }}
+                                </div>
+
+                                <div class="tw-hitPerPage" *ngIf="countPerPage > totalResult">
+                                    Résultats : {{hitsPerPage * (currentPage ) + 1 }} - {{totalResult }} de {{
+                                    totalResult }}
+                                </div>
+
+                                <div class="tw-hitPerPage" *ngIf="currentPage > 0 && countPerPage <= totalResult">
+                                    Résultats : {{hitsPerPage * (currentPage ) + 1 }} - {{hitsPerPage *
+                                    (currentPage + 1) }} de {{ totalResult }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ais-instantsearch>
+
+<div *ngIf="promoNotFound" class="tw-container w-full px-3 pb-[25px]  pt-3">
+    <div class="alert alert-info mt-4 mb-[16px] p-[16px] rounded-0 font-bold text-white text-center" role="alert">
+        Pas de promotions pour le moment
+    </div>
+</div>
+
+
+<ng-template #infoContent let-modal>
+    <div class=" tw-modal md:flex lg:flex" aria-labelledby="modal-title">
+        <div class="fixed inset-0 bg-[#000] bg-opacity-50 transition-opacity"></div>
+        <div class="p-2 w-full justify-center xl:w-[820px] items-center">
+            <div class="relative bg-white rounded-lg">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="shrink-0 text-center block p-4 border-b rounded-t">
+                        <h6 class="text-[16px] font-[inherit]">Information</h6>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-sm text-[#556a74] "[innerHtml]="textForModal"></p>
+                    </div>
+                    <div class="tw-btn-close">
+                        <button type="button" class="tw-btn-modal" (click)="modal.close('Close click')">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,79 @@
+:host ::ng-deep h2{ 
+    @apply text-custom-blue text-lg leading-[26px] font-bold mt-[10px] mr-5 ml-0 mb-0 !important; 
+}
+:host ::ng-deep h3{ 
+    @apply text-[#6f6f6f] text-base font-bold leading-[22px] mt-0 mx-5 mb-1
+}
+
+::ng-deep a:link {
+    @apply no-underline ;
+}
+
+:host ::ng-deep .tw-text-html p{
+    @apply inline
+}
+
+:host ::ng-deep .tw-text-html h2{
+    @apply leading-normal;  
+}
+:host ::ng-deep .carousel-control-next-icon:after
+{
+    @apply text-transparent block !important ;
+}
+
+:host ::ng-deep .carousel-control-prev-icon:after {
+    @apply text-transparent block !important ;
+}
+
+:host ::ng-deep p{ 
+    @apply text-justify text-[#6f6f6f] mb-0;
+}
+
+.tw-text-split{
+    @apply overflow-hidden inline-block leading-[26px];
+}
+
+.tw-read-more {
+    @apply text-black font-bold cursor-pointer;
+}
+
+@media (max-width:767px) {
+    .tw-read-more {
+        @apply text-[11px];
+    }
+}
+@media (min-width:767px) {
+    .read-more {
+        @apply text-base;
+    }
+}
+
+@media only screen and (max-width : 444px) {
+    .tw-text-split{
+        @apply max-h-28 leading-[22px] ;
+   }
+}
+@media only screen and (min-width : 445px) and (max-width: 479px) {
+    .tw-text-split{
+        @apply max-h-[65px] leading-[22px] ;
+    }
+}
+@media only screen and (min-width : 480px) {
+    .tw-text-split{
+        @apply max-h-[57px];
+    }
+}
+
+@media (max-width:767px) {
+    :host ::ng-deep h2{ 
+        @apply text-xs !important;
+    }
+
+    :host ::ng-deep p { 
+        @apply text-[11px] leading-4 !important;
+    }
+}
+
+:host ::ng-deep iframe { 
+        @apply w-full;
+    }

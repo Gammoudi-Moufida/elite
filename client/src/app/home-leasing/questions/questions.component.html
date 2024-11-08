@@ -1,0 +1,55 @@
+<div class="flex flex-wrap pt-4 md:mt-6">
+    <div class="w-full pb-4">
+        <div class="tw-card border rounded-[5px] p-[30px]">
+            <h2 class="text-xl text-custom-black font-bold ms-0">{{cardsQuestions[0].title}}</h2>
+            <div *ngFor="let item of cardsQuestions[0].question">
+                <h3 class="font-bold text-custom-blue blue-h3 text-[18px]">{{item.h3}}</h3>
+                <p [innerHtml]="item.p"></p>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row d-flex m-auto">
+        <div *ngIf="screenMode == 3" class="col-lg-6 pt-3">
+            <div class="card fix-body-2">
+                    <img ngSrc="{{imgUrl+'/lease/home/loa_questions.webp'}}" fill class="loa-Img w-100 h-75 position-relative">
+            </div>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6 pt-3 pb-3">
+            <div class="card leaseCard">
+
+                <h2 class="ea-h2 ea-bold ms-0">{{cardsQuestions[1].title}}</h2>
+
+                <div *ngFor="let item of cardsQuestions[1].idea">
+                    <span class="blue-h3">{{item.span}}</span>
+                    <h3 class="ea-h3">{{item.h3}}</h3>
+                    <p [innerHtml]="item.p"></p>
+                </div>
+                
+            </div>
+        </div>
+    </div> -->
+</div>
+<div class="flex flex-wrap pt-3">
+    <div class="w-full mb-4 lg:pt-3 pb-4">
+        <div class="border rounded-[5px] p-[30px]">
+            <h2 class="text-xl text-custom-black font-bold ms-0">{{cardsQuestions[2].title}}</h2>
+            <p class="m-0" [innerHtml]="cardsQuestions[2].content"></p>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+        <div class="w-full pb-4">
+            <div class="border rounded-[5px] p-[30px] mb-3 h-full">
+                <h2 class="text-xl text-custom-black font-bold ms-0">{{cardsQuestions[3].title}}</h2>
+                <p class="m-0" [innerHtml]="cardsQuestions[3].content"></p>
+
+            </div>
+        </div>
+        <div class="w-full pb-4">
+            <div class="border rounded-[5px] p-[30px] h-full">
+                <h2 class="text-xl text-custom-black font-bold ms-0">{{cardsQuestions[4].title}}</h2>
+                <p class="m-0" [innerHtml]="cardsQuestions[4].content"></p>
+
+            </div>
+        </div>
+    </div>
+</div>
